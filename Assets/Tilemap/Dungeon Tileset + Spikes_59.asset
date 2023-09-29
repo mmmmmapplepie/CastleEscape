@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dungeon Tileset + Spikes_59
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 1082001965, guid: e00bf543153cf7e4ea962a9fb9d3eed8, type: 3}
-  m_Color: {r: 0.9716981, g: 0.39629388, b: 0.26991615, a: 1}
+  m_Color: {r: 0.972549, g: 0.39607844, b: 0.27058825, a: 1}
   m_Transform:
     e00: 1
     e01: 0
