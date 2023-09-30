@@ -1,8 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+	#region 
+	[SerializeField]
+	float jumpPower, playerSpeed;
+
+
+
+
+	#endregion
+
+
+
+
 	float XControl;
 	float YControl;
 	bool dashing = false;
@@ -25,11 +38,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		RB.velocity = new Vector2(XControl * 20f, RB.velocity.y);
+		RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
 		if (dashCharge > 0 && YControl > 0 && !dashing) {
 			RB.gravityScale = basicG;
 			if (RB.velocity.y < 0) { RB.velocity = new Vector3(RB.velocity.x, 0f, 0f); }
-			RB.AddForce(new Vector2(0, YControl * RB.mass * RB.gravityScale * 7f), ForceMode2D.Impulse);
+			RB.AddForce(new Vector2(0, YControl * RB.mass * RB.gravityScale * jumpPower), ForceMode2D.Impulse);
 			dashCharge--;
 			dashing = true;
 			Invoke("notDashingChange", 0.25f);
