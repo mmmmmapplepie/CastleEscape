@@ -36,13 +36,11 @@ public class CameraFollow : MonoBehaviour {
 			stopNoMovementRoutines();
 			Vector3 newDir = getPlayerPosition() - transform.position;
 			transform.position = getPlayerPosition() - maxoffset * newDir.normalized;
-			print("far");
 		}
 		if (Vector3.Distance(transform.position, getPlayerPosition()) > maxoffset / 4f) {
 			stopNoMovementRoutines();
 			StopCoroutine(currentSmooth);
 			currentSmooth = StartCoroutine(cameraMove());
-			print("smoothing");
 		} else {
 			noMovementRoutine = StartCoroutine(noMovementCameraMove());
 		}
@@ -52,7 +50,6 @@ public class CameraFollow : MonoBehaviour {
 		Vector3 startPos = transform.position;
 		Vector3 finalPos = getPlayerPosition();
 		while (Time.unscaledTime - start < smoothTime) {
-			print("moving");
 			transform.position = Vector3.Lerp(startPos, finalPos, (Time.unscaledTime - start) / smoothTime);
 			yield return null;
 		}

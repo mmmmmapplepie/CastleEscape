@@ -548,7 +548,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -573,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95889,7 +95889,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &722775826
 MonoBehaviour:
@@ -96099,8 +96099,8 @@ Canvas:
   m_GameObject: {fileID: 860733594}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -96180,11 +96180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1600, y: 1000}
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -96200,8 +96200,8 @@ Canvas:
   m_GameObject: {fileID: 889687458}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -96211,7 +96211,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1161541013
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &889687462
@@ -96234,6 +96234,90 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &907629832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907629834}
+  - component: {fileID: 907629833}
+  m_Layer: 0
+  m_Name: Square
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &907629833
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907629832}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1414959387
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &907629834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907629832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918745340
 GameObject:
   m_ObjectHideFlags: 0
@@ -96351,7 +96435,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1218687070
 MonoBehaviour:
@@ -96971,159 +97055,159 @@ CompositeCollider2D:
       - X: -20000000
         Y: 200000000
       - X: -20000000
-        Y: 199375008
+        Y: 190000000
       - X: 20000000
-        Y: 199375008
+        Y: 190000000
     - - X: 40000000
         Y: 150000000
       - X: 20000000
         Y: 150000000
       - X: 20000000
-        Y: 149375008
+        Y: 140000000
       - X: 40000000
-        Y: 149375008
+        Y: 140000000
     - - X: -20000000
         Y: 150000000
       - X: -40000000
         Y: 150000000
       - X: -40000000
-        Y: 149375008
+        Y: 140000000
       - X: -20000000
-        Y: 149375008
+        Y: 140000000
     - - X: 10000000
         Y: 100000000
       - X: -10000000
         Y: 100000000
       - X: -10000000
-        Y: 99375000
+        Y: 90000000
       - X: 10000000
-        Y: 99375000
+        Y: 90000000
     - - X: 40000000
         Y: 50000000
       - X: 20000000
         Y: 50000000
       - X: 20000000
-        Y: 49375000
+        Y: 40000000
       - X: 40000000
-        Y: 49375000
+        Y: 40000000
     - - X: -20000000
         Y: 50000000
       - X: -40000000
         Y: 50000000
       - X: -40000000
-        Y: 49375000
+        Y: 40000000
       - X: -20000000
-        Y: 49375000
+        Y: 40000000
     - - X: 20000000
         Y: 0
       - X: -20000000
         Y: 0
       - X: -20000000
-        Y: -625000
+        Y: -10000000
       - X: 20000000
-        Y: -625000
+        Y: -10000000
     - - X: -20000000
         Y: -40000000
       - X: -40000000
         Y: -40000000
       - X: -40000000
-        Y: -40625000
+        Y: -50000000
       - X: -20000000
-        Y: -40625000
+        Y: -50000000
     - - X: 40000000
         Y: -40000000
       - X: 20000000
         Y: -40000000
       - X: 20000000
-        Y: -40625000
+        Y: -50000000
       - X: 40000000
-        Y: -40625000
+        Y: -50000000
     - - X: 10000000
         Y: -80000000
       - X: -10000000
         Y: -80000000
       - X: -10000000
-        Y: -80625000
+        Y: -90000000
       - X: 10000000
-        Y: -80625000
+        Y: -90000000
     - - X: -20000000
         Y: -130000000
       - X: -40000000
         Y: -130000000
       - X: -40000000
-        Y: -130625000
+        Y: -140000000
       - X: -20000000
-        Y: -130625000
+        Y: -140000000
     - - X: 40000000
         Y: -130000000
       - X: 20000000
         Y: -130000000
       - X: 20000000
-        Y: -130625000
+        Y: -140000000
       - X: 40000000
-        Y: -130625000
+        Y: -140000000
     - - X: 10000000
         Y: -180000000
       - X: -10000000
         Y: -180000000
       - X: -10000000
-        Y: -180624992
+        Y: -190000000
       - X: 10000000
-        Y: -180624992
+        Y: -190000000
   m_CompositePaths:
     m_Paths:
     - - {x: 2, y: 20}
       - {x: -2, y: 20}
-      - {x: -2, y: 19.937502}
-      - {x: 2, y: 19.937502}
+      - {x: -2, y: 19}
+      - {x: 2, y: 19}
     - - {x: 4, y: 15}
       - {x: 2, y: 15}
-      - {x: 2, y: 14.937501}
-      - {x: 4, y: 14.937501}
+      - {x: 2, y: 14}
+      - {x: 4, y: 14}
     - - {x: -2, y: 15}
       - {x: -4, y: 15}
-      - {x: -4, y: 14.937501}
-      - {x: -2, y: 14.937501}
+      - {x: -4, y: 14}
+      - {x: -2, y: 14}
     - - {x: 1, y: 10}
       - {x: -1, y: 10}
-      - {x: -1, y: 9.9375}
-      - {x: 1, y: 9.9375}
+      - {x: -1, y: 9}
+      - {x: 1, y: 9}
     - - {x: 4, y: 5}
       - {x: 2, y: 5}
-      - {x: 2, y: 4.9375}
-      - {x: 4, y: 4.9375}
+      - {x: 2, y: 4}
+      - {x: 4, y: 4}
     - - {x: -2, y: 5}
       - {x: -4, y: 5}
-      - {x: -4, y: 4.9375}
-      - {x: -2, y: 4.9375}
+      - {x: -4, y: 4}
+      - {x: -2, y: 4}
     - - {x: 2, y: 0}
       - {x: -2, y: 0}
-      - {x: -2, y: -0.0625}
-      - {x: 2, y: -0.0625}
+      - {x: -2, y: -1}
+      - {x: 2, y: -1}
     - - {x: -2, y: -4}
       - {x: -4, y: -4}
-      - {x: -4, y: -4.0625}
-      - {x: -2, y: -4.0625}
+      - {x: -4, y: -5}
+      - {x: -2, y: -5}
     - - {x: 4, y: -4}
       - {x: 2, y: -4}
-      - {x: 2, y: -4.0625}
-      - {x: 4, y: -4.0625}
+      - {x: 2, y: -5}
+      - {x: 4, y: -5}
     - - {x: 1, y: -8}
       - {x: -1, y: -8}
-      - {x: -1, y: -8.0625}
-      - {x: 1, y: -8.0625}
+      - {x: -1, y: -9}
+      - {x: 1, y: -9}
     - - {x: -2, y: -13}
       - {x: -4, y: -13}
-      - {x: -4, y: -13.0625}
-      - {x: -2, y: -13.0625}
+      - {x: -4, y: -14}
+      - {x: -2, y: -14}
     - - {x: 4, y: -13}
       - {x: 2, y: -13}
-      - {x: 2, y: -13.0625}
-      - {x: 4, y: -13.0625}
+      - {x: 2, y: -14}
+      - {x: 4, y: -14}
     - - {x: 1, y: -18}
       - {x: -1, y: -18}
-      - {x: -1, y: -18.0625}
-      - {x: 1, y: -18.0625}
+      - {x: -1, y: -19}
+      - {x: 1, y: -19}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0
   m_UseDelaunayMesh: 0
@@ -97163,7 +97247,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336011549
 MonoBehaviour:
@@ -97232,7 +97316,7 @@ Transform:
   m_GameObject: {fileID: 1372634219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.574, z: 0}
+  m_LocalPosition: {x: -0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -97404,7 +97488,7 @@ RectTransform:
   m_GameObject: {fileID: 1461564766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1218687069}
@@ -97412,10 +97496,10 @@ RectTransform:
   - {fileID: 1336011548}
   m_Father: {fileID: 889687462}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 130, y: 130}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 800, y: 500}
+  m_SizeDelta: {x: 900, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1461564768
 MonoBehaviour:
@@ -97470,9 +97554,11 @@ MonoBehaviour:
   Handle: {fileID: 1336011547}
   InnerArea: {fileID: 722775824}
   OuterArea: {fileID: 1218687068}
+  ConstantTrigger: 0
   OuterAreaTrigger: 0
-  FastOuterAreaTriggerThreshold: 0.2
-  JoystickSensingRadius: 60
+  OuterAreaTriggerEntrySpeedThreshold: 0.2
+  JoystickSensingRadius: 5
+  RequireFirstTouchInside: 0
 --- !u!1 &1503979177
 GameObject:
   m_ObjectHideFlags: 0
@@ -97699,3 +97785,4 @@ SceneRoots:
   - {fileID: 437623276}
   - {fileID: 860733598}
   - {fileID: 889687462}
+  - {fileID: 907629834}
