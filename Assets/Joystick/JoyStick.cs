@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +9,16 @@ using UnityEngine.UI;
 // each region generally will have the toggle and adjustable variables first and then the other detailed variables later.
 // generally shared variables may be in the "mainControls" region.
 public class JoyStick : MonoBehaviour {
-	#region Joystick Components
+	#region Joystick Basic Components
 	[SerializeField] GameObject Handle, InnerArea, OuterArea;
+	Vector2 handleBasePosition = Vector2.zero;
 
 
 
 
 
-
-
-
-
+	//your script with a public function for inner and outer Functions. Must have interface of "JoystickController".
+	public JoystickController controlScript = null;
 
 	#endregion
 
@@ -38,7 +39,8 @@ public class JoyStick : MonoBehaviour {
 		UseOuterArea = OuterArea.activeSelf == true ? true : false;
 	}
 	[Tooltip("TRUE - outer area method will be called continuously while the joystick is in the outer area. False - only triggered once per entry into outer area.")]
-	[SerializeField] bool ConstantTrigger = false;
+	[SerializeField] bool OneTriggerPerEntry = true;
+	[SerializeField] bool InnerFunctionActiveWhileInOuter = false;
 
 
 
@@ -48,7 +50,7 @@ public class JoyStick : MonoBehaviour {
 	enum OuterAreaEntry { smooth, snap, fast }
 	[Tooltip("SMOOTH - triggers outer area even with smooth movement of joystick to outer area. SNAP - will only trigger when joystick is at the maximum range of the outer area. FAST - only triggers when joystick enters outer area quickly.")]
 	[SerializeField] OuterAreaEntry OuterAreaTrigger = OuterAreaEntry.smooth;
-	[Tooltip("Only applies for the 'FAST' setting - determines the minimum speed for joystick movement into the outer area to trigger")]
+	[Tooltip("Only applies for the 'FAST' setting - determines the minimum speed - in world units (it is not completely written in stone due to calculations using frame rates as well; so adjust the value as you see fit) - for joystick movement to trigger the outer area")]
 	[SerializeField] float OuterAreaTriggerEntrySpeedThreshold = 0.2f;
 
 
@@ -93,29 +95,23 @@ public class JoyStick : MonoBehaviour {
 	[SerializeField] public float JoystickSensingRadius = 1f;
 	[Tooltip("Can the joystick start to be controlled even by sliding finger into its range.")]
 	[SerializeField] bool RequireFirstTouchInside = false;
-
 	//this is in pixel units - for ease code writing.
 	float InitialTouchSensingRadius = 100f;
+
+
+	float pixelsPerUnit = 50f;
 	void setTouchSenseRadius() {
-		float pixelsPerUnit = canvasHeight / (mainCameraSize * 2f);
+		pixelsPerUnit = canvasHeight / (mainCameraSize * 2f);
 		InitialTouchSensingRadius = Mathf.Min(JoystickSensingRadius * pixelsPerUnit, OuterAreaDistance);
 	}
 
-
-	Vector3 getWorldPosition(Vector3 vectortoconvert) {
-		Vector3 vec3 = Camera.main.ScreenToWorldPoint(vectortoconvert);
-		return new Vector3(vec3.x, vec3.y, 0f);
-	}
-
-	void SetTouchIDAndInitialDisplacement() {
+	void SetTouchID() {
 		if (Input.touchCount < 1) return;
 		if (currentTouchID != null) {
-			Debug.Log("already Taken now");
 			return;
 		}
 		//check up to the 3rd touch.
-		int numberofchecks = Mathf.Min(Input.touchCount, 3);
-		//have to make sure z value is 0 as the joystick is on 0.
+		int numberofchecks = Mathf.Min(Input.touchCount, 5);
 		Vector2 joystickPosition = GetComponent<RectTransform>().anchoredPosition;
 		for (int i = 0; i < numberofchecks; i++) {
 			Touch touch = Input.GetTouch(i);
@@ -125,8 +121,6 @@ public class JoyStick : MonoBehaviour {
 				}
 			}
 			Vector2 touchPosition = touch.position / canvasScale;
-			print(Vector2.Distance(touchPosition, joystickPosition));
-			print(InitialTouchSensingRadius);
 			if (Vector2.Distance(touchPosition, joystickPosition) < InitialTouchSensingRadius) {
 				currentTouchID = touch.fingerId;
 				break;
@@ -137,12 +131,6 @@ public class JoyStick : MonoBehaviour {
 
 
 
-
-
-
-	void Update() {
-		SetTouchIDAndInitialDisplacement();
-	}
 
 	#endregion
 
@@ -155,16 +143,14 @@ public class JoyStick : MonoBehaviour {
 
 
 	#region Canvas Scaling
-	float pixelScale = 100f;
 	float canvasHeight = 1000f;
 	float canvasScale = 1f;
 	float mainCameraSize = 10f;
 	void setCanvasScales() {
 		GameObject canvasO = transform.root.gameObject;
-		pixelScale = canvasO.GetComponent<CanvasScaler>().referencePixelsPerUnit;
 		canvasHeight = canvasO.GetComponent<CanvasScaler>().referenceResolution.y;
 		canvasScale = canvasO.GetComponent<Canvas>().scaleFactor;
-		//requires camera to be set to the joystick canvas.
+		//requires appropriate camera to be set to the joystick canvas. - in my case it was main camera.
 		mainCameraSize = canvasO.GetComponent<Canvas>().worldCamera.orthographicSize;
 	}
 
@@ -191,27 +177,200 @@ public class JoyStick : MonoBehaviour {
 	float OutOfBoundsDistance;
 	float OuterAreaDistance;
 	float InnerAreaDistance;
-	bool JoystickInOuterArea = false;
-
-
 	void SetAreaThresholdDistance() {
 		//the width of the "joystickholder" - OutOfBoundsDistance - determines the distance when the controls will be lifted from the joystick.
 		OutOfBoundsDistance = GetComponent<RectTransform>().rect.width / 2f;
 		OuterAreaDistance = OuterArea.GetComponent<RectTransform>().rect.width / 2f;
 		InnerAreaDistance = InnerArea.GetComponent<RectTransform>().rect.width / 2f;
+		handleBasePosition = Handle.GetComponent<RectTransform>().anchoredPosition;
 	}
 
 
-	//up is +y and rightside is +x directions as usual.
-	Vector2 currentJoystickPosition = Vector2.zero;
-	Vector2 previousJoystickPosition = Vector2.zero;
+
+
+
+	Vector2 currentJoystickDisplacement = Vector2.zero;
+	Vector2 previousJoystickDisplacement = Vector2.zero;
 	float Displacement = 0f;
+	bool OuterAreaOn = false;
 	int? currentTouchID = null;
 
 
 
+	void updatePreviousJoystickPosition() {
+		previousJoystickDisplacement = currentJoystickDisplacement;
+	}
+	Vector2 setJoystickDisplacement() {
+		if (currentTouchID == null) return Vector2.zero;
+		Touch touch = returnTouchWithID();
+		return (touch.position / canvasScale) - GetComponent<RectTransform>().anchoredPosition;
+	}
+	Touch returnTouchWithID() {
+		int numberofchecks = Mathf.Min(Input.touchCount, 10);
+		Touch touch = Input.GetTouch(0);
+		for (int i = 0; i < numberofchecks; i++) {
+			touch = Input.GetTouch(i);
+			if (touch.fingerId == currentTouchID) break;
+		}
+		return touch;
+	}
+
+	void returnJoystickToOriginalPosition() {
+		currentTouchID = null;
+		currentJoystickDisplacement = Vector2.zero;
+		previousJoystickDisplacement = Vector2.zero;
+		Displacement = 0f;
+		OuterAreaOn = false;
+	}
+	void setDisplacementAndCheckForStoppingControls() {
+		if (currentTouchID == null) return;
+		Touch touch = returnTouchWithID();
+		//stopping controls normally
+		if (touch.phase == TouchPhase.Ended) {
+			returnJoystickToOriginalPosition();
+			return;
+		}
+
+		//set displacement vectors and value.
+		currentJoystickDisplacement = setJoystickDisplacement();
+		setPastPositions();
+		Displacement = currentJoystickDisplacement.magnitude;
 
 
+
+		//stop controls due to being out of bounds. Requires displacements to be calculated first.
+		if (Displacement > OutOfBoundsDistance) {
+			returnJoystickToOriginalPosition();
+		}
+	}
+	void setPastPositions() {
+		updateFrameTime();
+		if (pastPositions.Count == 0) pastPositions.Add(Vector2.zero);
+		pastPositions.Add(currentJoystickDisplacement);
+		if (pastPositions.Count > 10) pastPositions.RemoveAt(0);
+	}
+	void moveHandleImage() {
+		float maxHandleValue = Mathf.Min(InnerAreaDistance, Displacement);
+		if (UseOuterArea && OuterAreaOn && Displacement > InnerAreaDistance) {
+			maxHandleValue = Mathf.Min(OuterAreaDistance, Displacement);
+			if (OuterAreaTrigger == OuterAreaEntry.snap) {
+				maxHandleValue = OuterAreaDistance;
+			}
+		}
+		Handle.GetComponent<RectTransform>().anchoredPosition = handleBasePosition + maxHandleValue * currentJoystickDisplacement.normalized;
+	}
+
+
+
+	void MainFunctionality() {
+		if (currentTouchID == null) return;
+		if (Displacement > InnerAreaDistance && UseOuterArea) {
+			if (InnerFunctionActiveWhileInOuter) {
+				InnerAreaFunction();
+			}
+			checkOuterFunctionApplicability();
+		} else {
+			OuterAreaOn = false;
+			InnerAreaFunction();
+		}
+
+	}
+	void checkOuterFunctionApplicability() {
+		if (OuterAreaTrigger == OuterAreaEntry.smooth) {
+			singleTriggerCheck();
+		} else if (OuterAreaTrigger == OuterAreaEntry.snap) {
+			if (Displacement <= OuterAreaDistance) return;
+			singleTriggerCheck();
+		} else if (OuterAreaTrigger == OuterAreaEntry.fast) {
+			FastEntryTriggerCheck();
+		}
+	}
+	void FastEntryTriggerCheck() {
+		if (!OuterAreaOn) {
+			float timeElapsed = getRealTimeElapse();
+			float touchMoveSpeed = (previousJoystickDisplacement - currentJoystickDisplacement).magnitude / (pixelsPerUnit * timeElapsed);
+			if (touchMoveSpeed > OuterAreaTriggerEntrySpeedThreshold && previousJoystickDisplacement.magnitude < InnerAreaDistance) {
+				OuterAreaFunction();
+				OuterAreaOn = true;
+			}
+		} else {
+			if (OneTriggerPerEntry) {
+				return;
+			} else {
+				OuterAreaFunction();
+			}
+		}
+	}
+	float getRealTimeElapse() {
+		if (pastPositions.Count < 2) return Time.unscaledDeltaTime;
+		int frames = 1;
+		for (int i = 0; i < pastPositions.Count - 1; i++) {
+			if (pastPositions[i] == pastPositions[i + 1]) {
+				frames++;
+			} else {
+				break;
+			}
+		}
+		float elapsedTime = 0f;
+		for (int i = 0; i < frames; i++) {
+			elapsedTime += frameTimes[i];
+		}
+		return elapsedTime;
+	}
+	void singleTriggerCheck() {
+		if (OneTriggerPerEntry) {
+			if (OuterAreaOn == true) return;
+		}
+		OuterAreaFunction();
+		OuterAreaOn = true;
+	}
+	void OuterAreaFunction() {
+		// controlScript.OuterControl(currentJoystickDisplacement);
+	}
+	void InnerAreaFunction() {
+		// controlScript.InnerControl(currentJoystickDisplacement);
+	}
+
+
+
+
+
+
+
+	void JoystickInitialization() {
+		setCanvasScales();
+		SetAreaThresholdDistance();
+		VerifyOuterAreaControlsToggle();
+		setTouchSenseRadius();
+	}
+	void JoystickUsage() {
+		SetTouchID();
+		setDisplacementAndCheckForStoppingControls();
+		MainFunctionality();
+		moveHandleImage();
+		updatePreviousJoystickPosition();
+	}
+
+
+
+
+
+
+
+
+
+
+
+	List<float> frameTimes = new List<float>();
+	List<Vector2> pastPositions = new List<Vector2>();
+	float frameTime = 0.01f;
+	void updateFrameTime() {
+		if (frameTimes.Count == 0) frameTimes.Add(0.01f);
+		float time = Time.unscaledDeltaTime;
+		frameTimes.Add(time);
+		if (frameTimes.Count > 10) frameTimes.RemoveAt(0);
+		frameTime = frameTimes.Average();
+	}
 	#endregion
 
 
@@ -225,14 +384,13 @@ public class JoyStick : MonoBehaviour {
 
 
 	void Start() {
-		setCanvasScales();
-		SetAreaThresholdDistance();
-		VerifyOuterAreaControlsToggle();
-		setTouchSenseRadius();
-
+		JoystickInitialization();
 	}
 
-
+	void Update() {
+		// if (controlScript != null) JoystickUsage();
+		JoystickUsage();
+	}
 
 
 
