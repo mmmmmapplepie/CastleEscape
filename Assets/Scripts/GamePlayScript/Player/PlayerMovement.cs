@@ -1,59 +1,66 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour {
-	#region 
-	[SerializeField]
-	float jumpPower, playerSpeed;
-
-
-
-
-	#endregion
-
-
-
-
-	float XControl;
-	float YControl;
-	bool dashing = false;
-	bool grounded = false;
-	bool tempGrounded = false;
+public class PlayerMovement : MonoBehaviour, JoystickController {
+	float XControl; Vector2 DashControl;
+	bool dashAble = false; bool grounded = false; bool tempGrounded = false; bool dashing = false;
 	int dashCharge = 0;
 	[SerializeField] LayerMask groundedMask;
-	[SerializeField] float basicG = 5f, fallingG = 10f;
+	[SerializeField] float basicG = 5f, fallingG = 10f, dashCooldown = 0.5f, dashSpeed = 20f, dashTime = 0.2f, playerSpeed = 8f;
 	Rigidbody2D RB;
+	Coroutine dashingRoutine;
 	void Awake() {
 		RB = gameObject.GetComponent<Rigidbody2D>();
 	}
 	void Update() {
-		XControl = Input.GetAxisRaw("Horizontal");
-		YControl = Input.GetAxisRaw("Vertical");
 		grounded = checkGrounded();
 		checkDashAdd();
 		gravityScale();
 		clampFallSpeed();
 	}
-
-	void FixedUpdate() {
-		RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
-		if (dashCharge > 0 && YControl > 0 && !dashing) {
-			RB.gravityScale = basicG;
-			if (RB.velocity.y < 0) { RB.velocity = new Vector3(RB.velocity.x, 0f, 0f); }
-			RB.AddForce(new Vector2(0, YControl * RB.mass * RB.gravityScale * jumpPower), ForceMode2D.Impulse);
+	void lateralMovement() {
+		if (playerSpeed < Mathf.Abs(RB.velocity.x)) {
+			float forceMultiplier = 1f;
+			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
+			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier, 0f), ForceMode2D.Force);
+		} else {
+			// print(XControl);
+			RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
+		}
+	}
+	void Dash() {
+		if (dashCharge > 0 && DashControl.magnitude != 0 && !dashAble) {
+			if (dashingRoutine != null) {
+				StopCoroutine(dashingRoutine);
+			}
+			checkDashIntoGround();
+			RB.gravityScale = 0f;
+			RB.velocity = Vector2.zero;
+			RB.velocity = dashSpeed * DashControl;
+			RB.drag = 0f;
 			dashCharge--;
+			dashAble = true;
 			dashing = true;
-			Invoke("notDashingChange", 0.25f);
+			dashingRoutine = StartCoroutine(dashingEnd());
+			StartCoroutine(notDashingChange());
+		}
+	}
+	void checkDashIntoGround() {
+		if (DashControl.y <= 0f && grounded == true) {
+			dashCharge++;
 		}
 	}
 	bool checkGrounded() {
 		Collider2D playerColl = gameObject.GetComponent<Collider2D>();
 		return Physics2D.BoxCast(playerColl.bounds.center, playerColl.bounds.size, 0f, Vector2.down, 0.02f, groundedMask);
 	}
-	void notDashingChange() {
+	IEnumerator dashingEnd() {
+		yield return new WaitForSeconds(dashTime);
+		RB.drag = 2f;
 		dashing = false;
+	}
+	IEnumerator notDashingChange() {
+		yield return new WaitForSeconds(dashCooldown);
+		dashAble = false;
 	}
 	void checkDashAdd() {
 		if (grounded == false) {
@@ -70,10 +77,27 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 	void gravityScale() {
+		if (dashing) return;
 		if (RB.velocity.y < 0f) {
 			RB.gravityScale = fallingG;
 		} else {
 			RB.gravityScale = basicG;
 		}
 	}
+
+
+
+
+	public void InnerControl(Vector2 inputDirection, float magnitude) {
+		if (dashing) return;
+		if (Mathf.Abs(inputDirection.x * magnitude) < 0.3f) { XControl = 0f; lateralMovement(); return; }
+		float x = inputDirection.x;
+		XControl = Mathf.Abs(x) > 0.5f ? (x / Mathf.Abs(x)) * 1f : (x) / 0.5f;
+		lateralMovement();
+	}
+	public void OuterControl(Vector2 inputDirection, float magnitude) {
+		DashControl = inputDirection;
+		Dash();
+	}
+
 }

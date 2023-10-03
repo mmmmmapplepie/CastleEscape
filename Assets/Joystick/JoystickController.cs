@@ -1,5 +1,5 @@
 using UnityEngine;
 public interface JoystickController {
-	void InnerControl(Vector2 displacement) { }
-	void OuterControl(Vector2 displacement) { }
+	public void InnerControl(Vector2 normalizedDirection, float magnitude);
+	public void OuterControl(Vector2 normalizedDirection, float magnitude);
 }

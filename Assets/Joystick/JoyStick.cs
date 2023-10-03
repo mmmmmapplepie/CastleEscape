@@ -13,13 +13,20 @@ public class JoyStick : MonoBehaviour {
 	[SerializeField] GameObject Handle, InnerArea, OuterArea;
 	Vector2 handleBasePosition = Vector2.zero;
 
-
-
-
-
 	//your script with a public function for inner and outer Functions. Must have interface of "JoystickController".
-	public JoystickController controlScript = null;
-
+	public GameObject ControlScriptHolder = null;
+	public string ScriptName = null;
+	JoystickController controlScript = null;
+	public void SetControlScript() {
+		if (ScriptName == null || ControlScriptHolder == null) return;
+		Component[] components = ControlScriptHolder.GetComponents<Component>();
+		foreach (Component comp in components) {
+			if (comp.GetType().Name == ScriptName) {
+				controlScript = comp as JoystickController;
+				break;
+			}
+		}
+	}
 	#endregion
 
 
@@ -41,7 +48,9 @@ public class JoyStick : MonoBehaviour {
 	[Tooltip("TRUE - outer area method will be called continuously while the joystick is in the outer area. False - only triggered once per entry into outer area.")]
 	[SerializeField] bool OneTriggerPerEntry = true;
 	[SerializeField] bool InnerFunctionActiveWhileInOuter = false;
-
+	[Tooltip("Defines the starting value for input at the boundary to the outerarea - inner area. e.g. value of 0 will mean that the outer area input will return 0 when just entered in the outer area.")]
+	[Range(0f, 1f)]
+	[SerializeField] float OuterMagnitudeStart = 0f;
 
 
 
@@ -72,28 +81,13 @@ public class JoyStick : MonoBehaviour {
 
 
 
-	#region Inner Area Controls
-
-
-
-
-	#endregion
-
-
-
-
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 	#region Starting Touch Controls
 	//options for different type of initial touch responses
 	[Tooltip("Maximum allowable distance range for the touch position to the joystick(-center) in in-game units required to `start controlling` the joystick - only applies on the first touch. Maximum is the outer area of the joystick.")]
 	[SerializeField] public float JoystickSensingRadius = 1f;
-	[Tooltip("Can the joystick start to be controlled even by sliding finger into its range.")]
+	[Tooltip("When enabled; disallows the joystick from start being controlled when sliding finger into its range. Must touch INSIDE the range to start.")]
 	[SerializeField] bool RequireFirstTouchInside = false;
 	//this is in pixel units - for ease code writing.
 	float InitialTouchSensingRadius = 100f;
@@ -106,11 +100,7 @@ public class JoyStick : MonoBehaviour {
 	}
 
 	void SetTouchID() {
-		if (Input.touchCount < 1) return;
-		if (currentTouchID != null) {
-			return;
-		}
-		//check up to the 3rd touch.
+		if (Input.touchCount < 1 || currentTouchID != null) return;
 		int numberofchecks = Mathf.Min(Input.touchCount, 5);
 		Vector2 joystickPosition = GetComponent<RectTransform>().anchoredPosition;
 		for (int i = 0; i < numberofchecks; i++) {
@@ -127,11 +117,6 @@ public class JoyStick : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-
-
 	#endregion
 
 
@@ -153,12 +138,6 @@ public class JoyStick : MonoBehaviour {
 		//requires appropriate camera to be set to the joystick canvas. - in my case it was main camera.
 		mainCameraSize = canvasO.GetComponent<Canvas>().worldCamera.orthographicSize;
 	}
-
-
-
-
-
-
 	#endregion
 
 
@@ -186,15 +165,13 @@ public class JoyStick : MonoBehaviour {
 	}
 
 
-
-
-
 	Vector2 currentJoystickDisplacement = Vector2.zero;
 	Vector2 previousJoystickDisplacement = Vector2.zero;
 	float Displacement = 0f;
 	bool OuterAreaOn = false;
 	int? currentTouchID = null;
-
+	[Tooltip("if enabled, the inner function will be called with the values of 0 displacement once before controls are stopped")]
+	[SerializeField] bool CallInnerFunctionWhenControlStopped = false;
 
 
 	void updatePreviousJoystickPosition() {
@@ -221,6 +198,7 @@ public class JoyStick : MonoBehaviour {
 		previousJoystickDisplacement = Vector2.zero;
 		Displacement = 0f;
 		OuterAreaOn = false;
+		if (CallInnerFunctionWhenControlStopped) InnerAreaFunction();
 	}
 	void setDisplacementAndCheckForStoppingControls() {
 		if (currentTouchID == null) return;
@@ -235,8 +213,6 @@ public class JoyStick : MonoBehaviour {
 		currentJoystickDisplacement = setJoystickDisplacement();
 		setPastPositions();
 		Displacement = currentJoystickDisplacement.magnitude;
-
-
 
 		//stop controls due to being out of bounds. Requires displacements to be calculated first.
 		if (Displacement > OutOfBoundsDistance) {
@@ -324,13 +300,17 @@ public class JoyStick : MonoBehaviour {
 		OuterAreaFunction();
 		OuterAreaOn = true;
 	}
+
+	// magnitude is normalized to having max at 1 for each outer and inner.
 	void OuterAreaFunction() {
-		// controlScript.OuterControl(currentJoystickDisplacement);
+		if (!UseOuterArea) return;
+		float outerDistance = Mathf.Max((Mathf.Min(OuterAreaDistance, Displacement) - InnerAreaDistance), 0);
+		float outerDistanceNormalized = OuterMagnitudeStart + (outerDistance / (OuterAreaDistance - InnerAreaDistance)) * (1f - OuterMagnitudeStart);
+		controlScript.OuterControl(currentJoystickDisplacement.normalized, outerDistanceNormalized);
 	}
 	void InnerAreaFunction() {
-		// controlScript.InnerControl(currentJoystickDisplacement);
+		controlScript.InnerControl(currentJoystickDisplacement.normalized, Mathf.Min(Displacement, InnerAreaDistance) / InnerAreaDistance);
 	}
-
 
 
 
@@ -342,8 +322,10 @@ public class JoyStick : MonoBehaviour {
 		SetAreaThresholdDistance();
 		VerifyOuterAreaControlsToggle();
 		setTouchSenseRadius();
+		SetControlScript();
 	}
 	void JoystickUsage() {
+		if (controlScript == null) return;
 		SetTouchID();
 		setDisplacementAndCheckForStoppingControls();
 		MainFunctionality();
@@ -388,7 +370,6 @@ public class JoyStick : MonoBehaviour {
 	}
 
 	void Update() {
-		// if (controlScript != null) JoystickUsage();
 		JoystickUsage();
 	}
 

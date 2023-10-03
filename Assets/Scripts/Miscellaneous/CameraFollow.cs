@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
 	[SerializeField] float maxoffset, smoothTime;
 
-	float camVelocity = 0f;
 	Transform player = null;
 	Coroutine currentSmooth;
 	Coroutine noMovementRoutine;

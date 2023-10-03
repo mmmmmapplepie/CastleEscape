@@ -36,8 +36,7 @@ public class TilePositionSizeRandomizer : MonoBehaviour {
 		transform.position = new Vector3(xDisplacement + TileAnchorCenter.x - 2.5f, yDisplacement + TileAnchorCenter.y - 2f);
 	}
 	//buff/debuff chances are out of hundred. pick random from -50 to 50. range from -50 to debuff gives debuff and 50 down to buffchance gives buff.
-	int buffChance = 10;
-	int debuffChance = -10;
+	[SerializeField] int buffChance = 10, debuffChance = -10;
 	void randomizeBuffAndDebuff() {
 		int buff_debuffInt = Random.Range(-50, 51);
 		GameObject bonus = null;
