@@ -1,15 +1,51 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 public class PlayerMovement : MonoBehaviour, JoystickController {
+	public PlayerType playerObject;
+	public Light2D torchLight;
+	public Light2D auraLight;
+	public PlayerLife lifeScript;
+
+
+	float dashRegen = 0f;
+	void SetupStats() {
+		lifeScript.maxHealth = playerObject.MaxHealth * 2;
+		lifeScript.Health = lifeScript.maxHealth;
+		lifeScript.regen = playerObject.Regeneration;
+		playerSpeed = (float)playerObject.Speed;
+		dashRegen = (float)playerObject.DashRegeneration;
+		dashSpeed = (float)playerObject.DashPower * 3f + 10f;
+		PlatformController.luck = playerObject.Luck * 3;
+		maxDash = playerObject.DashStamina;
+		setLightStrengths();
+	}
+	void setLightStrengths() {
+		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
+		torchLight.pointLightOuterRadius = (float)playerObject.TorchIntensity * 2f + 3f;
+		torchLight.pointLightInnerAngle = (float)playerObject.TorchWidth * 3f + 30f;
+		torchLight.pointLightOuterAngle = (float)playerObject.TorchWidth * 10f + 50f;
+		auraLight.pointLightOuterRadius = (float)playerObject.Aura + 10f;
+	}
+
 	float XControl; Vector2 DashControl;
 	bool dashAble = false; bool grounded = false; bool tempGrounded = false; bool dashing = false;
-	int dashCharge = 0;
+	int maxDash = 1;
+	int _dashCharge = 0;
+	int dashCharge {
+		get { return _dashCharge; }
+		set { _dashCharge = value > maxDash ? maxDash : value; }
+	}
 	[SerializeField] LayerMask groundedMask;
 	[SerializeField] float basicG = 5f, fallingG = 10f, dashCooldown = 0.5f, dashSpeed = 20f, dashTime = 0.2f, playerSpeed = 8f;
 	Rigidbody2D RB;
 	Coroutine dashingRoutine;
+
+
+
 	void Awake() {
 		RB = gameObject.GetComponent<Rigidbody2D>();
+		SetupStats();
 	}
 	void Update() {
 		grounded = checkGrounded();
@@ -23,7 +59,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
 			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier, 0f), ForceMode2D.Force);
 		} else {
-			// print(XControl);
 			RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
 		}
 	}

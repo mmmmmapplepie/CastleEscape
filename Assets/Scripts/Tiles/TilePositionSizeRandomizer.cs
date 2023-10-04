@@ -7,7 +7,7 @@ public class TilePositionSizeRandomizer : MonoBehaviour {
 	public Vector2 TileAnchorCenter;
 	[SerializeField] Tilemap tilemap;
 	[SerializeField] TileBase tileBase;
-
+	public int luck = 0;
 
 	//buff prefabs
 	[SerializeField] List<GameObject> buffPrefabs, debuffPrefabs = new List<GameObject>();
@@ -51,6 +51,6 @@ public class TilePositionSizeRandomizer : MonoBehaviour {
 	void setBonus(GameObject prefab) {
 		if (prefab == null) return;
 		Vector3 pos = new Vector3(Random.Range(-2f, 2f) + TileAnchorCenter.x, transform.position.y + 1f + Random.Range(0f, (TileAnchorCenter.y + 4f) - (transform.position.y + 1f)));
-		Instantiate(prefab, pos, Quaternion.identity);
+		Instantiate(prefab, pos, Quaternion.identity, transform);
 	}
 }

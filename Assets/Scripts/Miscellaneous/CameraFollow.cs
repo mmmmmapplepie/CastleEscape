@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
@@ -20,16 +19,16 @@ public class CameraFollow : MonoBehaviour {
 	}
 	Vector3 getPlayerPosition() {
 		Vector3 pos = Vector3.zero;
-		if (player != null) {
-			pos = player.transform.position;
-			pos = new Vector3(pos.x, pos.y, -10f);
-		}
+		pos = player.transform.position;
+		pos = new Vector3(pos.x, pos.y, -10f);
 		return pos;
 	}
 	void LateUpdate() {
 		cameraFollow();
 	}
 	void cameraFollow() {
+		if (!GameStateManager.InGame) return;
+		if (player == null) return;
 		if (0.1f > Vector3.Distance(transform.position, getPlayerPosition())) return;
 		if (maxoffset < Vector3.Distance(transform.position, getPlayerPosition())) {
 			stopNoMovementRoutines();
