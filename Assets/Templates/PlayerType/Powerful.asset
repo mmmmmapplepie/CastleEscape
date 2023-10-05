@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Average Guy 2
+  m_Name: Powerful
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  DashStamina: 0
-  Regeneration: 0
-  Luck: 0
-  Speed: 0
-  DashPower: 0
-  DashRegeneration: 0
-  TorchIntensity: 0
-  TorchWidth: 0
-  Aura: 0
+  key: Powerful
+  MaxHealth: 9
+  Regeneration: 7
+  DashPower: 10
+  DashRegeneration: 6
+  DashStamina: 3
+  Luck: 3
+  Speed: 7
+  TorchIntensity: 3
+  TorchWidth: 3
+  Aura: 9

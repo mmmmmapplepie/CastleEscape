@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Average Guy 3
+  m_Name: Wise
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  DashStamina: 0
-  Regeneration: 0
-  Luck: 0
-  Speed: 0
-  DashPower: 0
-  DashRegeneration: 0
-  TorchIntensity: 0
-  TorchWidth: 0
-  Aura: 0
+  key: Wise
+  MaxHealth: 6
+  Regeneration: 5
+  DashPower: 3
+  DashRegeneration: 9
+  DashStamina: 9
+  Luck: 2
+  Speed: 3
+  TorchIntensity: 7
+  TorchWidth: 10
+  Aura: 6

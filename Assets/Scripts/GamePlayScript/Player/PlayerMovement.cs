@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -19,7 +20,14 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		PlatformController.luck = playerObject.Luck * 3;
 		maxDash = playerObject.DashStamina;
 		setLightStrengths();
+		makeSureTotalCorrect();
 	}
+
+	void makeSureTotalCorrect() {
+		int tot = playerObject.MaxHealth + playerObject.Regeneration + playerObject.DashPower + playerObject.DashRegeneration + playerObject.DashStamina + playerObject.Luck + playerObject.Speed + playerObject.TorchIntensity + playerObject.TorchWidth + playerObject.Aura;
+		if (tot != 60) Debug.Log(tot);
+	}
+
 	void setLightStrengths() {
 		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
 		torchLight.pointLightOuterRadius = (float)playerObject.TorchIntensity * 2f + 3f;

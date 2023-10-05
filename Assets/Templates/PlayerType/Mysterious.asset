@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Average Guy 1
+  m_Name: Mysterious
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  DashStamina: 0
-  Regeneration: 0
-  Luck: 0
-  Speed: 0
-  DashPower: 0
-  DashRegeneration: 0
-  TorchIntensity: 0
-  TorchWidth: 0
-  Aura: 0
+  key: Mysterious
+  MaxHealth: 7
+  Regeneration: 7
+  DashPower: 7
+  DashRegeneration: 7
+  DashStamina: 7
+  Luck: 7
+  Speed: 7
+  TorchIntensity: 7
+  TorchWidth: 7
+  Aura: 7
