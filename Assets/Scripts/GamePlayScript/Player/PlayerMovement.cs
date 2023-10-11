@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		maxDash = playerObject.DashStamina;
 		setLightStrengths();
 		changeSprite();
+		//remove the below method when finally done with game overall.
 		makeSureTotalCorrect();
 	}
 	void changeSprite() {

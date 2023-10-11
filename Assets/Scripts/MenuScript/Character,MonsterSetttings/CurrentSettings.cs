@@ -70,7 +70,14 @@ public class CurrentSettings : MonoBehaviour {
 		player.GetComponent<PlayerMovement>().playerObject = CurrentPlayerType;
 		player.GetComponent<PlayerMovement>().SetupStats();
 	}
-
+	public void SetPlayerMonsterVariables(string playerName, string monsterName) {
+		if (playerName != null) {
+			CurrentPlayerType = PlayerTypes.Find(x => x.name == playerName);
+		}
+		if (monsterName != null) {
+			CurrentMonster = Monsters.Find(x => x.name == monsterName);
+		}
+	}
 
 
 

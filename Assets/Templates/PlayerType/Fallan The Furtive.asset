@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Fallan The Furtive
   m_EditorClassIdentifier: 
-  key: Furtive
   MaxHealth: 10
   Regeneration: 9
-  DashPower: 3
-  DashRegeneration: 4
-  DashStamina: 7
-  Luck: 2
-  Speed: 2
-  TorchIntensity: 9
-  TorchWidth: 9
-  Aura: 5
+  DashPower: 6
+  DashRegeneration: 10
+  DashStamina: 8
+  Luck: 8
+  Speed: 6
+  TorchIntensity: 1
+  TorchWidth: 1
+  Aura: 1
+  color: {r: 0, g: 0, b: 0, a: 0}

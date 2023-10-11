@@ -97092,7 +97092,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pick Character
+  m_text: Pick Monster
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
   m_sharedMaterial: {fileID: -7194338813117649309, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
@@ -99054,7 +99054,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 587d5f01279f30c4f983bcd608c0fd86, type: 2}
   - {fileID: 11400000, guid: a0da93780e282184eb86b6cc90a244b0, type: 2}
   - {fileID: 11400000, guid: 64342e3a5bf904e49897faa0cf416317, type: 2}
-  - {fileID: 11400000, guid: c92a6c8007c89d14fb7dfd3bc0792afe, type: 2}
   - {fileID: 11400000, guid: 417cbc91a264f0d418d9bf687c97570f, type: 2}
   - {fileID: 11400000, guid: f3bb68c20d3781b40b331b9e71daf2e7, type: 2}
   - {fileID: 11400000, guid: 2e404cd5bb29c0e4e9543cace373e2e4, type: 2}
@@ -99325,7 +99324,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427645018}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -99339,7 +99338,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427645018}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -99361,7 +99360,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c84b7ff6b6c214440b2452a1a5959acf, type: 2}
   - {fileID: 11400000, guid: a03e8acbdb112dd4f896f16675e3e563, type: 2}
   players:
-  - {fileID: 11400000, guid: 50121c12e50e2e2449b5c45e4eb87976, type: 2}
   - {fileID: 11400000, guid: 37c0d6ebba182024eb9660ae95047202, type: 2}
   - {fileID: 11400000, guid: d1555ecdaa41608458f9dc6b29bfacac, type: 2}
   - {fileID: 11400000, guid: 135a7bdd5be9f5d4fbc587c4b8bb73e3, type: 2}
@@ -99369,11 +99367,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0da93780e282184eb86b6cc90a244b0, type: 2}
   - {fileID: 11400000, guid: 587d5f01279f30c4f983bcd608c0fd86, type: 2}
   - {fileID: 11400000, guid: 64342e3a5bf904e49897faa0cf416317, type: 2}
-  - {fileID: 11400000, guid: c92a6c8007c89d14fb7dfd3bc0792afe, type: 2}
+  - {fileID: 11400000, guid: 50121c12e50e2e2449b5c45e4eb87976, type: 2}
   - {fileID: 11400000, guid: 417cbc91a264f0d418d9bf687c97570f, type: 2}
   - {fileID: 11400000, guid: 2e404cd5bb29c0e4e9543cace373e2e4, type: 2}
   - {fileID: 11400000, guid: f3bb68c20d3781b40b331b9e71daf2e7, type: 2}
   - {fileID: 11400000, guid: af6798f2c722a1149a1673bddfee4cf2, type: 2}
+  - {fileID: 11400000, guid: 645c3fdd07187024eb97e075566e64ac, type: 2}
   - {fileID: 11400000, guid: f2ee3fc011bffd144b2eee65221989ed, type: 2}
   - {fileID: 11400000, guid: 01963efeb9f0ab2458cb7122ee7686dd, type: 2}
   - {fileID: 11400000, guid: 30f3dd0c32bcbd0498b427a0175ae45c, type: 2}
@@ -99382,6 +99381,7 @@ MonoBehaviour:
   InPlayerSettings: 1
   cell: {fileID: 4455666986650237962, guid: b5b78cfdfed9d784ab9d2245a6eca94f, type: 3}
   cellHolder: {fileID: 1399561961}
+  playerMonsterSettingsScript: {fileID: 1295429867}
 --- !u!224 &1432908134 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6894858107044326761, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
@@ -99557,7 +99557,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -575, y: 150}
-  m_SizeDelta: {x: 350, y: 80}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1592746437
 MonoBehaviour:
@@ -99602,7 +99602,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1592746438}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1427645024}
+        m_TargetAssemblyTypeName: NameOrganizer, Assembly-CSharp
+        m_MethodName: ChangeName
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1592746438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100393,7 +100405,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -575, y: -400}
-  m_SizeDelta: {x: 350, y: 80}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1939996815
 MonoBehaviour:
@@ -100438,7 +100450,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1939996816}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1427645024}
+        m_TargetAssemblyTypeName: NameOrganizer, Assembly-CSharp
+        m_MethodName: ChangeName
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1939996816
 MonoBehaviour:
   m_ObjectHideFlags: 0

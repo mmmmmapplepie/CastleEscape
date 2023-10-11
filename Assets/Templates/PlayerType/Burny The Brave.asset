@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Burny The Brave
   m_EditorClassIdentifier: 
-  key: Brave
   MaxHealth: 3
   Regeneration: 2
   DashPower: 9
@@ -21,5 +20,6 @@ MonoBehaviour:
   Luck: 7
   Speed: 8
   TorchIntensity: 1
-  TorchWidth: 3
+  TorchWidth: 2
   Aura: 10
+  color: {r: 0, g: 0, b: 0, a: 0}
