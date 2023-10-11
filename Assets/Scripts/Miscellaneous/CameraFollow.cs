@@ -27,7 +27,7 @@ public class CameraFollow : MonoBehaviour {
 		cameraFollow();
 	}
 	void cameraFollow() {
-		if (!GameStateManager.InGame) return;
+		if (!GameStateManager.InGame || GameStateManager.Paused) return;
 		if (player == null) return;
 		if (0.1f > Vector3.Distance(transform.position, getPlayerPosition())) return;
 		if (maxoffset < Vector3.Distance(transform.position, getPlayerPosition())) {

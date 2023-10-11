@@ -9,11 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
-  m_Name: Monst
+  m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
+  m_Name: Pontar The Powerful
   m_EditorClassIdentifier: 
-  Damage: 0
-  Speed: 0
-  Hunger: 0
-  Range: 0
-  MonsterPrefab: {fileID: 0}
+  key: Powerful
+  MaxHealth: 9
+  Regeneration: 7
+  DashPower: 10
+  DashRegeneration: 6
+  DashStamina: 3
+  Luck: 3
+  Speed: 7
+  TorchIntensity: 3
+  TorchWidth: 3
+  Aura: 9

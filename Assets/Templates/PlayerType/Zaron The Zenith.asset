@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Slumbering
+  m_Name: Zaron The Zenith
   m_EditorClassIdentifier: 
-  key: Slumbering
-  MaxHealth: 10
-  Regeneration: 9
-  DashPower: 2
-  DashRegeneration: 3
-  DashStamina: 6
-  Luck: 9
-  Speed: 1
-  TorchIntensity: 5
-  TorchWidth: 6
-  Aura: 9
+  key: Wise
+  MaxHealth: 6
+  Regeneration: 5
+  DashPower: 3
+  DashRegeneration: 9
+  DashStamina: 9
+  Luck: 2
+  Speed: 3
+  TorchIntensity: 7
+  TorchWidth: 10
+  Aura: 6

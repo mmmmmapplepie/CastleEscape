@@ -1,37 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class HighScore : MonoBehaviour {
-	[SerializeField] TextMeshProUGUI highscoreTxt;
-	public static TextMeshProUGUI HighscoreTxt;
+	[SerializeField] TextMeshProUGUI highScoreTxt, scoreTypeLabel;
+	public static TextMeshProUGUI HighScoreTxt, ScoreTypeLabel;
 	public static int CurrentHighscore = 0;
 	public static int CurrentScore = 0;
 	void Awake() {
-		HighscoreTxt = highscoreTxt;
+		HighScoreTxt = highScoreTxt;
+		ScoreTypeLabel = scoreTypeLabel;
 	}
 	public static void ShowHighScore(bool saveScore = false) {
 		if (saveScore) {
 			CurrentHighscore = CurrentScore > CurrentHighscore ? CurrentScore : CurrentHighscore;
-			PlayerPrefs.SetInt(CurrentSettings.CurrentPlayerType.key, CurrentHighscore);
+			PlayerPrefs.SetInt(CurrentSettings.CurrentSettingName, CurrentHighscore);
 		}
-		if (PlayerPrefs.HasKey(CurrentSettings.CurrentPlayerType.key)) {
-			CurrentHighscore = PlayerPrefs.GetInt(CurrentSettings.CurrentPlayerType.key);
+		if (PlayerPrefs.HasKey(CurrentSettings.CurrentSettingName)) {
+			CurrentHighscore = PlayerPrefs.GetInt(CurrentSettings.CurrentSettingName);
 		} else {
 			CurrentHighscore = 0;
-			PlayerPrefs.SetInt(CurrentSettings.CurrentPlayerType.key, CurrentHighscore);
+			PlayerPrefs.SetInt(CurrentSettings.CurrentSettingName, CurrentHighscore);
 		}
-		HighscoreTxt.text = CurrentHighscore.ToString();
+		ScoreTypeLabel.text = "High-Score:";
+		HighScoreTxt.text = CurrentHighscore.ToString();
 	}
 
 	public static void UpdateScore(bool newgame = false) {
 		if (newgame) {
 			CurrentScore = 0;
-			HighscoreTxt.text = CurrentScore.ToString();
+			HighScoreTxt.text = CurrentScore.ToString();
+			ScoreTypeLabel.text = "Score:";
 			return;
 		}
 		CurrentScore++;
-		HighscoreTxt.text = (CurrentScore).ToString();
+		HighScoreTxt.text = (CurrentScore).ToString();
 	}
 }

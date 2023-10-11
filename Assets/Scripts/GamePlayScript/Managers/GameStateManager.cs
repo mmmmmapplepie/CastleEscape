@@ -19,21 +19,23 @@ public class GameStateManager : MonoBehaviour {
 
 
 	public static bool InGame = false;
-
+	public static bool Paused = false;
 
 
 	public static void GoToMenu() {
 		playingMenu.SetActive(false);
 		outMenu.SetActive(true);
-		//enable platforms spawning
+		InGame = false;
+		//disable platforms and clear
 		//game end event
 	}
 
 	public static void StartGame() {
 		playingMenu.SetActive(true);
 		outMenu.SetActive(false);
-		//disable platforms and clear
-		//
+		InGame = true;
+		//enable platforms spawning
+		//start gaem
 	}
 
 	public static void StartNewWave() {

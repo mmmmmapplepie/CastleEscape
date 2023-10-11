@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Ready
+  m_Name: Curin The Coward
   m_EditorClassIdentifier: 
-  key: Ready
-  MaxHealth: 10
-  Regeneration: 9
-  DashPower: 1
-  DashRegeneration: 7
-  DashStamina: 7
-  Luck: 1
-  Speed: 4
-  TorchIntensity: 7
-  TorchWidth: 8
-  Aura: 6
+  key: Coward
+  MaxHealth: 4
+  Regeneration: 3
+  DashPower: 5
+  DashRegeneration: 5
+  DashStamina: 6
+  Luck: 9
+  Speed: 10
+  TorchIntensity: 8
+  TorchWidth: 9
+  Aura: 1

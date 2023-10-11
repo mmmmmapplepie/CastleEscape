@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Ordinary
+  m_Name: Bronca The Blatant
   m_EditorClassIdentifier: 
-  key: Ordinary
-  MaxHealth: 7
-  Regeneration: 5
-  DashPower: 6
-  DashRegeneration: 6
-  DashStamina: 6
-  Luck: 6
-  Speed: 6
-  TorchIntensity: 6
-  TorchWidth: 6
-  Aura: 6
+  key: Blatant
+  MaxHealth: 9
+  Regeneration: 8
+  DashPower: 9
+  DashRegeneration: 3
+  DashStamina: 1
+  Luck: 5
+  Speed: 4
+  TorchIntensity: 10
+  TorchWidth: 4
+  Aura: 7

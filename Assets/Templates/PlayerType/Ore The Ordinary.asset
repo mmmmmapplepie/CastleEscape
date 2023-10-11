@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Persistent
+  m_Name: Ore The Ordinary
   m_EditorClassIdentifier: 
-  key: Persistent
-  MaxHealth: 8
-  Regeneration: 7
-  DashPower: 4
-  DashRegeneration: 8
-  DashStamina: 10
-  Luck: 2
-  Speed: 5
-  TorchIntensity: 5
-  TorchWidth: 5
+  key: Ordinary
+  MaxHealth: 7
+  Regeneration: 5
+  DashPower: 6
+  DashRegeneration: 6
+  DashStamina: 6
+  Luck: 6
+  Speed: 6
+  TorchIntensity: 6
+  TorchWidth: 6
   Aura: 6

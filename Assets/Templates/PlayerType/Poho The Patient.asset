@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Blessed
+  m_Name: Poho The Patient
   m_EditorClassIdentifier: 
-  key: Blessed
-  MaxHealth: 3
-  Regeneration: 2
-  DashPower: 8
-  DashRegeneration: 8
-  DashStamina: 4
-  Luck: 10
+  key: Patient
+  MaxHealth: 8
+  Regeneration: 7
+  DashPower: 10
+  DashRegeneration: 7
+  DashStamina: 9
+  Luck: 7
   Speed: 3
-  TorchIntensity: 5
-  TorchWidth: 8
-  Aura: 9
+  TorchIntensity: 2
+  TorchWidth: 4
+  Aura: 3

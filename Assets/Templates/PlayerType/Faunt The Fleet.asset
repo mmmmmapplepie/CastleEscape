@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Mysterious
+  m_Name: Faunt The Fleet
   m_EditorClassIdentifier: 
-  key: Mysterious
-  MaxHealth: 7
-  Regeneration: 7
-  DashPower: 7
-  DashRegeneration: 7
-  DashStamina: 7
-  Luck: 7
-  Speed: 7
-  TorchIntensity: 7
-  TorchWidth: 7
-  Aura: 7
+  key: Fleet
+  MaxHealth: 3
+  Regeneration: 1
+  DashPower: 6
+  DashRegeneration: 10
+  DashStamina: 10
+  Luck: 4
+  Speed: 10
+  TorchIntensity: 10
+  TorchWidth: 1
+  Aura: 5

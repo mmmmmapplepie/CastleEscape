@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Sly
+  m_Name: Gould The Glutton
   m_EditorClassIdentifier: 
-  key: Sly
-  MaxHealth: 7
-  Regeneration: 2
-  DashPower: 8
-  DashRegeneration: 5
-  DashStamina: 4
-  Luck: 9
-  Speed: 6
-  TorchIntensity: 8
+  key: Glutton
+  MaxHealth: 10
+  Regeneration: 9
+  DashPower: 3
+  DashRegeneration: 4
+  DashStamina: 7
+  Luck: 2
+  Speed: 2
+  TorchIntensity: 9
   TorchWidth: 9
-  Aura: 2
+  Aura: 5

@@ -7,7 +7,7 @@ public class JoystickPosition : MonoBehaviour {
 	Vector2 LeftPos;
 	[SerializeField] TextMeshProUGUI textbox;
 	[SerializeField] RectTransform MovementStick, TorchStick;
-	[SerializeField] GameObject ConfigureBtn, ChangeBtn, SaveBtn, GuideText;
+	[SerializeField] GameObject ConfigureBtn, ChangeBtn, SaveBtn, StartBtn, CharacterSettingBtn, IngameMenu;
 	void Start() {
 		getPositions();
 		setOrientation();
@@ -37,7 +37,11 @@ public class JoystickPosition : MonoBehaviour {
 		ConfigureBtn.SetActive(false);
 		SaveBtn.SetActive(true);
 		ChangeBtn.SetActive(true);
-		GuideText.SetActive(true);
+		MovementStick.transform.parent.gameObject.SetActive(true);
+		TorchStick.transform.parent.gameObject.SetActive(true);
+		IngameMenu.SetActive(true);
+		StartBtn.SetActive(false);
+		CharacterSettingBtn.SetActive(false);
 	}
 	public void SaveValue() {
 		int saveVal = RightSide == true ? 1 : 0;
@@ -45,7 +49,11 @@ public class JoystickPosition : MonoBehaviour {
 		ConfigureBtn.SetActive(true);
 		SaveBtn.SetActive(false);
 		ChangeBtn.SetActive(false);
-		GuideText.SetActive(false);
+		MovementStick.transform.parent.gameObject.SetActive(false);
+		TorchStick.transform.parent.gameObject.SetActive(false);
+		IngameMenu.SetActive(false);
+		StartBtn.SetActive(true);
+		CharacterSettingBtn.SetActive(true);
 	}
 
 }

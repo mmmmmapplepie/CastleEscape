@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Coward
+  m_Name: Fallan The Furtive
   m_EditorClassIdentifier: 
-  key: Coward
-  MaxHealth: 4
-  Regeneration: 3
-  DashPower: 5
-  DashRegeneration: 5
-  DashStamina: 6
-  Luck: 9
-  Speed: 10
-  TorchIntensity: 8
+  key: Furtive
+  MaxHealth: 10
+  Regeneration: 9
+  DashPower: 3
+  DashRegeneration: 4
+  DashStamina: 7
+  Luck: 2
+  Speed: 2
+  TorchIntensity: 9
   TorchWidth: 9
-  Aura: 1
+  Aura: 5

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Smart
+  m_Name: Visnu The Vengeful
   m_EditorClassIdentifier: 
-  key: Smart
-  MaxHealth: 5
-  Regeneration: 4
-  DashPower: 8
-  DashRegeneration: 9
-  DashStamina: 5
-  Luck: 3
-  Speed: 4
-  TorchIntensity: 10
-  TorchWidth: 9
-  Aura: 4
+  key: Vengeful
+  MaxHealth: 2
+  Regeneration: 1
+  DashPower: 7
+  DashRegeneration: 8
+  DashStamina: 7
+  Luck: 5
+  Speed: 9
+  TorchIntensity: 6
+  TorchWidth: 7
+  Aura: 8

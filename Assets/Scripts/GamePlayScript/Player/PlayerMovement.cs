@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 
 	float dashRegen = 0f;
-	void SetupStats() {
+	public void SetupStats() {
 		lifeScript.maxHealth = playerObject.MaxHealth * 2;
 		lifeScript.Health = lifeScript.maxHealth;
 		lifeScript.regen = playerObject.Regeneration;
@@ -20,9 +20,12 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		PlatformController.luck = playerObject.Luck * 3;
 		maxDash = playerObject.DashStamina;
 		setLightStrengths();
+		changeSprite();
 		makeSureTotalCorrect();
 	}
-
+	void changeSprite() {
+		transform.Find("PlayerSprite").gameObject.GetComponent<SpriteRenderer>().color = playerObject.color;
+	}
 	void makeSureTotalCorrect() {
 		int tot = playerObject.MaxHealth + playerObject.Regeneration + playerObject.DashPower + playerObject.DashRegeneration + playerObject.DashStamina + playerObject.Luck + playerObject.Speed + playerObject.TorchIntensity + playerObject.TorchWidth + playerObject.Aura;
 		if (tot != 60) Debug.Log(tot);
@@ -53,9 +56,9 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 	void Awake() {
 		RB = gameObject.GetComponent<Rigidbody2D>();
-		SetupStats();
 	}
 	void Update() {
+		if (!GameStateManager.InGame || GameStateManager.Paused) return;
 		grounded = checkGrounded();
 		checkDashAdd();
 		gravityScale();
@@ -132,6 +135,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
+		if (!GameStateManager.InGame || GameStateManager.Paused) return;
 		if (dashing) return;
 		if (Mathf.Abs(inputDirection.x * magnitude) < 0.3f) { XControl = 0f; lateralMovement(); return; }
 		float x = inputDirection.x;
@@ -139,6 +143,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
+		if (!GameStateManager.InGame || GameStateManager.Paused) return;
 		DashControl = inputDirection;
 		Dash();
 	}

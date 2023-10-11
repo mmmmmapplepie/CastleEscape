@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Glutton
+  m_Name: Solambus The Slumbering
   m_EditorClassIdentifier: 
-  key: Glutton
+  key: Slumbering
   MaxHealth: 10
   Regeneration: 9
-  DashPower: 3
-  DashRegeneration: 4
-  DashStamina: 7
-  Luck: 2
-  Speed: 2
-  TorchIntensity: 9
-  TorchWidth: 9
-  Aura: 5
+  DashPower: 2
+  DashRegeneration: 3
+  DashStamina: 6
+  Luck: 9
+  Speed: 1
+  TorchIntensity: 5
+  TorchWidth: 6
+  Aura: 9
