@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NameOrganizer : MonoBehaviour {
 	[SerializeField] List<Monster> monsters = new List<Monster>();
@@ -11,7 +12,7 @@ public class NameOrganizer : MonoBehaviour {
 	[SerializeField] GameObject cell;
 	[SerializeField] Transform cellHolder;
 	List<GameObject> nameCells = new List<GameObject>();
-	static float ShiftTime = 0.2f;
+	static float ShiftTime = 0.1f;
 	bool EvenCount = true;
 	int above = 0;
 	int centerIndex = 0;
@@ -118,21 +119,57 @@ public class NameOrganizer : MonoBehaviour {
 
 	#region StatsEditing
 	//stat references: left null for the unused ones. I.E monster stuff left null onn player name organizer.
+	[SerializeField] Transform[] statPointImageHolder;
+	[SerializeField] TextMeshProUGUI availableCustomPointsText;
+	[SerializeField] GameObject CustomPointsCustomizer, statPointImagePrefab;
+	PlayerType customizablePlayer;
+	int maxStat = 70;
 	void EditStats() {
+		if (CustomPointsCustomizer != null) CustomPointsCustomizer.SetActive(false);
 		if (InPlayerSettings) {
-
-
-			if (CurrentSettings.CurrentPlayerType.name == "Zaron The Zenith") {
-				//enable the custom character controls
-				//	the add & subtract from skillpoint
-				//	the remaining skillpoints number & text
+			clearHolders(statPointImageHolder);
+			for (int i = 0; i < statPointImageHolder.Count(); i++) {
+				int statPoint = CurrentSettings.CurrentPlayerType.GetStat(CurrentSettings.stats[i]);
+				for (int j = 0; j < statPoint; j++) {
+					Instantiate(statPointImagePrefab, statPointImageHolder[i]);
+				}
 			}
-			//check if it is custom character as well.
+			if (CurrentSettings.CurrentPlayerType.name == "Zaron The Zenith") {
+				CustomPointsCustomizer.SetActive(true);
+				availableCustomPointsText.text = (maxStat - statTotal()).ToString();
+			}
 		} else {
-
+			//monster settings
 		}
-		//enable the controls if name is the custom one.
+		CurrentSettings.ChangePlayerSettingsInnateAndPreview();
 	}
+	void clearHolders(Transform[] HoldersToClear) {
+		foreach (Transform holder in HoldersToClear) {
+			for (int i = 0; i < holder.childCount; i++) {
+				Destroy(holder.GetChild(i).gameObject);
+			}
+		}
+	}
+	[SerializeField] TMPro.TMP_Dropdown dropdownStat;
+	public void changeStat(bool raise) {
+		int total = statTotal();
+		if (raise && total >= 70) return;
+		int index = dropdownStat.value;
+		int currentStat = CurrentSettings.CustomPlayerStats[index];
+		if ((raise && currentStat == 10) || (!raise && currentStat == 1)) return;
+		CurrentSettings.CustomPlayerStats[index] = raise ? currentStat + 1 : currentStat - 1;
+		playerMonsterSettingsScript.SetCustomPlayerSettings();
+		EditStats();
+	}
+	int statTotal() {
+		int total = 0;
+		foreach (int val in CurrentSettings.CustomPlayerStats) {
+			total += val;
+		}
+		return total;
+	}
+
+
 	#endregion
 
 
@@ -222,7 +259,6 @@ public class NameOrganizer : MonoBehaviour {
 		} else {
 			playerMonsterSettingsScript.SetPlayerMonsterVariables(null, nameCells[centerIndex].GetComponent<TextMeshProUGUI>().text);
 		}
-		CurrentSettings.ChangePlayerSettingsInnateAndPreview();
 	}
 	void Update() {
 		callCommands();

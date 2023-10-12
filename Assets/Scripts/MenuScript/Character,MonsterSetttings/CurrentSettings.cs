@@ -46,7 +46,7 @@ public class CurrentSettings : MonoBehaviour {
 
 
 	#region Load/Set Custom Player Settings
-	List<string> stats = new List<string>() { "MaxHealth", "Regeneration", "DashPower", "DashRegeneration", "DashStamina", "Luck", "Speed", "TorchIntensity", "TorchWidth", "Aura" };
+	public static List<string> stats = new List<string>() { "MaxHealth", "Regeneration", "DashPower", "DashRegeneration", "DashStamina", "Luck", "Speed", "TorchIntensity", "TorchWidth", "Aura" };
 	void LoadCustomPlayerSettings() {
 		CustomPlayerStats = new int[10];
 		for (int i = 0; i < stats.Count; i++) {
@@ -59,9 +59,12 @@ public class CurrentSettings : MonoBehaviour {
 		}
 		SetCustomPlayerSettings();
 	}
-	void SetCustomPlayerSettings() {
+	public void SetCustomPlayerSettings() {
 		PlayerType customPlayer = PlayerTypes.Find(x => x.name == "Zaron The Zenith");
-		customPlayer.MaxHealth = CustomPlayerStats[0]; customPlayer.Regeneration = CustomPlayerStats[1]; customPlayer.DashPower = CustomPlayerStats[2]; customPlayer.DashRegeneration = CustomPlayerStats[3]; customPlayer.DashStamina = CustomPlayerStats[4]; customPlayer.Luck = CustomPlayerStats[5]; customPlayer.Speed = CustomPlayerStats[6]; customPlayer.TorchIntensity = CustomPlayerStats[7]; customPlayer.TorchWidth = CustomPlayerStats[8]; customPlayer.Aura = CustomPlayerStats[9];
+		for (int i = 0; i < 10; i++) {
+			customPlayer.SetStat(stats[i], CustomPlayerStats[i]);
+		}
+		// customPlayer.MaxHealth = CustomPlayerStats[0]; customPlayer.Regeneration = CustomPlayerStats[1]; customPlayer.DashPower = CustomPlayerStats[2]; customPlayer.DashRegeneration = CustomPlayerStats[3]; customPlayer.DashStamina = CustomPlayerStats[4]; customPlayer.Luck = CustomPlayerStats[5]; customPlayer.Speed = CustomPlayerStats[6]; customPlayer.TorchIntensity = CustomPlayerStats[7]; customPlayer.TorchWidth = CustomPlayerStats[8]; customPlayer.Aura = CustomPlayerStats[9];
 	}
 	#endregion
 
