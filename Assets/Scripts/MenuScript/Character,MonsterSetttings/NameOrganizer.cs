@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -119,10 +120,18 @@ public class NameOrganizer : MonoBehaviour {
 
 	#region StatsEditing
 	//stat references: left null for the unused ones. I.E monster stuff left null onn player name organizer.
+	[Header("Player Variables")]
 	[SerializeField] Transform[] statPointImageHolder;
 	[SerializeField] TextMeshProUGUI availableCustomPointsText;
 	[SerializeField] GameObject CustomPointsCustomizer, statPointImagePrefab;
 	PlayerType customizablePlayer;
+
+
+
+	[Space(10)]
+	[Header("MonsterVariables")]
+	[SerializeField] TextMeshProUGUI dmgT, spdT, senseT, hungerT, descriptionT;
+	[SerializeField] Image monsterSprite;
 	int maxStat = 70;
 	void EditStats() {
 		if (CustomPointsCustomizer != null) CustomPointsCustomizer.SetActive(false);
@@ -139,7 +148,12 @@ public class NameOrganizer : MonoBehaviour {
 				availableCustomPointsText.text = (maxStat - statTotal()).ToString();
 			}
 		} else {
-			//monster settings
+			// dmgT.text = CurrentSettings.CurrentMonster.Damage.ToString();
+			// spdT.text = CurrentSettings.CurrentMonster.Speed.ToString();
+			// senseT.text = CurrentSettings.CurrentMonster.Senses.ToString();
+			// hungerT.text = CurrentSettings.CurrentMonster.Hunger.ToString();
+			// dmgT.text = CurrentSettings.CurrentMonster.Description;
+			// monsterSprite.color = CurrentSettings.CurrentMonster.Color;
 		}
 		CurrentSettings.ChangePlayerSettingsInnateAndPreview();
 	}

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
   m_Name: Disparatop
   m_EditorClassIdentifier: 
-  Damage: 0
-  Speed: 0
-  Hunger: 0
-  Range: 0
+  Damage: 3
+  Speed: 1
+  Senses: 3
+  Hunger: 5
+  gimmick: Instills severe fear and desparation when in range SLOWING you and REDUCING
+    your jump power.
   MonsterPrefab: {fileID: 0}

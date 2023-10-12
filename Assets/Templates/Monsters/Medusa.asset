@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
-  m_Name: Ghost
+  m_Name: Medusa
   m_EditorClassIdentifier: 
   Damage: 2
   Speed: 2
-  Senses: 4
-  Hunger: 4
-  gimmick: Hungry monster that moves FASTER when it senses you.
+  Senses: 5
+  Hunger: 3
+  gimmick: Monster that petrifies you for a moment when it senses you.
   MonsterPrefab: {fileID: 0}

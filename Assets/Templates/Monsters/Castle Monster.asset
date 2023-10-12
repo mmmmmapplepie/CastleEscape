@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
   m_Name: Castle Monster
   m_EditorClassIdentifier: 
-  Damage: 0
-  Speed: 0
-  Hunger: 0
-  Range: 0
+  Damage: 3
+  Speed: 3
+  Senses: 3
+  Hunger: 3
+  gimmick: A monster roaming the castle grounds.
   MonsterPrefab: {fileID: 0}

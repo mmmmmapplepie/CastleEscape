@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
-  m_Name: Ghost
+  m_Name: Screamer
   m_EditorClassIdentifier: 
-  Damage: 2
-  Speed: 2
-  Senses: 4
-  Hunger: 4
-  gimmick: Hungry monster that moves FASTER when it senses you.
+  Damage: 5
+  Speed: 5
+  Senses: 1
+  Hunger: 1
+  gimmick: Odd monster that runs away from you.
   MonsterPrefab: {fileID: 0}
