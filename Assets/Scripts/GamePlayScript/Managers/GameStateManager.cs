@@ -22,24 +22,27 @@ public class GameStateManager : MonoBehaviour {
 	public static bool Paused = false;
 
 
-	public static void GoToMenu() {
+
+
+	[SerializeField] PlatformController platformController;
+
+	public void GoToMenu() {
+		platformController.destroyPlatforms();
 		playingMenu.SetActive(false);
 		outMenu.SetActive(true);
 		InGame = false;
-		//disable platforms and clear
 		//game end event
 	}
-
-	public static void StartGame() {
+	public void StartGame() {
+		platformController.makePlatforms();
 		playingMenu.SetActive(true);
 		outMenu.SetActive(false);
 		InGame = true;
-		//enable platforms spawning
 		//start gaem
 	}
 
-	public static void StartNewWave() {
-
+	public void StartNewWave() {
+		platformController.changeAllTiles();
 	}
 
 

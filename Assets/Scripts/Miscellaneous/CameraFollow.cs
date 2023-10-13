@@ -1,9 +1,9 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 	[SerializeField] float maxoffset, smoothTime;
-
 	Transform player = null;
 	Coroutine currentSmooth;
 	Coroutine noMovementRoutine;
@@ -27,21 +27,24 @@ public class CameraFollow : MonoBehaviour {
 		cameraFollow();
 	}
 	void cameraFollow() {
-		if (!GameStateManager.InGame || GameStateManager.Paused) return;
+		if (!GameStateManager.InGame || GameStateManager.Paused) { StopFollowRoutines(); return; }
 		if (player == null) return;
 		if (0.1f > Vector3.Distance(transform.position, getPlayerPosition())) return;
 		if (maxoffset < Vector3.Distance(transform.position, getPlayerPosition())) {
 			stopNoMovementRoutines();
 			Vector3 newDir = getPlayerPosition() - transform.position;
 			transform.position = getPlayerPosition() - maxoffset * newDir.normalized;
-		}
-		if (Vector3.Distance(transform.position, getPlayerPosition()) > maxoffset / 4f) {
+		} else if (Vector3.Distance(transform.position, getPlayerPosition()) > maxoffset / 4f) {
 			stopNoMovementRoutines();
 			StopCoroutine(currentSmooth);
 			currentSmooth = StartCoroutine(cameraMove());
 		} else {
 			noMovementRoutine = StartCoroutine(noMovementCameraMove());
 		}
+	}
+	void StopFollowRoutines() {
+		if (currentSmooth != null) StopCoroutine(currentSmooth);
+		stopNoMovementRoutines();
 	}
 	IEnumerator cameraMove() {
 		float start = Time.unscaledTime;
@@ -63,5 +66,24 @@ public class CameraFollow : MonoBehaviour {
 		if (subNoMovement != null) {
 			StopCoroutine(subNoMovement);
 		}
+	}
+
+	float moveTime = 2f;
+	public Coroutine menuCameraShift;
+	public void moveCamera(Vector3 finalPos) {
+		if (menuCameraShift != null) StopCoroutine(menuCameraShift);
+		menuCameraShift = StartCoroutine(moveCameraSet(finalPos));
+	}
+	IEnumerator moveCameraSet(Vector3 finalPos) {
+		float start = Time.unscaledTime;
+		Vector3 initialPos = transform.position;
+		while (Time.unscaledTime < start + moveTime) {
+			float timeRatio = 1f - ((start + moveTime - Time.unscaledTime) / moveTime);
+			float input = 0.251f + timeRatio * 4f;
+			float point = Mathf.Min(1f, (4f - (1 / input)) / 3.765f);
+			transform.position = Vector3.Lerp(initialPos, finalPos, point);
+			yield return null;
+		}
+		transform.position = finalPos;
 	}
 }

@@ -11,10 +11,7 @@ public class PlatformController : MonoBehaviour {
 	[SerializeField]
 	int gridNumX = 5, gridNumY = 6;
 	List<TilePositionSizeRandomizer> tileScriptList = new List<TilePositionSizeRandomizer>();
-	void Start() {
-		makePlatforms();
-	}
-	void makePlatforms() {
+	public void makePlatforms() {
 		for (int i = 0; i < gridNumY; i++) {
 			float yPos = i * gridHeight - 17f;
 			makeRows(-29f, gridNumX, gridWidth, yPos);
@@ -36,6 +33,11 @@ public class PlatformController : MonoBehaviour {
 	public void changeAllTiles() {
 		foreach (TilePositionSizeRandomizer tileScript in tileScriptList) {
 			tileScript.randomizeTile();
+		}
+	}
+	public void destroyPlatforms() {
+		foreach (TilePositionSizeRandomizer tile in tileScriptList) {
+			Destroy(tile.gameObject);
 		}
 	}
 }

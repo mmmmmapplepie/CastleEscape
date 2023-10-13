@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CurrentSettings : MonoBehaviour {
 	[SerializeField] TextMeshProUGUI highscore;
-	[SerializeField] GameObject Player;
+	public GameObject Player;
 	static GameObject player;
 	[SerializeField] List<PlayerType> PlayerTypes = new List<PlayerType>();
 	[SerializeField] List<Monster> Monsters = new List<Monster>();
@@ -14,7 +14,9 @@ public class CurrentSettings : MonoBehaviour {
 	public static Monster CurrentMonster;
 	public static string CurrentSettingName;
 
+	CameraFollow cameraScript;
 	void Awake() {
+		cameraScript = Camera.main.GetComponent<CameraFollow>();
 		player = Player;
 		loadSavedSettings();
 		// gameObject.SetActive(false);
@@ -111,11 +113,18 @@ public class CurrentSettings : MonoBehaviour {
 			SetupToggleBtnTxt.text = "Pick\nMonster";
 		}
 	}
+
+	[SerializeField] GameObject customizationBtn, StartBtn, JoystickBtn;
 	public void SaveSettings() {
 		for (int i = 0; i < stats.Count; i++) {
 			PlayerPrefs.SetInt(stats[i] + "CustomPlayer", CustomPlayerStats[i]);
 		}
 		PlayerPrefs.SetString("SetPlayer", CurrentPlayerType.name);
 		PlayerPrefs.SetString("SetMonster", CurrentMonster.name);
+		cameraScript.moveCamera(new Vector3(0f, 0.5f, -10f));
+		gameObject.SetActive(false);
+		customizationBtn.SetActive(true);
+		StartBtn.SetActive(true);
+		JoystickBtn.SetActive(true);
 	}
 }
