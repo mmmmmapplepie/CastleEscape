@@ -41,4 +41,10 @@ public class PlatformController : MonoBehaviour {
 		}
 		tileScriptList.Clear();
 	}
+
+	void Awake() {
+		GameStateManager.WaveCleared += changeAllTiles;
+		GameStateManager.GameEnd += destroyPlatforms;
+		GameStateManager.GameStart += makePlatforms;
+	}
 }

@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class PauseGame : MonoBehaviour {
 	[SerializeField] GameObject pausePanel, pauseBtn;
 	[SerializeField] GameStateManager manager;
 	public void Pause() {
+		GameStateManager.PauseGame();
+	}
+	void PauseAction() {
 		Time.timeScale = 0f;
 		pausePanel.SetActive(true);
 		pauseBtn.SetActive(false);
-		//have a pause event
 	}
-
-
 	public void Resume() {
-		Time.timeScale = 1f;
-		pausePanel.SetActive(false);
-		pauseBtn.SetActive(true);
-		//pause event stop
+		GameStateManager.ResumeGame();
 	}
-
-	public void Quit() {
+	void ResumeAction() {
 		Time.timeScale = 1f;
-		HighScore.ShowHighScore(true);
-		pauseBtn.SetActive(true);
 		pausePanel.SetActive(false);
+		pauseBtn.SetActive(true);
+	}
+	public void Quit() {
+		HighScore.ShowHighScore(true);
+		ResumeAction();
 		manager.GoToMenu();
-		//pause event stop as well as game end start
-		//other ingame required events.
+	}
+	void Awake() {
+		GameStateManager.PauseStart += PauseAction;
+		GameStateManager.PauseEnd += ResumeAction;
 	}
 }

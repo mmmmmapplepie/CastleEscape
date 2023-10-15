@@ -13,6 +13,7 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 	public void takeDamage(int damage) {
+		//effects
 		Health -= damage;
 	}
 	void Regen() {

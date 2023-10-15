@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour {
-	[SerializeField] GameObject PlayingMenu, OutMenu, PauseBtn;
+	[SerializeField] GameObject PlayingMenu, OutMenu, PauseBtn, StatusUI, BuffUI;
 	static GameObject playingMenu, outMenu;
 	void Awake() {
 		playingMenu = PlayingMenu;
@@ -18,38 +19,42 @@ public class GameStateManager : MonoBehaviour {
 
 
 
-	public static bool InGame = false;
-	public static bool Paused = false;
-
-
-
-
 	[SerializeField] PlatformController platformController;
-
+	public static bool InGame = false, Paused = false;
+	public static event Action WaveCleared, GameStart, GameEnd, PauseStart, PauseEnd;
+	public void Defeat() {
+		GameEnd?.Invoke();
+		InGame = false;
+		//show score screen. and new continue btn. (touch anywhere will go to menu)
+	}
 	public void GoToMenu() {
-		platformController.destroyPlatforms();
 		playingMenu.SetActive(false);
 		outMenu.SetActive(true);
 		PauseBtn.SetActive(false);
-		MonsterController.clearMonsterList();
+		GameEnd?.Invoke();
 		InGame = false;
-		//game end event
+		Paused = false;
 	}
 	public void StartGame() {
-		platformController.makePlatforms();
 		playingMenu.SetActive(true);
 		outMenu.SetActive(false);
 		PauseBtn.SetActive(true);
-		MonsterController.spawnInitialMonsters();
+		StatusUI.SetActive(true);
+		BuffUI.SetActive(true);
+		GameStart?.Invoke();
 		InGame = true;
-		//start gaem
 	}
-
-	public void StartNewWave() {
-		platformController.changeAllTiles();
-		MonsterController.spawnMonsterWave();
+	public static void StartNewWave() {
+		WaveCleared?.Invoke();
 	}
-
+	public static void PauseGame() {
+		PauseStart?.Invoke();
+		Paused = true;
+	}
+	public static void ResumeGame() {
+		PauseEnd?.Invoke();
+		Paused = false;
+	}
 
 
 

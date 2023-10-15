@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Curin The Coward
   m_EditorClassIdentifier: 
-  MaxHealth: 4
-  Regeneration: 3
+  MaxHealth: 5
+  Regeneration: 4
   DashPower: 5
-  DashRegeneration: 5
+  DashRegeneration: 3
   DashStamina: 6
   Luck: 9
   Speed: 10

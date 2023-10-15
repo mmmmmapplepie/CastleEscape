@@ -9,30 +9,28 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	public PlayerLife lifeScript;
 
 
-	float dashRegen = 0f;
 	public void SetupStats() {
+		RevertToIntialSettings();
 		lifeScript.maxHealth = playerObject.MaxHealth * 2;
 		lifeScript.Health = lifeScript.maxHealth;
 		lifeScript.regen = playerObject.Regeneration;
 		playerSpeed = (float)playerObject.Speed;
-		dashRegen = (float)playerObject.DashRegeneration;
-		dashSpeed = (float)playerObject.DashPower * 2f + 20f;
+		dashSpeed = (float)playerObject.DashPower * 3f + 10f;
 		PlatformController.luck = playerObject.Luck * 3;
-		maxDash = playerObject.DashStamina;
-		dashCooldown = (0.6f - playerObject.DashStamina * 0.02f);
+		maxDash = playerObject.DashStamina + 1;
+		dashCooldown = (0.6f - playerObject.DashStamina * 0.03f);
 		setLightStrengths();
 		changeSprite();
-		//remove the below method when finally done with game overall.
-		makeSureTotalCorrect();
+	}
+	void RevertToIntialSettings() {
+		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
+		if (RB != null) { RB.gravityScale = basicG; RB.drag = 2f; }
+		endDashChanges();
+		transform.position = new Vector3(0f, 0.5f, 0f);
 	}
 	void changeSprite() {
 		transform.Find("PlayerSprite").gameObject.GetComponent<SpriteRenderer>().color = playerObject.color;
 	}
-	void makeSureTotalCorrect() {
-		int tot = playerObject.MaxHealth + playerObject.Regeneration + playerObject.DashPower + playerObject.DashRegeneration + playerObject.DashStamina + playerObject.Luck + playerObject.Speed + playerObject.TorchIntensity + playerObject.TorchWidth + playerObject.Aura;
-		if (tot != 60) Debug.Log(tot);
-	}
-
 	void setLightStrengths() {
 		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
 		torchLight.pointLightOuterRadius = (float)playerObject.TorchIntensity * 2f + 3f;
@@ -44,8 +42,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	float XControl; Vector2 DashControl;
 	bool dashAble = true; bool grounded = false; bool tempGrounded = false; bool dashing = false;
 	int maxDash = 1;
+
+	//initially set to 0 as the player somehow gets a charge just as the game starts.
 	int _dashCharge = 0;
-	int dashCharge {
+	public int dashCharge {
 		get { return _dashCharge; }
 		set { _dashCharge = value > maxDash ? maxDash : value; }
 	}
@@ -59,9 +59,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 	void Awake() {
 		RB = gameObject.GetComponent<Rigidbody2D>();
+		GameStateManager.GameStart += SetupStats;
 	}
 	void Update() {
-		if (!GameStateManager.InGame || GameStateManager.Paused) return;
+		if (!ControllableState()) return;
 		grounded = checkGrounded();
 		checkDashAdd();
 		gravityScale();
@@ -81,7 +82,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
-			checkDashIntoGround();
 			RB.gravityScale = 0f;
 			RB.velocity = Vector2.zero;
 			RB.velocity = dashSpeed * DashControl;
@@ -93,21 +93,16 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			StartCoroutine(notDashingChange());
 		}
 	}
-	void checkDashIntoGround() {
-		if (DashControl.y <= 0f && grounded == true) {
-			dashCharge++;
-		}
-	}
 	bool checkGrounded() {
 		Collider2D playerColl = gameObject.GetComponent<Collider2D>();
 		return Physics2D.BoxCast(playerColl.bounds.center, playerColl.bounds.size, 0f, Vector2.down, 0.02f, groundedMask);
 	}
-	bool endedDash = false;
+	bool HaltUsed = false;
 	public void endDash() {
-		if (dashAble || endedDash) return;
-		endedDash = true;
+		if (HaltUsed || !ControllableState()) return;
+		HaltUsed = true;
 		RB.velocity = Vector2.zero;
-		StopCoroutine(dashingRoutine);
+		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
 		endDashChanges();
 	}
 	IEnumerator dashingEnd() {
@@ -115,22 +110,26 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		endDashChanges();
 	}
 	void endDashChanges() {
-		RB.drag = 2f;
+		if (RB != null) RB.drag = 2f;
 		dashing = false;
 	}
 	IEnumerator notDashingChange() {
 		yield return new WaitForSeconds(dashCooldown);
 		//need to show the cooldown working/some indicator that dash is ready/not
 		dashAble = true;
-		endedDash = false;
 	}
 	void checkDashAdd() {
 		if (grounded == false) {
 			tempGrounded = false;
 		}
-		if (grounded == true && tempGrounded == false && RB.velocity.y <= 0f) {
+		if (grounded && !tempGrounded && RB.velocity.y <= 0f) {
 			tempGrounded = true;
 			dashCharge++;
+			HaltUsed = false;
+		}
+		if (grounded && RB.velocity.y <= 0f && dashCharge == 0) {
+			dashCharge++;
+			HaltUsed = false;
 		}
 	}
 	void clampFallSpeed() {
@@ -151,7 +150,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
-		if (!GameStateManager.InGame || GameStateManager.Paused) return;
+		if (!ControllableState()) return;
 		if (dashing) return;
 		if (Mathf.Abs(inputDirection.x * magnitude) < 0.3f) { XControl = 0f; lateralMovement(); return; }
 		float x = inputDirection.x;
@@ -159,9 +158,11 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
-		if (!GameStateManager.InGame || GameStateManager.Paused) return;
+		if (!ControllableState()) return;
 		DashControl = inputDirection;
 		Dash();
 	}
-
+	bool ControllableState() {
+		return (!GameStateManager.Paused && GameStateManager.InGame);
+	}
 }

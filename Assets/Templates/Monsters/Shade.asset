@@ -9,17 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
-  m_Name: Bronca The Blatant
+  m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
+  m_Name: Shade
   m_EditorClassIdentifier: 
-  MaxHealth: 9
-  Regeneration: 8
-  DashPower: 9
-  DashRegeneration: 1
-  DashStamina: 1
-  Luck: 5
-  Speed: 4
-  TorchIntensity: 10
-  TorchWidth: 6
-  Aura: 7
-  color: {r: 1, g: 1, b: 1, a: 1}
+  Damage: 3
+  Speed: 1
+  Senses: 5
+  Hunger: 3
+  Description: 
+  MonsterPrefab: {fileID: 0}
+  Color: {r: 0.45531246, g: 0.9245283, b: 0.23936945, a: 1}
