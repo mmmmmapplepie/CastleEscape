@@ -39,5 +39,6 @@ public class PlatformController : MonoBehaviour {
 		foreach (TilePositionSizeRandomizer tile in tileScriptList) {
 			Destroy(tile.gameObject);
 		}
+		tileScriptList.Clear();
 	}
 }

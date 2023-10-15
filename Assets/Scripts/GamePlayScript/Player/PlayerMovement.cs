@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		lifeScript.regen = playerObject.Regeneration;
 		playerSpeed = (float)playerObject.Speed;
 		dashRegen = (float)playerObject.DashRegeneration;
-		dashSpeed = (float)playerObject.DashPower * 3f + 10f;
+		dashSpeed = (float)playerObject.DashPower * 2f + 20f;
 		PlatformController.luck = playerObject.Luck * 3;
 		maxDash = playerObject.DashStamina;
+		dashCooldown = (0.6f - playerObject.DashStamina * 0.02f);
 		setLightStrengths();
 		changeSprite();
 		//remove the below method when finally done with game overall.
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 
 	float XControl; Vector2 DashControl;
-	bool dashAble = false; bool grounded = false; bool tempGrounded = false; bool dashing = false;
+	bool dashAble = true; bool grounded = false; bool tempGrounded = false; bool dashing = false;
 	int maxDash = 1;
 	int _dashCharge = 0;
 	int dashCharge {
@@ -49,7 +50,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		set { _dashCharge = value > maxDash ? maxDash : value; }
 	}
 	[SerializeField] LayerMask groundedMask;
-	[SerializeField] float basicG = 5f, fallingG = 10f, dashCooldown = 0.5f, dashSpeed = 20f, dashTime = 0.2f, playerSpeed = 8f;
+	[SerializeField] float basicG = 5f, fallingG = 10f, dashTime = 0.15f;
+	float dashSpeed = 20f, dashCooldown = 0.6f, playerSpeed = 8f;
 	Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
@@ -75,7 +77,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	void Dash() {
-		if (dashCharge > 0 && DashControl.magnitude != 0 && !dashAble) {
+		if (dashCharge > 0 && DashControl.magnitude != 0 && dashAble) {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
@@ -85,7 +87,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			RB.velocity = dashSpeed * DashControl;
 			RB.drag = 0f;
 			dashCharge--;
-			dashAble = true;
+			dashAble = false;
 			dashing = true;
 			dashingRoutine = StartCoroutine(dashingEnd());
 			StartCoroutine(notDashingChange());
@@ -100,14 +102,27 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		Collider2D playerColl = gameObject.GetComponent<Collider2D>();
 		return Physics2D.BoxCast(playerColl.bounds.center, playerColl.bounds.size, 0f, Vector2.down, 0.02f, groundedMask);
 	}
+	bool endedDash = false;
+	public void endDash() {
+		if (dashAble || endedDash) return;
+		endedDash = true;
+		RB.velocity = Vector2.zero;
+		StopCoroutine(dashingRoutine);
+		endDashChanges();
+	}
 	IEnumerator dashingEnd() {
 		yield return new WaitForSeconds(dashTime);
+		endDashChanges();
+	}
+	void endDashChanges() {
 		RB.drag = 2f;
 		dashing = false;
 	}
 	IEnumerator notDashingChange() {
 		yield return new WaitForSeconds(dashCooldown);
-		dashAble = false;
+		//need to show the cooldown working/some indicator that dash is ready/not
+		dashAble = true;
+		endedDash = false;
 	}
 	void checkDashAdd() {
 		if (grounded == false) {

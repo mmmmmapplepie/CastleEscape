@@ -148,12 +148,12 @@ public class NameOrganizer : MonoBehaviour {
 				availableCustomPointsText.text = (maxStat - statTotal()).ToString();
 			}
 		} else {
-			// dmgT.text = CurrentSettings.CurrentMonster.Damage.ToString();
-			// spdT.text = CurrentSettings.CurrentMonster.Speed.ToString();
-			// senseT.text = CurrentSettings.CurrentMonster.Senses.ToString();
-			// hungerT.text = CurrentSettings.CurrentMonster.Hunger.ToString();
-			// dmgT.text = CurrentSettings.CurrentMonster.Description;
-			// monsterSprite.color = CurrentSettings.CurrentMonster.Color;
+			dmgT.text = CurrentSettings.CurrentMonster.Damage.ToString();
+			spdT.text = CurrentSettings.CurrentMonster.Speed.ToString();
+			senseT.text = CurrentSettings.CurrentMonster.Senses.ToString();
+			hungerT.text = CurrentSettings.CurrentMonster.Hunger.ToString();
+			descriptionT.text = CurrentSettings.CurrentMonster.Description;
+			monsterSprite.color = CurrentSettings.CurrentMonster.Color;
 		}
 		CurrentSettings.ChangePlayerSettingsInnateAndPreview();
 	}

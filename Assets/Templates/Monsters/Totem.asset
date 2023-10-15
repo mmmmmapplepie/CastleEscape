@@ -16,6 +16,6 @@ MonoBehaviour:
   Speed: 2
   Senses: 5
   Hunger: 2
-  gimmick: Peculiar monster that removes all your time based buffs when it senses
-    you.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.45531246, g: 0.9245283, b: 0.23936945, a: 1}

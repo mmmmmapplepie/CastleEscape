@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Curin The Coward
   m_EditorClassIdentifier: 
-  key: Coward
   MaxHealth: 4
   Regeneration: 3
   DashPower: 5
@@ -23,3 +22,4 @@ MonoBehaviour:
   TorchIntensity: 8
   TorchWidth: 9
   Aura: 1
+  color: {r: 1, g: 1, b: 1, a: 1}

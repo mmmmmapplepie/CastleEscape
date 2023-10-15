@@ -16,5 +16,6 @@ MonoBehaviour:
   Speed: 5
   Senses: 1
   Hunger: 2
-  gimmick: Switches off your torch for a moment when it senses you.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.12324474, g: 0.9716981, b: 0.6018128, a: 1}

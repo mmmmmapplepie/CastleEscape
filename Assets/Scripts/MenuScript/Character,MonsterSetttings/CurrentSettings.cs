@@ -19,7 +19,7 @@ public class CurrentSettings : MonoBehaviour {
 		cameraScript = Camera.main.GetComponent<CameraFollow>();
 		player = Player;
 		loadSavedSettings();
-		// gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 	public void loadSavedSettings() {
 		LoadCustomPlayerSettings();

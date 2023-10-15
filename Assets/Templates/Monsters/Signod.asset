@@ -16,6 +16,6 @@ MonoBehaviour:
   Speed: 4
   Senses: 4
   Hunger: 2
-  gimmick: Attack your soul when it senses you dealing some amount of guaranteed
-    damage.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.11008268, g: 0.7489494, b: 0.8679245, a: 1}

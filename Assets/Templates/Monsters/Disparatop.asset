@@ -16,6 +16,6 @@ MonoBehaviour:
   Speed: 1
   Senses: 3
   Hunger: 5
-  gimmick: Instills severe fear and desparation when in range SLOWING you and REDUCING
-    your jump power.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.9339623, g: 0.8634616, b: 0.40922034, a: 1}

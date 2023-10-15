@@ -16,5 +16,6 @@ MonoBehaviour:
   Speed: 2
   Senses: 5
   Hunger: 3
-  gimmick: Monster that petrifies you for a moment when it senses you.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.9528302, g: 0, b: 0.44302258, a: 1}

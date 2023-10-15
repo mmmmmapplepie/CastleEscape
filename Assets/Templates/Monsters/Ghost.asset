@@ -16,5 +16,6 @@ MonoBehaviour:
   Speed: 2
   Senses: 4
   Hunger: 4
-  gimmick: Hungry monster that moves FASTER when it senses you.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.84052163, g: 0.990566, b: 0.66764563, a: 1}

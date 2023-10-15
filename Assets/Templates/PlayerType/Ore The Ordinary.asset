@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Ore The Ordinary
   m_EditorClassIdentifier: 
-  key: Ordinary
   MaxHealth: 7
   Regeneration: 5
   DashPower: 6
@@ -23,3 +22,4 @@ MonoBehaviour:
   TorchIntensity: 6
   TorchWidth: 6
   Aura: 6
+  color: {r: 1, g: 1, b: 1, a: 1}

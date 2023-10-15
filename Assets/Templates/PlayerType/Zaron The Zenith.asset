@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Zaron The Zenith
   m_EditorClassIdentifier: 
-  key: Wise
-  MaxHealth: 6
-  Regeneration: 5
-  DashPower: 3
-  DashRegeneration: 9
-  DashStamina: 9
-  Luck: 2
-  Speed: 3
-  TorchIntensity: 7
-  TorchWidth: 10
-  Aura: 6
+  MaxHealth: 1
+  Regeneration: 1
+  DashPower: 1
+  DashRegeneration: 1
+  DashStamina: 1
+  Luck: 1
+  Speed: 1
+  TorchIntensity: 1
+  TorchWidth: 1
+  Aura: 1
+  color: {r: 1, g: 1, b: 1, a: 1}

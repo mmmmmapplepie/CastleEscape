@@ -16,5 +16,6 @@ MonoBehaviour:
   Speed: 5
   Senses: 4
   Hunger: 1
-  gimmick: Monster that dashes at you once it senses your presence.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0.61409616, g: 0.06237883, b: 0.7830189, a: 1}

@@ -16,5 +16,6 @@ MonoBehaviour:
   Speed: 3
   Senses: 3
   Hunger: 5
-  gimmick: Monster that slowly drains you of your life.
+  Description: 
   MonsterPrefab: {fileID: 0}
+  Color: {r: 0, g: 0, b: 0, a: 1}
