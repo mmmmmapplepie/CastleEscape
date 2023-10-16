@@ -23,7 +23,6 @@ public class PauseGame : MonoBehaviour {
 		pauseBtn.SetActive(true);
 	}
 	public void Quit() {
-		HighScore.ShowHighScore(true);
 		ResumeAction();
 		manager.GoToMenu();
 	}

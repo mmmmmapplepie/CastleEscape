@@ -19,6 +19,10 @@ public class NameOrganizer : MonoBehaviour {
 	int centerIndex = 0;
 	int below = 0;
 	bool start = true;
+	void OnEnable() {
+		setCountValues();
+		InitializeNames();
+	}
 	void setCountValues() {
 		centerIndex = InPlayerSettings ? Mathf.FloorToInt(players.Count / 2) : Mathf.FloorToInt(monsters.Count / 2);
 		EvenCount = InPlayerSettings ? (players.Count % 2 == 0 ? true : false) : (monsters.Count % 2 == 0 ? true : false);
@@ -28,10 +32,6 @@ public class NameOrganizer : MonoBehaviour {
 		} else {
 			above = below = centerIndex;
 		}
-	}
-	void OnEnable() {
-		setCountValues();
-		InitializeNames();
 	}
 	void OnDisable() {
 		for (int i = 0; i < cellHolder.childCount; i++) {
@@ -66,38 +66,37 @@ public class NameOrganizer : MonoBehaviour {
 				float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
 				cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY + 80f * centerIndex);
 			}
-			return;
 		} else {
 			foreach (GameObject cell in nameCells) {
 				float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
 				cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY + 80f * index);
 			}
-		}
-		Stack<GameObject> tempNameHolder = new Stack<GameObject>();
-		int count = nameCells.Count;
-		if (index < centerIndex) {
-			int itemsToMove = count - 1 - index - below;
-			for (int i = 0; i < itemsToMove; i++) {
-				tempNameHolder.Push(nameCells[i + below + index + 1]);
-			}
-			nameCells.RemoveRange(below + index + 1, itemsToMove);
-			for (int i = 0; i < itemsToMove; i++) {
-				GameObject cell = tempNameHolder.Pop();
-				float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
-				cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY + 80f * count);
-				nameCells.Insert(0, cell);
-			}
-		} else {
-			int itemsToMove = index - above;
-			for (int i = itemsToMove; i > 0; i--) {
-				tempNameHolder.Push(nameCells[i - 1]);
-			}
-			nameCells.RemoveRange(0, itemsToMove);
-			for (int i = 0; i < itemsToMove; i++) {
-				GameObject cell = tempNameHolder.Pop();
-				float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
-				cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY - 80f * count);
-				nameCells.Add(cell);
+			Stack<GameObject> tempNameHolder = new Stack<GameObject>();
+			int count = nameCells.Count;
+			if (index < centerIndex) {
+				int itemsToMove = count - 1 - index - below;
+				for (int i = 0; i < itemsToMove; i++) {
+					tempNameHolder.Push(nameCells[i + below + index + 1]);
+				}
+				nameCells.RemoveRange(below + index + 1, itemsToMove);
+				for (int i = 0; i < itemsToMove; i++) {
+					GameObject cell = tempNameHolder.Pop();
+					float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
+					cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY + 80f * count);
+					nameCells.Insert(0, cell);
+				}
+			} else {
+				int itemsToMove = index - above;
+				for (int i = itemsToMove; i > 0; i--) {
+					tempNameHolder.Push(nameCells[i - 1]);
+				}
+				nameCells.RemoveRange(0, itemsToMove);
+				for (int i = 0; i < itemsToMove; i++) {
+					GameObject cell = tempNameHolder.Pop();
+					float initialY = cell.GetComponent<RectTransform>().anchoredPosition.y;
+					cell.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, initialY - 80f * count);
+					nameCells.Add(cell);
+				}
 			}
 		}
 		ChangeNameColorsDirect();

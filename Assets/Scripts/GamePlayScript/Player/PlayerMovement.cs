@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void Awake() {
 		RB = gameObject.GetComponent<Rigidbody2D>();
 		GameStateManager.GameStart += SetupStats;
+		GameStateManager.GameEnd += SetupStats;
 	}
 	void Update() {
 		if (!ControllableState()) return;

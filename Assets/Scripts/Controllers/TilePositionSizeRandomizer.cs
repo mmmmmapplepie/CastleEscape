@@ -35,17 +35,23 @@ public class TilePositionSizeRandomizer : MonoBehaviour {
 		float yDisplacement = Random.Range(0, 5f);
 		transform.position = new Vector3(xDisplacement + TileAnchorCenter.x - 2.5f, yDisplacement + TileAnchorCenter.y - 2f);
 	}
-	//buff/debuff chances are out of hundred. pick random from -50 to 50. range from -50 to debuff gives debuff and 50 down to buffchance gives buff.
-	[SerializeField] int buffChance = 10, debuffChance = -10;
+	//buff/debuff chances are out of hundred. pick random from -50 to 50. range from -50 to debuff gives debuff and 50 down to buffchance gives buff. affected by Luck stat.
 	void randomizeBuffAndDebuff() {
-		int buff_debuffInt = Random.Range(-50, 51);
+		int itemchanceluck = luck / 3;
+		int itemChance = Random.Range(1, 101);
+		if (itemChance > itemchanceluck) return;
+
+		int buffChance = 15;
+		buffChance = buffChance - luck;
+		int buff_debuffInt = Random.Range(-50, 50);
 		GameObject bonus = null;
-		// if (buff_debuffInt < debuffChance) {
-		// 	bonus = buffPrefabs[Random.Range(0, buffPrefabs.Count)];
-		// }
-		// if (buff_debuffInt > buffChance) {
-		// 	bonus = debuffPrefabs[Random.Range(0, debuffPrefabs.Count)];
-		// }
+		if (buff_debuffInt >= buffChance) {
+			// 	bonus = buffPrefabs[Random.Range(0, buffPrefabs.Count)];
+			print("buff");
+		} else {
+			// 	bonus = debuffPrefabs[Random.Range(0, debuffPrefabs.Count)];
+			print("debuff");
+		}
 		setBonus(bonus);
 	}
 	void setBonus(GameObject prefab) {

@@ -9,4 +9,10 @@ public class TorchMovement : MonoBehaviour, JoystickController {
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
 	}
+	void Awake() {
+		GameStateManager.GameEnd += returnTorch;
+	}
+	void returnTorch() {
+		transform.rotation = Quaternion.Euler(-90f * Vector3.forward);
+	}
 }

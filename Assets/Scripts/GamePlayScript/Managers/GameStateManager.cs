@@ -32,6 +32,8 @@ public class GameStateManager : MonoBehaviour {
 		outMenu.SetActive(true);
 		PauseBtn.SetActive(false);
 		GameEnd?.Invoke();
+		HighScore.ShowHighScore(true);
+		Camera.main.transform.position = new Vector3(0f, 0.5f, -10f);
 		InGame = false;
 		Paused = false;
 	}
@@ -41,6 +43,7 @@ public class GameStateManager : MonoBehaviour {
 		PauseBtn.SetActive(true);
 		StatusUI.SetActive(true);
 		BuffUI.SetActive(true);
+		HighScore.UpdateScore(true);
 		GameStart?.Invoke();
 		InGame = true;
 	}

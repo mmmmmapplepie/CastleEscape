@@ -9,9 +9,9 @@ public class StatusUI : MonoBehaviour {
 		GameStateManager.GameStart += SetLife;
 	}
 	void HideMenu() {
-		gameObject.SetActive(false);
 		charging = false;
 		StopAllCoroutines();
+		gameObject.SetActive(false);
 	}
 
 
