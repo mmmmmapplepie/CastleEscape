@@ -22,4 +22,4 @@ MonoBehaviour:
   TorchIntensity: 8
   TorchWidth: 9
   Aura: 1
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0.23812348, g: 0.38407323, b: 0.754717, a: 1}
