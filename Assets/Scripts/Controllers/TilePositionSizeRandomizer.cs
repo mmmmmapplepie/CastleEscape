@@ -47,10 +47,8 @@ public class TilePositionSizeRandomizer : MonoBehaviour {
 		GameObject bonus = null;
 		if (buff_debuffInt >= buffChance) {
 			// 	bonus = buffPrefabs[Random.Range(0, buffPrefabs.Count)];
-			print("buff");
 		} else {
 			// 	bonus = debuffPrefabs[Random.Range(0, debuffPrefabs.Count)];
-			print("debuff");
 		}
 		setBonus(bonus);
 	}

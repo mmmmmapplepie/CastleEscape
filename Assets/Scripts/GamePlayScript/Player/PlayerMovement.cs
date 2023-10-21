@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.TextCore;
+
 public class PlayerMovement : MonoBehaviour, JoystickController {
 	public PlayerType playerObject;
 	public Light2D torchLight;
 	public Light2D auraLight;
 	public PlayerLife lifeScript;
-
+	[SerializeField] Animator animator;
+	string currentAnimation = "";
 
 	public void SetupStats() {
 		RevertToIntialSettings();
@@ -21,6 +24,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		dashCooldown = (0.6f - playerObject.DashStamina * 0.03f);
 		setLightStrengths();
 		changeSprite();
+		animationFix();
 	}
 	void RevertToIntialSettings() {
 		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
@@ -40,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 
 	float XControl; Vector2 DashControl;
-	bool dashAble = true; bool grounded = false; bool tempGrounded = false; bool dashing = false;
+	bool dashAble = true; public bool grounded = false; bool tempGrounded = false; public bool dashing = false;
 	int maxDash = 1;
 
 	//initially set to 0 as the player somehow gets a charge just as the game starts.
@@ -52,15 +56,18 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] LayerMask groundedMask;
 	[SerializeField] float basicG = 5f, fallingG = 10f, dashTime = 0.15f;
 	float dashSpeed = 20f, dashCooldown = 0.6f, playerSpeed = 8f;
-	Rigidbody2D RB;
+	[SerializeField] Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
 
 
 	void Awake() {
-		RB = gameObject.GetComponent<Rigidbody2D>();
 		GameStateManager.GameStart += SetupStats;
 		GameStateManager.GameEnd += SetupStats;
+		GameStateManager.GameEnd += EndGame;
+	}
+	void EndGame() {
+		StopAllCoroutines();
 	}
 	void Update() {
 		if (!ControllableState()) return;
@@ -68,14 +75,23 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		checkDashAdd();
 		gravityScale();
 		clampFallSpeed();
+		setAnimation();
 	}
 	void lateralMovement() {
-		if (playerSpeed < Mathf.Abs(RB.velocity.x)) {
+		if (XControl == 0) { RB.velocity = new Vector2(0f, RB.velocity.y); return; }
+		if (!grounded) {
 			float forceMultiplier = 1f;
 			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
 			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier, 0f), ForceMode2D.Force);
 		} else {
 			RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
+			if (Mathf.Abs(RB.velocity.x) > playerSpeed / 2f) {
+				print("walk");
+				changeAnimation("Walk", 0.2f);
+			} else {
+				print("run");
+				changeAnimation("Run", 0.2f);
+			}
 		}
 	}
 	void Dash() {
@@ -90,8 +106,21 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			dashCharge--;
 			dashAble = false;
 			dashing = true;
+			DashAnimation();
 			dashingRoutine = StartCoroutine(dashingEnd());
 			StartCoroutine(notDashingChange());
+		}
+	}
+	void DashAnimation() {
+		float angle = DashControl.x != 0f ? (180f / Mathf.PI) * Mathf.Atan(Mathf.Abs(DashControl.y / DashControl.x)) : 90f;
+		if (angle > 30f) {
+			if (DashControl.y > 0) {
+				changeAnimation("DashUp", 0f);
+			} else {
+				changeAnimation("DashDown", 0f);
+			}
+		} else {
+			changeAnimation("DashHor", 0f);
 		}
 	}
 	bool checkGrounded() {
@@ -100,7 +129,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	bool HaltUsed = false;
 	public void endDash() {
-		if (HaltUsed || !ControllableState()) return;
+		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
 		HaltUsed = true;
 		RB.velocity = Vector2.zero;
 		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
@@ -151,19 +180,113 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
-		if (!ControllableState()) return;
-		if (dashing) return;
+		if (!ControllableState() || dashing || lifeScript.panic) return;
 		if (Mathf.Abs(inputDirection.x * magnitude) < 0.3f) { XControl = 0f; lateralMovement(); return; }
 		float x = inputDirection.x;
 		XControl = Mathf.Abs(x) > 0.5f ? (x / Mathf.Abs(x)) * 1f : (x) / 0.5f;
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
-		if (!ControllableState()) return;
+		if (!ControllableState() || lifeScript.panic) return;
 		DashControl = inputDirection;
 		Dash();
 	}
 	bool ControllableState() {
 		return (!GameStateManager.Paused && GameStateManager.InGame);
 	}
+
+
+	#region fear related methods
+	public void panicAttack(float panicTime) {
+		StartCoroutine(panicDarkness(panicTime));
+	}
+	public void recoveredFromPanicAttack() {
+		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
+	}
+	IEnumerator panicDarkness(float panicTime) {
+		float starttime = Time.time;
+		float initialIntensity = torchLight.intensity;
+		while (Time.time < panicTime / 4f + starttime) {
+			float ratio = (Time.time - starttime) / (panicTime / 4f);
+			torchLight.intensity = Mathf.Lerp(initialIntensity, 0f, ratio);
+			yield return null;
+		}
+		torchLight.intensity = 0f;
+	}
+	#endregion
+
+
+
+	#region animation related
+	Coroutine _idleBored = null;
+	public void changeAnimation(string name, float transitionDuration) {
+		if (name.Substring(0, 1) != "_" && _idleBored != null) StopCoroutine(_idleBored);
+		if (name == currentAnimation) return;
+		animator.CrossFade(name, transitionDuration);
+		currentAnimation = name;
+		print(name);
+	}
+	void setAnimation() {
+		if (lifeScript.panic || !ControllableState()) return;
+		setSpriteDirection();
+		if (RB.velocity.magnitude == 0 && grounded && _idleBored == null) {
+			changeAnimation("Idle", 0.1f);
+			bored();
+			return;
+		}
+		if (!grounded) {
+			if (RB.velocity.y >= 0) {
+				changeAnimation("Fly", 0.1f);
+			} else {
+				changeAnimation("Fall", 0.1f);
+			}
+		}
+	}
+	bool faceRight = true;
+	[SerializeField] Transform SpriteRenderTransform;
+	Vector2 rightFacingVector = new Vector3(-1f, 1f, 1f);
+	Vector2 leftFacingVector = new Vector3(1f, 1f, 1f);
+	void setSpriteDirection() {
+		if (RB.velocity.x > 0f) {
+			bool right = true;
+			if (right == faceRight) return;
+			faceRight = true;
+		} else if (RB.velocity.x < 0f) {
+			bool right = false;
+			if (right == faceRight) return;
+			faceRight = false;
+		} else {
+			return;
+		}
+		if (faceRight) {
+			print("gothere");
+			SpriteRenderTransform.localScale = rightFacingVector;
+		} else {
+			print("should be here");
+			SpriteRenderTransform.localScale = leftFacingVector;
+		}
+	}
+
+	IEnumerator boredIdle() {
+		yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 3f));
+		if (ControllableState() && !lifeScript.panic && currentAnimation == "Idle") {
+			changeAnimation("_IdleSneeze", 0.2f);
+			while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) yield return null;
+		}
+	}
+	void bored() {
+		if (ControllableState() && !lifeScript.panic && currentAnimation == "Idle" && _idleBored == null) {
+			_idleBored = StartCoroutine(boredIdle());
+		}
+	}
+	void animationFix() {
+		animator.Play("idle");
+		currentAnimation = "idle";
+		faceRight = true;
+		setSpriteDirection();
+		changeAnimation("Idle", 0f);
+		if (_idleBored != null) StopCoroutine(_idleBored);
+	}
+
+	#endregion
 }

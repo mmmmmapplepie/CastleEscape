@@ -1,12 +1,20 @@
 using System.Collections;
+using System.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatusUI : MonoBehaviour {
 	void Awake() {
 		GameStateManager.GameEnd += HideMenu;
 		GameStateManager.GameStart += DashRecharge;
 		GameStateManager.GameStart += SetLife;
+		setIntialSettings();
+	}
+	void setIntialSettings() {
+		fearSliderWidth = fearbackground.rect.width;
+		fearSliderHeight = fearbackground.rect.height;
+		initialSliderColor = fearSlider.gameObject.GetComponent<Image>().color;
 	}
 	void HideMenu() {
 		charging = false;
@@ -25,6 +33,7 @@ public class StatusUI : MonoBehaviour {
 	void Update() {
 		RenderDashCharges();
 		RenderHealth();
+		RenderFear();
 	}
 
 	#region healthRelated
@@ -122,7 +131,25 @@ public class StatusUI : MonoBehaviour {
 	#endregion
 
 
+	[SerializeField] RectTransform fearbackground;
+	[SerializeField] RectTransform fearSlider;
+	[SerializeField] Color panickColor;
+	float fearSliderWidth = 0f;
+	float fearSliderHeight = 0f;
+	Color initialSliderColor;
 
+	void RenderFear() {
+		fearSlider.sizeDelta = new Vector2((lifeScript.Fear / 100f) * fearSliderWidth, fearSliderHeight);
+		if (lifeScript.Fear == 100f) {
+			fearSlider.gameObject.GetComponent<Image>().color = panickColor;
+			float buzz = 3f;
+			Vector2 ranPos = new Vector2(Random.Range(buzz, -buzz), Random.Range(buzz, -buzz));
+			fearbackground.anchoredPosition = fearSlider.anchoredPosition = ranPos;
+		} else {
+			fearSlider.gameObject.GetComponent<Image>().color = initialSliderColor;
+			fearbackground.anchoredPosition = fearSlider.anchoredPosition = Vector2.zero;
+		}
 
-
+		
+	}
 }
