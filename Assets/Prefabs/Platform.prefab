@@ -61,10 +61,9 @@ MonoBehaviour:
   TileAnchorCenter: {x: 0, y: 0}
   tilemap: {fileID: 6005674191942885338}
   tileBase: {fileID: 11400000, guid: 4002854eb4cf35446be0ed9c14a7722c, type: 2}
+  luck: 0
   buffPrefabs: []
   debuffPrefabs: []
-  buffChance: 10
-  debuffChance: -10
 --- !u!1 &7046812537374283207
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +354,7 @@ CompositeCollider2D:
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:

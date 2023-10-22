@@ -101306,7 +101306,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -109724,7 +109724,7 @@ CompositeCollider2D:
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -120546,7 +120546,7 @@ PrefabInstance:
       objectReference: {fileID: 1372634224}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: OuterAreaTrigger
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: ControlScriptHolder
@@ -120570,7 +120570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: OuterAreaTriggerEntrySpeedThreshold
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

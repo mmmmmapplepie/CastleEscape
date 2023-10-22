@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
-
+	Animation ani = null;
 
 	void Awake() {
 		GameStateManager.GameStart += SetupStats;
@@ -84,13 +84,11 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
 			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier, 0f), ForceMode2D.Force);
 		} else {
-			RB.velocity = new Vector2(XControl * playerSpeed, RB.velocity.y);
-			if (Mathf.Abs(RB.velocity.x) > playerSpeed / 2f) {
-				// print("walk");
-				changeAnimation("Walk", 0.2f);
+			RB.velocity = new Vector2(XControl * playerSpeed, 0f);
+			if (Mathf.Abs(RB.velocity.x) < playerSpeed / 1.7f) {
+				changeAnimation("Walk");
 			} else {
-				// print("run");
-				changeAnimation("Run", 0.2f);
+				changeAnimation("Run");
 			}
 		}
 	}
@@ -113,14 +111,14 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	void DashAnimation() {
 		float angle = DashControl.x != 0f ? (180f / Mathf.PI) * Mathf.Atan(Mathf.Abs(DashControl.y / DashControl.x)) : 90f;
-		if (angle > 30f) {
+		if (angle > 45f) {
 			if (DashControl.y > 0) {
-				changeAnimation("DashUp", 0f);
+				changeAnimation("DashUp");
 			} else {
-				changeAnimation("DashDown", 0f);
+				changeAnimation("DashDown");
 			}
 		} else {
-			changeAnimation("DashHor", 0f);
+			changeAnimation("DashHor");
 		}
 	}
 	bool checkGrounded() {
@@ -128,7 +126,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		return Physics2D.BoxCast(playerColl.bounds.center, playerColl.bounds.size, 0f, Vector2.down, 0.02f, groundedMask);
 	}
 	bool HaltUsed = false;
-	public void endDash() {
+	public void HaltOrDrop() {
 		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
 		HaltUsed = true;
 		RB.velocity = Vector2.zero;
@@ -177,9 +175,9 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
 		if (!ControllableState() || dashing || lifeScript.panic) return;
-		if (Mathf.Abs(inputDirection.x * magnitude) < 0.3f) { XControl = 0f; lateralMovement(); return; }
-		float x = inputDirection.x;
-		XControl = Mathf.Abs(x) > 0.5f ? (x / Mathf.Abs(x)) * 1f : (x) / 0.5f;
+		if (Mathf.Abs(inputDirection.x * magnitude) < 0.2f) { XControl = 0f; lateralMovement(); return; }
+		float x = inputDirection.x * magnitude;
+		XControl = Mathf.Abs(x) > 0.70f ? (x / Mathf.Abs(x)) * 1f : x;
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
@@ -215,36 +213,32 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 	#region animation related
 	Coroutine _idleBored = null;
-	public void changeAnimation(string name, float transitionDuration, int layer = 0) {
-		if (name.Substring(0, 1) != "_" && _idleBored != null) {
+	public void changeAnimation(string name, float transitionDuration = 0f) {
+		if (name.Substring(name.Length - Mathf.Min(3, name.Length)) != "III" && _idleBored != null) {
 			stopBored();
 		}
 		if (name == currentAnimation) return;
 		if (transitionDuration == 0f) {
-			animator.Play(name, layer);
+			animator.Play(name);
 		} else {
-			animator.CrossFade(name, transitionDuration, layer);
+			animator.CrossFade(name, transitionDuration);
 		}
 		currentAnimation = name;
-		// print(name);
 	}
 	void setAnimation() {
 		if (lifeScript.panic || !ControllableState()) return;
 		setSpriteDirection();
-		// print(RB.velocity.magnitude);
-		// print(grounded);
 		if (RB.velocity.magnitude == 0 && grounded && _idleBored == null) {
 			if (XControl == 0) RB.velocity = Vector2.zero;
-			// print(_idleBored + "idleboredstate: calling animation for idle");
-			changeAnimation("Idle", 0.1f);
+			changeAnimation("Idle", 0.3f);
 			bored();
 			return;
 		}
 		if (!grounded) {
 			if (RB.velocity.y >= 0) {
-				changeAnimation("Fly", 0.1f);
+				changeAnimation("Fly");
 			} else {
-				changeAnimation("Fall", 0.1f);
+				changeAnimation("Fall");
 			}
 		}
 	}
@@ -272,16 +266,12 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 
 	IEnumerator boredIdle() {
-		yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 3f));
+		yield return new WaitForSeconds(UnityEngine.Random.Range(5f, 8f));
 		if (ControllableState() && !lifeScript.panic && currentAnimation == "Idle") {
-			changeAnimation("_IdleSneeze", 0.2f);
-			yield return new WaitForSeconds(5f);
-			print(animator.GetCurrentAnimatorStateInfo(0).IsName("_IdleSneeze"));
-
-			// print(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-			// while (!animator.GetCurrentAnimatorStateInfo(0).IsName("_IdleSneeze") || animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) {
-			// 	yield return null;
-			// }
+			changeAnimation("IdleSneezeIII", 0.2f);
+			while (!animator.GetCurrentAnimatorStateInfo(0).IsName("IdleSneezeIII") || animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f) {
+				yield return null;
+			}
 			_idleBored = null;
 		}
 	}
@@ -291,8 +281,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	void animationFix() {
-		animator.Play("idle");
-		currentAnimation = "idle";
+		changeAnimation("Idle");
+		currentAnimation = "Idle";
 		faceRight = true;
 		SpriteRenderTransform.localScale = rightFacingVector;
 		if (_idleBored != null) stopBored();
