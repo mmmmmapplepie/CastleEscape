@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 1
   Senses: 3
   Hunger: 5
-  Description: 
+  Description: A creature that makes your legs shake upon seeing it. (Reduces your
+    movement speed and Jump power)
   MonsterPrefab: {fileID: 0}
-  Color: {r: 0.9339623, g: 0.8634616, b: 0.40922034, a: 1}
+  Color: {r: 1, g: 0.69411767, b: 0.38039216, a: 1}

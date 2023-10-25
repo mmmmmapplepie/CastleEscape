@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 5
   Senses: 1
   Hunger: 1
-  Description: 
+  Description: Monster of paranoia. It is easily a menace even among monsters but
+    tends to run away. (Runs away from you when it notices you)
   MonsterPrefab: {fileID: 0}
-  Color: {r: 0, g: 0, b: 0, a: 1}
+  Color: {r: 1, g: 0.6156863, b: 0.92156863, a: 1}

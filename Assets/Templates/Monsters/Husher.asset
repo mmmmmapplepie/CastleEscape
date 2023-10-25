@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 5
   Senses: 1
   Hunger: 2
-  Description: 
+  Description: Monster of the dark. Likes to put out fires and lives alike. (Blows
+    off your torch for a moment when it senses you)
   MonsterPrefab: {fileID: 0}
-  Color: {r: 0.12324474, g: 0.9716981, b: 0.6018128, a: 1}
+  Color: {r: 0.20392157, g: 0.2509804, b: 1, a: 1}

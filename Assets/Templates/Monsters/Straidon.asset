@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 5
   Senses: 4
   Hunger: 1
-  Description: 
+  Description: Monster with similarities to an enraged bull, but far more ferocious.
+    (Charges towards you when it notices you)
   MonsterPrefab: {fileID: 0}
-  Color: {r: 0.61409616, g: 0.06237883, b: 0.7830189, a: 1}
+  Color: {r: 1, g: 0.627451, b: 0.6156863, a: 1}

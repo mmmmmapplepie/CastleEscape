@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour {
 	Coroutine subNoMovement;
 	void Start() {
 		setPlayerToFollow();
+		GameStateManager.GameStart += StopMenuCamera;
 	}
 	public void setPlayerToFollow() {
 		player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -68,6 +69,10 @@ public class CameraFollow : MonoBehaviour {
 		}
 	}
 
+
+
+
+
 	float moveTime = 2f;
 	public Coroutine menuCameraShift;
 	public void moveCamera(Vector3 finalPos) {
@@ -85,5 +90,8 @@ public class CameraFollow : MonoBehaviour {
 			yield return null;
 		}
 		transform.position = finalPos;
+	}
+	void StopMenuCamera() {
+		if (menuCameraShift != null) StopCoroutine(menuCameraShift);
 	}
 }

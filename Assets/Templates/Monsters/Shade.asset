@@ -16,6 +16,7 @@ MonoBehaviour:
   Speed: 1
   Senses: 5
   Hunger: 3
-  Description: 
+  Description: Monster that is one with the shadows and lurks to catch its prey.
+    (Turns invisible once it detects you)
   MonsterPrefab: {fileID: 0}
-  Color: {r: 0.45531246, g: 0.9245283, b: 0.23936945, a: 1}
+  Color: {r: 0.20392157, g: 0.7529412, b: 1, a: 1}
