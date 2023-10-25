@@ -11,7 +11,18 @@ public class JoystickPosition : MonoBehaviour {
 	[SerializeField] GameObject ConfigureBtn, ChangeBtn, SaveBtn, StartBtn, CharacterSettingBtn, IngameMenu, JoystickPositionBtn;
 	void Start() {
 		getPositions();
-		setOrientation(true, false);
+		SetJoystickPosition();
+		GameStateManager.GameStart += () => JoystickAvailability(true);
+		GameStateManager.GameEnd += () => JoystickAvailability(false);
+	}
+	void JoystickAvailability(bool enable) {
+		if (enable) {
+			MovementStick.GetComponent<JoyStick>().Controllable = true;
+			TorchStick.GetComponent<JoyStick>().Controllable = true;
+		} else {
+			TorchStick.GetComponent<JoyStick>().Controllable = false;
+			MovementStick.GetComponent<JoyStick>().Controllable = false;
+		}
 	}
 	void getPositions() {
 		if (PlayerPrefs.HasKey("RightPosx") && PlayerPrefs.HasKey("RightPosy") && PlayerPrefs.HasKey("LeftPosx") && PlayerPrefs.HasKey("LeftPosy") && PlayerPrefs.HasKey("HaltPosx") && PlayerPrefs.HasKey("HaltPosy")) {
@@ -24,7 +35,6 @@ public class JoystickPosition : MonoBehaviour {
 			HaltPos = HaltBtn.anchoredPosition;
 			PlayerPrefs.SetFloat("RightPosx", RightPos.x); PlayerPrefs.SetFloat("RightPosy", RightPos.y); PlayerPrefs.SetFloat("LeftPosx", LeftPos.x); PlayerPrefs.SetFloat("LeftPosy", LeftPos.y); PlayerPrefs.SetFloat("HaltPosx", HaltPos.x); PlayerPrefs.SetFloat("HaltPosy", HaltPos.y);
 		}
-
 		// 0 == false -------------------- 1 == true
 		if (PlayerPrefs.HasKey("Orientation")) { RightSide = PlayerPrefs.GetInt("Orientation") == 0 ? false : true; } else { PlayerPrefs.SetInt("Orientation", 1); }
 		if (PlayerPrefs.HasKey("MovX") && PlayerPrefs.HasKey("MovY") && PlayerPrefs.HasKey("TorX") && PlayerPrefs.HasKey("TorY")) {
@@ -41,33 +51,35 @@ public class JoystickPosition : MonoBehaviour {
 	}
 	public void changeOrientation() {
 		RightSide = !RightSide;
-		setOrientation();
+		SetJoystickPosition();
 	}
-	void setOrientation(bool position = false, bool temp = true) {
-		if (RightSide) {
-			HaltBtn.anchoredPosition = new Vector2(-Mathf.Abs(HaltPos.x), HaltPos.y);
-			// textbox.text = "Right";
-			MovementStick.anchoredPosition = RightPos;
-			TorchStick.anchoredPosition = LeftPos;
+	void SetJoystickPosition(bool temp = false) {
+		if (temp) {
+			moveJoystickPosition(tempMX, tempMY, tempTX, tempTY);
 		} else {
-			HaltBtn.anchoredPosition = new Vector2(Mathf.Abs(HaltPos.x), HaltPos.y);
-			// textbox.text = "Left";
-			MovementStick.anchoredPosition = LeftPos;
-			TorchStick.anchoredPosition = RightPos;
-		}
-		if (position) {
-			if (temp) {
-				moveJoystickPosition(tempMX, tempMY, tempTX, tempTY);
-			} else {
-				moveJoystickPosition(MovementX, MovementY, TorchX, TorchY);
-			}
+			moveJoystickPosition(MovementX, MovementY, TorchX, TorchY);
 		}
 	}
 	void moveJoystickPosition(float MX = 0f, float MY = 0f, float TX = 0f, float TY = 0f) {
-		float mx = 0; float my = 0; float tx = 0; float ty = 0;
+		// print("MX:" + MX + "MY:" + MY + "TX:" + TX + "TY:" + TY);
+		Vector2 movementPos = Vector2.zero; Vector2 torchPos = Vector2.zero;
+		Vector2 haltPos = Vector2.zero;
 		if (RightSide) {
-
+			movementPos = new Vector2(RightPos.x - MX, RightPos.y + MY);
+			Vector2 torchDisplacement = new Vector2(TX, TY);
+			torchPos = LeftPos + torchDisplacement;
+			// haltPos = HaltPos + torchDisplacement;
+			haltPos = HaltPos;
+		} else {
+			movementPos = new Vector2(LeftPos.x + MX, LeftPos.y + MY);
+			Vector2 torchDisplacement = new Vector2(-TX, TY);
+			torchPos = RightPos + torchDisplacement;
+			// haltPos = new Vector2(-HaltPos.x, HaltPos.y) + torchDisplacement;
+			haltPos = new Vector2(-HaltPos.x, HaltPos.y);
 		}
+		HaltBtn.anchoredPosition = haltPos;
+		MovementStick.anchoredPosition = movementPos;
+		TorchStick.anchoredPosition = torchPos;
 	}
 	public void Configure() {
 		ConfigureBtn.SetActive(false);
@@ -95,9 +107,13 @@ public class JoystickPosition : MonoBehaviour {
 
 
 
+
+
+
 	bool PositionConfigurationMode = false;
 	[SerializeField] GameObject AdjustingPanel;
 	float HalfScreenWidth = 1600f;
+	float ScreenHeight = 1000f;
 	float movementX = 0f, movementY = 0f, torchX = 0f, torchY = 0f;
 	float MovementX {
 		get {
@@ -133,6 +149,7 @@ public class JoystickPosition : MonoBehaviour {
 	}
 	public void StartAdjustingJoystickPosition() {
 		HalfScreenWidth = Screen.width / 2f;
+		ScreenHeight = Screen.height;
 		AdjustingPanel.SetActive(true);
 		PositionConfigurationMode = true;
 	}
@@ -157,10 +174,13 @@ public class JoystickPosition : MonoBehaviour {
 	void MoveJoystick() {
 		if (!PositionConfigurationMode || Input.touchCount < 1) return;
 		Touch touch = Input.GetTouch(0);
+		Vector2 checkPos = touch.position;
+		if (checkPos.y / ScreenHeight > 3f / 4f) return;
 		if (touch.phase == TouchPhase.Began) {
 			TouchStartPos = touch.position;
 			bool rightsideTouch = TouchStartPos.x > HalfScreenWidth ? true : false;
-			bool movJoystickSide = RightSide ? (rightsideTouch ? true : false) : (!rightsideTouch ? true : false);
+			movJoystickSide = RightSide ? (rightsideTouch ? true : false) : (!rightsideTouch ? true : false);
+			print(movJoystickSide);
 		} else if (touch.phase == TouchPhase.Ended) {
 			TouchStartPos = Vector2.zero;
 			EndTouchForConfiguration();
@@ -185,9 +205,9 @@ public class JoystickPosition : MonoBehaviour {
 			MovementY = tempMY;
 			TorchX = tempTX;
 			TorchY = tempTY;
-			setOrientation(true, false);
+			SetJoystickPosition();
 		} else {
-			setOrientation(true);
+			SetJoystickPosition(true);
 		}
 	}
 

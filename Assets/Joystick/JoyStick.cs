@@ -150,6 +150,8 @@ public class JoyStick : MonoBehaviour {
 
 
 	#region mainControls
+	public bool Controllable = false;
+
 	float OutOfBoundsDistance;
 	float OuterAreaDistance;
 	float InnerAreaDistance;
@@ -322,7 +324,7 @@ public class JoyStick : MonoBehaviour {
 		SetControlScript();
 	}
 	void JoystickUsage() {
-		if (controlScript == null) return;
+		if (controlScript == null || !Controllable) return;
 		SetTouchID();
 		setDisplacementAndCheckForStoppingControls();
 		MainFunctionality();
