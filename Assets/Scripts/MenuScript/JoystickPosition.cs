@@ -61,20 +61,17 @@ public class JoystickPosition : MonoBehaviour {
 		}
 	}
 	void moveJoystickPosition(float MX = 0f, float MY = 0f, float TX = 0f, float TY = 0f) {
-		// print("MX:" + MX + "MY:" + MY + "TX:" + TX + "TY:" + TY);
 		Vector2 movementPos = Vector2.zero; Vector2 torchPos = Vector2.zero;
 		Vector2 haltPos = Vector2.zero;
 		if (RightSide) {
 			movementPos = new Vector2(RightPos.x - MX, RightPos.y + MY);
 			Vector2 torchDisplacement = new Vector2(TX, TY);
 			torchPos = LeftPos + torchDisplacement;
-			// haltPos = HaltPos + torchDisplacement;
 			haltPos = HaltPos;
 		} else {
 			movementPos = new Vector2(LeftPos.x + MX, LeftPos.y + MY);
 			Vector2 torchDisplacement = new Vector2(-TX, TY);
 			torchPos = RightPos + torchDisplacement;
-			// haltPos = new Vector2(-HaltPos.x, HaltPos.y) + torchDisplacement;
 			haltPos = new Vector2(-HaltPos.x, HaltPos.y);
 		}
 		HaltBtn.anchoredPosition = haltPos;
@@ -180,7 +177,6 @@ public class JoystickPosition : MonoBehaviour {
 			TouchStartPos = touch.position;
 			bool rightsideTouch = TouchStartPos.x > HalfScreenWidth ? true : false;
 			movJoystickSide = RightSide ? (rightsideTouch ? true : false) : (!rightsideTouch ? true : false);
-			print(movJoystickSide);
 		} else if (touch.phase == TouchPhase.Ended) {
 			TouchStartPos = Vector2.zero;
 			EndTouchForConfiguration();

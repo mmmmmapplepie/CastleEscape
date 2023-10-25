@@ -76,13 +76,14 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 	void CheckPanickAttack() {
-		if (Fear >= 100f) { panic = true; PanicRoutine = StartCoroutine(Panicking()); }
+		if (Fear >= 100f) { PanicRoutine = StartCoroutine(Panicking()); }
 	}
 	IEnumerator Panicking() {
-
 		while (!MovementScript.grounded || MovementScript.dashing) {
 			yield return null;
 		}
+		panic = true;
+		MovementScript.StopDropping();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		MovementScript.panicAttack(panicTime);
 		MovementScript.changeAnimation("Fear", 0.1f);

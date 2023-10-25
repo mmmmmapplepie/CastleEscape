@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.iOS;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.TextCore;
@@ -44,7 +47,9 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 
 	float XControl; Vector2 DashControl;
-	bool dashAble = true; public bool grounded = false; bool tempGrounded = false; public bool dashing = false;
+	[HideInInspector]
+	public bool grounded = false; bool dashAble = true; bool tempGrounded = false;
+	[HideInInspector] public bool dashing = false;
 	int maxDash = 1;
 
 	//initially set to 0 as the player somehow gets a charge just as the game starts.
@@ -121,17 +126,50 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			changeAnimation("DashHor");
 		}
 	}
-	bool checkGrounded() {
-		Collider2D playerColl = gameObject.GetComponent<Collider2D>();
-		return Physics2D.BoxCast(playerColl.bounds.center, playerColl.bounds.size, 0f, Vector2.down, 0.02f, groundedMask);
+	void OnTriggerEnter2D(Collision2D collision) {
+		if (droppingRoutine == null || collision.gameObject.tag != "Ground" || collision.collider.gameObject.name != "Background") return;
+		StopDropping();
 	}
-	bool HaltUsed = false;
+	[SerializeField] Collider2D playerColl;
+	bool checkGrounded() {
+		float xSize = playerColl.bounds.size.x;
+		float ySize = playerColl.bounds.size.y;
+		RaycastHit2D groundCastBottom = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
+		RaycastHit2D groundCastTop = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f - 0.02f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
+		if (RB.velocity.y <= 0f && groundCastBottom && !groundCastTop) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	Coroutine droppingRoutine = null;
+	public bool HaltUsed = false;
+	public float haltFactor = 0.4f;
 	public void HaltOrDrop() {
 		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
 		HaltUsed = true;
-		RB.velocity = Vector2.zero;
 		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
 		endDashChanges();
+		if (grounded) {
+			droppingRoutine = StartCoroutine(dropThroughPlatform());
+		} else {
+			RB.velocity = haltFactor * RB.velocity;
+		}
+
+	}
+	IEnumerator dropThroughPlatform() {
+		float initialY = transform.position.y;
+		playerColl.isTrigger = true;
+		while (transform.position.y > initialY - 0.5f) {
+			yield return null;
+		}
+		StopDropping();
+	}
+	public void StopDropping() {
+		playerColl.isTrigger = false;
+		if (droppingRoutine != null) {
+			StopCoroutine(droppingRoutine); droppingRoutine = null;
+		}
 	}
 	IEnumerator dashingEnd() {
 		yield return new WaitForSeconds(dashTime);
@@ -156,8 +194,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			HaltUsed = false;
 		}
 		if (grounded && RB.velocity.y <= 0f && dashCharge == 0) {
-			dashCharge++;
-			HaltUsed = false;
+			if (dashCharge == 0) dashCharge++;
+			if (HaltUsed == true) HaltUsed = false;
 		}
 	}
 	void clampFallSpeed() {
@@ -174,10 +212,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
-		if (!ControllableState() || dashing || lifeScript.panic) return;
-		if (Mathf.Abs(inputDirection.x * magnitude) < 0.2f) { XControl = 0f; lateralMovement(); return; }
-		float x = inputDirection.x * magnitude;
-		XControl = Mathf.Abs(x) > 0.70f ? (x / Mathf.Abs(x)) * 1f : x;
+		if (!ControllableState()) return;
+		if (dashing || lifeScript.panic) { XControl = 0; return; }
+		float xVal = magnitude * inputDirection.x;
+		if (Mathf.Abs(xVal) < 0.2f) {
+			XControl = 0f; lateralMovement(); return;
+		}
+		XControl = Mathf.Abs(xVal) > 0.70f ? (xVal / Mathf.Abs(xVal)) * 1f : xVal;
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
@@ -228,13 +269,15 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void setAnimation() {
 		if (lifeScript.panic || !ControllableState()) return;
 		setSpriteDirection();
-		if (RB.velocity.magnitude == 0 && grounded && _idleBored == null) {
-			if (XControl == 0) RB.velocity = Vector2.zero;
-			changeAnimation("Idle", 0.3f);
-			bored();
-			return;
-		}
-		if (!grounded) {
+		if (grounded) {
+			if (XControl == 0) RB.velocity = Vector3.zero;
+			Debug.LogError(RB.velocity.x);
+			if (RB.velocity.magnitude == 0f && _idleBored == null) {
+				changeAnimation("Idle", 0.3f);
+				bored();
+				return;
+			}
+		} else {
 			if (RB.velocity.y >= 0) {
 				changeAnimation("Fly");
 			} else {
