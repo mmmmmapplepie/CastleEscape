@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour {
+	static AudioPlayer UIAudio;
+	[SerializeField] AudioPlayer UIaudio;
 	[SerializeField] GameObject PlayingMenu, OutMenu, PauseBtn, StatusUI, BuffUI;
 	static GameObject playingMenu, outMenu;
 	void Awake() {
 		playingMenu = PlayingMenu;
 		outMenu = OutMenu;
+		UIAudio = UIaudio;
 	}
 
 
@@ -38,6 +41,7 @@ public class GameStateManager : MonoBehaviour {
 		Paused = false;
 	}
 	public void StartGame() {
+		UIAudio.PlaySound("Click");
 		playingMenu.SetActive(true);
 		outMenu.SetActive(false);
 		PauseBtn.SetActive(true);
@@ -51,10 +55,12 @@ public class GameStateManager : MonoBehaviour {
 		WaveCleared?.Invoke();
 	}
 	public static void PauseGame() {
+		UIAudio.PlaySound("Click");
 		PauseStart?.Invoke();
 		Paused = true;
 	}
 	public static void ResumeGame() {
+		UIAudio.PlaySound("Click");
 		PauseEnd?.Invoke();
 		Paused = false;
 	}

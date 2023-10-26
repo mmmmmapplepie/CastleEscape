@@ -126,8 +126,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			changeAnimation("DashHor");
 		}
 	}
-	void OnTriggerEnter2D(Collision2D collision) {
-		if (droppingRoutine == null || collision.gameObject.tag != "Ground" || collision.collider.gameObject.name != "Background") return;
+	void OnTriggerEnter2D(Collider2D collider) {
+		if (droppingRoutine == null || collider.gameObject.tag != "Ground" || collider.gameObject.name != "Background") return;
 		StopDropping();
 	}
 	[SerializeField] Collider2D playerColl;
@@ -271,7 +271,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		setSpriteDirection();
 		if (grounded) {
 			if (XControl == 0) RB.velocity = Vector3.zero;
-			Debug.LogError(RB.velocity.x);
 			if (RB.velocity.magnitude == 0f && _idleBored == null) {
 				changeAnimation("Idle", 0.3f);
 				bored();

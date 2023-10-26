@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class JoystickPosition : MonoBehaviour {
+	[SerializeField] AudioPlayer UIAudio;
 	[SerializeField] bool RightSide = true;
 	Vector2 RightPos;
 	Vector2 LeftPos;
@@ -50,6 +51,7 @@ public class JoystickPosition : MonoBehaviour {
 		}
 	}
 	public void changeOrientation() {
+		UIAudio.PlaySound("Click");
 		RightSide = !RightSide;
 		SetJoystickPosition();
 	}
@@ -79,6 +81,7 @@ public class JoystickPosition : MonoBehaviour {
 		TorchStick.anchoredPosition = torchPos;
 	}
 	public void Configure() {
+		UIAudio.PlaySound("Click");
 		ConfigureBtn.SetActive(false);
 		SaveBtn.SetActive(true);
 		ChangeBtn.SetActive(true);
@@ -89,6 +92,7 @@ public class JoystickPosition : MonoBehaviour {
 		CharacterSettingBtn.SetActive(false);
 	}
 	public void SaveValue() {
+		UIAudio.PlaySound("Click");
 		int saveVal = RightSide == true ? 1 : 0;
 		PlayerPrefs.SetInt("Orientation", saveVal);
 		ConfigureBtn.SetActive(true);
@@ -145,12 +149,14 @@ public class JoystickPosition : MonoBehaviour {
 		}
 	}
 	public void StartAdjustingJoystickPosition() {
+		UIAudio.PlaySound("Click");
 		HalfScreenWidth = Screen.width / 2f;
 		ScreenHeight = Screen.height;
 		AdjustingPanel.SetActive(true);
 		PositionConfigurationMode = true;
 	}
 	public void FinishAdjustingJoystickPosition() {
+		UIAudio.PlaySound("Click");
 		PositionConfigurationMode = false;
 		EndTouchForConfiguration();
 		AdjustingPanel.SetActive(false);

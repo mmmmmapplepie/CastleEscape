@@ -7,13 +7,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NameOrganizer : MonoBehaviour {
+	[SerializeField] AudioPlayer UIAudio;
 	[SerializeField] List<Monster> monsters = new List<Monster>();
 	[SerializeField] List<PlayerType> players = new List<PlayerType>();
 	[SerializeField] bool InPlayerSettings = true;
 	[SerializeField] GameObject cell;
 	[SerializeField] Transform cellHolder;
 	List<GameObject> nameCells = new List<GameObject>();
-	static float ShiftTime = 0.1f;
+	static float ShiftTime = 0.2f;
 	bool EvenCount = true;
 	int above = 0;
 	int centerIndex = 0;
@@ -38,6 +39,7 @@ public class NameOrganizer : MonoBehaviour {
 			Destroy(cellHolder.GetChild(i).gameObject);
 			nameCells.Clear();
 		}
+		UIAudio.findSound("GearTurn").loop = false; UIAudio.StopSound("GearTurn");
 	}
 	void InitializeNames() {
 		if (InPlayerSettings) {
@@ -167,6 +169,7 @@ public class NameOrganizer : MonoBehaviour {
 	public void changeStat(bool raise) {
 		int total = statTotal();
 		if (raise && total >= 70) return;
+		UIAudio.PlaySound("Click");
 		int index = dropdownStat.value;
 		int currentStat = CurrentSettings.CustomPlayerStats[index];
 		if ((raise && currentStat == 10) || (!raise && currentStat == 1)) return;
@@ -201,6 +204,7 @@ public class NameOrganizer : MonoBehaviour {
 		StartCoroutine(moveCommand(currFillPosition, up));
 		currFillPosition = currFillPosition + 1 > 4 ? 0 : currFillPosition + 1;
 	}
+	bool gearTurnAudioActive = false;
 	IEnumerator moveCommand(int here, bool up) {
 		while (locked[here]) {
 			yield return null;
@@ -213,6 +217,7 @@ public class NameOrganizer : MonoBehaviour {
 			initialPos.Add(anchorPos);
 			finalPos.Add(up ? anchorPos + new Vector2(0f, 80f) : anchorPos - new Vector2(0f, 80f));
 		}
+		if (!gearTurnAudioActive) { UIAudio.findSound("GearTurn").audioSource.loop = true; UIAudio.PlaySound("GearTurn"); gearTurnAudioActive = true; }
 		while (Time.unscaledTime < time + ShiftTime) {
 			//ratio goes from 0f to 1f as time passes.
 			float ratio = 1f - ((time + ShiftTime - Time.unscaledTime) / ShiftTime);
@@ -230,6 +235,11 @@ public class NameOrganizer : MonoBehaviour {
 		EditStats();
 		ExecutingCommand = false;
 		usedCommandOrders--;
+		if (usedCommandOrders == 0) {
+			UIAudio.findSound("GearTurn").audioSource.loop = false;
+			gearTurnAudioActive = false;
+			UIAudio.StopSound("GearTurn", 0.4f);
+		}
 	}
 	void SetColors(float ratio, bool up) {
 		Color32 center = new Color32(0xFF, 0xE7, 0x2A, 0xFF);

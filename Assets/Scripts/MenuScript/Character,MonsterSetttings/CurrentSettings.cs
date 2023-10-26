@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 
 public class CurrentSettings : MonoBehaviour {
+	[SerializeField] AudioPlayer UIAudio;
 	[SerializeField] TextMeshProUGUI highscore;
 	public GameObject Player;
 	static GameObject player;
@@ -101,6 +102,7 @@ public class CurrentSettings : MonoBehaviour {
 	[SerializeField] GameObject CharacterSetup, MonsterSetup;
 	[SerializeField] TextMeshProUGUI SetupToggleBtnTxt;
 	public void MonsterCharacterToggle() {
+		UIAudio.PlaySound("Click");
 		if (InCharacterSetup) {
 			InCharacterSetup = false;
 			CharacterSetup.SetActive(false);
@@ -116,6 +118,7 @@ public class CurrentSettings : MonoBehaviour {
 
 	[SerializeField] GameObject customizationBtn, StartBtn, JoystickBtn;
 	public void SaveSettings() {
+		UIAudio.PlaySound("Click");
 		for (int i = 0; i < stats.Count; i++) {
 			PlayerPrefs.SetInt(stats[i] + "CustomPlayer", CustomPlayerStats[i]);
 		}
