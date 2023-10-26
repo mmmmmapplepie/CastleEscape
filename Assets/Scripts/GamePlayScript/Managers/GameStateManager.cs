@@ -14,17 +14,27 @@ public class GameStateManager : MonoBehaviour {
 		UIAudio = UIaudio;
 	}
 
+	///////////////////////////////////////////////////////
+	void Update() {
+		if (InGame) StartCoroutine(waitFor());
+	}
+	bool called = false;
+	IEnumerator waitFor() {
+		if (called) yield break;
+		print("called");
+		called = true;
+		yield return new WaitForSeconds(5f);
+		RoomCleared?.Invoke();
+	}
+	///////////////////////////////////////////////////////
 
 
 
 
 
 
-
-
-	[SerializeField] PlatformController platformController;
 	public static bool InGame = false, Paused = false;
-	public static event Action WaveCleared, GameStart, GameEnd, PauseStart, PauseEnd;
+	public static event Action RoomCleared, GameStart, GameEnd, PauseStart, PauseEnd, StartNewRoom;
 	public void Defeat() {
 		GameEnd?.Invoke();
 		InGame = false;
@@ -51,10 +61,16 @@ public class GameStateManager : MonoBehaviour {
 		GameStart?.Invoke();
 		InGame = true;
 	}
-	public static void StartNewWave() {
-		WaveCleared?.Invoke();
+	public static bool changingRoom = false;
+	public static void ClearRoom() {
+		changingRoom = true;
+		RoomCleared?.Invoke();
+	}
+	public static void MakeNewRoom() {
+		StartNewRoom?.Invoke();
 	}
 	public static void PauseGame() {
+		if (changingRoom) return;
 		UIAudio.PlaySound("Click");
 		PauseStart?.Invoke();
 		Paused = true;

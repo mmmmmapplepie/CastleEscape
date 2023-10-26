@@ -70,6 +70,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		GameStateManager.GameStart += SetupStats;
 		GameStateManager.GameEnd += SetupStats;
 		GameStateManager.GameEnd += EndGame;
+		GameStateManager.StartNewRoom += NewRoomPosition;
+	}
+	void NewRoomPosition() {
+		transform.position = Camera.main.transform.position = new Vector3(0f, 0.5f, 0f);
 	}
 	void EndGame() {
 		StopAllCoroutines();
@@ -323,7 +327,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	void animationFix() {
-		changeAnimation("Idle");
+		if (currentAnimation != "Idle") changeAnimation("Idle");
 		currentAnimation = "Idle";
 		faceRight = true;
 		SpriteRenderTransform.localScale = rightFacingVector;

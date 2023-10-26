@@ -122,6 +122,10 @@ public class StatusUI : MonoBehaviour {
 		float startTime = Time.time;
 		while (Time.time < startTime + regenTime) {
 			float ratio = (Time.time - startTime) / regenTime;
+			if (GameStateManager.changingRoom) {
+				yield return null;
+				continue;
+			}
 			chargeTimerSlider.sizeDelta = new Vector2(ratio * sliderSize.x, sliderSize.y);
 			yield return null;
 		}
@@ -150,6 +154,6 @@ public class StatusUI : MonoBehaviour {
 			fearbackground.anchoredPosition = fearSlider.anchoredPosition = Vector2.zero;
 		}
 
-		
+
 	}
 }

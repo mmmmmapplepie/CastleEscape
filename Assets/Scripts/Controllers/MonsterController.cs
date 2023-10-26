@@ -35,7 +35,8 @@ public class MonsterController : MonoBehaviour {
 		return new Vector3(Random.Range(0, 1), Random.Range(0, 1), 0f);
 	}
 	void Awake() {
-		GameStateManager.WaveCleared += spawnMonsterWave;
+		GameStateManager.RoomCleared += clearMonsterList;
+		GameStateManager.StartNewRoom += spawnMonsterWave;
 		GameStateManager.GameEnd += clearMonsterList;
 		GameStateManager.GameStart += spawnInitialMonsters;
 	}

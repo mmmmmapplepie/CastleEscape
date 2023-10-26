@@ -29,7 +29,7 @@ public class PlayerLife : MonoBehaviour {
 	void Awake() {
 		GameStateManager.GameEnd += EndGame;
 		GameStateManager.GameStart += StartGame;
-
+		GameStateManager.StartNewRoom += () => changeHealth(regen);
 
 	}
 	void EndGame() {
@@ -44,9 +44,9 @@ public class PlayerLife : MonoBehaviour {
 
 
 	#region healthRelated
-	public void takeDamage(int damage) {
+	public void changeHealth(int amount) {
 		//effects
-		Health -= damage;
+		Health += amount;
 	}
 	void Regen() {
 		Health += regen;

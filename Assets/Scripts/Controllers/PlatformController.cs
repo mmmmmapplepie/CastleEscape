@@ -43,7 +43,7 @@ public class PlatformController : MonoBehaviour {
 	}
 
 	void Awake() {
-		GameStateManager.WaveCleared += changeAllTiles;
+		GameStateManager.StartNewRoom += changeAllTiles;
 		GameStateManager.GameEnd += destroyPlatforms;
 		GameStateManager.GameStart += makePlatforms;
 	}
