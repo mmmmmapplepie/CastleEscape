@@ -15,17 +15,17 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	///////////////////////////////////////////////////////
-	void Update() {
-		if (InGame) StartCoroutine(waitFor());
-	}
-	bool called = false;
-	IEnumerator waitFor() {
-		if (called) yield break;
-		print("called");
-		called = true;
-		yield return new WaitForSeconds(5f);
-		RoomCleared?.Invoke();
-	}
+	// void Update() {
+	// 	if (InGame) StartCoroutine(waitFor());
+	// }
+	// bool called = false;
+	// IEnumerator waitFor() {
+	// 	if (called) yield break;
+	// 	print("called");
+	// 	called = true;
+	// 	yield return new WaitForSeconds(5f);
+	// 	RoomCleared?.Invoke();
+	// }
 	///////////////////////////////////////////////////////
 
 

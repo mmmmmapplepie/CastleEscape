@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	void NewRoomPosition() {
 		transform.position = Camera.main.transform.position = new Vector3(0f, 0.5f, 0f);
+		RB.velocity = Vector2.zero;
+		changeAnimation("Idle");
 	}
 	void EndGame() {
 		StopAllCoroutines();
@@ -230,8 +232,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		DashControl = inputDirection;
 		Dash();
 	}
-	bool ControllableState() {
-		return (!GameStateManager.Paused && GameStateManager.InGame);
+	public static bool ControllableState() {
+		return (!GameStateManager.Paused && GameStateManager.InGame && !GameStateManager.changingRoom);
 	}
 
 
