@@ -51,3 +51,6 @@ TagManager:
   - name: UI
     uniqueID: 1161541013
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 2291095301
+    locked: 0

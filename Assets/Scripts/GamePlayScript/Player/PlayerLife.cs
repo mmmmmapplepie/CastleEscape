@@ -29,7 +29,7 @@ public class PlayerLife : MonoBehaviour {
 	void Awake() {
 		GameStateManager.GameEnd += EndGame;
 		GameStateManager.GameStart += StartGame;
-		GameStateManager.StartNewRoom += () => changeHealth(regen);
+		GameStateManager.StartNewRoom += NewRoom;
 
 	}
 	void EndGame() {
@@ -39,8 +39,10 @@ public class PlayerLife : MonoBehaviour {
 		StartFear();
 	}
 
-
-
+	void NewRoom() {
+		changeHealth(regen);
+		ChangeFear(-(aura * 2f + 30f));
+	}
 
 
 	#region healthRelated
@@ -66,7 +68,9 @@ public class PlayerLife : MonoBehaviour {
 		aura = (float)CurrentSettings.CurrentPlayerType.Aura;
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
-
+	void ChangeFear(float value) {
+		Fear += value;
+	}
 	IEnumerator FearRaiseRoutine() {
 		while (true) {
 			if (panic || GameStateManager.Paused) { yield return null; continue; }

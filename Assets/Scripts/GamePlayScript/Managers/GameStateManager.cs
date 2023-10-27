@@ -14,19 +14,18 @@ public class GameStateManager : MonoBehaviour {
 		UIAudio = UIaudio;
 	}
 
-	///////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////
 	// void Update() {
 	// 	if (InGame) StartCoroutine(waitFor());
 	// }
 	// bool called = false;
 	// IEnumerator waitFor() {
 	// 	if (called) yield break;
-	// 	print("called");
 	// 	called = true;
-	// 	yield return new WaitForSeconds(5f);
+	// 	yield return new WaitForSeconds(2f);
 	// 	RoomCleared?.Invoke();
 	// }
-	///////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////
 
 
 

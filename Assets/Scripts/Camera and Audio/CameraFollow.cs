@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 	[SerializeField] float maxoffset, smoothTime;
-	Transform player = null;
+	[SerializeField] Transform player;
 	Coroutine currentSmooth;
 	Coroutine noMovementRoutine;
 	Coroutine subNoMovement;
@@ -13,7 +13,6 @@ public class CameraFollow : MonoBehaviour {
 		GameStateManager.GameStart += StopMenuCamera;
 	}
 	public void setPlayerToFollow() {
-		player = GameObject.FindGameObjectWithTag("Player").transform;
 		if (player != null) {
 			currentSmooth = StartCoroutine(cameraMove());
 		}
