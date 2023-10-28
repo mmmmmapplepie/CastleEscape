@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 3
   Description: A typical monster to be found in the castle. Least of your worries.
     (Follows you once it senses your presence)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: bf6ac2007ac1c114db9468cef8aba76f, type: 3}
   Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}

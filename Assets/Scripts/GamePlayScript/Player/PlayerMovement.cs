@@ -33,13 +33,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
 		if (RB != null) { RB.gravityScale = basicG; RB.drag = 2f; }
 		endDashChanges();
-		transform.position = new Vector3(0f, 0.5f, 0f);
+		transform.position = new Vector3(0f, 1f, 0f);
 	}
 	void changeSprite() {
 		transform.Find("PlayerSprite").gameObject.GetComponent<SpriteRenderer>().color = playerObject.color;
 	}
-	void setLightStrengths() {
-		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
+	public void setLightStrengths() {
+		torchLight.intensity = (float)playerObject.TorchIntensity * GameBuffsManager.TorchModifierMultiplier * 0.5f;
 		torchLight.pointLightOuterRadius = (float)playerObject.TorchIntensity * 2f + 3f;
 		torchLight.pointLightInnerAngle = (float)playerObject.TorchWidth * 3f + 30f;
 		torchLight.pointLightOuterAngle = (float)playerObject.TorchWidth * 10f + 50f;
@@ -64,8 +64,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
-	Animation ani = null;
-
 	void Awake() {
 		GameStateManager.GameStart += SetupStats;
 		GameStateManager.GameEnd += SetupStats;
@@ -73,7 +71,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		GameStateManager.StartNewRoom += NewRoomPosition;
 	}
 	void NewRoomPosition() {
-		transform.position = Camera.main.transform.position = new Vector3(0f, 0.5f, 0f);
+		transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
 		RB.velocity = Vector2.zero;
 		changeAnimation("Idle");
 	}
@@ -93,9 +91,9 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		if (!grounded) {
 			float forceMultiplier = 1f;
 			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
-			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier, 0f), ForceMode2D.Force);
+			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier * GameBuffsManager.PlayerSpeedMultiplier, 0f), ForceMode2D.Force);
 		} else {
-			RB.velocity = new Vector2(XControl * playerSpeed, 0f);
+			RB.velocity = new Vector2(XControl * playerSpeed * GameBuffsManager.PlayerSpeedMultiplier, 0f);
 			if (Mathf.Abs(RB.velocity.x) < playerSpeed / 1.7f) {
 				changeAnimation("Walk");
 			} else {
@@ -110,7 +108,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			}
 			RB.gravityScale = 0f;
 			RB.velocity = Vector2.zero;
-			RB.velocity = dashSpeed * DashControl;
+			RB.velocity = dashSpeed * DashControl * GameBuffsManager.PlayerSpeedMultiplier;
 			RB.drag = 0f;
 			dashCharge--;
 			dashAble = false;
@@ -133,7 +131,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	void OnTriggerEnter2D(Collider2D collider) {
-		if (droppingRoutine == null || collider.gameObject.tag != "Ground" || collider.gameObject.name != "Background") return;
+		if (droppingRoutine == null || collider.gameObject.layer != groundedMask || collider.gameObject.name != "Background") return;
 		StopDropping();
 	}
 	[SerializeField] Collider2D playerColl;
@@ -242,7 +240,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		StartCoroutine(panicDarkness(panicTime));
 	}
 	public void recoveredFromPanicAttack() {
-		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
+		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f * GameBuffsManager.TorchModifierMultiplier;
 	}
 	IEnumerator panicDarkness(float panicTime) {
 		float starttime = Time.time;

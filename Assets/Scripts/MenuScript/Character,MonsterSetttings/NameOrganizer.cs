@@ -19,7 +19,6 @@ public class NameOrganizer : MonoBehaviour {
 	int above = 0;
 	int centerIndex = 0;
 	int below = 0;
-	bool start = true;
 	void OnEnable() {
 		setCountValues();
 		InitializeNames();

@@ -119,13 +119,15 @@ public class StatusUI : MonoBehaviour {
 		}
 	}
 	IEnumerator DashCharge() {
-		float startTime = Time.time;
-		while (Time.time < startTime + regenTime) {
-			float ratio = (Time.time - startTime) / regenTime;
+		float remainingTime = regenTime;
+		float ratio = 0f;
+		while (remainingTime > 0f) {
 			if (GameStateManager.changingRoom) {
 				yield return null;
 				continue;
 			}
+			ratio = (regenTime - remainingTime) / regenTime;
+			remainingTime -= Time.deltaTime * GameBuffsManager.DashRegenerationRateMultiplier;
 			chargeTimerSlider.sizeDelta = new Vector2(ratio * sliderSize.x, sliderSize.y);
 			yield return null;
 		}

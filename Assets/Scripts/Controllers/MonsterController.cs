@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour {
 	GameObject monsterPrefab;
-	public float monsterDamage, monsterSpeed;
-	public void spawnInitialMonsters() {
+	void spawnMonsters() {
 		monsterPrefab = CurrentSettings.CurrentMonster.MonsterPrefab;
 		spawnMonsterWave();
 	}
 	List<GameObject> monsterList = new List<GameObject>();
-	public void spawnMonsterWave() {
+	void spawnMonsterWave() {
 		clearMonsterList();
 		int monsterNumber = getMonsterNumber();
 		for (int i = 0; i < monsterNumber; i++) {
 			spawnMonster(monsterPosition());
 		}
 	}
-	public void clearMonsterList() {
+	void clearMonsterList() {
 		foreach (GameObject monster in monsterList) {
 			Destroy(monster);
 		}
@@ -32,12 +31,12 @@ public class MonsterController : MonoBehaviour {
 		monsterList.Add(Instantiate(monsterPrefab, position, Quaternion.identity));
 	}
 	static Vector3 monsterPosition() {
-		return new Vector3(Random.Range(0, 1), Random.Range(0, 1), 0f);
+		return new Vector3(Random.Range(20, 25), Random.Range(32, 30), 0f);
 	}
 	void Awake() {
 		GameStateManager.RoomCleared += clearMonsterList;
-		GameStateManager.StartNewRoom += spawnMonsterWave;
+		GameStateManager.StartNewRoom += spawnMonsters;
 		GameStateManager.GameEnd += clearMonsterList;
-		GameStateManager.GameStart += spawnInitialMonsters;
+		GameStateManager.GameStart += spawnMonsters;
 	}
 }

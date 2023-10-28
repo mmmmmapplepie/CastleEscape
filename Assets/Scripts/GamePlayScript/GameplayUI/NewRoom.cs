@@ -34,7 +34,6 @@ public class NewRoom : MonoBehaviour {
 		startTime = Time.unscaledTime;
 		while (Time.unscaledTime < startTime + downTime) {
 			float ratio = (Time.unscaledTime - startTime) / downTime;
-			print(ratio);
 			straightChange((1f - ratio));
 			// roomClearPanel.sizeDelta = Vector2.Lerp(new Vector2(2400f, 1500f), Vector2.zero, ratio);
 			yield return null;

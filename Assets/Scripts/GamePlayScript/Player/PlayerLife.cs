@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour {
@@ -26,7 +27,11 @@ public class PlayerLife : MonoBehaviour {
 	}
 
 
+
+	[SerializeField] SpriteRenderer playerSprite;
+	Color playerColor;
 	void Awake() {
+		playerColor = playerSprite.color;
 		GameStateManager.GameEnd += EndGame;
 		GameStateManager.GameStart += StartGame;
 		GameStateManager.StartNewRoom += NewRoom;
@@ -46,9 +51,23 @@ public class PlayerLife : MonoBehaviour {
 
 
 	#region healthRelated
+
+	Coroutine hitRecoveryRoutineHolder = null;
 	public void changeHealth(int amount) {
+		if (hitRecoveryRoutineHolder != null) return;
+		hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine());
 		//effects
 		Health += amount;
+	}
+	public float hitRecoverTime = 2f;
+	IEnumerator hitRecoveryRoutine() {
+		float t = hitRecoverTime;
+		while (t > 0f) {
+			playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.4f * Mathf.Sin(t * hitRecoverTime * 2f * Mathf.PI) + 0.6f);
+			t -= Time.deltaTime;
+			yield return null;
+		}
+		playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, 1f);
 	}
 	void Regen() {
 		Health += regen;
