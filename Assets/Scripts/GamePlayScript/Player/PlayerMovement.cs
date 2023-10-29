@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
 		endDashChanges();
+	}
+	void ResetPosition() {
 		transform.position = new Vector3(0f, 1f, 0f);
 	}
 	void changeSprite() {
@@ -76,6 +78,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		GameStateManager.GameEnd += SetupStats;
 		GameStateManager.GameEnd += EndGame;
 		GameStateManager.StartNewRoom += NewRoomPosition;
+		GameStateManager.StartNewRoom += ResetPosition;
+		GameStateManager.EnterMenu += ResetPosition;
 	}
 	void NewRoomPosition() {
 		transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);

@@ -1453,11 +1453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 900
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1497,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 1940306955}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: RequireFirstTouchInside
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: InnerFunctionActiveWhileInOuter
@@ -111351,9 +111351,9 @@ RectTransform:
   m_Children:
   - {fileID: 740839635}
   - {fileID: 972413719}
-  - {fileID: 1949259596}
   - {fileID: 1432908134}
   - {fileID: 673119188}
+  - {fileID: 1949259596}
   m_Father: {fileID: 860733598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -122911,11 +122911,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 900
+      value: 1250
       objectReference: {fileID: 0}
     - target: {fileID: 7293667180113703423, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: m_AnchoredPosition.x

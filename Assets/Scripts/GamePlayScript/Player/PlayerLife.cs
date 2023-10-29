@@ -55,10 +55,12 @@ public class PlayerLife : MonoBehaviour {
 	Coroutine hitRecoveryRoutineHolder = null;
 	public void changeHealth(int amount) {
 		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return;
-		hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine());
-		//effects
 		Health += amount;
-		checkDeath();
+		if (amount < 0) {
+			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine());
+			checkDeath();
+		}
+		//effects
 	}
 	public float hitRecoverTime = 2f;
 	IEnumerator hitRecoveryRoutine() {

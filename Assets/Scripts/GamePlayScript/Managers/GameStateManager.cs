@@ -33,6 +33,7 @@ public class GameStateManager : MonoBehaviour {
 	public void GoToMenu() {
 		playingMenu.SetActive(false);
 		pauseBtn.SetActive(false);
+		BuffUI.SetActive(false);
 		outMenu.SetActive(true);
 		HighScore.ShowHighScore(true);
 		Camera.main.transform.position = new Vector3(0f, 0.5f, -10f);
@@ -47,7 +48,7 @@ public class GameStateManager : MonoBehaviour {
 		outMenu.SetActive(false);
 		pauseBtn.SetActive(true);
 		StatusUI.SetActive(true);
-		BuffUI.SetActive(true);
+		// BuffUI.SetActive(true);
 		HighScore.UpdateScore(true);
 		InGame = true;
 		GameStart?.Invoke();
