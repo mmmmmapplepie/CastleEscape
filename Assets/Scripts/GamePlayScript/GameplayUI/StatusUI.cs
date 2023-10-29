@@ -17,6 +17,7 @@ public class StatusUI : MonoBehaviour {
 		initialSliderColor = fearSlider.gameObject.GetComponent<Image>().color;
 	}
 	void HideMenu() {
+		healthTemp = 0;
 		charging = false;
 		StopAllCoroutines();
 		gameObject.SetActive(false);
@@ -53,7 +54,7 @@ public class StatusUI : MonoBehaviour {
 				Instantiate(healthPrefab, healthContainer);
 			}
 		} else {
-			for (int i = 0; i < change; i++) {
+			for (int i = 0; i < Mathf.Abs(change); i++) {
 				Destroy(healthContainer.GetChild(i).gameObject);
 			}
 		}

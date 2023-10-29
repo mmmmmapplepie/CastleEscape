@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 public class MonsterBase : MonoBehaviour {
-	public float senseRange = 2f;
+	protected float senseRange = 5f;
 	[SerializeField] Monster monsterStats;
 	[SerializeField] SpriteRenderer faceGlow;
 	public Rigidbody2D RB;
 	[SerializeField] Animator ani;
-	protected float moveSpeed = 5f;
+	protected float moveSpeed = 1f;
 	protected float damage = 1f;
 	float senseTime = 5f;
 	float losePlayerRangeMultiplier = 1f;
@@ -20,26 +20,37 @@ public class MonsterBase : MonoBehaviour {
 		senseTime = senseTime / monsterStats.Hunger;
 		losePlayerRangeMultiplier = monsterStats.Hunger / 2f + 0.5f;
 		GetComponent<SpriteRenderer>().color = faceGlow.color = monsterStats.Color;
-		damage = monsterStats.Damage * 2f;
+		if (monsterStats.Damage < 2) {
+			damage = monsterStats.Damage;
+		} else {
+			damage = monsterStats.Damage * 2f;
+		}
 	}
 
 	protected Coroutine SensingRoutineHolder = null;
 	protected Coroutine MovingRoutineHolder = null;
 	protected Coroutine ChasingRoutineHolder = null;
+	Coroutine calmingRoutine = null;
+	void stopRoutine(ref Coroutine routine) {
+		if (routine == null) return;
+		if (routine == MovingRoutineHolder) ani.speed = 1f;
+		StopCoroutine(routine);
+		routine = null;
+	}
 	void Update() {
 		checkPrey();
 		naturalStroll();
 		spriteDirection();
 	}
-	//check if it senses player in range.
+
 	void checkPrey() {
-		//if in range start coroutine for the wait.
 		if (ChasingRoutineHolder != null || SensingRoutineHolder != null) return;
 		if (PreyInRange(senseRange)) {
 			SensingRoutineHolder = StartCoroutine(SensingRoutine());
 		}
 	}
 	protected bool PreyInRange(float range) {
+		if (!GameStateManager.InGame) return false;
 		return (player.position - transform.position).magnitude <= range ? true : false;
 	}
 	void naturalStroll() {
@@ -50,11 +61,10 @@ public class MonsterBase : MonoBehaviour {
 		yield return new WaitForSeconds(Random.Range(0, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
 		RB.velocity = (new Vector3(NZR(), NZR(), 0f)).normalized * moveSpeed * GameBuffsManager.EnemySpeedMultiplier;
 		ani.speed = 2f * GameBuffsManager.EnemySpeedMultiplier;
-		// yield return new WaitForSeconds(Random.Range(0f, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
-		yield return new WaitForSeconds(Random.Range(0f, 5f));
+		yield return new WaitForSeconds(Random.Range(0f, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
 		RB.velocity = Vector3.zero;
 		ani.speed = 1f;
-		MovingRoutineHolder = null;
+		stopRoutine(ref MovingRoutineHolder);
 	}
 
 	//NZR non zero random.
@@ -75,15 +85,12 @@ public class MonsterBase : MonoBehaviour {
 			remainingTime -= Time.deltaTime * GameBuffsManager.EnemySpeedMultiplier;
 			yield return null;
 		}
-		ani.Play("Chase");
 		faceGlow.color = new Color(1f, 1f, 1f, 1f);
 		ChasingRoutineHolder = StartCoroutine(ChasingRoutine());
-		StopCoroutine(calmingRoutine);
-		calmingRoutine = null;
-		StopCoroutine(SensingRoutineHolder);
-		SensingRoutineHolder = null;
-		StopCoroutine(MovingRoutineHolder);
-		MovingRoutineHolder = null;
+		ani.Play("Chase");
+		stopRoutine(ref calmingRoutine);
+		stopRoutine(ref SensingRoutineHolder);
+		stopRoutine(ref MovingRoutineHolder);
 	}
 
 
@@ -131,14 +138,10 @@ public class MonsterBase : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0f, 0f, angle);
 	}
 
-	Coroutine calmingRoutine = null;
 	protected void StopChase() {
-		StopCoroutine(SensingRoutineHolder);
-		SensingRoutineHolder = null;
-		StopCoroutine(ChasingRoutineHolder);
-		ChasingRoutineHolder = null;
-		StopCoroutine(MovingRoutineHolder);
-		MovingRoutineHolder = null;
+		stopRoutine(ref SensingRoutineHolder);
+		stopRoutine(ref ChasingRoutineHolder);
+		stopRoutine(ref MovingRoutineHolder);
 		calmingRoutine = StartCoroutine(calmingDown());
 	}
 	public float calmTime = 0.5f;
@@ -159,8 +162,8 @@ public class MonsterBase : MonoBehaviour {
 	}
 	void checkWall(Collider2D coll) {
 		if (coll.gameObject.tag == "bGround") {
-			//need additional check so that it doesnt repeat glitching when stuck to wall back and forth.
 			Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
+			if (normal == Vector2.zero) normal = -transform.position;
 			float dot = Vector2.Dot(normal, RB.velocity);
 			if (dot > 0f) return;
 			Vector2 final = RB.velocity - 2f * dot * normal;
@@ -174,6 +177,7 @@ public class MonsterBase : MonoBehaviour {
 		damagePlayer();
 	}
 	protected virtual void damagePlayer() {
-		player.root.gameObject.GetComponent<PlayerLife>().changeHealth((int)(damage * GameBuffsManager.EnemyDamageMultiplier));
+		int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
+		player.root.gameObject.GetComponent<PlayerLife>().changeHealth(dmg);
 	}
 }

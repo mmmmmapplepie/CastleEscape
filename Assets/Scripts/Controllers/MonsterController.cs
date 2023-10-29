@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour {
 	GameObject monsterPrefab;
 	void spawnMonsters() {
+		clearMonsterList();
 		monsterPrefab = CurrentSettings.CurrentMonster.MonsterPrefab;
 		spawnMonsterWave();
 	}
@@ -31,12 +32,11 @@ public class MonsterController : MonoBehaviour {
 		monsterList.Add(Instantiate(monsterPrefab, position, Quaternion.identity));
 	}
 	static Vector3 monsterPosition() {
-		return new Vector3(Random.Range(20, 25), Random.Range(32, 30), 0f);
+		return new Vector3(Random.Range(20, 20), Random.Range(20, 20), 0f);
 	}
 	void Awake() {
-		GameStateManager.RoomCleared += clearMonsterList;
 		GameStateManager.StartNewRoom += spawnMonsters;
-		GameStateManager.GameEnd += clearMonsterList;
+		GameStateManager.EnterMenu += clearMonsterList;
 		GameStateManager.GameStart += spawnMonsters;
 	}
 }

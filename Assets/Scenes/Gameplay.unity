@@ -118442,7 +118442,7 @@ MonoBehaviour:
   - audioSource: {fileID: 0}
     clip: {fileID: 8300000, guid: ba01107411c5a104ab7e69dbf2861950, type: 3}
     priority: 40
-    volume: 0.3
+    volume: 0.5
     pitch: 0.7
     loop: 1
     playOnAwake: 0

@@ -67,7 +67,6 @@ public class CurrentSettings : MonoBehaviour {
 		for (int i = 0; i < 10; i++) {
 			customPlayer.SetStat(stats[i], CustomPlayerStats[i]);
 		}
-		// customPlayer.MaxHealth = CustomPlayerStats[0]; customPlayer.Regeneration = CustomPlayerStats[1]; customPlayer.DashPower = CustomPlayerStats[2]; customPlayer.DashRegeneration = CustomPlayerStats[3]; customPlayer.DashStamina = CustomPlayerStats[4]; customPlayer.Luck = CustomPlayerStats[5]; customPlayer.Speed = CustomPlayerStats[6]; customPlayer.TorchIntensity = CustomPlayerStats[7]; customPlayer.TorchWidth = CustomPlayerStats[8]; customPlayer.Aura = CustomPlayerStats[9];
 	}
 	#endregion
 
@@ -75,6 +74,8 @@ public class CurrentSettings : MonoBehaviour {
 	public static void ChangePlayerSettingsInnateAndPreview() {
 		player.GetComponent<PlayerMovement>().playerObject = CurrentPlayerType;
 		player.GetComponent<PlayerMovement>().SetupStats();
+		CurrentSettingName = CurrentPlayerType.name + CurrentMonster.name;
+		HighScore.ShowHighScore();
 	}
 	public void SetPlayerMonsterVariables(string playerName, string monsterName) {
 		if (playerName != null) {

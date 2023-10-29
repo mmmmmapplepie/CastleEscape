@@ -54,7 +54,7 @@ public class PlatformController : MonoBehaviour {
 
 	void Awake() {
 		GameStateManager.StartNewRoom += changeAllTiles;
-		GameStateManager.GameEnd += destroyPlatforms;
+		GameStateManager.EnterMenu += destroyPlatforms;
 		GameStateManager.GameStart += makePlatforms;
 	}
 }

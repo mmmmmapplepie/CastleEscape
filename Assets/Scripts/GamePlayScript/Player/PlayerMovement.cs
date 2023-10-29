@@ -30,8 +30,15 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		animationFix();
 	}
 	void RevertToIntialSettings() {
+		if (GameStateManager.InGame) {
+			transform.Find("PlayerSprite").gameObject.GetComponent<Collider2D>().enabled = true;
+			RB.gravityScale = basicG; RB.drag = 2f;
+		} else {
+			transform.Find("PlayerSprite").gameObject.GetComponent<Collider2D>().enabled = false;
+			RB.velocity = Vector3.zero;
+			RB.gravityScale = 0f;
+		}
 		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
-		if (RB != null) { RB.gravityScale = basicG; RB.drag = 2f; }
 		endDashChanges();
 		transform.position = new Vector3(0f, 1f, 0f);
 	}

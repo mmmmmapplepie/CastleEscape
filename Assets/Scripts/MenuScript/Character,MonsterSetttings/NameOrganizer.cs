@@ -101,6 +101,7 @@ public class NameOrganizer : MonoBehaviour {
 			}
 		}
 		ChangeNameColorsDirect();
+		HighScore.ShowHighScore();
 	}
 	void ChangeNameColorsDirect() {
 		nameCells[centerIndex].GetComponent<TextMeshProUGUI>().color = new Color32(0xFF, 0xE7, 0x2A, 0xFF);
