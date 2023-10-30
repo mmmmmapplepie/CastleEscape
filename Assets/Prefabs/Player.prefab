@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2229995582042259761}
+  - component: {fileID: 5719910481790898552}
+  - component: {fileID: 7952678183652637700}
   m_Layer: 6
-  m_Name: DashChecker
+  m_Name: DropChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,12 +27,70 @@ Transform:
   m_GameObject: {fileID: 2270084676415489830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5332911349955062708}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5719910481790898552
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270084676415489830}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 2cd15eac98197e145b01a2a1d0ef3073, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.02}
+  m_EdgeRadius: 0
+--- !u!114 &7952678183652637700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270084676415489830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5afd9d672e8854681c8d058648f061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementScript: {fileID: 5837862220789305942}
 --- !u!1 &3754237965873142213
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,11 +152,15 @@ MonoBehaviour:
   dashing: 0
   groundedMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   basicG: 3
   fallingG: 5
   dashTime: 0.15
   RB: {fileID: 3278750547286442692}
+  backgroundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  nonDroppable: 0
   playerColl: {fileID: 264724723793017757}
   HaltUsed: 0
   haltFactor: 0.4
@@ -116,10 +180,10 @@ MonoBehaviour:
   MovementScript: {fileID: 5837862220789305942}
   panicTime: 2
   panic: 0
+  panicImminent: 0
   maxHealth: 0
   regen: 0
   playerSprite: {fileID: 1914209169635122267}
-  hitRecoverTime: 1
 --- !u!50 &3278750547286442692
 Rigidbody2D:
   serializedVersion: 4
@@ -179,7 +243,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03125, y: -0.49}
+  m_Offset: {x: 0, y: -0.99}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -190,7 +254,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6875, y: 0.02}
+  m_Size: {x: 0.875, y: 0.02}
   m_EdgeRadius: 0
 --- !u!95 &119177441486853935
 Animator:
@@ -266,7 +330,7 @@ MonoBehaviour:
   m_Intensity: 2.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000075f512d295b53b45
+  m_ApplyToSortingLayers: 0000000075f512d2
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -360,7 +424,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000e56ea9ab75f512d295b53b45
+  m_ApplyToSortingLayers: 00000000e56ea9ab75f512d2
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -417,7 +481,7 @@ Transform:
   m_GameObject: {fileID: 8822099999280348894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -465,7 +529,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 100
   m_Sprite: {fileID: -2116888372, guid: 3766efea0e5e82e4c98c2d6b7f4cd0ad, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.4817524, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -484,7 +548,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8822099999280348894}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2cd15eac98197e145b01a2a1d0ef3073, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

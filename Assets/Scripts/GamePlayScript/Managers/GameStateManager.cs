@@ -48,7 +48,7 @@ public class GameStateManager : MonoBehaviour {
 		outMenu.SetActive(false);
 		pauseBtn.SetActive(true);
 		StatusUI.SetActive(true);
-		// BuffUI.SetActive(true);
+		BuffUI.SetActive(true);
 		HighScore.UpdateScore(true);
 		InGame = true;
 		GameStart?.Invoke();

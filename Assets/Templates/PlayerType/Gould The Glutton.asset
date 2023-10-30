@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Gould The Glutton
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  Regeneration: 9
+  MaxHealth: 9
+  Regeneration: 10
   DashPower: 3
   DashRegeneration: 4
   DashStamina: 7

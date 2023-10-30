@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Sekro The Sly
   m_EditorClassIdentifier: 
   MaxHealth: 7
-  Regeneration: 2
+  Regeneration: 3
   DashPower: 8
   DashRegeneration: 2
-  DashStamina: 6
-  Luck: 9
-  Speed: 7
+  DashStamina: 3
+  Luck: 10
+  Speed: 8
   TorchIntensity: 8
   TorchWidth: 9
   Aura: 2

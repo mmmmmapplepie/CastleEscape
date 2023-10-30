@@ -15,11 +15,11 @@ MonoBehaviour:
   MaxHealth: 10
   Regeneration: 9
   DashPower: 2
-  DashRegeneration: 3
-  DashStamina: 6
+  DashRegeneration: 1
+  DashStamina: 8
   Luck: 9
   Speed: 1
-  TorchIntensity: 5
-  TorchWidth: 6
+  TorchIntensity: 4
+  TorchWidth: 7
   Aura: 9
   color: {r: 1, g: 0.63529414, b: 0.9254902, a: 1}

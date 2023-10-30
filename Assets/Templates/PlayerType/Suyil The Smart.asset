@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Suyil The Smart
   m_EditorClassIdentifier: 
   MaxHealth: 5
-  Regeneration: 4
-  DashPower: 8
+  Regeneration: 5
+  DashPower: 7
   DashRegeneration: 9
   DashStamina: 5
   Luck: 3

@@ -16,6 +16,7 @@ public class PlayerLife : MonoBehaviour {
 	Coroutine PanicRoutine;
 	float aura = 0f;
 	public bool panic = false;
+	public bool panicImminent = false;
 	public int maxHealth = 1;
 	public int regen = 0;
 	int _health = 3;
@@ -46,6 +47,7 @@ public class PlayerLife : MonoBehaviour {
 
 	void NewRoom() {
 		changeHealth(regen);
+		if (panicImminent || panic) return;
 		ChangeFear(-(aura * 2f + 30f));
 	}
 
@@ -53,20 +55,19 @@ public class PlayerLife : MonoBehaviour {
 	#region healthRelated
 
 	Coroutine hitRecoveryRoutineHolder = null;
-	public void changeHealth(int amount) {
+	public void changeHealth(int amount, float recoveryTime = 2f) {
 		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return;
 		Health += amount;
 		if (amount < 0) {
-			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine());
+			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine(recoveryTime));
 			checkDeath();
 		}
 		//effects
 	}
-	public float hitRecoverTime = 2f;
-	IEnumerator hitRecoveryRoutine() {
-		float t = hitRecoverTime;
+	IEnumerator hitRecoveryRoutine(float recoveryTime) {
+		float t = recoveryTime;
 		while (t > 0f) {
-			playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.4f * Mathf.Sin(t * hitRecoverTime * 2f * Mathf.PI) + 0.6f);
+			playerSprite.color = new Color(playerColor.r, playerColor.g, playerColor.b, 0.4f * Mathf.Sin(t * recoveryTime * 2f * Mathf.PI) + 0.6f);
 			t -= Time.deltaTime;
 			yield return null;
 		}
@@ -106,9 +107,11 @@ public class PlayerLife : MonoBehaviour {
 		if (Fear >= 100f) { PanicRoutine = StartCoroutine(Panicking()); }
 	}
 	IEnumerator Panicking() {
+		panicImminent = true;
 		while (!MovementScript.grounded || MovementScript.dashing) {
 			yield return null;
 		}
+		panicImminent = false;
 		panic = true;
 		MovementScript.StopDropping();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -138,12 +137,16 @@ public class NameOrganizer : MonoBehaviour {
 		if (CustomPointsCustomizer != null) CustomPointsCustomizer.SetActive(false);
 		if (InPlayerSettings) {
 			clearHolders(statPointImageHolder);
+			//the tot is here whenever you have to check if the character stats add up to 60.
+			// int tot = 0;
 			for (int i = 0; i < statPointImageHolder.Count(); i++) {
 				int statPoint = CurrentSettings.CurrentPlayerType.GetStat(CurrentSettings.stats[i]);
+				// tot += statPoint;
 				for (int j = 0; j < statPoint; j++) {
 					Instantiate(statPointImagePrefab, statPointImageHolder[i]);
 				}
 			}
+			// if (tot != 60) print(tot);
 			if (CurrentSettings.CurrentPlayerType.name == "Zaron The Zenith") {
 				CustomPointsCustomizer.SetActive(true);
 				availableCustomPointsText.text = (maxStat - statTotal()).ToString();

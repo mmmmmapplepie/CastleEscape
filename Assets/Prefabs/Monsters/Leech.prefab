@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8556374713934527768}
   - component: {fileID: 3337408574432676648}
   m_Layer: 0
-  m_Name: CastleMonster
+  m_Name: Leech
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

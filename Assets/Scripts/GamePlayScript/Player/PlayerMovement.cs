@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		lifeScript.Health = lifeScript.maxHealth;
 		lifeScript.regen = playerObject.Regeneration;
 		playerSpeed = (float)playerObject.Speed;
-		dashSpeed = (float)playerObject.DashPower * 3f + 10f;
+		dashSpeed = (float)playerObject.DashPower * 1f + 10f;
 		PlatformController.luck = playerObject.Luck * 3;
 		maxDash = playerObject.DashStamina + 1;
 		dashCooldown = (0.6f - playerObject.DashStamina * 0.03f);
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	[SerializeField] LayerMask groundedMask;
 	[SerializeField] float basicG = 5f, fallingG = 10f, dashTime = 0.15f;
-	float dashSpeed = 20f, dashCooldown = 0.6f, playerSpeed = 8f;
+	float dashSpeed = 15f, dashCooldown = 0.6f, playerSpeed = 8f;
 	[SerializeField] Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
@@ -95,15 +95,17 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		checkDashAdd();
 		gravityScale();
 		clampFallSpeed();
+		stopOnGround();
 		setAnimation();
 	}
 	void lateralMovement() {
-		if (XControl == 0) { RB.velocity = new Vector2(0f, RB.velocity.y); return; }
+		if (XControl == 0) { return; }
 		if (!grounded) {
-			float forceMultiplier = 1f;
-			if ((RB.velocity.x > 0 && XControl < 0) || (RB.velocity.x < 0 && XControl > 0)) forceMultiplier = 3f;
+			float forceMultiplier = 5f;
 			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier * GameBuffsManager.PlayerSpeedMultiplier, 0f), ForceMode2D.Force);
+			RB.velocity = new Vector2(Mathf.Sign(RB.velocity.x) * Mathf.Min((playerSpeed + dashSpeed) * GameBuffsManager.PlayerSpeedMultiplier / 2f, Mathf.Abs(RB.velocity.x)), RB.velocity.y);
 		} else {
+			if (dashing) return;
 			RB.velocity = new Vector2(XControl * playerSpeed * GameBuffsManager.PlayerSpeedMultiplier, 0f);
 			if (Mathf.Abs(RB.velocity.x) < playerSpeed / 1.7f) {
 				changeAnimation("Walk");
@@ -117,9 +119,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
-			RB.gravityScale = 0f;
-			RB.velocity = Vector2.zero;
 			RB.velocity = dashSpeed * DashControl * GameBuffsManager.PlayerSpeedMultiplier;
+			RB.gravityScale = 0f;
 			RB.drag = 0f;
 			dashCharge--;
 			dashAble = false;
@@ -141,9 +142,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			changeAnimation("DashHor");
 		}
 	}
+	[SerializeField] LayerMask backgroundMask;
+	public bool nonDroppable = false;
 	void OnTriggerEnter2D(Collider2D collider) {
-		if (droppingRoutine == null || collider.gameObject.layer != groundedMask || collider.gameObject.name != "Background") return;
-		StopDropping();
+		if (droppingRoutine != null && (collider.gameObject.layer == LayerMask.NameToLayer("Background") || collider.gameObject.layer != LayerMask.NameToLayer("Ground"))) StopDropping();
 	}
 	[SerializeField] Collider2D playerColl;
 	bool checkGrounded() {
@@ -162,15 +164,15 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	public float haltFactor = 0.4f;
 	public void HaltOrDrop() {
 		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
-		HaltUsed = true;
 		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
 		endDashChanges();
 		if (grounded) {
+			if (nonDroppable) return;
 			droppingRoutine = StartCoroutine(dropThroughPlatform());
 		} else {
 			RB.velocity = haltFactor * RB.velocity;
 		}
-
+		HaltUsed = true;
 	}
 	IEnumerator dropThroughPlatform() {
 		float initialY = transform.position.y;
@@ -215,7 +217,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	void clampFallSpeed() {
 		if (RB.velocity.y < 0 && RB.velocity.y < -30f) {
-			RB.velocity = new Vector3(RB.velocity.x, -30f, 0f);
+			RB.velocity = new Vector2(RB.velocity.x, -30f);
 		}
 	}
 	void gravityScale() {
@@ -281,11 +283,15 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 		currentAnimation = name;
 	}
+	void stopOnGround() {
+		if (grounded && XControl == 0 && !dashing) {
+			RB.velocity = Vector3.zero;
+		}
+	}
 	void setAnimation() {
 		if (lifeScript.panic || !ControllableState()) return;
 		setSpriteDirection();
 		if (grounded) {
-			if (XControl == 0) RB.velocity = Vector3.zero;
 			if (RB.velocity.magnitude == 0f && _idleBored == null) {
 				changeAnimation("Idle", 0.3f);
 				bored();

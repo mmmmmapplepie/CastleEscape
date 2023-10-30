@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 public class MonsterBase : MonoBehaviour {
-	protected float senseRange = 5f;
+	protected float senseRange = 2f;
 	[SerializeField] Monster monsterStats;
 	[SerializeField] SpriteRenderer faceGlow;
 	public Rigidbody2D RB;
@@ -12,14 +12,20 @@ public class MonsterBase : MonoBehaviour {
 	float losePlayerRangeMultiplier = 1f;
 	protected Transform player = null;
 	Vector3 baseScale;
+	void OnDrawGizmos() {
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere(transform.position, senseRange);
+	}
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
 		baseScale = transform.localScale;
 		moveSpeed = monsterStats.Speed * moveSpeed;
-		senseRange = senseRange * monsterStats.Senses;
-		senseTime = senseTime / monsterStats.Hunger;
+		senseRange = senseRange * monsterStats.Senses + 2f;
+		senseTime = 0.5f * monsterStats.Hunger - 0.25f;
 		losePlayerRangeMultiplier = monsterStats.Hunger / 2f + 0.5f;
-		GetComponent<SpriteRenderer>().color = faceGlow.color = monsterStats.Color;
+		Color hue = monsterStats.Color;
+		GetComponent<SpriteRenderer>().color = hue;
+		faceGlow.color = new Color(hue.r, hue.g, hue.b, 0f);
 		if (monsterStats.Damage < 2) {
 			damage = monsterStats.Damage;
 		} else {
@@ -76,7 +82,7 @@ public class MonsterBase : MonoBehaviour {
 		return v;
 	}
 	IEnumerator SensingRoutine() {
-		float remainingTime = senseTime;
+		float remainingTime = Random.Range(senseTime, senseTime * 1.5f);
 		while (remainingTime > 0f) {
 			if (!PreyInRange(senseRange)) {
 				SensingRoutineHolder = null;
@@ -89,8 +95,8 @@ public class MonsterBase : MonoBehaviour {
 		ChasingRoutineHolder = StartCoroutine(ChasingRoutine());
 		ani.Play("Chase");
 		stopRoutine(ref calmingRoutine);
-		stopRoutine(ref SensingRoutineHolder);
 		stopRoutine(ref MovingRoutineHolder);
+		stopRoutine(ref SensingRoutineHolder);
 	}
 
 
@@ -126,11 +132,11 @@ public class MonsterBase : MonoBehaviour {
 	protected void setMovement(Vector3 moveDir, float multiplier = 1f) {
 		RB.velocity = moveDir.normalized * multiplier * moveSpeed * GameBuffsManager.EnemySpeedMultiplier;
 		spriteDirection();
-		float angle = moveDir.x == 0 ? (moveDir.y == 0 ? RZ() : (facingLeft == true ? -maxRotation : maxRotation)) : Mathf.Atan(moveDir.y / moveDir.x);
+		float angle = moveDir.x == 0 ? (moveDir.y == 0 ? RZ() : (moveDir.y > 0 ? (facingLeft == true ? -maxRotation : maxRotation) : (facingLeft == true ? maxRotation : -maxRotation))) : 180f * Mathf.Atan(moveDir.y / moveDir.x) / Mathf.PI;
+		angle = Mathf.Sign(angle) * Mathf.Min(Mathf.Abs(angle), maxRotation);
 		SetRotation(angle);
 	}
 
-	//get current z rotation
 	float RZ() {
 		return transform.rotation.z;
 	}
@@ -177,6 +183,7 @@ public class MonsterBase : MonoBehaviour {
 		damagePlayer();
 	}
 	protected virtual void damagePlayer() {
+		if (GameStateManager.changingRoom) return;
 		int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
 		player.root.gameObject.GetComponent<PlayerLife>().changeHealth(dmg);
 	}

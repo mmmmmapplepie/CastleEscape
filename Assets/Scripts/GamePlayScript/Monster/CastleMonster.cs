@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEngine;
 public class CastleMonster : MonsterBase {
 	protected override IEnumerator ChasingRoutine() {
 		while (true) {
@@ -8,8 +7,12 @@ public class CastleMonster : MonsterBase {
 				yield break;
 			}
 			direction = player.position - transform.position;
+			if (PreyInRange(2f)) { yield return null; continue; }
 			setMovement(direction);
 			yield return null;
 		}
+	}
+	protected override void damagePlayer() {
+
 	}
 }

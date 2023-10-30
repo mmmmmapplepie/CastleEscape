@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Wallace The Wise
   m_EditorClassIdentifier: 
-  MaxHealth: 6
-  Regeneration: 5
+  MaxHealth: 4
+  Regeneration: 7
   DashPower: 3
   DashRegeneration: 9
   DashStamina: 9

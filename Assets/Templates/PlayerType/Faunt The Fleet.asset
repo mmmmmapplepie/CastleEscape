@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd54b59427aae144a28d0fe7bf8b65d, type: 3}
   m_Name: Faunt The Fleet
   m_EditorClassIdentifier: 
-  MaxHealth: 3
+  MaxHealth: 1
   Regeneration: 1
-  DashPower: 6
+  DashPower: 8
   DashRegeneration: 10
   DashStamina: 10
   Luck: 4
