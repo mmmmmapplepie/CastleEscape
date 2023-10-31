@@ -2,8 +2,8 @@ using System.Collections;
 using UnityEngine;
 public class MonsterBase : MonoBehaviour {
 	protected float senseRange = 2f;
-	[SerializeField] Monster monsterStats;
-	[SerializeField] SpriteRenderer faceGlow;
+	[SerializeField] protected Monster monsterStats;
+	[SerializeField] protected SpriteRenderer faceGlow;
 	public Rigidbody2D RB;
 	[SerializeField] Animator ani;
 	protected float moveSpeed = 1f;
@@ -31,8 +31,9 @@ public class MonsterBase : MonoBehaviour {
 		} else {
 			damage = monsterStats.Damage * 2f;
 		}
+		AwakeMethod();
 	}
-
+	protected virtual void AwakeMethod() { }
 	protected Coroutine SensingRoutineHolder = null;
 	protected Coroutine MovingRoutineHolder = null;
 	protected Coroutine ChasingRoutineHolder = null;
@@ -47,8 +48,11 @@ public class MonsterBase : MonoBehaviour {
 		checkPrey();
 		naturalStroll();
 		spriteDirection();
+		UpdateMethod();
 	}
+	protected virtual void UpdateMethod() {
 
+	}
 	void checkPrey() {
 		if (ChasingRoutineHolder != null || SensingRoutineHolder != null) return;
 		if (PreyInRange(senseRange)) {
@@ -154,22 +158,28 @@ public class MonsterBase : MonoBehaviour {
 	IEnumerator calmingDown() {
 		ani.Play("Idle");
 		float time = calmTime;
+		float initialIntensity = faceGlow.color.a;
 		while (time > 0f) {
-			faceGlow.color = new Color(1f, 1f, 1f, time / calmTime);
+			faceGlow.color = new Color(1f, 1f, 1f, initialIntensity * time / calmTime);
 			time -= Time.deltaTime;
 			yield return null;
 		}
 		faceGlow.color = new Color(1f, 1f, 1f, 0f);
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		checkWall(coll);
+		enterOuterWall(coll);
 		if (coll.gameObject.tag != "Player") return;
 		damagePlayer();
 	}
-	void checkWall(Collider2D coll) {
+	void enterOuterWall(Collider2D coll) {
+		HitOuterWall();
+		reflectFromWall(coll);
+	}
+	void reflectFromWall(Collider2D coll) {
 		if (coll.gameObject.tag == "bGround") {
+			HitOuterWall();
 			Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
-			if (normal == Vector2.zero) normal = -transform.position;
+			if (normal == Vector2.zero) normal = -transform.position.normalized;
 			float dot = Vector2.Dot(normal, RB.velocity);
 			if (dot > 0f) return;
 			Vector2 final = RB.velocity - 2f * dot * normal;
@@ -178,13 +188,22 @@ public class MonsterBase : MonoBehaviour {
 		}
 	}
 	void OnTriggerStay2D(Collider2D coll) {
-		checkWall(coll);
-		if (coll.gameObject.tag != "Player") return;
+		reflectFromWall(coll);
+		if (coll.gameObject.tag != "Player" || !damageOnCollision) return;
 		damagePlayer();
 	}
-	protected virtual void damagePlayer() {
-		if (GameStateManager.changingRoom) return;
-		int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
-		player.root.gameObject.GetComponent<PlayerLife>().changeHealth(dmg);
+	void damagePlayer() {
+		// if (GameStateManager.changingRoom) return;
+		// int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
+		// damageAmountAndTime(dmg);
 	}
+	protected virtual void damageAmountAndTime(float dmg, float time = 2f) {
+		player.root.gameObject.GetComponent<PlayerLife>().changeHealth((int)dmg, time);
+
+	}
+	bool damageOnCollision = true;
+	protected void DamageWhileColliding(bool dmgOnCollision = true) {
+		damageOnCollision = dmgOnCollision;
+	}
+	protected virtual void HitOuterWall() { }
 }

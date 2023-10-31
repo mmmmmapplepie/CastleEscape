@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 6105173874643444712}
   - component: {fileID: 5620558821209431236}
   - component: {fileID: 1348864497801118145}
-  - component: {fileID: 8556374713934527768}
   - component: {fileID: 3337408574432676648}
+  - component: {fileID: 6103255779767653280}
   m_Layer: 0
   m_Name: Medusa
   m_TagString: Untagged
@@ -253,23 +253,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &8556374713934527768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892936468193292106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6565708632786ac45b325ce0d6669097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterStats: {fileID: 11400000, guid: c84b7ff6b6c214440b2452a1a5959acf, type: 2}
-  faceGlow: {fileID: 4708010243349141681}
-  RB: {fileID: 1348864497801118145}
-  ani: {fileID: 3337408574432676648}
-  calmTime: 0.5
 --- !u!95 &3337408574432676648
 Animator:
   serializedVersion: 5
@@ -291,3 +274,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6103255779767653280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892936468193292106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd98186b1a8571346bb7dd2cffcf52b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterStats: {fileID: 11400000, guid: 06cf0c820d78c494daf03f9b4bffe7ef, type: 2}
+  faceGlow: {fileID: 4708010243349141681}
+  RB: {fileID: 1348864497801118145}
+  ani: {fileID: 3337408574432676648}
+  calmTime: 0.5

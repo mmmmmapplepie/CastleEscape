@@ -12,7 +12,4 @@ public class CastleMonster : MonsterBase {
 			yield return null;
 		}
 	}
-	protected override void damagePlayer() {
-
-	}
 }
