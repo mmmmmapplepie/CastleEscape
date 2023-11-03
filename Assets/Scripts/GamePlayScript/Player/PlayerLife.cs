@@ -10,7 +10,7 @@ public class PlayerLife : MonoBehaviour {
 	public float panicTime = 0.5f;
 	public float Fear {
 		get { return _fear; }
-		set { _fear = value > 100f ? 100f : (value < 0f ? 0 : value); }
+		set { _fear = Mathf.Clamp(value, 0f, 100f); }
 	}
 	Coroutine RisingFearRoutine;
 	Coroutine PanicRoutine;

@@ -168,7 +168,7 @@ public class MonsterBase : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
 		enterOuterWall(coll);
-		if (coll.gameObject.tag != "Player") return;
+		if (coll.gameObject.tag != "Player" || !damageOnCollision) return;
 		damagePlayer();
 	}
 	void enterOuterWall(Collider2D coll) {
