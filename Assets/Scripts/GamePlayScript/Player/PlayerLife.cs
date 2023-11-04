@@ -47,7 +47,6 @@ public class PlayerLife : MonoBehaviour {
 
 	void NewRoom() {
 		changeHealth(regen);
-		if (panicImminent || panic) return;
 		ChangeFear(-(aura * 2f + 30f));
 	}
 
@@ -92,7 +91,8 @@ public class PlayerLife : MonoBehaviour {
 		aura = (float)CurrentSettings.CurrentPlayerType.Aura;
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
-	void ChangeFear(float value) {
+	public void ChangeFear(float value) {
+		if (panic || panicImminent) return;
 		Fear += value;
 	}
 	IEnumerator FearRaiseRoutine() {

@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Item : MonoBehaviour {
 	public new string name;
+	public bool IsABuff = false;
 	public GameObject consumeParticleEffect = null;
 
 
@@ -14,11 +14,24 @@ public class Item : MonoBehaviour {
 	[SerializeField] GameObject UIItemPrefab, UIItemDummyPrefab;
 	[HideInInspector] public Transform UIItemHolder;
 	[HideInInspector] public GameObject player;
+	Color playerColor;
+	bool triggered = false;
 	void OnTriggerEnter2D(Collider2D coll) {
+		ItemTrigger(coll);
+	}
+	void OnTriggerStay2D(Collider2D coll) {
+		ItemTrigger(coll);
+	}
+	void ItemTrigger(Collider2D coll) {
+		if (UIItemHolder.childCount > 5 || triggered) return;
 		if (coll.tag == "Player") {
+			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
+			player = coll.transform.root.gameObject;
+			triggered = true;
 			CheckAddingItemToUI();
 			ItemEffect();
 			ItemVisuals();
+			Destroy(gameObject);
 		}
 	}
 	void CheckAddingItemToUI() {
@@ -38,22 +51,35 @@ public class Item : MonoBehaviour {
 		}
 		return null;
 	}
+	bool EndingCalled = false;
 	void AddItemToUI() {
-		GameObject uIItem = Instantiate(UIItemPrefab);
+		UIItemPrefab.GetComponent<UIItem>().playerColor = playerColor;
+		UIItemPrefab.GetComponent<UIItem>().remainingTime = itemTime;
+		GameObject uIItem = Instantiate(UIItemPrefab, UIItemHolder);
 		UIItem script = uIItem.GetComponent<UIItem>();
-		script.remainingTime = itemTime;
+		script.itemName = name;
+		script.IsABuff = IsABuff;
+		uIItem.transform.Find("Image").gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		script.EndFunction = EndItemEffect;
-		GameObject Dummy = Instantiate(UIItemDummyPrefab, uIItem.transform.root);
-		Dummy.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -270f);
-		Dummy.transform.parent = uIItem.transform;
+		EndingCalled = true;
+		GameObject Dummy = Instantiate(UIItemDummyPrefab, uIItem.transform.parent.parent.Find("DummyHolder"));
+		Dummy.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+		Dummy.GetComponent<RectTransform>().anchoredPosition = new Vector2(300f, 80f);
 		script.ItemDummy = Dummy.transform;
 	}
+
 	void ExtendItemTime(UIItem itemInUI) {
 		itemInUI.remainingTime = itemTime;
 	}
 	protected virtual void ItemEffect() { }
 	protected virtual void EndItemEffect() { }
 	void ItemVisuals() {
-		Instantiate(consumeParticleEffect, transform.position, quaternion.identity);
+		if (consumeParticleEffect != null) {
+			Instantiate(consumeParticleEffect, transform.position, quaternion.identity);
+		}
+	}
+	void OnDestroy() {
+		if (EndingCalled || !GameStateManager.InGame) return;
+		EndItemEffect();
 	}
 }

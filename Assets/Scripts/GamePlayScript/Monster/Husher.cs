@@ -18,6 +18,7 @@ public class Husher : MonsterBase {
 	float turnoffTime = 0.2f;
 	float offWaitTime = 2f;
 	Coroutine hushRoutine;
+	static bool fullyOff = false;
 	IEnumerator TurnOfftorch() {
 		float time = turnoffTime;
 		while (time > 0f) {
@@ -25,12 +26,14 @@ public class Husher : MonsterBase {
 			time -= Time.deltaTime;
 			yield return null;
 		}
+		if (fullyOff != true) fullyOff = true;
 		yield return new WaitForSeconds(offWaitTime);
-		TorchMovement.SetTorchIntensity(1f, true);
+
+		TorchMovement.SetTorchIntensity(1f);
 	}
 	void returnTorchToNormal() {
 		if (hushRoutine != null) StopCoroutine(hushRoutine);
-		TorchMovement.SetTorchIntensity(1f, true);
+		TorchMovement.SetTorchIntensity(1f);
 
 	}
 	void OnDestroy() {

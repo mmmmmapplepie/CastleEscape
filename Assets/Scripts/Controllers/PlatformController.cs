@@ -25,7 +25,6 @@ public class PlatformController : MonoBehaviour {
 		for (int i = 0; i < gridNum; i++) {
 			GameObject newPlatform = Instantiate(platformPrefab, Vector3.zero, Quaternion.identity, transform);
 			TilePositionSizeRandomizer tileScript = newPlatform.GetComponent<TilePositionSizeRandomizer>();
-			tileScript.luck = luck;
 			tileScript.TileAnchorCenter = new Vector2((i * width) + (width / 2f) + startXPos, inputY);
 			tileScriptList.Add(tileScript);
 		}

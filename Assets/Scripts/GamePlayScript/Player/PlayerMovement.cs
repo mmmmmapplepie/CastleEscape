@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		PlatformController.luck = playerObject.Luck * 3;
 		maxDash = playerObject.DashStamina + 1;
 		dashCooldown = (0.6f - playerObject.DashStamina * 0.03f);
+		ItemsController.luck = playerObject.Luck;
 		setLightStrengths();
 		changeSprite();
 		animationFix();
