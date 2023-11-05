@@ -16,6 +16,16 @@ public class ItemsController : MonoBehaviour {
 		setBonus(buffPrefabs[0], new Vector3(2f, 1f, 0f));
 		setBonus(buffPrefabs[1], new Vector3(2.5f, 1f, 0f));
 		setBonus(buffPrefabs[2], new Vector3(3f, 0f, 0f));
+		setBonus(buffPrefabs[3], new Vector3(3f, 0f, 0f));
+		setBonus(buffPrefabs[4], new Vector3(3f, 0f, 0f));
+		setBonus(buffPrefabs[5], new Vector3(3f, 0f, 0f));
+		setBonus(buffPrefabs[6], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[0], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[1], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[2], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[3], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[4], new Vector3(3f, 0f, 0f));
+		setBonus(debuffPrefabs[5], new Vector3(3f, 0f, 0f));
 	}
 
 

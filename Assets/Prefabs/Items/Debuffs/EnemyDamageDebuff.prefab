@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2778597107082157449}
   - component: {fileID: 1607549232881305773}
-  - component: {fileID: 3632292155866618488}
   - component: {fileID: 8184073451196302934}
+  - component: {fileID: 9184203872986458573}
   m_Layer: 0
   m_Name: EnemyDamageDebuff
   m_TagString: Untagged
@@ -86,26 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3632292155866618488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273485022342163795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e913400f321d26a4bb1d207483f2a8bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Heal
-  IsABuff: 1
-  consumeParticleEffect: {fileID: 0}
-  itemTime: 20
-  UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}
-  UIItemDummyPrefab: {fileID: 4752792858218526008, guid: c8fa1ef9779f9254e901f172cfc282a0, type: 3}
-  UIItemHolder: {fileID: 0}
-  player: {fileID: 0}
 --- !u!61 &8184073451196302934
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -151,3 +131,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0.2
+--- !u!114 &9184203872986458573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273485022342163795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a99443950ee2174db31fa0a1f4815b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: EnemyDamageDebuff
+  IsABuff: 0
+  consumeParticleEffect: {fileID: 0}
+  itemTime: 20
+  UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}
+  UIItemDummyPrefab: {fileID: 4752792858218526008, guid: c8fa1ef9779f9254e901f172cfc282a0, type: 3}
+  UIItemHolder: {fileID: 0}
+  player: {fileID: 0}

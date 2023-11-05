@@ -7,7 +7,6 @@ public class Item : MonoBehaviour {
 	public bool IsABuff = false;
 	public GameObject consumeParticleEffect = null;
 
-
 	//itemTime below is the time it takes for the item to wear off. 0 mean item effects are instantaneous and dont add to UI.
 	public float itemTime = 0f;
 

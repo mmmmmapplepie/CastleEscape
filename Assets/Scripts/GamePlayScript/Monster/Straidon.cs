@@ -36,4 +36,7 @@ public class Straidon : MonsterBase {
 		yield return new WaitForSeconds(chargetime);
 		charging = false;
 	}
+	protected override void HitOuterWall() {
+		RB.velocity = Vector2.zero;
+	}
 }

@@ -8,6 +8,7 @@ public class testingqueueroutines : MonoBehaviour {
 		Coroutine newRoutine = StartCoroutine(wait(key));
 		thequeue.Enqueue(new CoroutineQueueItem(newRoutine, key));
 	}
+
 	static bool running = false;
 	void Update() {
 		if (thequeue.Count > 0 && running == false) {

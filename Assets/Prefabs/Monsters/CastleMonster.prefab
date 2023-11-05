@@ -185,10 +185,10 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 448
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 55
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -249,7 +249,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6565708632786ac45b325ce0d6669097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  senseRange: 2
   monsterStats: {fileID: 11400000, guid: c84b7ff6b6c214440b2452a1a5959acf, type: 2}
   faceGlow: {fileID: 4708010243349141681}
   RB: {fileID: 1348864497801118145}

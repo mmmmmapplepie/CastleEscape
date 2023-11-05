@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 public class MonsterBase : MonoBehaviour {
-	protected float senseRange = 2f;
+	public float senseRange = 1f;
 	[SerializeField] protected Monster monsterStats;
 	[SerializeField] protected SpriteRenderer faceGlow;
 	public Rigidbody2D RB;
@@ -50,16 +50,14 @@ public class MonsterBase : MonoBehaviour {
 		spriteDirection();
 		UpdateMethod();
 	}
-	protected virtual void UpdateMethod() {
-
-	}
+	protected virtual void UpdateMethod() { }
 	void checkPrey() {
 		if (ChasingRoutineHolder != null || SensingRoutineHolder != null) return;
 		if (PreyInRange(senseRange)) {
 			SensingRoutineHolder = StartCoroutine(SensingRoutine());
 		}
 	}
-	protected bool PreyInRange(float range) {
+	public bool PreyInRange(float range) {
 		if (!GameStateManager.InGame) return false;
 		return (player.position - transform.position).magnitude <= range ? true : false;
 	}
@@ -168,7 +166,7 @@ public class MonsterBase : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
 		enterOuterWall(coll);
-		if (coll.gameObject.tag != "Player" || !damageOnCollision) return;
+		if (coll.gameObject.tag != "Player" || !damagePlayerOnCollision) return;
 		damagePlayer();
 	}
 	void enterOuterWall(Collider2D coll) {
@@ -177,19 +175,19 @@ public class MonsterBase : MonoBehaviour {
 	}
 	void reflectFromWall(Collider2D coll) {
 		if (coll.gameObject.tag == "bGround") {
-			HitOuterWall();
 			Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
 			if (normal == Vector2.zero) normal = -transform.position.normalized;
 			float dot = Vector2.Dot(normal, RB.velocity);
 			if (dot > 0f) return;
 			Vector2 final = RB.velocity - 2f * dot * normal;
+			print(final);
 			RB.velocity = final;
 			spriteDirection();
 		}
 	}
 	void OnTriggerStay2D(Collider2D coll) {
 		reflectFromWall(coll);
-		if (coll.gameObject.tag != "Player" || !damageOnCollision) return;
+		if (coll.gameObject.tag != "Player" || !damagePlayerOnCollision) return;
 		damagePlayer();
 	}
 	void damagePlayer() {
@@ -201,9 +199,10 @@ public class MonsterBase : MonoBehaviour {
 		player.root.gameObject.GetComponent<PlayerLife>().changeHealth((int)dmg, time);
 
 	}
-	bool damageOnCollision = true;
+	bool damagePlayerOnCollision = true;
+	protected bool triggerReflect = true;
 	protected void DamageWhileColliding(bool dmgOnCollision = true) {
-		damageOnCollision = dmgOnCollision;
+		damagePlayerOnCollision = dmgOnCollision;
 	}
 	protected virtual void HitOuterWall() { }
 }

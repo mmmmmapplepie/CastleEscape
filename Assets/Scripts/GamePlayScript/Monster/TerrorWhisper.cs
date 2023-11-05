@@ -38,4 +38,7 @@ public class TerrorWhisper : MonsterBase {
 		if (lifeS.panic == false) lifeS.Fear += addedFear / 2f;
 	}
 	static int fearCharges = 0;
+	void OnDestroy() {
+		if (fearCharges > 0) fearCharges--;
+	}
 }
