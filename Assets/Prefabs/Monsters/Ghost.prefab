@@ -185,10 +185,10 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 448
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 55
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b8004da71447b43b1652a2422f3128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  senseRange: 1
   monsterStats: {fileID: 11400000, guid: 8851d8e12cc9ec34dbf88c6f89197e04, type: 2}
   faceGlow: {fileID: 4708010243349141681}
   RB: {fileID: 1348864497801118145}

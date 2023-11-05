@@ -29,14 +29,17 @@ public class Straidon : MonsterBase {
 	float restTime = 1f;
 	IEnumerator chargeDash() {
 		charging = true;
+		triggerStay = false;
 		yield return new WaitForSeconds(chargeTime);
 		direction = player.position - transform.position;
 		float chargetime = (direction.magnitude + 2f) / (2f * moveSpeed * GameBuffsManager.EnemySpeedMultiplier);
 		setMovement(direction, 2f);
 		yield return new WaitForSeconds(chargetime);
 		charging = false;
+		triggerStay = true;
 	}
 	protected override void HitOuterWall() {
 		RB.velocity = Vector2.zero;
 	}
+
 }

@@ -165,30 +165,26 @@ public class MonsterBase : MonoBehaviour {
 		faceGlow.color = new Color(1f, 1f, 1f, 0f);
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
-		enterOuterWall(coll);
-		if (coll.gameObject.tag != "Player" || !damagePlayerOnCollision) return;
-		damagePlayer();
+		if (triggerEnter && coll.gameObject.tag == "bGround") enterOuterWall(coll);
+		if (coll.gameObject.tag == "Player" || damagePlayerOnCollision) damagePlayer();
 	}
 	void enterOuterWall(Collider2D coll) {
 		HitOuterWall();
 		reflectFromWall(coll);
 	}
 	void reflectFromWall(Collider2D coll) {
-		if (coll.gameObject.tag == "bGround") {
-			Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
-			if (normal == Vector2.zero) normal = -transform.position.normalized;
-			float dot = Vector2.Dot(normal, RB.velocity);
-			if (dot > 0f) return;
-			Vector2 final = RB.velocity - 2f * dot * normal;
-			print(final);
-			RB.velocity = final;
-			spriteDirection();
-		}
+		Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
+		if (normal == Vector2.zero) normal = -transform.position.normalized;
+		float dot = Vector2.Dot(normal, RB.velocity);
+		if (dot > 0f) return;
+		Vector2 final = RB.velocity - 2f * dot * normal;
+		print(final);
+		RB.velocity = final;
+		spriteDirection();
 	}
 	void OnTriggerStay2D(Collider2D coll) {
-		reflectFromWall(coll);
-		if (coll.gameObject.tag != "Player" || !damagePlayerOnCollision) return;
-		damagePlayer();
+		if (triggerStay && coll.gameObject.tag == "bGround") reflectFromWall(coll);
+		if (coll.gameObject.tag == "Player" || damagePlayerOnCollision) damagePlayer();
 	}
 	void damagePlayer() {
 		// if (GameStateManager.changingRoom) return;
@@ -200,7 +196,8 @@ public class MonsterBase : MonoBehaviour {
 
 	}
 	bool damagePlayerOnCollision = true;
-	protected bool triggerReflect = true;
+	protected bool triggerEnter = true;
+	protected bool triggerStay = true;
 	protected void DamageWhileColliding(bool dmgOnCollision = true) {
 		damagePlayerOnCollision = dmgOnCollision;
 	}
