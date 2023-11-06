@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 5
   Description: Troublesome monster of great danger. (Drains your life over time while
     in range)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: bef12fc0ade8f69488b66695da3a10de, type: 3}
   Color: {r: 1, g: 0.98039216, b: 0.28627452, a: 1}

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Leech : MonsterBase {
 	protected override IEnumerator ChasingRoutine() {
+		DamageWhileColliding(false);
+		LeechLife = StartCoroutine(leeching());
 		while (true) {
-			DamageWhileColliding(false);
-			LeechLife = StartCoroutine(leeching());
 			if (!PreyInRange(senseRange)) {
-				if (LeechLife != null) StopCoroutine(LeechLife);
+				if (LeechLife != null) { print("stopleech"); StopCoroutine(LeechLife); }
 				DamageWhileColliding(true);
 				StopChase();
 				yield break;
@@ -18,10 +18,8 @@ public class Leech : MonsterBase {
 			yield return null;
 		}
 	}
-
-
-	float period = 1f;
-	Coroutine LeechLife;
+	float period = 1.5f;
+	Coroutine LeechLife = null;
 	IEnumerator leeching() {
 		while (true) {
 			int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);

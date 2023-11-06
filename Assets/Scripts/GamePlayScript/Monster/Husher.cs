@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 public class Husher : MonsterBase {
+	protected override void AwakeMethod() {
+		if (playerlife == null) playerlife = player.root.gameObject.GetComponent<PlayerLife>();
+	}
 	protected override IEnumerator ChasingRoutine() {
-		if (playerlife == null) playerlife = player.gameObject.GetComponent<PlayerLife>();
+		AddRoutineToList();
 		while (true) {
 			if (!PreyInRange(senseRange)) {
 				OutOfRange();
@@ -25,7 +27,8 @@ public class Husher : MonsterBase {
 	static bool coroutineRunning = false;
 	static CoroutineListItem currentItem;
 	static PlayerLife playerlife = null;
-	void Update() {
+	protected override void UpdateMethod() {
+		if (playerlife == null) return;
 		checkToStopForPanic();
 		if (theList.Count > 0 && coroutineRunning == false && !playerlife.panic) {
 			coroutineRunning = true;
@@ -42,7 +45,8 @@ public class Husher : MonsterBase {
 
 	void StopRunningRoutine(ref CoroutineListItem item) {
 		StopCoroutine(item.coroutine);
-		TorchMovement.SetTorchIntensity(1f);
+		coroutineRunning = false;
+		if (!playerlife.panic) TorchMovement.SetTorchIntensity(1f);
 	}
 	void OutOfRange() {
 		int i = theList.FindIndex(x => x.GO == gameObject);
@@ -50,7 +54,9 @@ public class Husher : MonsterBase {
 			theList.RemoveAt(i);
 		} else {
 			if (currentItem.GO == gameObject) StopRunningRoutine(ref currentItem);
+			coroutineRunning = false;
 		}
+
 		TorchMovement.SetTorchIntensity(1f);
 	}
 	static List<CoroutineListItem> theList = new List<CoroutineListItem>();
@@ -73,8 +79,8 @@ public class Husher : MonsterBase {
 		}
 	}
 
-	float turnoffTime = 0.2f;
-	float offWaitTime = 2f;
+	float turnoffTime = 0.1f;
+	float offWaitTime = 4f;
 	IEnumerator TurnOfftorch(keys key) {
 		while (key.runKey == 0) {
 			yield return null;
@@ -85,11 +91,10 @@ public class Husher : MonsterBase {
 			time -= Time.deltaTime;
 			yield return null;
 		}
+		TorchMovement.SetTorchIntensity(0f);
 		yield return new WaitForSeconds(offWaitTime);
 		TorchMovement.SetTorchIntensity(1f);
 		coroutineRunning = false;
-	}
-	void returnTorchToNormal() {
 	}
 	void OnDestroy() {
 		if (theList.Count > 0) OutOfRange();

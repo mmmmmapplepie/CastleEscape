@@ -117,7 +117,6 @@ public class PlayerLife : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		MovementScript.panicAttack(panicTime);
 		MovementScript.changeAnimation("Fear", 0.1f);
-		//changeanimation
 		yield return new WaitForSeconds(panicTime);
 		MovementScript.changeAnimation("Idle", 0.1f);
 		MovementScript.recoveredFromPanicAttack();

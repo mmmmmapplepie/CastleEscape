@@ -99,7 +99,7 @@ public class StatusUI : MonoBehaviour {
 		sliderSize.x = background.rect.width;
 		sliderSize.y = background.rect.height;
 		chargeMax = CurrentSettings.CurrentPlayerType.DashStamina + 1;
-		regenTime = (-1f / 3f) * CurrentSettings.CurrentPlayerType.DashRegeneration + 16f / 3f;
+		regenTime = (-2f / 9f) * CurrentSettings.CurrentPlayerType.DashRegeneration + 29f / 9f;
 		while (true) {
 			if (movementScript.dashCharge == chargeMax) {
 				charging = false;

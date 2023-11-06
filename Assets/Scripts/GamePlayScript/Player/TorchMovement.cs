@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class TorchMovement : MonoBehaviour, JoystickController {
+	[SerializeField] Animator ani;
 	public void InnerControl(Vector2 inputDirection, float magnitude) {
-		if (!PlayerMovement.ControllableState()) return;
+		if (!PlayerMovement.ControllableState() || !ani.enabled) return;
 		transform.up = inputDirection;
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {

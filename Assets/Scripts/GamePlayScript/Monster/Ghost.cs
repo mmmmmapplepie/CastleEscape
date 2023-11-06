@@ -10,7 +10,7 @@ public class Ghost : MonsterBase {
 			}
 			direction = player.position - transform.position;
 			if (PreyInRange(2f)) { yield return null; continue; }
-			setMovement(direction, 1.5f);
+			setMovement(direction, 2f);
 			yield return null;
 		}
 	}

@@ -121,7 +121,7 @@ public class JoystickPosition : MonoBehaviour {
 			return movementX;
 		}
 		set {
-			movementX = Mathf.Clamp(value, 0f, 50f);
+			movementX = Mathf.Clamp(value, 0f, 100f);
 		}
 	}
 	float MovementY {
@@ -137,7 +137,7 @@ public class JoystickPosition : MonoBehaviour {
 			return torchX;
 		}
 		set {
-			torchX = Mathf.Clamp(value, 0f, 50f);
+			torchX = Mathf.Clamp(value, 0f, 100f);
 		}
 	}
 	float TorchY {
@@ -196,10 +196,10 @@ public class JoystickPosition : MonoBehaviour {
 	void setDisplacements(bool touchEndCommand = false) {
 		tempMX = MovementX; tempMY = MovementY; tempTX = TorchX; tempTY = TorchY;
 		if (movJoystickSide) {
-			tempMX = Mathf.Clamp(RightSide ? (MovementX - Displacement.x) : (MovementX + Displacement.x), 0f, 50f);
+			tempMX = Mathf.Clamp(RightSide ? (MovementX - Displacement.x) : (MovementX + Displacement.x), 0f, 100f);
 			tempMY = Mathf.Clamp((MovementY + Displacement.y), 0f, 150f);
 		} else {
-			tempTX = Mathf.Clamp(!RightSide ? (TorchX - Displacement.x) : (TorchX + Displacement.x), 0f, 50f);
+			tempTX = Mathf.Clamp(!RightSide ? (TorchX - Displacement.x) : (TorchX + Displacement.x), 0f, 100f);
 			tempTY = Mathf.Clamp((TorchY + Displacement.y), 0f, 150f);
 		}
 		if (touchEndCommand) {

@@ -260,6 +260,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		float starttime = Time.time;
 		float initialIntensity = torchLight.intensity;
 		while (Time.time < panicTime / 4f + starttime) {
+			if (currentAnimation != "Fear") changeAnimation("Fear");
 			float ratio = (Time.time - starttime) / (panicTime / 4f);
 			torchLight.intensity = Mathf.Lerp(initialIntensity, 0f, ratio);
 			yield return null;
@@ -273,6 +274,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	#region animation related
 	Coroutine _idleBored = null;
 	public void changeAnimation(string name, float transitionDuration = 0f) {
+		if (!animator.enabled) return;
 		if (name.Substring(name.Length - Mathf.Min(3, name.Length)) != "III" && _idleBored != null) {
 			stopBored();
 		}
@@ -311,6 +313,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	Vector2 rightFacingVector = new Vector3(-1f, 1f, 1f);
 	Vector2 leftFacingVector = new Vector3(1f, 1f, 1f);
 	void setSpriteDirection() {
+		if (!animator.enabled) return;
 		if (RB.velocity.x > 0f) {
 			bool right = true;
 			if (right == faceRight) return;

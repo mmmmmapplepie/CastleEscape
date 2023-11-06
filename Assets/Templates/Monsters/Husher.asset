@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
   m_Name: Husher
   m_EditorClassIdentifier: 
-  Damage: 4
+  Damage: 1
   Speed: 5
   Senses: 1
-  Hunger: 2
+  Hunger: 5
   Description: Monster of the dark. Likes to put out fires and lives alike. (Blows
     off your torch for a moment when it senses you)
-  MonsterPrefab: {fileID: 0}
-  Color: {r: 0.20392157, g: 0.2509804, b: 1, a: 1}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 3d71c52ff2a15a949a15edf269d1da37, type: 3}
+  Color: {r: 0.36268342, g: 0.40017265, b: 1, a: 1}

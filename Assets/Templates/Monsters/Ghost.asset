@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 4
   Description: Creature desparately hungry for fresh souls. (Moves quickly once it
     senses you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 9dd46fa4d8ba37b45b8ef2527100c71b, type: 3}
   Color: {r: 1, g: 1, b: 1, a: 1}

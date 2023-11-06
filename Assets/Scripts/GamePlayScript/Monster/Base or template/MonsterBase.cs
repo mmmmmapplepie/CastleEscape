@@ -1,17 +1,18 @@
 using System.Collections;
 using UnityEngine;
 public class MonsterBase : MonoBehaviour {
-	public float senseRange = 1f;
+	[HideInInspector] public float senseRange = 1f;
 	[SerializeField] protected Monster monsterStats;
 	[SerializeField] protected SpriteRenderer faceGlow;
 	public Rigidbody2D RB;
 	[SerializeField] Animator ani;
 	protected float moveSpeed = 1f;
 	protected float damage = 1f;
-	float senseTime = 5f;
+	float senseTime = 2.5f;
 	float losePlayerRangeMultiplier = 1f;
 	protected Transform player = null;
 	Vector3 baseScale;
+	Color hue;
 	void OnDrawGizmos() {
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere(transform.position, senseRange);
@@ -19,13 +20,13 @@ public class MonsterBase : MonoBehaviour {
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
 		baseScale = transform.localScale;
-		moveSpeed = monsterStats.Speed * moveSpeed;
-		senseRange = senseRange * monsterStats.Senses + 2f;
-		senseTime = 0.5f * monsterStats.Hunger - 0.25f;
+		moveSpeed = monsterStats.Speed * 1.25f;
+		senseRange = monsterStats.Senses + 7f;
+		senseTime = 0.5f * (6f - monsterStats.Hunger) - 0.25f;
 		losePlayerRangeMultiplier = monsterStats.Hunger / 2f + 0.5f;
-		Color hue = monsterStats.Color;
+		hue = monsterStats.Color;
 		GetComponent<SpriteRenderer>().color = hue;
-		faceGlow.color = new Color(hue.r, hue.g, hue.b, 0f);
+		ChangeFaceLight(0f);
 		if (monsterStats.Damage < 2) {
 			damage = monsterStats.Damage;
 		} else {
@@ -57,6 +58,11 @@ public class MonsterBase : MonoBehaviour {
 			SensingRoutineHolder = StartCoroutine(SensingRoutine());
 		}
 	}
+	void ChangeFaceLight(float alpha) {
+		faceGlow.color = new Color(hue.r, hue.g, hue.b, alpha);
+	}
+
+
 	public bool PreyInRange(float range) {
 		if (!GameStateManager.InGame) return false;
 		return (player.position - transform.position).magnitude <= range ? true : false;
@@ -93,7 +99,7 @@ public class MonsterBase : MonoBehaviour {
 			remainingTime -= Time.deltaTime * GameBuffsManager.EnemySpeedMultiplier;
 			yield return null;
 		}
-		faceGlow.color = new Color(1f, 1f, 1f, 1f);
+		ChangeFaceLight(1f);
 		ChasingRoutineHolder = StartCoroutine(ChasingRoutine());
 		ani.Play("Chase");
 		stopRoutine(ref calmingRoutine);
@@ -152,17 +158,17 @@ public class MonsterBase : MonoBehaviour {
 		stopRoutine(ref MovingRoutineHolder);
 		calmingRoutine = StartCoroutine(calmingDown());
 	}
-	public float calmTime = 0.5f;
+	[HideInInspector] public float calmTime = 0.5f;
 	IEnumerator calmingDown() {
 		ani.Play("Idle");
 		float time = calmTime;
 		float initialIntensity = faceGlow.color.a;
 		while (time > 0f) {
-			faceGlow.color = new Color(1f, 1f, 1f, initialIntensity * time / calmTime);
+			ChangeFaceLight(initialIntensity * time / calmTime);
 			time -= Time.deltaTime;
 			yield return null;
 		}
-		faceGlow.color = new Color(1f, 1f, 1f, 0f);
+		ChangeFaceLight(0f);
 	}
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (triggerEnter && coll.gameObject.tag == "bGround") enterOuterWall(coll);
@@ -178,7 +184,6 @@ public class MonsterBase : MonoBehaviour {
 		float dot = Vector2.Dot(normal, RB.velocity);
 		if (dot > 0f) return;
 		Vector2 final = RB.velocity - 2f * dot * normal;
-		print(final);
 		RB.velocity = final;
 		spriteDirection();
 	}
@@ -193,7 +198,6 @@ public class MonsterBase : MonoBehaviour {
 	}
 	protected virtual void damageAmountAndTime(float dmg, float time = 2f) {
 		player.root.gameObject.GetComponent<PlayerLife>().changeHealth((int)dmg, time);
-
 	}
 	bool damagePlayerOnCollision = true;
 	protected bool triggerEnter = true;

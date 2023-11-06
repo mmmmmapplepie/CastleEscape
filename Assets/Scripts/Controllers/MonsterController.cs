@@ -13,8 +13,11 @@ public class MonsterController : MonoBehaviour {
 	void spawnMonsterWave() {
 		clearMonsterList();
 		int monsterNumber = getMonsterNumber();
+		spawnMonster(new Vector3(5f, 0f, 0f));
+		// spawnMonster(new Vector3(5f, 5f, 0f));
+		// spawnMonster(new Vector3(5f, -5f, 0f));
 		for (int i = 0; i < monsterNumber; i++) {
-			spawnMonster(monsterPosition());
+			// spawnMonster(monsterPosition());
 		}
 	}
 	void clearMonsterList() {
@@ -31,7 +34,7 @@ public class MonsterController : MonoBehaviour {
 		if (monsterPrefab == null) return;
 		monsterList.Add(Instantiate(monsterPrefab, position, Quaternion.identity));
 	}
-	static Vector3 monsterPosition() {
+	Vector3 monsterPosition() {
 		return new Vector3(Random.Range(20, 20), Random.Range(20, 20), 0f);
 	}
 	void Awake() {
