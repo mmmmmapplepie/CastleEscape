@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	Coroutine droppingRoutine = null;
 	public bool HaltUsed = false;
-	public float haltFactor = 0.4f;
+	public float haltFactor = 0.1f;
 	public void HaltOrDrop() {
 		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
 		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		lateralMovement();
 	}
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
-		if (!ControllableState() || lifeScript.panic) return;
+		if (!ControllableState() || lifeScript.panic || !animator.enabled) return;
 		DashControl = inputDirection;
 		Dash();
 	}

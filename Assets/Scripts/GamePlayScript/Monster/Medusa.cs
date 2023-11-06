@@ -4,7 +4,6 @@ using UnityEngine;
 public class Medusa : MonsterBase {
 	protected override void AwakeMethod() {
 		realColor = player.gameObject.GetComponent<SpriteRenderer>().color;
-		if (!hasController) { controllerScript = true; hasController = true; }
 	}
 	static bool hasController = false;
 	bool controllerScript = false;
@@ -22,8 +21,8 @@ public class Medusa : MonsterBase {
 		}
 	}
 	protected override void UpdateMethod() {
+		if (!hasController) { controllerScript = true; hasController = true; }
 		if (!controllerScript) return;
-		if (remainingPetrifyTime != 0) print(remainingPetrifyTime);
 		if (remainingPetrifyTime > 0f) {
 			if (!petrified) Petrify();
 			remainingPetrifyTime -= Time.deltaTime;

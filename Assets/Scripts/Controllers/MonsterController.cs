@@ -14,8 +14,8 @@ public class MonsterController : MonoBehaviour {
 		clearMonsterList();
 		int monsterNumber = getMonsterNumber();
 		spawnMonster(new Vector3(5f, 0f, 0f));
-		// spawnMonster(new Vector3(5f, 5f, 0f));
-		// spawnMonster(new Vector3(5f, -5f, 0f));
+		spawnMonster(new Vector3(5f, 5f, 0f));
+		spawnMonster(new Vector3(5f, -5f, 0f));
 		for (int i = 0; i < monsterNumber; i++) {
 			// spawnMonster(monsterPosition());
 		}
