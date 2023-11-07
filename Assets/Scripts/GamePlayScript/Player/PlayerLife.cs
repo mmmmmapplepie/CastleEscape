@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerLife : MonoBehaviour {
 	public PlayerMovement MovementScript;
-	//0 to a 100;
 	float _fear = 0f;
 	public float panicTime = 0.5f;
 	public float Fear {
@@ -54,13 +53,14 @@ public class PlayerLife : MonoBehaviour {
 	#region healthRelated
 
 	Coroutine hitRecoveryRoutineHolder = null;
-	public void changeHealth(int amount, float recoveryTime = 2f) {
-		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return;
+	public bool changeHealth(int amount, float recoveryTime = 2f) {
+		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return false;
 		Health += amount;
 		if (amount < 0) {
 			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine(recoveryTime));
 			checkDeath();
 		}
+		return true;
 		//effects
 	}
 	IEnumerator hitRecoveryRoutine(float recoveryTime) {

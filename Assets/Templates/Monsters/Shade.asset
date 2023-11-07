@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 3
   Description: Monster that is one with the shadows and lurks to catch its prey.
     (Turns invisible once it detects you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 439a9ecfccb3a124082e6d894260202b, type: 3}
   Color: {r: 0.20392157, g: 0.7529412, b: 1, a: 1}

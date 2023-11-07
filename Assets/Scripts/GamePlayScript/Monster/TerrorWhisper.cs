@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 public class TerrorWhisper : MonsterBase {
+	protected override void AwakeMethod() {
+		lifeScript = player.root.gameObject.GetComponent<PlayerLife>();
+	}
 	static PlayerLife lifeScript;
 	protected override IEnumerator ChasingRoutine() {
-		if (lifeScript == null) lifeScript = player.gameObject.GetComponent<PlayerLife>();
 		fearCharges++;
 		while (true) {
-			if (!PreyInRange(senseRange * 1f)) {
+			if (!PreyInRange(senseRange)) {
 				StopChase();
 				yield break;
 			}
@@ -20,22 +19,19 @@ public class TerrorWhisper : MonsterBase {
 		}
 	}
 	protected override void UpdateMethod() {
-		if (lifeScript != null) {
-			while (lifeScript.Fear < 100f && fearCharges > 0 && lifeScript.panic == false) {
-				fearCharges--;
-				InstillFear();
-			}
+		while (lifeScript.Fear < 100f && fearCharges > 0 && lifeScript.panic == false) {
+			fearCharges--;
+			InstillFear();
 		}
 	}
 	void InstillFear() {
 		lifeScript.Fear += addedFear;
 	}
-	float addedFear = 50f;
+	float addedFear = 40f;
 
 	protected override void damageAmountAndTime(float dmg, float time = 2) {
-		PlayerLife lifeS = player.root.gameObject.GetComponent<PlayerLife>();
-		lifeS.changeHealth((int)dmg, time);
-		if (lifeS.panic == false) lifeS.Fear += addedFear / 2f;
+		bool changed = lifeScript.changeHealth((int)dmg, time);
+		if (!lifeScript.panic && changed) lifeScript.Fear += addedFear / 4f;
 	}
 	static int fearCharges = 0;
 	void OnDestroy() {

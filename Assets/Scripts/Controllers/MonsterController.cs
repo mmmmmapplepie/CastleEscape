@@ -13,9 +13,10 @@ public class MonsterController : MonoBehaviour {
 	void spawnMonsterWave() {
 		clearMonsterList();
 		int monsterNumber = getMonsterNumber();
-		spawnMonster(new Vector3(5f, 0f, 0f));
-		spawnMonster(new Vector3(5f, 5f, 0f));
-		spawnMonster(new Vector3(5f, -5f, 0f));
+		float x = 5;
+		spawnMonster(new Vector3(x, 0f, 0f));
+		// spawnMonster(new Vector3(x, x, 0f));
+		// spawnMonster(new Vector3(x, -x / 2, 0f));
 		for (int i = 0; i < monsterNumber; i++) {
 			// spawnMonster(monsterPosition());
 		}

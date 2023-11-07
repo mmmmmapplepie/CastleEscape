@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
-  m_Name: Death Howler
+  m_Name: Terror Whisperor
   m_EditorClassIdentifier: 
   Damage: 1
   Speed: 4
@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 5
   Description: Monstrosity of the highest order. It hunts by paralyzing its prey
     with fear. (Increases you fear level when it senses you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: f3b89e17c48f384458c3546f9d7177c2, type: 3}
   Color: {r: 1, g: 0, b: 0.2, a: 1}

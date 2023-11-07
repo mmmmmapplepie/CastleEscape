@@ -8,8 +8,7 @@ public class MonsterBase : MonoBehaviour {
 	[SerializeField] Animator ani;
 	protected float moveSpeed = 1f;
 	protected float damage = 1f;
-	float senseTime = 2.5f;
-	float losePlayerRangeMultiplier = 1f;
+	protected float senseTime = 2.5f;
 	protected Transform player = null;
 	Vector3 baseScale;
 	Color hue;
@@ -23,7 +22,6 @@ public class MonsterBase : MonoBehaviour {
 		moveSpeed = monsterStats.Speed * 1.25f;
 		senseRange = monsterStats.Senses + 7f;
 		senseTime = 0.5f * (6f - monsterStats.Hunger) - 0.25f;
-		losePlayerRangeMultiplier = monsterStats.Hunger / 2f + 0.5f;
 		hue = monsterStats.Color;
 		GetComponent<SpriteRenderer>().color = hue;
 		ChangeFaceLight(0f);
@@ -75,7 +73,7 @@ public class MonsterBase : MonoBehaviour {
 		yield return new WaitForSeconds(Random.Range(0, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
 		RB.velocity = (new Vector3(NZR(), NZR(), 0f)).normalized * moveSpeed * GameBuffsManager.EnemySpeedMultiplier;
 		ani.speed = 2f * GameBuffsManager.EnemySpeedMultiplier;
-		yield return new WaitForSeconds(Random.Range(0f, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
+		yield return new WaitForSeconds(Random.Range(0f, 5f));
 		RB.velocity = Vector3.zero;
 		ani.speed = 1f;
 		stopRoutine(ref MovingRoutineHolder);
@@ -170,9 +168,13 @@ public class MonsterBase : MonoBehaviour {
 		}
 		ChangeFaceLight(0f);
 	}
+	protected bool InOuterArea = false;
 	void OnTriggerEnter2D(Collider2D coll) {
-		if (triggerEnter && coll.gameObject.tag == "bGround") enterOuterWall(coll);
-		if (coll.gameObject.tag == "Player" || damagePlayerOnCollision) damagePlayer();
+		if (triggerEnter && coll.gameObject.tag == "bGround") { enterOuterWall(coll); InOuterArea = true; }
+		if (coll.gameObject.tag == "Player" && damagePlayerOnCollision) damagePlayer();
+	}
+	void OnTriggerExit2D(Collider2D coll) {
+		if (triggerEnter && coll.gameObject.tag == "bGround") { enterOuterWall(coll); InOuterArea = false; }
 	}
 	void enterOuterWall(Collider2D coll) {
 		HitOuterWall();
@@ -182,19 +184,28 @@ public class MonsterBase : MonoBehaviour {
 		Vector2 normal = ((Vector2)transform.position - coll.ClosestPoint(transform.position)).normalized;
 		if (normal == Vector2.zero) normal = -transform.position.normalized;
 		float dot = Vector2.Dot(normal, RB.velocity);
-		if (dot > 0f) return;
+		float dotNormal = RB.velocity.magnitude > 0f ? dot / RB.velocity.magnitude : 1f;
+		if (dot >= 0f) {
+			if (!InOuterArea || dotNormal > 0.87f) return;
+			setMovement(-transform.position);
+			return;
+		}
 		Vector2 final = RB.velocity - 2f * dot * normal;
 		RB.velocity = final;
 		spriteDirection();
 	}
 	void OnTriggerStay2D(Collider2D coll) {
-		if (triggerStay && coll.gameObject.tag == "bGround") reflectFromWall(coll);
-		if (coll.gameObject.tag == "Player" || damagePlayerOnCollision) damagePlayer();
+		if (triggerStay && coll.gameObject.tag == "bGround") { reflectFromWall(coll); }
+		if (coll.gameObject.tag == "Player" && damagePlayerOnCollision) damagePlayer();
+		OnTriggerMethod2D(coll);
 	}
-	void damagePlayer() {
-		// if (GameStateManager.changingRoom) return;
-		// int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
-		// damageAmountAndTime(dmg);
+
+	protected virtual void OnTriggerMethod2D(Collider2D coll) {
+	}
+	protected virtual void damagePlayer() {
+		if (GameStateManager.changingRoom) return;
+		int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
+		damageAmountAndTime(dmg);
 	}
 	protected virtual void damageAmountAndTime(float dmg, float time = 2f) {
 		player.root.gameObject.GetComponent<PlayerLife>().changeHealth((int)dmg, time);

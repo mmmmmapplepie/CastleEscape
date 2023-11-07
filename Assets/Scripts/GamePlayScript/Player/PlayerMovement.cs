@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	IEnumerator panicDarkness(float panicTime) {
 		float starttime = Time.time;
 		float initialIntensity = torchLight.intensity;
-		while (Time.time < panicTime / 4f + starttime) {
+		while (Time.time < panicTime / 8f + starttime) {
 			if (currentAnimation != "Fear") changeAnimation("Fear");
 			float ratio = (Time.time - starttime) / (panicTime / 4f);
 			torchLight.intensity = Mathf.Lerp(initialIntensity, 0f, ratio);

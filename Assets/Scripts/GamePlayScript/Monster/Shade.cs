@@ -1,14 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shade : MonsterBase {
+	protected override void AwakeMethod() {
+		sr = GetComponent<SpriteRenderer>();
+		color = sr.color;
+	}
 	protected override IEnumerator ChasingRoutine() {
 		inviRoutine = StartCoroutine(turnInvisible());
 		while (true) {
 			if (!PreyInRange(senseRange)) {
-				if (inviRoutine != null) StopCoroutine(turnInvisible());
-				gameObject.GetComponent<SpriteRenderer>().color = color;
+				if (inviRoutine != null) StopCoroutine(inviRoutine);
+				GetComponent<SpriteRenderer>().color = color;
 				StopChase();
 				yield break;
 			}
@@ -18,12 +21,11 @@ public class Shade : MonsterBase {
 			yield return null;
 		}
 	}
-	float cloakTime = 2f;
+	SpriteRenderer sr;
+	float cloakTime = 0.5f;
 	Color color;
 	Coroutine inviRoutine;
 	IEnumerator turnInvisible() {
-		SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
-		color = sr.color;
 		float start = cloakTime;
 		while (start > 0f) {
 			float ratio = start / cloakTime;
@@ -32,5 +34,7 @@ public class Shade : MonsterBase {
 			start -= Time.deltaTime;
 			yield return null;
 		}
+		sr.color = new Color(color.r, color.g, color.b, 0f);
+		faceGlow.color = new Color(color.r, color.g, color.b, 0.05f);
 	}
 }

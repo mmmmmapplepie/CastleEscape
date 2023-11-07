@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
   m_Name: Leech
   m_EditorClassIdentifier: 
-  Damage: 1
-  Speed: 3
+  Damage: 2
+  Speed: 2
   Senses: 3
   Hunger: 5
   Description: Troublesome monster of great danger. (Drains your life over time while

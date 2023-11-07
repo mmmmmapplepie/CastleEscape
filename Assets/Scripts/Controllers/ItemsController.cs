@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +9,22 @@ public class ItemsController : MonoBehaviour {
 	[SerializeField] Transform uiItemHolderRef;
 	static Transform UIItemHolderRef;
 	void Awake() {
+		GameStateManager.GameEnd += ClearItems;
 		UIItemHolderRef = uiItemHolderRef;
 		buffPrefabs = buffsPre;
 		debuffPrefabs = debuffsPre;
+		setBonus(buffPrefabs[0], Vector3.zero);
+		setBonus(buffPrefabs[2], Vector3.zero);
+		setBonus(buffPrefabs[3], Vector3.zero);
+		setBonus(debuffPrefabs[0], Vector3.zero);
+		setBonus(debuffPrefabs[4], Vector3.zero);
+		setBonus(debuffPrefabs[1], Vector3.zero);
 	}
-
+	void ClearItems() {
+		foreach (Transform tra in UIItemHolderRef) {
+			Destroy(tra.gameObject);
+		}
+	}
 
 
 

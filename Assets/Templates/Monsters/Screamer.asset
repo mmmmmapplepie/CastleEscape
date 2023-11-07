@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 1
   Description: Monster of paranoia. It is easily a menace even among monsters but
     tends to run away. (Runs away from you when it notices you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 677be007a843e834fa99917e555e5a01, type: 3}
   Color: {r: 1, g: 0.6156863, b: 0.92156863, a: 1}

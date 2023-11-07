@@ -11,35 +11,58 @@ public class Straidon : MonsterBase {
 				yield break;
 			}
 			if (chargingtemp != charging) {
-				yield return new WaitForSeconds(restTime);
+				if (charging) { chargingtemp = charging; yield return null; continue; }
+				float t = restTime;
+				while (t > 0f) {
+					t -= Time.deltaTime;
+					if (!charging) {
+						if (!InOuterArea) facePlayer(0.1f);
+					}
+					yield return null;
+				}
 				chargingtemp = charging;
 				continue;
 			}
-			if (!charging) {
+			if (!charging && !chargingtemp) {
 				StartCoroutine(chargeDash());
 			}
 			yield return null;
 		}
 	}
-
-
 	bool chargingtemp = false;
 	bool charging = false;
 	float chargeTime = 2f;
 	float restTime = 1f;
+	float chargeSpeedMultiplier = 4f;
 	IEnumerator chargeDash() {
 		charging = true;
 		triggerStay = false;
-		yield return new WaitForSeconds(chargeTime);
-		direction = player.position - transform.position;
-		float chargetime = (direction.magnitude + 2f) / (2f * moveSpeed * GameBuffsManager.EnemySpeedMultiplier);
-		setMovement(direction, 2f);
-		yield return new WaitForSeconds(chargetime);
+		float remainingTime = chargeTime;
+		while (remainingTime > 0f) {
+			if (remainingTime > 0.2f) {
+				facePlayer(0.2f);
+			}
+			remainingTime -= Time.deltaTime;
+			yield return null;
+		}
+		// direction = player.position - transform.position;
+		float chaseTime = (direction.magnitude + Random.Range(0.5f, 3f)) / (chargeSpeedMultiplier * moveSpeed * GameBuffsManager.EnemySpeedMultiplier);
+		setMovement(direction, chargeSpeedMultiplier);
+		yield return new WaitForSeconds(chaseTime);
+		setMovement(direction, 0f);
 		charging = false;
 		triggerStay = true;
 	}
 	protected override void HitOuterWall() {
-		RB.velocity = Vector2.zero;
+		if (charging) RB.velocity = Vector2.zero;
+	}
+	void facePlayer(float multiplier) {
+		if (PreyInRange(0.2f)) {
+			return;
+		} else {
+			direction = player.position - transform.position;
+			setMovement(direction, multiplier);
+		}
 	}
 
 }

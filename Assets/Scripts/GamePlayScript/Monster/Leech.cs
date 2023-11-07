@@ -6,8 +6,8 @@ public class Leech : MonsterBase {
 		DamageWhileColliding(false);
 		LeechLife = StartCoroutine(leeching());
 		while (true) {
-			if (!PreyInRange(senseRange)) {
-				if (LeechLife != null) { print("stopleech"); StopCoroutine(LeechLife); }
+			if (!PreyInRange(senseRange * 1.5f)) {
+				if (LeechLife != null) { StopCoroutine(LeechLife); }
 				DamageWhileColliding(true);
 				StopChase();
 				yield break;
@@ -22,8 +22,7 @@ public class Leech : MonsterBase {
 	Coroutine LeechLife = null;
 	IEnumerator leeching() {
 		while (true) {
-			int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
-			damageAmountAndTime(dmg, period);
+			damageAmountAndTime(Mathf.CeilToInt(1 * GameBuffsManager.EnemyDamageMultiplier), 0f);
 			yield return new WaitForSeconds(period);
 		}
 	}

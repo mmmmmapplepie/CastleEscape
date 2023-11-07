@@ -19,5 +19,5 @@ MonoBehaviour:
   Description: Items are its favorite toys and it loves to tinker with them; however,
     this doesn't make it any less dangerous. (removes all your buffs when it senses
     you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 8e3aa898db9171d49a72dc4a4d556539, type: 3}
   Color: {r: 0.627451, g: 1, b: 0, a: 1}

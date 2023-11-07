@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 1
   Description: Monster with similarities to an enraged bull, but far more ferocious.
     (Charges towards you when it notices you)
-  MonsterPrefab: {fileID: 0}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 992350552f3d9604d99935b5ec69333b, type: 3}
   Color: {r: 1, g: 0.627451, b: 0.6156863, a: 1}

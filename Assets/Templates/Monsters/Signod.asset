@@ -18,5 +18,5 @@ MonoBehaviour:
   Hunger: 2
   Description: This monster is capable of attacking ones mind. (Guarantees damage
     when it notices you)
-  MonsterPrefab: {fileID: 0}
-  Color: {r: 0.69411767, g: 0.42745098, b: 1, a: 1}
+  MonsterPrefab: {fileID: 3892936468193292106, guid: 4f93b16b91ceb10439d33bd6e75b25d6, type: 3}
+  Color: {r: 0.79559755, g: 0.6174004, b: 1, a: 1}
