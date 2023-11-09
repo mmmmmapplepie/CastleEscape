@@ -15,6 +15,7 @@ public class JoystickPosition : MonoBehaviour {
 		SetJoystickPosition();
 		GameStateManager.GameStart += () => JoystickAvailability(true);
 		GameStateManager.GameEnd += () => JoystickAvailability(false);
+		GameStateManager.EnterMenu += () => JoystickAvailability(false);
 	}
 	void JoystickAvailability(bool enable) {
 		if (enable) {

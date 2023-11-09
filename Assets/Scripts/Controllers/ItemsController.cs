@@ -10,6 +10,7 @@ public class ItemsController : MonoBehaviour {
 	static Transform UIItemHolderRef;
 	void Awake() {
 		GameStateManager.GameEnd += ClearItems;
+		GameStateManager.EnterMenu += ClearItems;
 		UIItemHolderRef = uiItemHolderRef;
 		buffPrefabs = buffsPre;
 		debuffPrefabs = debuffsPre;

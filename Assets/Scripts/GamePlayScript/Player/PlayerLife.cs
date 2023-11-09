@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour {
@@ -33,6 +31,7 @@ public class PlayerLife : MonoBehaviour {
 	void Awake() {
 		playerColor = playerSprite.color;
 		GameStateManager.GameEnd += EndGame;
+		GameStateManager.EnterMenu += EndGame;
 		GameStateManager.GameStart += StartGame;
 		GameStateManager.StartNewRoom += NewRoom;
 
@@ -76,7 +75,6 @@ public class PlayerLife : MonoBehaviour {
 	void Regen() {
 		Health += regen;
 	}
-	bool dead = false;
 	void checkDeath() {
 		if (Health == 0) {
 			GameStateManager.Defeat();

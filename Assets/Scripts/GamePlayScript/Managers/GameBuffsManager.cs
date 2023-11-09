@@ -15,7 +15,7 @@ public class GameBuffsManager : MonoBehaviour {
 	//higher value means brighter and wider torch.
 	public static float TorchModifierMultiplier = 1f;
 	void Awake() {
-		GameStateManager.GameEnd += resetMultipliers;
+		GameStateManager.EnterMenu += resetMultipliers;
 		GameStateManager.GameStart += resetMultipliers;
 	}
 	void resetMultipliers() {

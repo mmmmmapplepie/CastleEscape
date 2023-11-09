@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StatusUI : MonoBehaviour {
 	void Awake() {
 		GameStateManager.GameEnd += HideMenu;
+		GameStateManager.EnterMenu += HideMenu;
 		GameStateManager.GameStart += DashRecharge;
 		GameStateManager.GameStart += SetLife;
 		setIntialSettings();

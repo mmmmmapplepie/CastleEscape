@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour {
 	static AudioPlayer UIAudio;
@@ -30,7 +31,55 @@ public class GameStateManager : MonoBehaviour {
 		GameEnd?.Invoke();
 		//show score screen. and new continue btn. (touch anywhere will go to menu)
 	}
+
+
+	[SerializeField] GameObject DeathMenu;
+	[SerializeField] Canvas DeathCanvas;
+	[SerializeField] Camera maincam;
+	[SerializeField] AudioPlayer BGMAudio;
+	public static float deathRoutineTime = 2f;
+	IEnumerator deathRoutine() {
+		float tm = deathRoutineTime * 3f / 4f;
+		float t = tm;
+		DeathCanvas.gameObject.SetActive(true);
+		DeathCanvas.sortingOrder = 150;
+		float initialCamSize = 10f;
+		float finalCamSize = 1f;
+		float greyer = 0.6f;
+		Color c = CurrentSettings.CurrentPlayerType.color - new Color(greyer, greyer, greyer);
+		while (t > 0f) {
+			float increasingRatio = (tm - t) / tm;
+			float decreasingRatio = t / tm;
+			maincam.orthographicSize = Mathf.Lerp(initialCamSize, finalCamSize, Mathf.Pow(increasingRatio, 3f));
+			DeathCanvas.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, increasingRatio);
+			//camera slowly zooms in
+			//slowly black out
+			//even covers the player
+			//play the audio for death
+			t -= Time.unscaledDeltaTime;
+			yield return null;
+		}
+		DeathCanvas.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, 1f);
+		maincam.orthographicSize = initialCamSize;
+		tm = deathRoutineTime / 2f;
+		t = tm;
+		yield return new WaitForSecondsRealtime((deathRoutineTime / 4f) + 0.2f);
+		while (t > 0f) {
+			float increasingRatio = (tm - t) / tm;
+			DeathCanvas.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, Mathf.Lerp(1f, 0.8f, increasingRatio));
+			t -= Time.unscaledDeltaTime;
+			yield return null;
+		}
+		DeathCanvas.sortingOrder = 0;
+		DeathCanvas.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, 0.8f);
+		ShowDeathMenu();
+	}
+	void ShowDeathMenu() {
+		DeathMenu.SetActive(true);
+	}
 	public void GoToMenu() {
+		DeathCanvas.gameObject.SetActive(false);
+		DeathMenu.SetActive(false);
 		playingMenu.SetActive(false);
 		pauseBtn.SetActive(false);
 		BuffUI.SetActive(false);
@@ -39,7 +88,6 @@ public class GameStateManager : MonoBehaviour {
 		Camera.main.transform.position = new Vector3(0f, 0.5f, -10f);
 		InGame = false;
 		Paused = false;
-		GameEnd?.Invoke();
 		EnterMenu?.Invoke();
 	}
 	public void StartGame() {

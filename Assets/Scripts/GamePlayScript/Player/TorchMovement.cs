@@ -11,7 +11,7 @@ public class TorchMovement : MonoBehaviour, JoystickController {
 	public void OuterControl(Vector2 inputDirection, float magnitude) {
 	}
 	void Awake() {
-		GameStateManager.GameEnd += returnTorch;
+		GameStateManager.EnterMenu += returnTorch;
 		torch = Torch;
 	}
 	void returnTorch() {

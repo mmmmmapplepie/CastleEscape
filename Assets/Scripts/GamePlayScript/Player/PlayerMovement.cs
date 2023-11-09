@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.iOS;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.TextCore;
 
 public class PlayerMovement : MonoBehaviour, JoystickController {
 	public PlayerType playerObject;
@@ -28,7 +23,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		ItemsController.luck = playerObject.Luck;
 		setLightStrengths();
 		changeSprite();
-		animationFix();
 	}
 	void RevertToIntialSettings() {
 		if (GameStateManager.InGame) {
@@ -76,19 +70,31 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 	void Awake() {
 		GameStateManager.GameStart += SetupStats;
-		GameStateManager.GameEnd += SetupStats;
 		GameStateManager.GameEnd += EndGame;
-		GameStateManager.StartNewRoom += NewRoomPosition;
-		GameStateManager.StartNewRoom += ResetPosition;
-		GameStateManager.EnterMenu += ResetPosition;
+		GameStateManager.StartNewRoom += () => StateChangePosition();
+		GameStateManager.EnterMenu += SetupStats;
+		GameStateManager.EnterMenu += () => StateChangePosition(false);
 	}
-	void NewRoomPosition() {
-		transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
+	void StateChangePosition(bool newroom = true) {
+		if (newroom) {
+			transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
+		} else {
+			transform.position = new Vector3(0f, 1f, 0f);
+		}
 		RB.velocity = Vector2.zero;
 		changeAnimation("Idle");
 	}
 	void EndGame() {
 		StopAllCoroutines();
+		RevertToIntialSettings();
+		StartCoroutine(deathCoroutine());
+	}
+	IEnumerator deathCoroutine() {
+		float t = GameStateManager.deathRoutineTime;
+		while (t > 0f) {
+			t -= Time.unscaledDeltaTime;
+			yield return null;
+		}
 	}
 	void Update() {
 		if (!ControllableState()) return;
