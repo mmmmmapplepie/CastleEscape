@@ -9,7 +9,7 @@ public class Item : MonoBehaviour {
 
 	//itemTime below is the time it takes for the item to wear off. 0 mean item effects are instantaneous and dont add to UI.
 	public float itemTime = 0f;
-
+	[SerializeField] AudioClip sfxClip;
 	[SerializeField] GameObject UIItemPrefab, UIItemDummyPrefab;
 	[HideInInspector] public Transform UIItemHolder;
 	[HideInInspector] public GameObject player;
@@ -22,7 +22,7 @@ public class Item : MonoBehaviour {
 		ItemTrigger(coll);
 	}
 	void ItemTrigger(Collider2D coll) {
-		if (UIItemHolder.childCount > 5 || triggered) return;
+		if ((UIItemHolder.childCount > 5 || triggered) && itemTime != 0f) return;
 		if (coll.tag == "Player") {
 			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
 			player = coll.transform.root.gameObject;
@@ -30,6 +30,7 @@ public class Item : MonoBehaviour {
 			CheckAddingItemToUI();
 			ItemEffect();
 			ItemVisuals();
+			ItemSound();
 			Destroy(gameObject);
 		}
 	}
@@ -76,6 +77,10 @@ public class Item : MonoBehaviour {
 		if (consumeParticleEffect != null) {
 			Instantiate(consumeParticleEffect, transform.position, quaternion.identity);
 		}
+	}
+	void ItemSound() {
+		AudioPlayer audioS = UIItemHolder.gameObject.GetComponent<AudioPlayer>();
+		audioS.PlaySound(sfxClip.name, 0f);
 	}
 	void OnDestroy() {
 		if (EndingCalled || !GameStateManager.InGame) return;

@@ -147,6 +147,7 @@ MonoBehaviour:
   IsABuff: 1
   consumeParticleEffect: {fileID: 0}
   itemTime: 30
+  sfxClip: {fileID: 8300000, guid: a7fec37a31a8bcc4095c9e7d68022e1a, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}
   UIItemDummyPrefab: {fileID: 4752792858218526008, guid: c8fa1ef9779f9254e901f172cfc282a0, type: 3}
   UIItemHolder: {fileID: 0}

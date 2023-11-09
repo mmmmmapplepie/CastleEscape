@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 3278750547286442692}
   - component: {fileID: 264724723793017757}
   - component: {fileID: 119177441486853935}
+  - component: {fileID: 7468109369239596968}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementScript: {fileID: 5837862220789305942}
-  panicTime: 2
+  panicTime: 4
   panic: 0
   panicImminent: 0
   maxHealth: 0
@@ -277,6 +278,75 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7468109369239596968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754237965873142213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3306c77a5f8cba4d8611cd24aee8352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: edc93fc29c2f2d742853884c7288cdfb, type: 3}
+    priority: 200
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: efb2517e7e48e2b4595c3e20e1757c2f, type: 3}
+    priority: 200
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3aba23827b45b594bb12168e9f2993d0, type: 3}
+    priority: 215
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8ad96911f493e7343a622e207bd8694c, type: 3}
+    priority: 205
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 32a9465a8596ced46b4f39419126ff04, type: 3}
+    priority: 220
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: c91e02b47bf72be4cb820e1185523b21, type: 3}
+    priority: 210
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: d95b70df8dfcd7e4e86351e3961dc8f6, type: 3}
+    priority: 240
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 0
 --- !u!1 &4395135529893958955
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699e591860e74ef4f91af279bbfa608e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ani: {fileID: 119177441486853935}
+  Torch: {fileID: 8971738510554556498}
 --- !u!1 &8487038072316814305
 GameObject:
   m_ObjectHideFlags: 0

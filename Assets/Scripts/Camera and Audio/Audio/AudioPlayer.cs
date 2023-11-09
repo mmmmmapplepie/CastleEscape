@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour {
-	[SerializeField] List<Sound> sounds;
+	public List<Sound> sounds;
 	void Awake() {
 		foreach (Sound sound in sounds) {
 			AudioSource src = sound.audioSource = gameObject.AddComponent<AudioSource>();
@@ -27,23 +27,27 @@ public class AudioPlayer : MonoBehaviour {
 	public bool CheckPlaying(string name) {
 		return findSound(name).audioSource.isPlaying;
 	}
+	public void ChangeLoop(string name, bool LoopIsTrue = true) {
+		findSound(name).audioSource.loop = LoopIsTrue ? true : false;
+	}
 	List<FadedSounds> fadeSounds = new List<FadedSounds>();
-	public void PlaySound(string name, float fadeInTime = 0f) {
+	public void PlaySound(string name, float fadeInTime = 0f, bool stopAllRoutines = false, float volume = 1f) {
 		Sound sound = findSound(name);
 		if (sound == null) return;
-		StopFadeRoutines(name);
+		StopFadeRoutines(name, stopAllRoutines);
+		float vol = sound.volume;
+		vol = volume > vol ? volume : vol;
 		if (fadeInTime == 0) {
-			sound.audioSource.volume = sound.volume;
+			sound.audioSource.volume = vol;
 			sound.audioSource.Play();
 		} else {
-			FadedSounds fadeSound = new FadedSounds(StartCoroutine(FadeInRoutine(sound, fadeInTime)), name);
+			FadedSounds fadeSound = new FadedSounds(StartCoroutine(FadeInRoutine(sound, fadeInTime, vol)), name);
 			fadeSounds.Add(fadeSound);
 		}
 	}
-	IEnumerator FadeInRoutine(Sound sound, float fadeInTime) {
+	IEnumerator FadeInRoutine(Sound sound, float fadeInTime, float volumeFinal) {
 		float InitialVol = sound.audioSource.volume;
-		float FinalVol = sound.volume;
-		float VolDiff = FinalVol - InitialVol;
+		float VolDiff = volumeFinal - InitialVol;
 		float StartTime = Time.time;
 		sound.audioSource.Play();
 		while (Time.time < StartTime + fadeInTime) {
@@ -51,12 +55,12 @@ public class AudioPlayer : MonoBehaviour {
 			sound.audioSource.volume = InitialVol + VolDiff * ratio;
 			yield return null;
 		}
-		sound.audioSource.volume = FinalVol;
+		sound.audioSource.volume = volumeFinal;
 	}
-	public void StopSound(string name, float fadeOutTime = 0f) {
+	public void StopSound(string name, float fadeOutTime = 0f, bool stopAllRoutines = false) {
 		Sound sound = findSound(name);
 		if (sound == null) return;
-		StopFadeRoutines(name);
+		StopFadeRoutines(name, stopAllRoutines);
 		if (fadeOutTime == 0) {
 			sound.audioSource.volume = 0f;
 			sound.audioSource.Stop();
@@ -78,8 +82,13 @@ public class AudioPlayer : MonoBehaviour {
 		sound.audioSource.volume = FinalVol;
 		sound.audioSource.Stop();
 	}
-	void StopFadeRoutines(string name) {
-		List<FadedSounds> fadesounds = fadeSounds.FindAll(x => x.Name == name);
+	void StopFadeRoutines(string name, bool stopAllRoutines = false) {
+		List<FadedSounds> fadesounds = null;
+		if (stopAllRoutines) {
+			fadesounds = fadeSounds;
+		} else {
+			fadesounds = fadeSounds.FindAll(x => x.Name == name);
+		}
 		for (int i = 0; i < fadesounds.Count; i++) {
 			if (fadesounds[i] != null) {
 				StopCoroutine(fadesounds[i].Routine);
@@ -96,10 +105,10 @@ public class AudioPlayer : MonoBehaviour {
 			this.Name = name;
 		}
 	}
-	public void changeVolume(string name, float targetVolume = 1f) {
+	public void changeVolume(string name, float targetVolume = 1f, bool stopAllRoutines = false) {
 		Sound sound = findSound(name);
 		if (sound == null || !sound.audioSource.isPlaying) return;
-		StopFadeRoutines(name);
+		StopFadeRoutines(name, stopAllRoutines);
 		sound.audioSource.volume = sound.volume * targetVolume;
 	}
 	public void PauseOrResumeSound(string name, bool pause) {

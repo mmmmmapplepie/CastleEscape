@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 1348864497801118145}
   - component: {fileID: 3337408574432676648}
   - component: {fileID: 2861953010883282280}
+  - component: {fileID: 3091060749768478368}
+  - component: {fileID: 6650183651593577376}
   m_Layer: 0
   m_Name: Signod
   m_TagString: Untagged
@@ -292,3 +294,69 @@ MonoBehaviour:
   RB: {fileID: 1348864497801118145}
   ani: {fileID: 3337408574432676648}
   calmTime: 0.5
+--- !u!114 &3091060749768478368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892936468193292106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3306c77a5f8cba4d8611cd24aee8352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1a8dd4cf40dc9964996150b796d02352, type: 3}
+    priority: 5
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 1
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: b7525effd74f2d1458ed49754a385dde, type: 3}
+    priority: 5
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 1
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9602d6e9375b9c54d974a3dc390ae163, type: 3}
+    priority: 5
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 1
+--- !u!114 &6650183651593577376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892936468193292106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3306c77a5f8cba4d8611cd24aee8352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: f8a1eb1145be846479861551e17fe8c0, type: 3}
+    priority: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 1
+  - audioSource: {fileID: 0}
+    clip: {fileID: 8300000, guid: 03bd625baff3df245b13475a35aaeada, type: 3}
+    priority: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    spatialBlend: 1
