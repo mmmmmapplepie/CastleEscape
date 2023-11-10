@@ -10,6 +10,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] Animator animator;
 	string currentAnimation = "";
 
+	void Awake() {
+		GameStateManager.GameStart += SetupStats;
+		GameStateManager.GameEnd += EndGame;
+		GameStateManager.StartNewRoom += () => StateChangePosition();
+		GameStateManager.EnterMenu += SetupStats;
+		GameStateManager.EnterMenu += () => StateChangePosition(false);
+	}
 	public void SetupStats() {
 		RevertToIntialSettings();
 		lifeScript.maxHealth = playerObject.MaxHealth * 2;
@@ -68,13 +75,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] Rigidbody2D RB;
 	Coroutine dashingRoutine;
 
-	void Awake() {
-		GameStateManager.GameStart += SetupStats;
-		GameStateManager.GameEnd += EndGame;
-		GameStateManager.StartNewRoom += () => StateChangePosition();
-		GameStateManager.EnterMenu += SetupStats;
-		GameStateManager.EnterMenu += () => StateChangePosition(false);
-	}
 	void StateChangePosition(bool newroom = true) {
 		if (newroom) {
 			transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
@@ -90,11 +90,20 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		StartCoroutine(deathCoroutine());
 	}
 	IEnumerator deathCoroutine() {
-		float t = GameStateManager.deathRoutineTime;
+		animator.speed = 0f;
+		Color c = CurrentSettings.CurrentPlayerType.color;
+		SpriteRenderer sr = transform.Find("PlayerSprite").gameObject.GetComponent<SpriteRenderer>();
+		float tm = DeathUI.deathRoutineTime;
+		float t = tm;
 		while (t > 0f) {
+			float r = t / tm;
+			sr.color = new Color(c.r * r, c.g * r, c.b * r, 1f);
 			t -= Time.unscaledDeltaTime;
 			yield return null;
 		}
+		// changeAnimation("Dead");
+		sr.color = c;
+		animator.speed = 1f;
 	}
 	void Update() {
 		if (!ControllableState()) return;
@@ -133,6 +142,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			dashAble = false;
 			dashing = true;
 			DashAnimation();
+			oneOffSound(PlayerAudio.audioType.dash);
 			dashingRoutine = StartCoroutine(dashingEnd());
 			StartCoroutine(notDashingChange());
 		}
@@ -161,6 +171,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		RaycastHit2D groundCastBottom = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
 		RaycastHit2D groundCastTop = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f - 0.02f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
 		if (RB.velocity.y <= 0f && groundCastBottom && !groundCastTop) {
+			if (!grounded) oneOffSound(PlayerAudio.audioType.land);
 			return true;
 		} else {
 			return false;
@@ -260,15 +271,23 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		StartCoroutine(panicDarkness(panicTime));
 	}
 	public void recoveredFromPanicAttack() {
+		audioScript.StopSound("player panicking", lifeScript.panicTime / 20f, true);
 		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f * GameBuffsManager.TorchModifierMultiplier;
 	}
+	float panicMaxVol = 1f;
 	IEnumerator panicDarkness(float panicTime) {
-		float starttime = Time.time;
+		float starttime = panicTime / 8f;
 		float initialIntensity = torchLight.intensity;
-		while (Time.time < panicTime / 8f + starttime) {
+		if (audioScript.CheckPlaying("player panicking")) {
+			audioScript.changeVolume("player panicking", panicMaxVol, true);
+		} else {
+			audioScript.PlaySound("player panicking", panicTime / 2f, true, panicMaxVol);
+		}
+		while (starttime > 0f) {
 			if (currentAnimation != "Fear") changeAnimation("Fear");
-			float ratio = (Time.time - starttime) / (panicTime / 4f);
+			float ratio = (panicTime / 8f - starttime) / (panicTime / 8f);
 			torchLight.intensity = Mathf.Lerp(initialIntensity, 0f, ratio);
+			starttime -= Time.deltaTime;
 			yield return null;
 		}
 		torchLight.intensity = 0f;
@@ -365,5 +384,16 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		_idleBored = null;
 	}
 
+	Vector3 prevPos = Vector3.zero;
+	// void audioMethodUpdates() {
+	// 	prevPos = transform.position;
+	// }
+	[SerializeField] PlayerAudio audioScript;
+	public void oneOffSound(PlayerAudio.audioType type) {
+		bool soundFootsteps = true;
+		soundFootsteps = (prevPos - transform.position).magnitude >= playerSpeed * 0.1f ? true : false;
+		prevPos = transform.position;
+		audioScript.playOneShotAudio(type, soundFootsteps);
+	}
 	#endregion
 }

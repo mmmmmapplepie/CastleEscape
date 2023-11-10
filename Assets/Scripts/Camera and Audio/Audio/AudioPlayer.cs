@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour {
 	public List<Sound> sounds;
-	void Awake() {
+	protected virtual void Awake() {
 		foreach (Sound sound in sounds) {
 			AudioSource src = sound.audioSource = gameObject.AddComponent<AudioSource>();
+			if (sound.clip != null) {
+				sound.Name = sound.clip.name;
+			}
 			src.clip = sound.clip;
 			src.priority = sound.priority;
 			src.volume = sound.volume;
@@ -21,8 +24,19 @@ public class AudioPlayer : MonoBehaviour {
 			}
 		}
 	}
+	public void StopSoundsAndRoutines(string name, bool stopAll = false) {
+		if (stopAll) {
+			StopFadeRoutines("", true);
+			foreach (Sound s in sounds) {
+				s.audioSource.Stop();
+			}
+		} else {
+			StopFadeRoutines(name);
+			findSound(name).audioSource.Stop();
+		}
+	}
 	public Sound findSound(string name) {
-		return sounds.Find(x => x.clip.name == name);
+		return sounds.Find(x => x.Name == name);
 	}
 	public bool CheckPlaying(string name) {
 		return findSound(name).audioSource.isPlaying;
@@ -82,7 +96,7 @@ public class AudioPlayer : MonoBehaviour {
 		sound.audioSource.volume = FinalVol;
 		sound.audioSource.Stop();
 	}
-	void StopFadeRoutines(string name, bool stopAllRoutines = false) {
+	public void StopFadeRoutines(string name, bool stopAllRoutines = false) {
 		List<FadedSounds> fadesounds = null;
 		if (stopAllRoutines) {
 			fadesounds = fadeSounds;
@@ -109,7 +123,7 @@ public class AudioPlayer : MonoBehaviour {
 		Sound sound = findSound(name);
 		if (sound == null || !sound.audioSource.isPlaying) return;
 		StopFadeRoutines(name, stopAllRoutines);
-		sound.audioSource.volume = sound.volume * targetVolume;
+		sound.audioSource.volume = targetVolume;
 	}
 	public void PauseOrResumeSound(string name, bool pause) {
 		Sound sound = findSound(name);

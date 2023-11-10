@@ -18,6 +18,7 @@ public class NewRoom : MonoBehaviour {
 	}
 	float halfTransitionTime = 2f;
 	IEnumerator ClearRoomRoutine() {
+		GetComponent<AudioPlayer>().PlaySound("change room");
 		//make a cool looking boxes thingy. (idk how to make yet)
 		Time.timeScale = 0f;
 		clearImage.raycastTarget = true;

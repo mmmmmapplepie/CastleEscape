@@ -22,7 +22,7 @@ public class Leech : MonsterBase {
 	Coroutine LeechLife = null;
 	IEnumerator leeching() {
 		while (true) {
-			damageAmountAndTime(Mathf.CeilToInt(1 * GameBuffsManager.EnemyDamageMultiplier), 0f);
+			damageAmountAndTime(Mathf.CeilToInt(-1f * GameBuffsManager.EnemyDamageMultiplier), 0f);
 			yield return new WaitForSeconds(period);
 		}
 	}

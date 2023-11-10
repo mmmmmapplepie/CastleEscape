@@ -24,12 +24,9 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 
-
-
 	[SerializeField] SpriteRenderer playerSprite;
 	Color playerColor;
 	void Awake() {
-		playerColor = playerSprite.color;
 		GameStateManager.GameEnd += EndGame;
 		GameStateManager.EnterMenu += EndGame;
 		GameStateManager.GameStart += StartGame;
@@ -40,6 +37,8 @@ public class PlayerLife : MonoBehaviour {
 		StopAllCoroutines();
 	}
 	void StartGame() {
+		hitRecoveryRoutineHolder = null;
+		playerColor = CurrentSettings.CurrentPlayerType.color;
 		StartFear();
 	}
 
@@ -56,6 +55,7 @@ public class PlayerLife : MonoBehaviour {
 		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return false;
 		Health += amount;
 		if (amount < 0) {
+			MovementScript.oneOffSound(PlayerAudio.audioType.dmg);
 			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine(recoveryTime));
 			checkDeath();
 		}
@@ -86,6 +86,7 @@ public class PlayerLife : MonoBehaviour {
 
 	void StartFear() {
 		Fear = 0;
+		panic = false;
 		aura = (float)CurrentSettings.CurrentPlayerType.Aura;
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
@@ -95,7 +96,7 @@ public class PlayerLife : MonoBehaviour {
 	}
 	IEnumerator FearRaiseRoutine() {
 		while (true) {
-			if (panic || GameStateManager.Paused) { yield return null; continue; }
+			if (panic || GameStateManager.Paused || panicImminent) { yield return null; continue; }
 			if (Fear < 100f) Fear += (2.5f + 2.5f * (1 / aura)) * Time.deltaTime;
 			CheckPanickAttack();
 			yield return null;
@@ -109,8 +110,8 @@ public class PlayerLife : MonoBehaviour {
 		while (!MovementScript.grounded || MovementScript.dashing) {
 			yield return null;
 		}
-		panicImminent = false;
 		panic = true;
+		panicImminent = false;
 		MovementScript.StopDropping();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		MovementScript.panicAttack(panicTime);

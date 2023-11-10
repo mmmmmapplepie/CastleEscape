@@ -14,12 +14,19 @@ public class ItemsController : MonoBehaviour {
 		UIItemHolderRef = uiItemHolderRef;
 		buffPrefabs = buffsPre;
 		debuffPrefabs = debuffsPre;
-		setBonus(buffPrefabs[0], Vector3.zero);
-		setBonus(buffPrefabs[2], Vector3.zero);
-		setBonus(buffPrefabs[3], Vector3.zero);
-		setBonus(debuffPrefabs[0], Vector3.zero);
-		setBonus(debuffPrefabs[4], Vector3.zero);
-		setBonus(debuffPrefabs[1], Vector3.zero);
+		// setBonus(buffPrefabs[0], 1 * Vector3.one);
+		// setBonus(buffPrefabs[1], 2 * Vector3.one);
+		// setBonus(buffPrefabs[2], 3 * Vector3.one);
+		// setBonus(buffPrefabs[3], 4 * Vector3.one);
+		// setBonus(buffPrefabs[4], 5 * Vector3.one);
+		// setBonus(buffPrefabs[5], 6 * Vector3.one);
+		// setBonus(buffPrefabs[6], 7 * Vector3.one);
+		// setBonus(debuffPrefabs[0], -5 * Vector3.one);
+		// setBonus(debuffPrefabs[1], -6 * Vector3.one);
+		// setBonus(debuffPrefabs[2], -1 * Vector3.one);
+		// setBonus(debuffPrefabs[3], -2 * Vector3.one);
+		// setBonus(debuffPrefabs[4], -3 * Vector3.one);
+		// setBonus(debuffPrefabs[5], -4 * Vector3.one);
 	}
 	void ClearItems() {
 		foreach (Transform tra in UIItemHolderRef) {

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadf497854687241be18d3af261f4ac, type: 3}
   m_Name: Disparatop
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 4
   Speed: 1
-  Senses: 3
+  Senses: 2
   Hunger: 5
   Description: A creature that makes your legs shake upon seeing it. (Reduces your
     movement speed and Jump power)

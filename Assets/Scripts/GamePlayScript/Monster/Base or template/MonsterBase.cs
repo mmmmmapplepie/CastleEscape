@@ -24,6 +24,7 @@ public class MonsterBase : MonoBehaviour {
 		senseTime = 0.5f * (6f - monsterStats.Hunger) - 0.25f;
 		hue = monsterStats.Color;
 		GetComponent<SpriteRenderer>().color = hue;
+		monsterAudio = GetComponent<MonsterAudio>();
 		ChangeFaceLight(0f);
 		if (monsterStats.Damage < 2) {
 			damage = monsterStats.Damage;
@@ -70,12 +71,14 @@ public class MonsterBase : MonoBehaviour {
 		MovingRoutineHolder = StartCoroutine(MovingRoutine());
 	}
 	IEnumerator MovingRoutine() {
+		monsterAudio.PlayIdleSound();
 		yield return new WaitForSeconds(Random.Range(0, 5f) / (moveSpeed * GameBuffsManager.EnemySpeedMultiplier));
 		RB.velocity = (new Vector3(NZR(), NZR(), 0f)).normalized * moveSpeed * GameBuffsManager.EnemySpeedMultiplier;
 		ani.speed = 2f * GameBuffsManager.EnemySpeedMultiplier;
 		yield return new WaitForSeconds(Random.Range(0f, 5f));
 		RB.velocity = Vector3.zero;
 		ani.speed = 1f;
+		monsterAudio.PlayIdleSound();
 		stopRoutine(ref MovingRoutineHolder);
 	}
 
@@ -99,6 +102,7 @@ public class MonsterBase : MonoBehaviour {
 		}
 		ChangeFaceLight(1f);
 		ChasingRoutineHolder = StartCoroutine(ChasingRoutine());
+		monsterAudio.PlayChaseSound();
 		ani.Play("Chase");
 		stopRoutine(ref calmingRoutine);
 		stopRoutine(ref MovingRoutineHolder);
@@ -217,4 +221,15 @@ public class MonsterBase : MonoBehaviour {
 		damagePlayerOnCollision = dmgOnCollision;
 	}
 	protected virtual void HitOuterWall() { }
+
+
+
+
+
+
+
+
+
+	MonsterAudio monsterAudio;
+
 }

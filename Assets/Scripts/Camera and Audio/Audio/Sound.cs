@@ -3,6 +3,7 @@ using UnityEngine;
 public class Sound {
 	[HideInInspector]
 	public AudioSource audioSource;
+	public string Name;
 	public AudioClip clip;
 	[Range(0, 255)]
 	public int priority;
@@ -13,5 +14,4 @@ public class Sound {
 	public bool playOnAwake;
 	[Range(0, 1)]
 	public float spatialBlend;
-
 }
