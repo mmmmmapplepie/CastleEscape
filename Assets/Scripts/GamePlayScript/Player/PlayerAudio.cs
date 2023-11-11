@@ -50,13 +50,18 @@ public class PlayerAudio : AudioPlayer {
 				break;
 		}
 	}
+
+	int walkIndex = 0;
+	int runIndex = 0;
 	void playWalkSound(bool soundFootsteps) {
 		if (!soundFootsteps) return;
-		walkS.PlayOneShot(walkingSounds[Random.Range(0, walkingSounds.Count - 1)], walkS.volume);
+		walkS.PlayOneShot(walkingSounds[walkIndex], walkS.volume);
+		walkIndex = walkIndex == walkingSounds.Count - 1 ? 0 : walkIndex + 1;
 	}
 	void playRunSound(bool soundFootsteps) {
 		if (!soundFootsteps) return;
-		runS.PlayOneShot(runningSounds[Random.Range(0, runningSounds.Count - 1)], runS.volume);
+		runS.PlayOneShot(runningSounds[runIndex], runS.volume);
+		runIndex = runIndex == runningSounds.Count - 1 ? 0 : runIndex + 1;
 	}
 
 

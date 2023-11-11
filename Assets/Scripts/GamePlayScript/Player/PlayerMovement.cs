@@ -113,6 +113,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		clampFallSpeed();
 		stopOnGround();
 		setAnimation();
+		continuousWalkAndRunSounds();
 	}
 	void lateralMovement() {
 		if (XControl == 0) { return; }
@@ -310,6 +311,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			animator.CrossFade(name, transitionDuration);
 		}
 		currentAnimation = name;
+		walkAndRunSounds();
 	}
 	void stopOnGround() {
 		if (grounded && XControl == 0 && !dashing) {
@@ -385,14 +387,58 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 
 	Vector3 prevPos = Vector3.zero;
-	// void audioMethodUpdates() {
-	// 	prevPos = transform.position;
-	// }
+	bool wasWalking = false;
+	bool wasRunning = false;
+	int walkCycle = 1;
+	int runCycle = 1;
+	void continuousWalkAndRunSounds() {
+		if (wasWalking && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= walkCycle) {
+			oneOffSound(PlayerAudio.audioType.walk, true);
+			walkCycle++;
+			runCycle = 1;
+			return;
+		} else if (wasRunning && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= runCycle) {
+			oneOffSound(PlayerAudio.audioType.run, true);
+			runCycle++;
+			walkCycle = 1;
+			return;
+		}
+		if (!wasWalking) walkCycle = 1;
+		if (!wasRunning) runCycle = 1;
+	}
+	void walkAndRunSounds() {
+		if (currentAnimation == "Walk" && !wasWalking) {
+			wasWalking = true;
+			wasRunning = false;
+			oneOffSound(PlayerAudio.audioType.walk, true);
+		} else if (currentAnimation == "Run" && !wasRunning) {
+			wasRunning = true;
+			wasWalking = false;
+			oneOffSound(PlayerAudio.audioType.run, true);
+		} else {
+			wasRunning = false;
+			wasWalking = false;
+		}
+	}
 	[SerializeField] PlayerAudio audioScript;
-	public void oneOffSound(PlayerAudio.audioType type) {
+
+	bool tempStopStepSound = false;
+	float blockDir = 0f;
+	public void oneOffSound(PlayerAudio.audioType type, bool walkOrRun = false) {
 		bool soundFootsteps = true;
-		soundFootsteps = (prevPos - transform.position).magnitude >= playerSpeed * 0.1f ? true : false;
+		soundFootsteps = (prevPos - transform.position).magnitude >= playerSpeed * 0.1f * Time.deltaTime ? true : false;
+		if (!soundFootsteps && tempStopStepSound != soundFootsteps) {
+			blockDir = XControl;
+		} else if (soundFootsteps && tempStopStepSound != soundFootsteps) {
+			blockDir = 0f;
+		}
+		tempStopStepSound = soundFootsteps;
 		prevPos = transform.position;
+		if (Mathf.Sign(blockDir) != Mathf.Sign(XControl) && blockDir != 0f) {
+			blockDir = 0f;
+			soundFootsteps = true;
+		}
+		if (!walkOrRun) soundFootsteps = true;
 		audioScript.playOneShotAudio(type, soundFootsteps);
 	}
 	#endregion
