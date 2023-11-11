@@ -5,12 +5,13 @@ public class ItemsController : MonoBehaviour {
 	[SerializeField] List<GameObject> buffsPre, debuffsPre;
 	static List<GameObject> buffPrefabs = new List<GameObject>();
 	static List<GameObject> debuffPrefabs = new List<GameObject>();
-
+	static List<GameObject> ItemsInRoom = new List<GameObject>();
 	[SerializeField] Transform uiItemHolderRef;
 	static Transform UIItemHolderRef;
 	void Awake() {
 		GameStateManager.GameEnd += ClearItems;
 		GameStateManager.EnterMenu += ClearItems;
+		GameStateManager.StartNewRoom += NewRoom;
 		UIItemHolderRef = uiItemHolderRef;
 		buffPrefabs = buffsPre;
 		debuffPrefabs = debuffsPre;
@@ -19,21 +20,27 @@ public class ItemsController : MonoBehaviour {
 		// setBonus(buffPrefabs[2], 3 * Vector3.one);
 		// setBonus(buffPrefabs[3], 4 * Vector3.one);
 		// setBonus(buffPrefabs[4], 5 * Vector3.one);
-		// setBonus(buffPrefabs[5], 6 * Vector3.one);
+		setBonus(buffPrefabs[5], 6 * Vector3.one);
 		// setBonus(buffPrefabs[6], 7 * Vector3.one);
 		// setBonus(debuffPrefabs[0], -5 * Vector3.one);
 		// setBonus(debuffPrefabs[1], -6 * Vector3.one);
 		// setBonus(debuffPrefabs[2], -1 * Vector3.one);
 		// setBonus(debuffPrefabs[3], -2 * Vector3.one);
-		// setBonus(debuffPrefabs[4], -3 * Vector3.one);
+		setBonus(debuffPrefabs[4], -3 * Vector3.one);
 		// setBonus(debuffPrefabs[5], -4 * Vector3.one);
 	}
 	void ClearItems() {
 		foreach (Transform tra in UIItemHolderRef) {
-			Destroy(tra.gameObject);
+			if (tra != null) {
+				Destroy(tra.gameObject);
+			}
 		}
 	}
-
+	void NewRoom() {
+		foreach (GameObject g in ItemsInRoom) {
+			if (g != null) Destroy(g);
+		}
+	}
 
 
 
@@ -61,7 +68,7 @@ public class ItemsController : MonoBehaviour {
 		if (prefab == null) return;
 		Vector3 pos = new Vector3(Random.Range(-2f, 2f) + center.x, Random.Range(-3.5f, 3.5f) + center.y);
 		GameObject item = Instantiate(prefab, center, Quaternion.identity);
-		// GameObject item = Instantiate(prefab, pos, Quaternion.identity);
+		ItemsInRoom.Add(item);
 		item.GetComponent<Item>().UIItemHolder = UIItemHolderRef;
 	}
 }

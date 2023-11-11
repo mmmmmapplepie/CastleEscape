@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
-			RB.velocity = dashSpeed * DashControl * GameBuffsManager.PlayerSpeedMultiplier;
+			RB.velocity = dashSpeed * DashControl * GameBuffsManager.DashRegenerationRateMultiplier;
 			RB.gravityScale = 0f;
 			RB.drag = 0f;
 			dashCharge--;

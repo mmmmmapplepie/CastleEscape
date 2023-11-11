@@ -60,8 +60,9 @@ public class PlayerAudio : AudioPlayer {
 	}
 	void playRunSound(bool soundFootsteps) {
 		if (!soundFootsteps) return;
-		runS.PlayOneShot(runningSounds[runIndex], runS.volume);
-		runIndex = runIndex == runningSounds.Count - 1 ? 0 : runIndex + 1;
+		AudioClip c = runIndex == 0 ? runningSounds[Random.Range(0, 2)] : runningSounds[Random.Range(2, 4)];
+		runS.PlayOneShot(c, runS.volume);
+		runIndex = runIndex == 1 ? 0 : 1;
 	}
 
 

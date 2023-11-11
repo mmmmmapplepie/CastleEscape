@@ -21,9 +21,11 @@ public class Item : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D coll) {
 		ItemTrigger(coll);
 	}
+	bool itemConsumed = false;
 	void ItemTrigger(Collider2D coll) {
 		if ((UIItemHolder.childCount > 5 || triggered) && itemTime != 0f) return;
 		if (coll.tag == "Player") {
+			itemConsumed = true;
 			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
 			player = coll.transform.root.gameObject;
 			triggered = true;
@@ -82,8 +84,9 @@ public class Item : MonoBehaviour {
 		AudioPlayer audioS = UIItemHolder.gameObject.GetComponent<AudioPlayer>();
 		audioS.PlaySound(sfxClip.name, 0f);
 	}
-	void OnDestroy() {
-		if (EndingCalled || !GameStateManager.InGame) return;
-		EndItemEffect();
-	}
+	// void OnDestroy() {
+	// 	if (EndingCalled || !GameStateManager.InGame || !itemConsumed) return;
+	// 	print(1);
+	// 	EndItemEffect();
+	// }
 }
