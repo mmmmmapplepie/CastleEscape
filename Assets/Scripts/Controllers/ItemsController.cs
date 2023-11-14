@@ -67,7 +67,7 @@ public class ItemsController : MonoBehaviour {
 	public static void setBonus(GameObject prefab, Vector3 center) {
 		if (prefab == null) return;
 		Vector3 pos = new Vector3(Random.Range(-2f, 2f) + center.x, Random.Range(-3.5f, 3.5f) + center.y);
-		GameObject item = Instantiate(prefab, center, Quaternion.identity);
+		GameObject item = Instantiate(prefab, pos, Quaternion.identity);
 		ItemsInRoom.Add(item);
 		item.GetComponent<Item>().UIItemHolder = UIItemHolderRef;
 	}

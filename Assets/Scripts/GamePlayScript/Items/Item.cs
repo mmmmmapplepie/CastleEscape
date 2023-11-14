@@ -29,19 +29,19 @@ public class Item : MonoBehaviour {
 			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
 			player = coll.transform.root.gameObject;
 			triggered = true;
-			CheckAddingItemToUI();
+			CheckAddingItemToUI(coll);
 			ItemEffect();
-			ItemVisuals();
 			ItemSound();
 			Destroy(gameObject);
 		}
 	}
-	void CheckAddingItemToUI() {
+	void CheckAddingItemToUI(Collider2D coll) {
 		if (itemTime == 0) return;
 		UIItem itemPresent = FindForItemInUI();
 		if (itemPresent != null) {
 			ExtendItemTime(itemPresent); return;
 		} else {
+			ItemVisuals(coll.transform.root.Find("PEHolder"));
 			AddItemToUI();
 		}
 	}
@@ -68,6 +68,9 @@ public class Item : MonoBehaviour {
 		Dummy.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		Dummy.GetComponent<RectTransform>().anchoredPosition = new Vector2(300f, 80f);
 		script.ItemDummy = Dummy.transform;
+		if (PE != null && script.PE == null) {
+			script.PE = PE;
+		}
 	}
 
 	void ExtendItemTime(UIItem itemInUI) {
@@ -75,9 +78,14 @@ public class Item : MonoBehaviour {
 	}
 	protected virtual void ItemEffect() { }
 	protected virtual void EndItemEffect() { }
-	void ItemVisuals() {
+	GameObject PE = null;
+	void ItemVisuals(Transform player) {
 		if (consumeParticleEffect != null) {
-			Instantiate(consumeParticleEffect, transform.position, quaternion.identity);
+			if (itemTime != 0f) {
+				PE = Instantiate(consumeParticleEffect, player);
+			} else {
+				Instantiate(consumeParticleEffect, transform.position, Quaternion.identity);
+			}
 		}
 	}
 	void ItemSound() {

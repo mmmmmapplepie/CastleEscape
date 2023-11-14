@@ -84,10 +84,13 @@ public class UIItem : MonoBehaviour {
 			remainingTime -= Time.deltaTime;
 		} else {
 			EndFunction();
+			Destroy(PE);
 			Destroy(gameObject);
 		}
 	}
 	void OnDestroy() {
 		if (ItemDummy != null) Destroy(ItemDummy.gameObject);
+		if (PE != null) Destroy(PE);
 	}
+	public GameObject PE = null;
 }

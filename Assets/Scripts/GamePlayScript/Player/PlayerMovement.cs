@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void lateralMovement() {
 		if (XControl == 0) { return; }
 		if (!grounded) {
-			float forceMultiplier = 5f;
+			float forceMultiplier = 2f;
 			RB.AddForce(new Vector2(XControl * playerSpeed * forceMultiplier * GameBuffsManager.PlayerSpeedMultiplier, 0f), ForceMode2D.Force);
 			RB.velocity = new Vector2(Mathf.Sign(RB.velocity.x) * Mathf.Min((playerSpeed + dashSpeed) * GameBuffsManager.PlayerSpeedMultiplier / 2f, Mathf.Abs(RB.velocity.x)), RB.velocity.y);
 		} else {

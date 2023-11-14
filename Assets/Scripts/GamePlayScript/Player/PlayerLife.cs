@@ -31,6 +31,7 @@ public class PlayerLife : MonoBehaviour {
 		GameStateManager.EnterMenu += EndGame;
 		GameStateManager.GameStart += StartGame;
 		GameStateManager.StartNewRoom += NewRoom;
+		GameStateManager.RoomCleared += RoomClear;
 
 	}
 	void EndGame() {
@@ -45,6 +46,15 @@ public class PlayerLife : MonoBehaviour {
 	void NewRoom() {
 		changeHealth(regen);
 		ChangeFear(-(aura * 2f + 30f));
+		SetPEOnOrOff(true);
+	}
+	void RoomClear() {
+		SetPEOnOrOff(false);
+	}
+	void SetPEOnOrOff(bool on) {
+		foreach (Transform t in transform.Find("PEHolder")) {
+			t.gameObject.SetActive(on);
+		}
 	}
 
 

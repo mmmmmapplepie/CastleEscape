@@ -91,6 +91,7 @@ public class JoyStick : MonoBehaviour {
 
 
 	float pixelsPerUnit = 50f;
+	int touchesToCheck = 5;
 	void setTouchSenseRadius() {
 		pixelsPerUnit = canvasHeight / (mainCameraSize * 2f);
 		InitialTouchSensingRadius = Mathf.Min(JoystickSensingRadius * pixelsPerUnit, OuterAreaDistance);
@@ -98,7 +99,7 @@ public class JoyStick : MonoBehaviour {
 
 	void SetTouchID() {
 		if (Input.touchCount < 1 || currentTouchID != null) return;
-		int numberofchecks = Mathf.Min(Input.touchCount, 5);
+		int numberofchecks = Mathf.Min(Input.touchCount, touchesToCheck);
 		Vector2 joystickPosition = GetComponent<RectTransform>().anchoredPosition;
 		for (int i = 0; i < numberofchecks; i++) {
 			Touch touch = Input.GetTouch(i);
@@ -182,7 +183,7 @@ public class JoyStick : MonoBehaviour {
 		return (touch.position / canvasScale) - GetComponent<RectTransform>().anchoredPosition;
 	}
 	Touch returnTouchWithID() {
-		int numberofchecks = Mathf.Min(Input.touchCount, 10);
+		int numberofchecks = Mathf.Min(Input.touchCount, touchesToCheck);
 		Touch touch = Input.GetTouch(0);
 		for (int i = 0; i < numberofchecks; i++) {
 			touch = Input.GetTouch(i);
@@ -201,6 +202,10 @@ public class JoyStick : MonoBehaviour {
 	}
 	void setDisplacementAndCheckForStoppingControls() {
 		if (currentTouchID == null) return;
+		if (Input.touchCount < 1) {
+			returnJoystickToOriginalPosition();
+			return;
+		}
 		Touch touch = returnTouchWithID();
 		//stopping controls normally
 		if (touch.phase == TouchPhase.Ended) {
@@ -210,7 +215,6 @@ public class JoyStick : MonoBehaviour {
 
 		//set displacement vectors and value.
 		currentJoystickDisplacement = setJoystickDisplacement();
-		setPastPositions();
 		Displacement = currentJoystickDisplacement.magnitude;
 
 		//stop controls due to being out of bounds. Requires displacements to be calculated first.
@@ -219,10 +223,9 @@ public class JoyStick : MonoBehaviour {
 		}
 	}
 	void setPastPositions() {
-		updateFrameTime();
 		if (pastPositions.Count == 0) pastPositions.Add(Vector2.zero);
 		pastPositions.Add(currentJoystickDisplacement);
-		if (pastPositions.Count > 10) pastPositions.RemoveAt(0);
+		if (pastPositions.Count > joystickMovementSmoothingCalculationMaxFrames) pastPositions.RemoveAt(0);
 	}
 	void moveHandleImage() {
 		float maxHandleValue = Mathf.Min(InnerAreaDistance, Displacement);
@@ -279,16 +282,17 @@ public class JoyStick : MonoBehaviour {
 	float getRealTimeElapse() {
 		if (pastPositions.Count < 2) return Time.unscaledDeltaTime;
 		int frames = 1;
-		for (int i = 0; i < pastPositions.Count - 1; i++) {
-			if (pastPositions[i] == pastPositions[i + 1]) {
+		for (int i = pastPositions.Count - 1; i > 0; i--) {
+			if (pastPositions[i] == pastPositions[i - 1]) {
 				frames++;
 			} else {
 				break;
 			}
 		}
 		float elapsedTime = 0f;
-		for (int i = 0; i < frames; i++) {
-			elapsedTime += frameTimes[i];
+		int framesToAdd = Mathf.Min(frames, frameTimes.Count);
+		for (int i = 0; i < framesToAdd; i++) {
+			elapsedTime += frameTimes[frameTimes.Count - 1 - i];
 		}
 		return elapsedTime;
 	}
@@ -299,7 +303,11 @@ public class JoyStick : MonoBehaviour {
 		OuterAreaFunction();
 		OuterAreaOn = true;
 	}
-
+	void OnDisable() {
+		if (currentTouchID != null) {
+			returnJoystickToOriginalPosition();
+		}
+	}
 	// magnitude is normalized to having max at 1 for each outer and inner.
 	void OuterAreaFunction() {
 		if (!UseOuterArea) return;
@@ -324,7 +332,9 @@ public class JoyStick : MonoBehaviour {
 		SetControlScript();
 	}
 	void JoystickUsage() {
-		if (controlScript == null || !Controllable) return;
+		updateFrameTime();
+		if (controlScript == null || !Controllable) { }
+		setPastPositions();
 		SetTouchID();
 		setDisplacementAndCheckForStoppingControls();
 		MainFunctionality();
@@ -341,15 +351,15 @@ public class JoyStick : MonoBehaviour {
 
 
 
-
 	List<float> frameTimes = new List<float>();
 	List<Vector2> pastPositions = new List<Vector2>();
 	float frameTime = 0.01f;
+	int joystickMovementSmoothingCalculationMaxFrames = 20;
 	void updateFrameTime() {
 		if (frameTimes.Count == 0) frameTimes.Add(0.01f);
 		float time = Time.unscaledDeltaTime;
 		frameTimes.Add(time);
-		if (frameTimes.Count > 10) frameTimes.RemoveAt(0);
+		if (frameTimes.Count > joystickMovementSmoothingCalculationMaxFrames) frameTimes.RemoveAt(0);
 		frameTime = frameTimes.Average();
 	}
 	#endregion

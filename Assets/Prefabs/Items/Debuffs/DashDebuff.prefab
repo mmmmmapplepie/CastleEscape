@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1607549232881305773}
   - component: {fileID: 8184073451196302934}
   - component: {fileID: 1974755012151333372}
+  - component: {fileID: 8740603630120293842}
   m_Layer: 0
   m_Name: DashDebuff
   m_TagString: Untagged
@@ -146,13 +147,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: DashDebuff
   IsABuff: 0
-  consumeParticleEffect: {fileID: 0}
+  consumeParticleEffect: {fileID: 5670549468338301185, guid: edc27ffa7fb9d2f418a232840a0ecd9b, type: 3}
   itemTime: 20
   sfxClip: {fileID: 8300000, guid: dde572b15cd8cd2488fa655fb29b2f32, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}
   UIItemDummyPrefab: {fileID: 4752792858218526008, guid: c8fa1ef9779f9254e901f172cfc282a0, type: 3}
   UIItemHolder: {fileID: 0}
   player: {fileID: 0}
+--- !u!114 &8740603630120293842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273485022342163795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191945ab89e2015449d38dd7247cba95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 1
+  amplitude: 0.25
+  phase: 0
 --- !u!1 &4877006161383350554
 GameObject:
   m_ObjectHideFlags: 0

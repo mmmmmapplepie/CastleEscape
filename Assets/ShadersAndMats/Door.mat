@@ -64,7 +64,7 @@ Material:
     - _speed: 0.2
     m_Colors:
     - _CenterPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _Color: {r: 0.19607846, g: 1.4980392, b: 1.0496093, a: 0}
+    - _Color: {r: 0.0030812565, g: 0.7348872, b: 0.5088319, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &683171376412869694
 MonoBehaviour:
