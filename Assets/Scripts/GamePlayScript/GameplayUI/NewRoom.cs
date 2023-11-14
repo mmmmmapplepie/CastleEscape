@@ -16,10 +16,10 @@ public class NewRoom : MonoBehaviour {
 	void ClearRoom() {
 		StartCoroutine(ClearRoomRoutine());
 	}
-	float halfTransitionTime = 2f;
+	float halfTransitionTime = 1f;
 	IEnumerator ClearRoomRoutine() {
 		GetComponent<AudioPlayer>().PlaySound("change room");
-		//make a cool looking boxes thingy. (idk how to make yet)
+		//make a cool looking boxes thingy. preferably as a shader.
 		Time.timeScale = 0f;
 		clearImage.raycastTarget = true;
 		float startTime = Time.unscaledTime;
@@ -41,6 +41,7 @@ public class NewRoom : MonoBehaviour {
 		}
 		straightChange(0f);
 		Time.timeScale = 1f;
+		print(1);
 		roomClearPanel.sizeDelta = Vector2.zero;
 		GameStateManager.changingRoom = false;
 		clearImage.raycastTarget = false;

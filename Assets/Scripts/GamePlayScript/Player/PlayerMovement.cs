@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		ItemsController.luck = playerObject.Luck;
 		setLightStrengths();
 		changeSprite();
+		SetParticleEffectColors();
 	}
 	void RevertToIntialSettings() {
 		if (GameStateManager.InGame) {
@@ -78,6 +79,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void StateChangePosition(bool newroom = true) {
 		if (newroom) {
 			transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
+			DashPE.Play();
+			DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		} else {
 			transform.position = new Vector3(0f, 1f, 0f);
 		}
@@ -136,6 +139,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
+			StartCoroutine(DashEffect(DashControl));
 			RB.velocity = dashSpeed * DashControl * GameBuffsManager.DashRegenerationRateMultiplier;
 			RB.gravityScale = 0f;
 			RB.drag = 0f;
@@ -172,7 +176,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		RaycastHit2D groundCastBottom = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
 		RaycastHit2D groundCastTop = Physics2D.BoxCast((Vector2)playerColl.bounds.center - new Vector2(0f, ySize / 2f - 0.02f), new Vector2(xSize, 0.02f), 0f, Vector2.down, 0.01f, groundedMask);
 		if (RB.velocity.y <= 0f && groundCastBottom && !groundCastTop) {
-			if (!grounded) oneOffSound(PlayerAudio.audioType.land);
+			if (!grounded) {
+				oneOffSound(PlayerAudio.audioType.land);
+				LandAndDmg(LandPE, landPos);
+			}
 			return true;
 		} else {
 			return false;
@@ -196,7 +203,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	IEnumerator dropThroughPlatform() {
 		float initialY = transform.position.y;
 		playerColl.isTrigger = true;
-		while (transform.position.y > initialY - 0.5f) {
+		while (transform.position.y > initialY - 1f) {
 			yield return null;
 		}
 		StopDropping();
@@ -442,4 +449,36 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		audioScript.playOneShotAudio(type, soundFootsteps);
 	}
 	#endregion
+
+	public GameObject DmgPE, LandPE;
+	public ParticleSystem DashPE;
+	[SerializeField] Transform PEHolder;
+	void SetParticleEffectColors() {
+		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+		ParticleSystem.MainModule mod = DmgPE.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+		mod = DashPE.transform.Find("Glow").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+		mod = DashPE.transform.Find("Rays").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+	}
+
+	Vector3 landPos = new Vector3(0, -1f, 0);
+	public void LandAndDmg(GameObject PE, Vector3 pos) {
+		if (PE == LandPE) {
+			Instantiate(PE, transform.position + landPos, Quaternion.identity);
+			return;
+		}
+		Transform t = Instantiate(PE, PEHolder).transform;
+		t.localPosition = pos;
+	}
+	IEnumerator DashEffect(Vector3 dir) {
+		Transform DPET = DashPE.transform;
+		Quaternion fRot = Quaternion.LookRotation(Vector3.forward, dir);
+		DPET.rotation = Quaternion.RotateTowards(DPET.rotation, fRot, 180f);
+		DPET.localPosition = dir * 1.5f;
+		DashPE.Play();
+		yield return new WaitForSeconds(dashTime);
+		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+	}
 }

@@ -1,11 +1,11 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour {
 	public new string name;
 	public bool IsABuff = false;
-	public GameObject consumeParticleEffect = null;
+	public GameObject LingeringParticleEffect = null;
+	public GameObject burstParticleEffect = null;
 
 	//itemTime below is the time it takes for the item to wear off. 0 mean item effects are instantaneous and dont add to UI.
 	public float itemTime = 0f;
@@ -36,12 +36,12 @@ public class Item : MonoBehaviour {
 		}
 	}
 	void CheckAddingItemToUI(Collider2D coll) {
+		ItemVisuals(coll.transform.root.Find("PEHolder"));
 		if (itemTime == 0) return;
 		UIItem itemPresent = FindForItemInUI();
 		if (itemPresent != null) {
 			ExtendItemTime(itemPresent); return;
 		} else {
-			ItemVisuals(coll.transform.root.Find("PEHolder"));
 			AddItemToUI();
 		}
 	}
@@ -80,21 +80,15 @@ public class Item : MonoBehaviour {
 	protected virtual void EndItemEffect() { }
 	GameObject PE = null;
 	void ItemVisuals(Transform player) {
-		if (consumeParticleEffect != null) {
-			if (itemTime != 0f) {
-				PE = Instantiate(consumeParticleEffect, player);
-			} else {
-				Instantiate(consumeParticleEffect, transform.position, Quaternion.identity);
-			}
+		if (LingeringParticleEffect != null) {
+			PE = Instantiate(LingeringParticleEffect, player);
+		}
+		if (burstParticleEffect != null) {
+			Instantiate(burstParticleEffect, transform.position, Quaternion.identity);
 		}
 	}
 	void ItemSound() {
 		AudioPlayer audioS = UIItemHolder.gameObject.GetComponent<AudioPlayer>();
 		audioS.PlaySound(sfxClip.name, 0f);
 	}
-	// void OnDestroy() {
-	// 	if (EndingCalled || !GameStateManager.InGame || !itemConsumed) return;
-	// 	print(1);
-	// 	EndItemEffect();
-	// }
 }

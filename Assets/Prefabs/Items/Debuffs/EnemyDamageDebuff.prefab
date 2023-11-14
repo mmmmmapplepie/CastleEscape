@@ -147,7 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: EnemyDamageDebuff
   IsABuff: 0
-  consumeParticleEffect: {fileID: 2006365991972197376, guid: 8660fa886c3ef924eaff5cc0cb908d29, type: 3}
+  LingeringParticleEffect: {fileID: 2006365991972197376, guid: 8660fa886c3ef924eaff5cc0cb908d29, type: 3}
+  burstParticleEffect: {fileID: 3991579808942177665, guid: 6cb7412fc9755e54ab4bc6c90940f1ee, type: 3}
   itemTime: 20
   sfxClip: {fileID: 8300000, guid: dde572b15cd8cd2488fa655fb29b2f32, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}

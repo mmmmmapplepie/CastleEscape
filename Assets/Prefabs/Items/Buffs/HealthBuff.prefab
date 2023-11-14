@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Heal
   IsABuff: 1
-  consumeParticleEffect: {fileID: 0}
+  LingeringParticleEffect: {fileID: 0}
+  burstParticleEffect: {fileID: 3404816366082056523, guid: 478f085008d40434a8d03debd893653a, type: 3}
   itemTime: 10
   sfxClip: {fileID: 8300000, guid: 8be4c07cbc852cf4db5996bd7bdbf5cd, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}

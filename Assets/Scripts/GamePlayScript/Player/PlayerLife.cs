@@ -53,7 +53,11 @@ public class PlayerLife : MonoBehaviour {
 	}
 	void SetPEOnOrOff(bool on) {
 		foreach (Transform t in transform.Find("PEHolder")) {
-			t.gameObject.SetActive(on);
+			if (on) {
+				t.gameObject.GetComponent<ParticleSystem>().Play();
+			} else {
+				t.gameObject.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			}
 		}
 	}
 
@@ -65,6 +69,7 @@ public class PlayerLife : MonoBehaviour {
 		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return false;
 		Health += amount;
 		if (amount < 0) {
+			MovementScript.LandAndDmg(MovementScript.DmgPE, Vector3.zero);
 			MovementScript.oneOffSound(PlayerAudio.audioType.dmg);
 			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine(recoveryTime));
 			checkDeath();

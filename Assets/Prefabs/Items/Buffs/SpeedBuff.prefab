@@ -147,7 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SpeedBuff
   IsABuff: 1
-  consumeParticleEffect: {fileID: 5450642320510190514, guid: a466ce9d855fea74b8a8fff5f61d9ed5, type: 3}
+  LingeringParticleEffect: {fileID: 5450642320510190514, guid: a466ce9d855fea74b8a8fff5f61d9ed5, type: 3}
+  burstParticleEffect: {fileID: 5913084744351135984, guid: 8895855595c96044b9606230f9a4f8c7, type: 3}
   itemTime: 30
   sfxClip: {fileID: 8300000, guid: a7fec37a31a8bcc4095c9e7d68022e1a, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}

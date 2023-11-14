@@ -147,7 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: DashBuff
   IsABuff: 1
-  consumeParticleEffect: {fileID: 8040706535552748817, guid: c297807360f03944592486bcfaeafbcc, type: 3}
+  LingeringParticleEffect: {fileID: 8040706535552748817, guid: c297807360f03944592486bcfaeafbcc, type: 3}
+  burstParticleEffect: {fileID: 1540229595608436231, guid: 42f675b6e1516474b8d753d5a4081d0b, type: 3}
   itemTime: 20
   sfxClip: {fileID: 8300000, guid: a7fec37a31a8bcc4095c9e7d68022e1a, type: 3}
   UIItemPrefab: {fileID: 3316412810277199410, guid: 1b8f9cece510b3b41a9dc574bef82d62, type: 3}
