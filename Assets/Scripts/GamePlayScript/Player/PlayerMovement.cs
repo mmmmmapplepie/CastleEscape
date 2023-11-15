@@ -79,11 +79,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void StateChangePosition(bool newroom = true) {
 		if (newroom) {
 			transform.position = Camera.main.transform.position = new Vector3(0f, 1f, 0f);
-			DashPE.Play();
-			DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		} else {
 			transform.position = new Vector3(0f, 1f, 0f);
 		}
+		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		RB.velocity = Vector2.zero;
 		changeAnimation("Idle");
 	}
@@ -91,6 +90,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		StopAllCoroutines();
 		RevertToIntialSettings();
 		StartCoroutine(deathCoroutine());
+		DashEffect(Vector3.zero, false);
 	}
 	IEnumerator deathCoroutine() {
 		animator.speed = 0f;
@@ -139,7 +139,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
-			StartCoroutine(DashEffect(DashControl));
 			RB.velocity = dashSpeed * DashControl * GameBuffsManager.DashRegenerationRateMultiplier;
 			RB.gravityScale = 0f;
 			RB.drag = 0f;
@@ -153,6 +152,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		}
 	}
 	void DashAnimation() {
+		DashEffect(DashControl);
 		float angle = DashControl.x != 0f ? (180f / Mathf.PI) * Mathf.Atan(Mathf.Abs(DashControl.y / DashControl.x)) : 90f;
 		if (angle > 45f) {
 			if (DashControl.y > 0) {
@@ -221,6 +221,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	void endDashChanges() {
 		if (RB != null) RB.drag = 2f;
 		dashing = false;
+		DashEffect(DashControl, false);
 	}
 	IEnumerator notDashingChange() {
 		yield return new WaitForSeconds(dashCooldown);
@@ -472,13 +473,15 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		Transform t = Instantiate(PE, PEHolder).transform;
 		t.localPosition = pos;
 	}
-	IEnumerator DashEffect(Vector3 dir) {
-		Transform DPET = DashPE.transform;
-		Quaternion fRot = Quaternion.LookRotation(Vector3.forward, dir);
-		DPET.rotation = Quaternion.RotateTowards(DPET.rotation, fRot, 180f);
-		DPET.localPosition = dir * 1.5f;
-		DashPE.Play();
-		yield return new WaitForSeconds(dashTime);
-		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+	void DashEffect(Vector3 dir, bool turnOn = true) {
+		if (turnOn) {
+			Transform DPET = DashPE.transform;
+			Quaternion fRot = Quaternion.LookRotation(Vector3.forward, dir);
+			DPET.rotation = Quaternion.RotateTowards(DPET.rotation, fRot, 180f);
+			DPET.localPosition = dir * 1.5f;
+			DashPE.Play();
+		} else {
+			DashPE.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+		}
 	}
 }
