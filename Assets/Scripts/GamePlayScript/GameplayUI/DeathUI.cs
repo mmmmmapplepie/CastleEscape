@@ -23,8 +23,8 @@ public class DeathUI : MonoBehaviour {
 		DeathCanvas.sortingOrder = 150;
 		float initialCamSize = 10f;
 		float finalCamSize = 1f;
-		float greyer = 0.9f;
-		Color c = CurrentSettings.CurrentPlayerType.color - new Color(greyer, greyer, greyer);
+		float greyer = 0.95f;
+		Color c = CurrentSettings.CurrentPlayerType.color - new Color(greyer, greyer, greyer, 0f);
 		while (t > 0f) {
 			float increasingRatio = (tm - t) / tm;
 			float decreasingRatio = t / tm;

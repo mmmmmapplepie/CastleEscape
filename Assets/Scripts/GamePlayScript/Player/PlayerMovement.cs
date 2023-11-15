@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			RB.velocity = Vector3.zero;
 			RB.gravityScale = 0f;
 		}
+		transform.Find("PlayerSprite").localPosition = Vector3.zero;
+		transform.Find("PlayerSprite").gameObject.GetComponent<SimpleMovement>().enabled = false;
 		dashAble = true; grounded = false; tempGrounded = false; dashing = false; HaltUsed = false; dashCharge = 0;
 		endDashChanges();
 	}
@@ -99,12 +101,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		float tm = DeathUI.deathRoutineTime;
 		float t = tm;
 		while (t > 0f) {
-			float r = t / tm;
+			float r = (t / tm) * (t / tm);
 			sr.color = new Color(c.r * r, c.g * r, c.b * r, 1f);
 			t -= Time.unscaledDeltaTime;
 			yield return null;
 		}
-		// changeAnimation("Dead");
+		changeAnimation("Dead");
+		transform.Find("PlayerSprite").gameObject.GetComponent<SimpleMovement>().enabled = true;
 		sr.color = c;
 		animator.speed = 1f;
 	}
