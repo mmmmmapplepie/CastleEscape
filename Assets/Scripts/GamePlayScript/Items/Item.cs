@@ -21,11 +21,9 @@ public class Item : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D coll) {
 		ItemTrigger(coll);
 	}
-	bool itemConsumed = false;
 	void ItemTrigger(Collider2D coll) {
 		if ((UIItemHolder.childCount > 5 || triggered) && itemTime != 0f) return;
 		if (coll.tag == "Player") {
-			itemConsumed = true;
 			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
 			player = coll.transform.root.gameObject;
 			triggered = true;
@@ -53,7 +51,6 @@ public class Item : MonoBehaviour {
 		}
 		return null;
 	}
-	bool EndingCalled = false;
 	void AddItemToUI() {
 		UIItemPrefab.GetComponent<UIItem>().playerColor = playerColor;
 		UIItemPrefab.GetComponent<UIItem>().remainingTime = itemTime;
@@ -63,7 +60,6 @@ public class Item : MonoBehaviour {
 		script.IsABuff = IsABuff;
 		uIItem.transform.Find("Image").gameObject.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		script.EndFunction = EndItemEffect;
-		EndingCalled = true;
 		GameObject Dummy = Instantiate(UIItemDummyPrefab, uIItem.transform.parent.parent.Find("DummyHolder"));
 		Dummy.GetComponent<Image>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 		Dummy.GetComponent<RectTransform>().anchoredPosition = new Vector2(300f, 80f);

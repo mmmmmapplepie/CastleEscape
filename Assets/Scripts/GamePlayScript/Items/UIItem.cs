@@ -54,14 +54,12 @@ public class UIItem : MonoBehaviour {
 		dummyImage.color = new Color(1f, 1f, 1f, Mathf.Lerp(0f, initialAlpha, ratio));
 	}
 	Vector2 ImageOffset = new Vector2(0f, 10f);
-	bool dummyBound = false;
 	IEnumerator ChangeDummyPosition() {
 		float timeElapsed = 0f;
 		while (dummyRT != null) {
 			if (timeElapsed < halfDummyMoveTime) { timeElapsed += Time.unscaledDeltaTime; yield return null; continue; }
 			Vector2 targetPos = RT.anchoredPosition + ImageOffset;
 			if ((dummyRT.anchoredPosition - targetPos).magnitude <= 0.3f) {
-				dummyBound = true;
 				ItemDummy.SetParent(transform);
 				dummyRT.anchoredPosition = transform.Find("Image").gameObject.GetComponent<RectTransform>().anchoredPosition + 50f * Vector2.right;
 				yield break;

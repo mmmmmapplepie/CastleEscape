@@ -41,7 +41,6 @@ public class NewRoom : MonoBehaviour {
 		}
 		straightChange(0f);
 		Time.timeScale = 1f;
-		print(1);
 		roomClearPanel.sizeDelta = Vector2.zero;
 		GameStateManager.changingRoom = false;
 		clearImage.raycastTarget = false;

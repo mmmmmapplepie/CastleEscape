@@ -97,10 +97,12 @@ public class JoyStick : MonoBehaviour {
 		InitialTouchSensingRadius = Mathf.Min(JoystickSensingRadius * pixelsPerUnit, OuterAreaDistance);
 	}
 
+
+	RectTransform thisRT;
 	void SetTouchID() {
 		if (Input.touchCount < 1 || currentTouchID != null) return;
 		int numberofchecks = Mathf.Min(Input.touchCount, touchesToCheck);
-		Vector2 joystickPosition = GetComponent<RectTransform>().anchoredPosition;
+		Vector2 joystickPosition = GetComponent<RectTransform>().anchoredPosition + anchoredPositionOrigin;
 		for (int i = 0; i < numberofchecks; i++) {
 			Touch touch = Input.GetTouch(i);
 			if (RequireFirstTouchInside) {
@@ -127,14 +129,24 @@ public class JoyStick : MonoBehaviour {
 
 	#region Canvas Scaling
 	float canvasHeight = 1000f;
+	float canvasWidth = 1600f;
 	float canvasScale = 1f;
 	float mainCameraSize = 10f;
 	void setCanvasScales() {
+		thisRT = GetComponent<RectTransform>();
 		GameObject canvasO = transform.root.gameObject;
 		canvasHeight = canvasO.GetComponent<CanvasScaler>().referenceResolution.y;
+		canvasWidth = canvasO.GetComponent<CanvasScaler>().referenceResolution.x;
 		canvasScale = canvasO.GetComponent<Canvas>().scaleFactor;
+		changeAnchoredPositionAccordingToCanvas();
 		//requires appropriate camera to be set to the joystick canvas. - in my case it was main camera.
 		mainCameraSize = canvasO.GetComponent<Canvas>().worldCamera.orthographicSize;
+	}
+	Vector2 anchoredPositionOrigin = Vector2.zero;
+	void changeAnchoredPositionAccordingToCanvas() {
+		float xratio = (thisRT.anchorMax.x + thisRT.anchorMin.x) / 2f;
+		float yratio = (thisRT.anchorMax.y + thisRT.anchorMin.y) / 2f;
+		anchoredPositionOrigin = new Vector2(xratio * canvasWidth, yratio * canvasHeight);
 	}
 	#endregion
 
@@ -158,7 +170,7 @@ public class JoyStick : MonoBehaviour {
 	float InnerAreaDistance;
 	void SetAreaThresholdDistance() {
 		//the width of the "joystickholder" - OutOfBoundsDistance - determines the distance when the controls will be lifted from the joystick.
-		OutOfBoundsDistance = GetComponent<RectTransform>().rect.width / 2f;
+		OutOfBoundsDistance = thisRT.rect.width / 2f;
 		OuterAreaDistance = OuterArea.GetComponent<RectTransform>().rect.width / 2f;
 		InnerAreaDistance = InnerArea.GetComponent<RectTransform>().rect.width / 2f;
 		handleBasePosition = Handle.GetComponent<RectTransform>().anchoredPosition;
@@ -180,7 +192,7 @@ public class JoyStick : MonoBehaviour {
 	Vector2 setJoystickDisplacement() {
 		if (currentTouchID == null) return Vector2.zero;
 		Touch touch = returnTouchWithID();
-		return (touch.position / canvasScale) - GetComponent<RectTransform>().anchoredPosition;
+		return (touch.position / canvasScale) - (thisRT.anchoredPosition + anchoredPositionOrigin);
 	}
 	Touch returnTouchWithID() {
 		int numberofchecks = Mathf.Min(Input.touchCount, touchesToCheck);
@@ -333,7 +345,7 @@ public class JoyStick : MonoBehaviour {
 	}
 	void JoystickUsage() {
 		updateFrameTime();
-		if (controlScript == null || !Controllable) { }
+		if (controlScript == null || !Controllable) return;
 		setPastPositions();
 		SetTouchID();
 		setDisplacementAndCheckForStoppingControls();
@@ -378,7 +390,13 @@ public class JoyStick : MonoBehaviour {
 		JoystickInitialization();
 	}
 
+
+	Vector2 tempAnchorPos = Vector2.zero;
 	void Update() {
+		if (thisRT.anchoredPosition != tempAnchorPos) {
+			tempAnchorPos = thisRT.anchoredPosition;
+			changeAnchoredPositionAccordingToCanvas();
+		}
 		if (gameObject.activeSelf == false) return;
 		JoystickUsage();
 	}
