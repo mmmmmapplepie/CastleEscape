@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
-using TreeEditor;
 
 public class TilePositionSizeRandomizer : MonoBehaviour {
 	public Vector2 TileAnchorCenter;
