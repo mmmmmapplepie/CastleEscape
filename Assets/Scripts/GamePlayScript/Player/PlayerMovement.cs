@@ -17,6 +17,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		GameStateManager.EnterMenu += SetupStats;
 		GameStateManager.EnterMenu += () => StateChangePosition(false);
 	}
+	void EndGame() {
+		StopAllCoroutines();
+		audioScript.StopSound("player panicking");
+		RevertToIntialSettings();
+		StartCoroutine(deathCoroutine());
+		DashEffect(Vector3.zero, false);
+	}
 	public void SetupStats() {
 		RevertToIntialSettings();
 		lifeScript.maxHealth = playerObject.MaxHealth * 2;
@@ -87,12 +94,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		RB.velocity = Vector2.zero;
 		changeAnimation("Idle");
-	}
-	void EndGame() {
-		StopAllCoroutines();
-		RevertToIntialSettings();
-		StartCoroutine(deathCoroutine());
-		DashEffect(Vector3.zero, false);
 	}
 	IEnumerator deathCoroutine() {
 		animator.speed = 0f;
@@ -291,7 +292,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		float starttime = panicTime / 8f;
 		float initialIntensity = torchLight.intensity;
 		if (audioScript.CheckPlaying("player panicking")) {
-			audioScript.changeVolume("player panicking", panicMaxVol, true);
+			audioScript.changeVolume("player panicking", panicMaxVol, 0f, true);
 		} else {
 			audioScript.PlaySound("player panicking", panicTime / 2f, true, panicMaxVol);
 		}

@@ -1508,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 1940306955}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: RequireFirstTouchInside
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8967482146306948106, guid: 6580ce9c0706f6f4ba3369215a5b019c, type: 3}
       propertyPath: InnerFunctionActiveWhileInOuter
@@ -102680,6 +102680,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 1
 --- !u!223 &696013876
 Canvas:
   m_ObjectHideFlags: 0
@@ -103393,6 +103394,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 1
 --- !u!1 &743342072
 GameObject:
   m_ObjectHideFlags: 0
@@ -105655,6 +105657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 919363061}
   - component: {fileID: 919363062}
+  - component: {fileID: 919363063}
   m_Layer: 0
   m_Name: BGMAudio
   m_TagString: Untagged
@@ -105691,8 +105694,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - audioSource: {fileID: 0}
-    Name: 
-    clip: {fileID: 0}
+    Name: Background
+    clip: {fileID: 8300000, guid: d271a868c30435c47995a8edb89759c3, type: 3}
+    priority: 255
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    spatialBlend: 0
+  - audioSource: {fileID: 0}
+    Name: Menu
+    clip: {fileID: 8300000, guid: 236882386c518fb4ba01ec687d88e141, type: 3}
     priority: 255
     volume: 1
     pitch: 1
@@ -105700,8 +105712,8 @@ MonoBehaviour:
     playOnAwake: 0
     spatialBlend: 0
   - audioSource: {fileID: 0}
-    Name: 
-    clip: {fileID: 0}
+    Name: 1HP
+    clip: {fileID: 8300000, guid: 304e84c31fc21c54c95fd99a4f4b6b18, type: 3}
     priority: 255
     volume: 1
     pitch: 1
@@ -105709,14 +105721,29 @@ MonoBehaviour:
     playOnAwake: 0
     spatialBlend: 0
   - audioSource: {fileID: 0}
-    Name: 
-    clip: {fileID: 0}
+    Name: Play
+    clip: {fileID: 8300000, guid: 929386e60032d2a45b4b1c984958b7bb, type: 3}
     priority: 255
-    volume: 0
+    volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 0
+--- !u!114 &919363063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919363060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f97820490b0a84fb55aaf9f5b4af49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AP: {fileID: 919363062}
+  lifeS: {fileID: 1372634225}
 --- !u!1 &931891554
 GameObject:
   m_ObjectHideFlags: 0
@@ -106454,6 +106481,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 1
 --- !u!1 &991421745
 GameObject:
   m_ObjectHideFlags: 0
@@ -120851,6 +120879,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 1
 --- !u!1 &1674590881
 GameObject:
   m_ObjectHideFlags: 0
@@ -127954,6 +127983,7 @@ MonoBehaviour:
     loop: 1
     playOnAwake: 0
     spatialBlend: 0
+  UseClipNames: 1
 --- !u!1 &1860816193
 GameObject:
   m_ObjectHideFlags: 0

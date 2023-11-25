@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -28,14 +29,21 @@ public class PlayerLife : MonoBehaviour {
 	Color playerColor;
 	void Awake() {
 		GameStateManager.GameEnd += EndGame;
+		GameStateManager.GameEnd += endPanic;
 		GameStateManager.EnterMenu += EndGame;
 		GameStateManager.GameStart += StartGame;
 		GameStateManager.StartNewRoom += NewRoom;
 		GameStateManager.RoomCleared += RoomClear;
 
 	}
+	void endPanic() {
+		if (panic) {
+			panicEnd?.Invoke();
+		}
+	}
 	void EndGame() {
 		StopAllCoroutines();
+
 	}
 	void StartGame() {
 		hitRecoveryRoutineHolder = null;
@@ -120,11 +128,13 @@ public class PlayerLife : MonoBehaviour {
 	void CheckPanickAttack() {
 		if (Fear >= 100f) { PanicRoutine = StartCoroutine(Panicking()); }
 	}
+	public static event Action panicStart, panicEnd;
 	IEnumerator Panicking() {
 		panicImminent = true;
 		while (!MovementScript.grounded || MovementScript.dashing) {
 			yield return null;
 		}
+		panicStart?.Invoke();
 		panic = true;
 		panicImminent = false;
 		MovementScript.StopDropping();
@@ -134,6 +144,7 @@ public class PlayerLife : MonoBehaviour {
 		yield return new WaitForSeconds(panicTime);
 		MovementScript.changeAnimation("Idle", 0.1f);
 		MovementScript.recoveredFromPanicAttack();
+		panicEnd?.Invoke();
 		panic = false;
 		Fear = 0f;
 	}

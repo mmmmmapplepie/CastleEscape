@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpeedDebuff : Item {
 	protected override void ItemEffect() {
-		GameBuffsManager.PlayerSpeedMultiplier /= 1.5f;
+		GameBuffsManager.PlayerSpeedMultiplier /= 2f;
 	}
 	protected override void EndItemEffect() {
-		GameBuffsManager.PlayerSpeedMultiplier *= 1.5f;
+		GameBuffsManager.PlayerSpeedMultiplier *= 2f;
 	}
 }
