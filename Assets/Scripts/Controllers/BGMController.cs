@@ -11,16 +11,15 @@ public class BGMController : MonoBehaviour {
 		PlayerLife.panicEnd += panicEnd;
 		GameStateManager.EnterMenu += menu;
 		GameStateManager.GameStart += enterPlay;
+		GameStateManager.GameEnd += stop1HP;
 		startAudios();
 	}
 	void startAudios() {
 		AP.PlaySound("Background", 0.5f);
 		BGMroot = AP.findSound("Background").audioSource;
 		AP.PlaySound("Menu", 0.5f);
-		AP.PlaySound("1HP", 0f);
-		AP.changeVolume("1HP", 0f);
-		AP.PlaySound("Play", 0f);
-		AP.changeVolume("Play", 0f);
+		AP.PlaySound("1HP", 0f, false, 0f);
+		AP.PlaySound("Play", 0f, false, 0f);
 	}
 	string[] repeatAudioNames = { "Menu", "1HP", "Play" };
 	void RepeatAudio(float normTime = 0f) {
@@ -47,6 +46,7 @@ public class BGMController : MonoBehaviour {
 	}
 	void menu() {
 		inPanic = false;
+		playing1HP = false;
 		AP.changeVolume("1HP", 0f, 0.2f);
 		AP.changeVolume("Play", 0f, 2f);
 		AP.changeVolume("Menu", 1f, 2f);
@@ -69,12 +69,33 @@ public class BGMController : MonoBehaviour {
 		}
 		prevRatio = remaining;
 	}
+	void stop1HP() {
+		AP.changeVolume("1HP", 0f, 0.2f);
+		playing1HP = false;
+	}
+	bool playing1HP = false;
+	bool panicTemp = false;
 	void Check1HP() {
 		if (!GameStateManager.InGame) return;
-		if (lifeS.Health == 1) {
-			AP.changeVolume("1HP", 1f, 0.5f);
-		} else {
+		if (lifeS.Health == 1 && !playing1HP) {
+			playing1HP = true;
+			if (inPanic) {
+				AP.changeVolume("1HP", 0.6f, 0.5f);
+			} else {
+				AP.changeVolume("1HP", 1f, 0.5f);
+			}
+		}
+		if (lifeS.Health != 1 && playing1HP) {
+			playing1HP = false;
 			AP.changeVolume("1HP", 0f, 0.5f);
 		}
+		if (!playing1HP) return;
+		if (!panicTemp && inPanic) {
+			AP.changeVolume("1HP", 0.6f, 0.5f);
+		}
+		if (panicTemp && !inPanic) {
+			AP.changeVolume("1HP", 1f, 0.5f);
+		}
+		panicTemp = inPanic;
 	}
 }

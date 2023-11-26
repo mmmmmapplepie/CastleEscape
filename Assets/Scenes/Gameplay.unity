@@ -2687,6 +2687,7 @@ MonoBehaviour:
   frequency: 1.5
   amplitude: 10
   phase: 1.5707964
+  setPositionOnEnable: 0
 --- !u!1 &187539260
 GameObject:
   m_ObjectHideFlags: 0
@@ -113881,6 +113882,7 @@ MonoBehaviour:
   frequency: 1
   amplitude: 15
   phase: 90
+  setPositionOnEnable: 0
 --- !u!114 &1184077615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117383,6 +117385,7 @@ MonoBehaviour:
   frequency: 1.5
   amplitude: 10
   phase: 0
+  setPositionOnEnable: 0
 --- !u!114 &1379994290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117626,6 +117629,7 @@ MonoBehaviour:
   frequency: 1.5
   amplitude: 10
   phase: 0
+  setPositionOnEnable: 0
 --- !u!1 &1386822626
 GameObject:
   m_ObjectHideFlags: 0
@@ -131951,6 +131955,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2752250722599454273, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3754237965873142213, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
       propertyPath: m_Name
       value: Player
@@ -132051,6 +132059,7 @@ MonoBehaviour:
   frequency: 4
   amplitude: 0.25
   phase: 0
+  setPositionOnEnable: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

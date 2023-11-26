@@ -4,7 +4,12 @@ public class SimpleMovement : MonoBehaviour {
 	RectTransform rect = null;
 	float x, y;
 	[SerializeField] float frequency, amplitude, phase;
+	public bool setPositionOnEnable = false;
+
 	void Awake() {
+		setPosition();
+	}
+	void setPosition() {
 		if (GetComponent<RectTransform>()) {
 			rect = GetComponent<RectTransform>();
 			x = rect.anchoredPosition.x;
@@ -12,6 +17,11 @@ public class SimpleMovement : MonoBehaviour {
 		} else {
 			x = transform.position.x;
 			y = transform.position.y;
+		}
+	}
+	void OnEnable() {
+		if (setPositionOnEnable) {
+			setPosition();
 		}
 	}
 	void Update() {

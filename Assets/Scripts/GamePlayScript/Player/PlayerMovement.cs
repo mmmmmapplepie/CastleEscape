@@ -292,9 +292,9 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		float starttime = panicTime / 8f;
 		float initialIntensity = torchLight.intensity;
 		if (audioScript.CheckPlaying("player panicking")) {
-			audioScript.changeVolume("player panicking", panicMaxVol, 0f, true);
+			audioScript.changeVolume("player panicking", panicMaxVol, 0f);
 		} else {
-			audioScript.PlaySound("player panicking", panicTime / 2f, true, panicMaxVol);
+			audioScript.PlaySound("player panicking", panicTime / 2f, false, panicMaxVol);
 		}
 		while (starttime > 0f) {
 			if (currentAnimation != "Fear") changeAnimation("Fear");
