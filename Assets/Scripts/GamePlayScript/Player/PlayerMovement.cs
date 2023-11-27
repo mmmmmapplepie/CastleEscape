@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.XR;
 
 public class PlayerMovement : MonoBehaviour, JoystickController {
 	public PlayerType playerObject;
@@ -9,7 +10,6 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	public PlayerLife lifeScript;
 	[SerializeField] Animator animator;
 	string currentAnimation = "";
-
 	void Awake() {
 		GameStateManager.GameStart += SetupStats;
 		GameStateManager.GameEnd += EndGame;
@@ -460,12 +460,24 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	[SerializeField] Transform PEHolder;
 	void SetParticleEffectColors() {
 		DashPE.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-		ParticleSystem.MainModule mod = DmgPE.GetComponent<ParticleSystem>().main;
+		ParticleSystem.MainModule mod = DashPE.GetComponent<ParticleSystem>().main;
 		mod.startColor = playerObject.color;
 		mod = DashPE.transform.Find("Glow").gameObject.GetComponent<ParticleSystem>().main;
 		mod.startColor = playerObject.color;
 		mod = DashPE.transform.Find("Rays").gameObject.GetComponent<ParticleSystem>().main;
 		mod.startColor = playerObject.color;
+		mod = DashPE.transform.Find("Center").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = 0.2f * playerObject.color;
+
+
+		mod = DmgPE.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+		mod = DmgPE.transform.Find("Glow").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+		mod = DmgPE.transform.Find("Ray").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = playerObject.color;
+		mod = DmgPE.transform.Find("Ray2").gameObject.GetComponent<ParticleSystem>().main;
+		mod.startColor = 0.2f * playerObject.color;
 	}
 
 	Vector3 landPos = new Vector3(0, -1f, 0);
@@ -474,7 +486,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			Instantiate(PE, transform.position + landPos, Quaternion.identity);
 			return;
 		}
-		Transform t = Instantiate(PE, PEHolder).transform;
+		Transform t = Instantiate(PE, transform.position + new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f), 0), Quaternion.identity, PEHolder).transform;
 		t.localPosition = pos;
 	}
 	void DashEffect(Vector3 dir, bool turnOn = true) {

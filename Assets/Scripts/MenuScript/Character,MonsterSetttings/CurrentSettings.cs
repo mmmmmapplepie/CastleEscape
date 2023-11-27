@@ -116,7 +116,7 @@ public class CurrentSettings : MonoBehaviour {
 		}
 	}
 
-	[SerializeField] GameObject customizationBtn, StartBtn, JoystickBtn;
+	[SerializeField] GameObject GameMenu;
 	public void SaveSettings() {
 		UIAudio.PlaySound("Click");
 		for (int i = 0; i < stats.Count; i++) {
@@ -126,8 +126,6 @@ public class CurrentSettings : MonoBehaviour {
 		PlayerPrefs.SetString("SetMonster", CurrentMonster.name);
 		cameraScript.moveCamera(new Vector3(0f, 0.5f, -10f));
 		gameObject.SetActive(false);
-		customizationBtn.SetActive(true);
-		StartBtn.SetActive(true);
-		JoystickBtn.SetActive(true);
+		GameMenu.SetActive(true);
 	}
 }

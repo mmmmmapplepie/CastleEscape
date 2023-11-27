@@ -35,4 +35,17 @@ public class rantest : MonoBehaviour {
 			}
 		}
 	}
+
+
+
+	// Facing direction to move
+
+	//the input is the direction that you want to be facing.
+	void spin(Vector2 input) {
+		if (input.magnitude == 0) return;
+		//signedangle returns a -180 to 180 closest angle between 2 vector2's. we can use this directly as the angle for rotation as we are setting the rotation.
+		//we use the upwards (0x, 1y) direction in 2D for reference in angle calculation.
+		float angle = Vector2.SignedAngle(new Vector2(0f, 1f), input);
+		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+	}
 }

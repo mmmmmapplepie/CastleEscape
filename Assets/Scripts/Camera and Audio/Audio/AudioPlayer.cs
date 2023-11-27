@@ -49,6 +49,7 @@ public class AudioPlayer : MonoBehaviour {
 	public void PlaySound(string name, float fadeInTime = 0f, bool stopAllRoutines = false, float volume = 1f, bool limitVolume = true) {
 		Sound sound = findSound(name);
 		if (sound == null) return;
+		if (sound.audioSource == null) return;
 		StopFadeRoutines(name, stopAllRoutines);
 		float vol = sound.volume;
 		if (limitVolume) {
@@ -77,6 +78,7 @@ public class AudioPlayer : MonoBehaviour {
 	public void StopSound(string name, float fadeOutTime = 0f, bool stopAllRoutines = false) {
 		Sound sound = findSound(name);
 		if (sound == null) return;
+		if (sound.audioSource == null) return;
 		StopFadeRoutines(name, stopAllRoutines);
 		if (fadeOutTime == 0) {
 			sound.audioSource.volume = 0f;
@@ -124,6 +126,7 @@ public class AudioPlayer : MonoBehaviour {
 	}
 	public void changeVolume(string name, float targetVolume = 1f, float changeTime = 0f, bool stopAllRoutines = false, bool limitVolume = true) {
 		Sound sound = findSound(name);
+		if (sound.audioSource == null) return;
 		if (sound == null || !sound.audioSource.isPlaying) return;
 		float volM = sound.volume;
 		if (limitVolume) {

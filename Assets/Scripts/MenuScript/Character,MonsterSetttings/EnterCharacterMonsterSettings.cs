@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnterCharacterMonsterSettings : MonoBehaviour {
 	[SerializeField] AudioPlayer UIAudio;
-	[SerializeField] GameObject characterSettings, startBtn, JoystickBtn;
+	[SerializeField] GameObject characterSettings, GameMenu;
 	CameraFollow cameraScript;
 	void Awake() {
 		cameraScript = Camera.main.GetComponent<CameraFollow>();
@@ -12,9 +12,7 @@ public class EnterCharacterMonsterSettings : MonoBehaviour {
 		UIAudio.PlaySound("Click");
 		cameraScript.moveCamera(new Vector3(-5f, 0.5f, -10f));
 		characterSettings.SetActive(true);
-		gameObject.SetActive(false);
-		startBtn.SetActive(false);
-		JoystickBtn.SetActive(false);
+		GameMenu.SetActive(false);
 	}
 
 }

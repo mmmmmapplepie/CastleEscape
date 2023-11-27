@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7172962486909593568}
   - component: {fileID: 693202316054884469}
   m_Layer: 0
-  m_Name: TakeDmg
+  m_Name: PrevDmgPE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

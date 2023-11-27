@@ -71,7 +71,6 @@ public class PlayerLife : MonoBehaviour {
 
 
 	#region healthRelated
-
 	Coroutine hitRecoveryRoutineHolder = null;
 	public bool changeHealth(int amount, float recoveryTime = 2f) {
 		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return false;
@@ -83,7 +82,6 @@ public class PlayerLife : MonoBehaviour {
 			checkDeath();
 		}
 		return true;
-		//effects
 	}
 	IEnumerator hitRecoveryRoutine(float recoveryTime) {
 		float t = recoveryTime;

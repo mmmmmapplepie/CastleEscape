@@ -10,7 +10,7 @@ public class JoystickPosition : MonoBehaviour {
 	Vector2 LeftPos;
 	Vector2 HaltPos;
 	[SerializeField] RectTransform MovementStick, TorchStick, HaltBtn;
-	[SerializeField] GameObject ConfigureBtn, ChangeBtn, SaveBtn, StartBtn, CharacterSettingBtn, IngameMenu, JoystickPositionBtn;
+	[SerializeField] GameObject ChangeBtn, SaveBtn, IngameMenu, NonJoystickConfigure, JoystickPositionBtn;
 	float screenWidthRatioMultiplier = 1f;
 	void Start() {
 		SWidth = Screen.width;
@@ -91,31 +91,24 @@ public class JoystickPosition : MonoBehaviour {
 	}
 	public void Configure() {
 		UIAudio.PlaySound("Click");
-		ConfigureBtn.SetActive(false);
 		SaveBtn.SetActive(true);
 		ChangeBtn.SetActive(true);
 		MovementStick.transform.parent.parent.gameObject.SetActive(true);
 		IngameMenu.SetActive(true);
 		JoystickPositionBtn.SetActive(true);
-		StartBtn.SetActive(false);
-		CharacterSettingBtn.SetActive(false);
+		NonJoystickConfigure.SetActive(false);
 	}
 	public void SaveValue() {
 		UIAudio.PlaySound("Click");
 		int saveVal = RightSide == true ? 1 : 0;
 		PlayerPrefs.SetInt("Orientation", saveVal);
-		ConfigureBtn.SetActive(true);
 		SaveBtn.SetActive(false);
 		ChangeBtn.SetActive(false);
 		MovementStick.transform.parent.parent.gameObject.SetActive(false);
 		IngameMenu.SetActive(false);
 		JoystickPositionBtn.SetActive(false);
-		StartBtn.SetActive(true);
-		CharacterSettingBtn.SetActive(true);
+		NonJoystickConfigure.SetActive(true);
 	}
-
-
-
 
 	bool PositionConfigurationMode = false;
 	[SerializeField] GameObject AdjustingPanel;
