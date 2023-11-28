@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.XR;
 
 public class PlayerMovement : MonoBehaviour, JoystickController {
-	public PlayerType playerObject;
+	[HideInInspector] public PlayerType playerObject;
 	public Light2D torchLight;
 	public Light2D auraLight;
 	public PlayerLife lifeScript;
@@ -189,9 +188,10 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			return false;
 		}
 	}
+	[SerializeField] GameObject shockwavePre;
 	Coroutine droppingRoutine = null;
-	public bool HaltUsed = false;
-	public float haltFactor = 0.1f;
+	bool HaltUsed = false;
+	float haltFactor = 0f;
 	public void HaltOrDrop() {
 		if (HaltUsed || !ControllableState() || lifeScript.panic) return;
 		if (dashingRoutine != null) StopCoroutine(dashingRoutine);
@@ -200,7 +200,14 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (nonDroppable) return;
 			droppingRoutine = StartCoroutine(dropThroughPlatform());
 		} else {
+			Vector3 pos = transform.position;
+			if (RB.velocity.x > 0) {
+				pos += new Vector3(0f, 0.25f, 0f);
+			} else if (RB.velocity.x < 0) {
+				pos -= new Vector3(0f, 0.25f, 0f);
+			}
 			RB.velocity = haltFactor * RB.velocity;
+			Instantiate(shockwavePre, pos, Quaternion.identity);
 		}
 		HaltUsed = true;
 	}

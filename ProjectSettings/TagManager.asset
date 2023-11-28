@@ -52,9 +52,9 @@ TagManager:
   - name: GameEffects
     uniqueID: 597384753
     locked: 0
-  - name: UI
-    uniqueID: 1161541013
-    locked: 0
   - name: CameraSortingLayer
     uniqueID: 2291095301
+    locked: 0
+  - name: UI
+    uniqueID: 1161541013
     locked: 0

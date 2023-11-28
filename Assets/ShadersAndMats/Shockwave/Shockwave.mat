@@ -45,11 +45,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _dropoff: 8
-    - _intensity: 5
-    - _sharpness: 0.1
-    - _shockwaveWidth: 0.888
-    - _wavePosition: 0.54
+    - _WavePosition: 0.45
+    - _dropoff: 10
+    - _intensity: 1
+    - _sharpness: 0.15
+    - _shockwaveWidth: 0.4
+    - _wavePosition: 0.22
     - _width: 0.743
     m_Colors: []
   m_BuildTextureStacks: []
