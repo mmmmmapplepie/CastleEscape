@@ -114190,6 +114190,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5332911349955062708, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
   m_PrefabInstance: {fileID: 4602246580156499102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1372634230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372634219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30588e64dbfe16f4f9f09477cfc8e453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 4c916e2fdba8bd64db0afa1fe7500e1e, type: 2}
 --- !u!1 &1379994287
 GameObject:
   m_ObjectHideFlags: 0
@@ -125492,6 +125505,10 @@ PrefabInstance:
       propertyPath: dummytest
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5837862220789305942, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
+      propertyPath: fearshader
+      value: 
+      objectReference: {fileID: 1372634230}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -125499,6 +125516,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 73383178}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3754237965873142213, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1372634230}
     - targetCorrespondingSourceObject: {fileID: 8822099999280348894, guid: ebfb82088fff8824da4ea7e03764f917, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4602246580156499105}

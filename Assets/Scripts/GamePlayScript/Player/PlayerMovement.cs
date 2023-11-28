@@ -280,11 +280,13 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 
 
 	#region fear related methods
+	[SerializeField] FearShaderController fearshader;
 	public void panicAttack(float panicTime) {
 		StartCoroutine(panicDarkness(panicTime));
 	}
 	public void recoveredFromPanicAttack() {
 		audioScript.StopSound("player panicking", lifeScript.panicTime / 20f, true);
+		fearshader.SetFearEffectRoutine(0f, lifeScript.panicTime / 20f);
 		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f * GameBuffsManager.TorchModifierMultiplier;
 	}
 	float panicMaxVol = 1f;
@@ -296,6 +298,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		} else {
 			audioScript.PlaySound("player panicking", panicTime / 2f, false, panicMaxVol);
 		}
+		fearshader.SetFearEffectRoutine(1f, panicTime / 8f);
 		while (starttime > 0f) {
 			if (currentAnimation != "Fear") changeAnimation("Fear");
 			float ratio = (panicTime / 8f - starttime) / (panicTime / 8f);
