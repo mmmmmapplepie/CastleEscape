@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FearShaderController : MonoBehaviour {
 	public Material mat;
-	float finalRotIntensity = 15f;
+	float finalRotIntensity = 5f;
 	float finalIntensity = 0.015f;
 	float tempInt = 0f;
 	float tempRotInt = 0f;
