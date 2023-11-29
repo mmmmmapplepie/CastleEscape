@@ -6,87 +6,57 @@ using UnityEngine.UI;
 public class NewRoom : MonoBehaviour {
 	// Start is called before the first frame update
 	void Awake() {
+		FixSize();
 		GameStateManager.RoomCleared += ClearRoom;
-		makeBoxes();
+		rect.gameObject.GetComponent<Image>().material = null;
+		col = clearImage.color;
 	}
-
-
-	[SerializeField] RectTransform roomClearPanel;
+	void FixSize() {
+		float max = Mathf.Max(canvasRect.rect.width, canvasRect.rect.height);
+		if (max > 1600f) {
+			rect.sizeDelta = Vector2.one * max;
+		}
+	}
+	Color col;
+	[SerializeField] RectTransform rect, canvasRect;
 	[SerializeField] Image clearImage;
+	[SerializeField] Material mat;
 	void ClearRoom() {
 		StartCoroutine(ClearRoomRoutine());
 	}
 	float halfTransitionTime = 1f;
 	IEnumerator ClearRoomRoutine() {
 		GetComponent<AudioPlayer>().PlaySound("change room");
-		//make a cool looking boxes thingy. preferably as a shader.
+		rect.gameObject.SetActive(true);
+		rect.gameObject.GetComponent<Image>().material = mat;
+
 		Time.timeScale = 0f;
-		clearImage.raycastTarget = true;
-		float startTime = Time.unscaledTime;
-		while (Time.unscaledTime < startTime + halfTransitionTime) {
-			float ratio = (Time.unscaledTime - startTime) / halfTransitionTime;
-			changeOpacity(ratio);
-			// roomClearPanel.sizeDelta = Vector2.Lerp(Vector2.zero, new Vector2(2400f, 1500f), ratio);
+		float startTime = 0f;
+
+		mat.SetFloat("_progress", 0f);
+		while (startTime < halfTransitionTime) {
+			startTime += Time.unscaledDeltaTime;
+			float val = 8f * startTime / halfTransitionTime;
+			mat.SetFloat("_progress", val);
 			yield return null;
 		}
+
+		clearImage.color = new Color(col.r, col.g, col.b, 1f);
+		rect.gameObject.GetComponent<Image>().material = null;
+		mat.SetFloat("_progress", 0f);
 		GameStateManager.MakeNewRoom();
 		float downTime = halfTransitionTime / 4f;
 		yield return new WaitForSecondsRealtime(downTime / 2f);
-		startTime = Time.unscaledTime;
-		while (Time.unscaledTime < startTime + downTime) {
-			float ratio = (Time.unscaledTime - startTime) / downTime;
-			straightChange((1f - ratio));
-			// roomClearPanel.sizeDelta = Vector2.Lerp(new Vector2(2400f, 1500f), Vector2.zero, ratio);
+
+		startTime = downTime;
+		while (startTime > 0f) {
+			clearImage.color = new Color(col.r, col.g, col.b, startTime / downTime);
+			startTime -= Time.unscaledDeltaTime;
 			yield return null;
 		}
-		straightChange(0f);
+
+		rect.gameObject.SetActive(false);
 		Time.timeScale = 1f;
-		roomClearPanel.sizeDelta = Vector2.zero;
 		GameStateManager.changingRoom = false;
-		clearImage.raycastTarget = false;
-	}
-
-
-
-
-
-
-
-	[SerializeField] Transform boxesHolder;
-	[SerializeField] GameObject prefab;
-	List<roomEffectBox> boxes = new List<roomEffectBox>();
-	void makeBoxes() {
-		for (int i = -16; i < 16; i++) {
-			for (int j = -10; j < 10; j++) {
-				GameObject box = Instantiate(prefab, boxesHolder);
-				boxes.Add(new roomEffectBox(box.GetComponent<Image>()));
-				box.GetComponent<RectTransform>().anchoredPosition = new Vector2(25f, 25f) + 50f * (new Vector2(i, j));
-			}
-		}
-	}
-	void changeOpacity(float ratio) {
-		foreach (roomEffectBox box in boxes) {
-			float distance = box.refImage.gameObject.GetComponent<RectTransform>().anchoredPosition.magnitude;
-			float inputx = 6f * distance / 909f;
-			float baseVal = Mathf.Clamp(Mathf.Pow(2, -(6f + inputx - ratio * 12f)), 0, 1f);
-			float addVal = Mathf.Sin(box.frequency * Time.unscaledTime + box.phase) * Mathf.Min(1 - baseVal, baseVal) / 4f;
-			box.refImage.color = new Color(1f, 1f, 1f, Mathf.Clamp(baseVal + addVal, 0, 1f));
-		}
-	}
-	void straightChange(float val) {
-		foreach (roomEffectBox box in boxes) {
-			box.refImage.color = new Color(1f, 1f, 1f, val);
-		}
-	}
-
-	class roomEffectBox {
-		public float phase;
-		public float frequency;
-		public Image refImage;
-		public roomEffectBox(Image refImg) {
-			this.phase = Random.Range(0, Mathf.PI * 2f);
-			this.frequency = Random.Range(5f, 10f);
-			this.refImage = refImg;
-		}
 	}
 }
