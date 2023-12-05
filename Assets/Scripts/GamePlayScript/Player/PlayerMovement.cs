@@ -208,8 +208,8 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			}
 			RB.velocity = haltFactor * RB.velocity;
 			Instantiate(shockwavePre, pos, Quaternion.identity);
+			HaltUsed = true;
 		}
-		HaltUsed = true;
 	}
 	IEnumerator dropThroughPlatform() {
 		float initialY = transform.position.y;
