@@ -12,10 +12,9 @@ public class MonsterController : MonoBehaviour {
 	List<GameObject> monsterList = new List<GameObject>();
 	void spawnMonsterWave() {
 		clearMonsterList();
-		int monsterNumber = getMonsterNumber();
 		// float x = 5f;
 		// spawnMonster(new Vector3(x, 0f, 0f));
-		for (int i = 0; i < monsterNumber; i++) {
+		for (int i = 0; i < getMonsterNumber(); i++) {
 			// spawnMonster(monsterPosition());
 		}
 	}
@@ -26,8 +25,8 @@ public class MonsterController : MonoBehaviour {
 		monsterList.Clear();
 	}
 	int getMonsterNumber() {
-		int monsterNum = Random.Range(3, 5);
-		return monsterNum;
+		if (HighScore.CurrentScore < 120) return HighScore.CurrentScore / 30 + 1;
+		return Random.Range(3, 8);
 	}
 	void spawnMonster(Vector3 position) {
 		if (monsterPrefab == null) return;
@@ -36,7 +35,7 @@ public class MonsterController : MonoBehaviour {
 	Vector3 monsterPosition() {
 		Vector2 pos = Vector2.zero;
 		while (pos.magnitude < 10f) {
-			pos = new Vector2(Random.Range(-40f, 40f), Random.Range(-40f, 40f));
+			pos = new Vector2(Random.Range(-28f, 28f), Random.Range(-19f, 36f));
 		}
 		return new Vector3(pos.x, pos.y, 0f);
 	}

@@ -118,7 +118,7 @@ public class PlayerLife : MonoBehaviour {
 	IEnumerator FearRaiseRoutine() {
 		while (true) {
 			if (panic || GameStateManager.Paused || panicImminent) { yield return null; continue; }
-			if (Fear < 100f) Fear += (2.5f + 2.5f * (1 / aura)) * Time.deltaTime;
+			if (Fear < 100f) Fear += (2f + 3f * (1f / aura)) * Time.deltaTime;
 			CheckPanickAttack();
 			yield return null;
 		}

@@ -48,13 +48,13 @@ public class BGMController : MonoBehaviour {
 		inPanic = false;
 		playing1HP = false;
 		AP.changeVolume("1HP", 0f, 0.2f);
-		AP.changeVolume("Play", 0f, 2f);
-		AP.changeVolume("Menu", 1f, 2f);
-		AP.changeVolume("Background", 1f, 2f);
+		AP.changeVolume("Play", 0f, 3f);
+		AP.changeVolume("Menu", 1f, 3f);
+		AP.changeVolume("Background", 1f, 3f);
 	}
 	void enterPlay() {
-		AP.changeVolume("Play", 1f, 2f);
-		AP.changeVolume("Menu", 0f, 2f);
+		AP.changeVolume("Play", 1f, 3f);
+		AP.changeVolume("Menu", 0f, 3f);
 	}
 
 	void Update() {
