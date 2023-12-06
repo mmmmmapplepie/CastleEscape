@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteOutlineMat
-  m_Shader: {fileID: -6465566751694194690, guid: 73df1a9a21233f44eb8b3344a6c79ca7, type: 3}
+  m_Name: Pixelator
+  m_Shader: {fileID: -6465566751694194690, guid: 4bc3ea1f7907b204ab2b7ff248bfcb1c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,15 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Thickness: 0.02
-    - _Use_Multiple_Color: 1
-    - _rate: 0.1
-    - _size: 2.26
-    m_Colors:
-    - _Color: {r: 2, g: 0.39790574, b: 0, a: 1}
-    - _Color2: {r: 1.8301886, g: 0.01916428, b: 0, a: 1}
+    - _Pixels: 250
+    m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &1151437508053163264
+--- !u!114 &7386090493291825917
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
