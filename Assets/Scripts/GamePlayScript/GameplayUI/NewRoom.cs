@@ -8,8 +8,9 @@ public class NewRoom : MonoBehaviour {
 	void Awake() {
 		FixSize();
 		GameStateManager.RoomCleared += ClearRoom;
-		rect.gameObject.GetComponent<Image>().material = null;
+		rect.gameObject.GetComponent<Image>().material = unlit;
 		col = clearImage.color;
+		rect.gameObject.SetActive(false);
 	}
 	void FixSize() {
 		float max = Mathf.Max(canvasRect.rect.width, canvasRect.rect.height);
@@ -20,11 +21,11 @@ public class NewRoom : MonoBehaviour {
 	Color col;
 	[SerializeField] RectTransform rect, canvasRect;
 	[SerializeField] Image clearImage;
-	[SerializeField] Material mat;
+	[SerializeField] Material mat, unlit;
 	void ClearRoom() {
 		StartCoroutine(ClearRoomRoutine());
 	}
-	float halfTransitionTime = 1f;
+	float halfTransitionTime = 1.3f;
 	IEnumerator ClearRoomRoutine() {
 		GetComponent<AudioPlayer>().PlaySound("change room");
 		rect.gameObject.SetActive(true);
@@ -42,7 +43,7 @@ public class NewRoom : MonoBehaviour {
 		}
 
 		clearImage.color = new Color(col.r, col.g, col.b, 1f);
-		rect.gameObject.GetComponent<Image>().material = null;
+		rect.gameObject.GetComponent<Image>().material = unlit;
 		mat.SetFloat("_progress", 0f);
 		GameStateManager.MakeNewRoom();
 		float downTime = halfTransitionTime / 4f;
@@ -54,8 +55,8 @@ public class NewRoom : MonoBehaviour {
 			startTime -= Time.unscaledDeltaTime;
 			yield return null;
 		}
-
 		rect.gameObject.SetActive(false);
+		clearImage.color = new Color(col.r, col.g, col.b, 1f);
 		Time.timeScale = 1f;
 		GameStateManager.changingRoom = false;
 	}

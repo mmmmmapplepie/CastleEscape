@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BoxesAcross: 100
+    - _BoxesAcross: 32
     - _detail: 50
     - _dropoff: 50
     - _edge: 1.5
@@ -51,7 +51,8 @@ Material:
     - _sharpness: 50
     - _x: 0
     - _y: 0
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3245402832595332777
 MonoBehaviour:
