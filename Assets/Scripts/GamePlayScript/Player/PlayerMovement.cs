@@ -208,6 +208,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			}
 			RB.velocity = haltFactor * RB.velocity;
 			Instantiate(shockwavePre, pos, Quaternion.identity);
+			oneOffSound(PlayerAudio.audioType.halt);
 			HaltUsed = true;
 		}
 	}

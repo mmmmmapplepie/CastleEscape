@@ -24,8 +24,8 @@ public class PlayerAudio : AudioPlayer {
 	[SerializeField] AudioSource runS;
 	[SerializeField] AudioSource dmgS;
 	[SerializeField] AudioSource landS;
-	[SerializeField] AudioSource dashS;
-	public enum audioType { walk, run, dmg, land, dash }
+	[SerializeField] AudioSource dashS, haltS;
+	public enum audioType { walk, run, dmg, land, dash, halt }
 
 
 	[SerializeField] List<AudioClip> walkingSounds, runningSounds;
@@ -47,6 +47,9 @@ public class PlayerAudio : AudioPlayer {
 				break;
 			case audioType.dmg:
 				dmgS.PlayOneShot(dmgS.clip, dmgS.volume);
+				break;
+			case audioType.halt:
+				haltS.PlayOneShot(haltS.clip, haltS.volume);
 				break;
 		}
 	}
