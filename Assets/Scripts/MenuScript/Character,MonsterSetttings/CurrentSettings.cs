@@ -7,8 +7,8 @@ public class CurrentSettings : MonoBehaviour {
 	[SerializeField] TextMeshProUGUI highscore;
 	public GameObject Player;
 	static GameObject player;
-	[SerializeField] List<PlayerType> PlayerTypes = new List<PlayerType>();
-	[SerializeField] List<Monster> Monsters = new List<Monster>();
+	public List<PlayerType> PlayerTypes = new List<PlayerType>();
+	public List<Monster> Monsters = new List<Monster>();
 	public static int[] CustomPlayerStats;
 	public static PlayerType CurrentPlayerType;
 	public static Monster CurrentMonster;

@@ -35,4 +35,24 @@ public class HighScore : MonoBehaviour {
 		CurrentScore++;
 		HighScoreTxt.text = (CurrentScore).ToString();
 	}
+	[SerializeField] CurrentSettings currset;
+	[SerializeField] GameObject ConfirmationPanel;
+	public void OpenHighscoreResetConfirmation() {
+		ConfirmationPanel.SetActive(true);
+	}
+	public void CloseConfirmationPanel() {
+		ConfirmationPanel.SetActive(false);
+	}
+	public void ResetHighScores() {
+		foreach (Monster monster in currset.Monsters) {
+			foreach (PlayerType player in currset.PlayerTypes) {
+				string setting = player.name + monster.name;
+				if (PlayerPrefs.HasKey(setting)) {
+					PlayerPrefs.DeleteKey(setting);
+				}
+				ShowHighScore();
+			}
+		}
+		CloseConfirmationPanel();
+	}
 }

@@ -38,6 +38,9 @@ public class NameOrganizer : MonoBehaviour {
 			nameCells.Clear();
 		}
 		UIAudio.findSound("GearTurn").loop = false; UIAudio.StopSound("GearTurn");
+
+		//Reset coroutines for the character/monster changing
+		ResetValuesForNameChange();
 	}
 	void InitializeNames() {
 		if (InPlayerSettings) {
@@ -243,6 +246,7 @@ public class NameOrganizer : MonoBehaviour {
 			gearTurnAudioActive = false;
 			UIAudio.StopSound("GearTurn", 0.4f);
 		}
+		print("moveDone");
 	}
 	void SetColors(float ratio, bool up) {
 		Color32 center = new Color32(0xFF, 0xE7, 0x2A, 0xFF);
@@ -294,6 +298,16 @@ public class NameOrganizer : MonoBehaviour {
 		locked[currCommandPosition] = false;
 		ExecutingCommand = true;
 		currCommandPosition = currCommandPosition + 1 > 4 ? 0 : currCommandPosition + 1;
+	}
+	void ResetValuesForNameChange() {
+		for (int i = 0; i < locked.Length; i++) {
+			locked[i] = false;
+		}
+		currFillPosition = 0;
+		currCommandPosition = 0;
+		usedCommandOrders = 0;
+		ExecutingCommand = false;
+		gearTurnAudioActive = false;
 	}
 }
 
