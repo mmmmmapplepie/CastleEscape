@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Signod : MonsterBase {
 	protected override IEnumerator ChasingRoutine() {
-		damageAmountAndTime(-Mathf.RoundToInt((damage / 2f) * GameBuffsManager.EnemyDamageMultiplier), 0f);
+		damageAmountAndTime((int)((-damage / 2f) * GameBuffsManager.EnemyDamageMultiplier), 0f);
 		while (true) {
 			if (!PreyInRange(senseRange * 1.5f)) {
 				StopChase();

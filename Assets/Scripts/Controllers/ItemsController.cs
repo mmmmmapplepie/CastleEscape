@@ -35,6 +35,7 @@ public class ItemsController : MonoBehaviour {
 				Destroy(tra.gameObject);
 			}
 		}
+		NewRoom();
 	}
 	void NewRoom() {
 		foreach (GameObject g in ItemsInRoom) {
@@ -48,6 +49,8 @@ public class ItemsController : MonoBehaviour {
 	public static int luck = 0;
 
 	//buff/debuff chances are out of hundred. pick random from -50 to 50. range from -50 to debuff gives debuff and 50 down to buffchance gives buff. affected by Luck stat.
+	static int buffs = 0;
+	static int debuffs = 0;
 	public static void randomizeBuffAndDebuff(Vector3 pos) {
 		int itemchanceluck = 2 * luck + 50;
 		int itemChance = Random.Range(1, 1001);
@@ -59,8 +62,10 @@ public class ItemsController : MonoBehaviour {
 		int buff_debuffInt = Random.Range(1, 101);
 		GameObject bonus = null;
 		if (buff_debuffInt >= buffChance) {
+			buffs++;
 			bonus = buffPrefabs[Random.Range(0, buffPrefabs.Count)];
 		} else {
+			debuffs++;
 			bonus = debuffPrefabs[Random.Range(0, debuffPrefabs.Count)];
 		}
 		setBonus(bonus, pos);

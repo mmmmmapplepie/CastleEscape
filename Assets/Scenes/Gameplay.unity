@@ -5560,7 +5560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -688.38}
+  m_AnchoredPosition: {x: 0, y: -688.38574}
   m_SizeDelta: {x: 0, y: 2276.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &344021198
@@ -5773,7 +5773,7 @@ MonoBehaviour:
 
 
     all
-    levels - except for level 1 - deal double the damage unless a monster specific
+    levels - except lvl1 damage - deal double the level damage unless a monster specific
     ability is present'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
@@ -6814,7 +6814,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8679245, g: 0.76512, b: 0.7792304, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -40, y: -40, z: -40, w: -40}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7209,10 +7209,10 @@ MonoBehaviour:
   m_text: '<color=#CF00A9>sensing time of monster</color>
 
 
-    the monster will
-    need some time to sense you once you enter its sensing range. leaving the sensing
-    range before if fully senses you will prevent the monster from actively reacting
-    to you'
+    the monster takes
+    some time to sense you once you enter its sensing range. leaving the sensing
+    range before it fully senses you will prevent the monster from actively chasing
+    you'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
   m_sharedMaterial: {fileID: -7194338813117649309, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
@@ -7889,7 +7889,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 492587806}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -104970,13 +104970,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1623452839}
   - {fileID: 1382112391}
   - {fileID: 186535089}
   - {fileID: 1493977143}
   - {fileID: 1830814761}
   - {fileID: 1609315562}
   - {fileID: 2000423295}
-  - {fileID: 1623452839}
   m_Father: {fileID: 11452955}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -105313,7 +105313,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609315566}
+      - m_Target: {fileID: 1493977149}
         m_TargetAssemblyTypeName: Guide, Assembly-CSharp
         m_MethodName: CloseGuide
         m_Mode: 1
@@ -112562,7 +112562,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026877894}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
@@ -114990,7 +114990,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: each monster has unique capabilities that may favour certain player styles
+  m_text: each monster has unique capabilities that may favour certain play styles.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
   m_sharedMaterial: {fileID: -7194338813117649309, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
@@ -115902,7 +115902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1220029033
 Transform:
   m_ObjectHideFlags: 0
@@ -119107,7 +119107,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8679245, g: 0.76512, b: 0.7792304, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -40, y: -40, z: -40, w: -40}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -120864,8 +120864,8 @@ MonoBehaviour:
   m_text: '<color=#CF00A9>the sensing range of the monster</color>
 
 
-    the sensing
-    range is equal or less than the chasing-sensing range'
+    some monsters
+    may have a different sensing range while chasing'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
   m_sharedMaterial: {fileID: -7194338813117649309, guid: 68ebb8847d84b5d4cb5b92df20bae6bb, type: 2}
@@ -121371,8 +121371,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2054574487}
   m_HandleRect: {fileID: 2054574486}
   m_Direction: 2
-  m_Value: 0.99999636
-  m_Size: 0.39529684
+  m_Value: 1.0000005
+  m_Size: 0.39529583
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -123562,7 +123562,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8679245, g: 0.76512, b: 0.7792304, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -40, y: -40, z: -40, w: -40}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -126478,7 +126478,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609315566}
+      - m_Target: {fileID: 1849778067}
         m_TargetAssemblyTypeName: Guide, Assembly-CSharp
         m_MethodName: CloseGuide
         m_Mode: 1
@@ -128822,6 +128822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1834843267}
   - component: {fileID: 1834843268}
+  - component: {fileID: 1834843269}
   m_Layer: 0
   m_Name: UIAudio
   m_TagString: Untagged
@@ -128876,6 +128877,18 @@ MonoBehaviour:
     playOnAwake: 0
     spatialBlend: 0
   UseClipNames: 1
+--- !u!114 &1834843269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834843265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7d5fc2741db764b839cfb73c20ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1835503994
 GameObject:
   m_ObjectHideFlags: 0
@@ -128959,7 +128972,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609315566}
+      - m_Target: {fileID: 1668898648}
         m_TargetAssemblyTypeName: Guide, Assembly-CSharp
         m_MethodName: CloseGuide
         m_Mode: 1
@@ -130428,7 +130441,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -126.250244}
+  m_AnchoredPosition: {x: 0, y: -126.25023}
   m_SizeDelta: {x: 5, y: -252.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1929531348
@@ -130786,7 +130799,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8679245, g: 0.76512, b: 0.7792304, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: -40, y: -40, z: -40, w: -40}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -132930,8 +132943,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1736896093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.604701}
-  m_AnchorMax: {x: 1, y: 0.99999785}
+  m_AnchorMin: {x: 0, y: 0.60470414}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

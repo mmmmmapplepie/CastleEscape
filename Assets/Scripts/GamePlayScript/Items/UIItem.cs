@@ -87,6 +87,7 @@ public class UIItem : MonoBehaviour {
 		}
 	}
 	void OnDestroy() {
+		EndFunction();
 		if (ItemDummy != null) Destroy(ItemDummy.gameObject);
 		if (PE != null) Destroy(PE);
 	}

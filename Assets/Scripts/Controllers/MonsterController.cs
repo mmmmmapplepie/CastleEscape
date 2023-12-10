@@ -15,7 +15,7 @@ public class MonsterController : MonoBehaviour {
 		// float x = 5f;
 		// spawnMonster(new Vector3(x, 0f, 0f));
 		for (int i = 0; i < getMonsterNumber(); i++) {
-			// spawnMonster(monsterPosition());
+			spawnMonster(monsterPosition());
 		}
 	}
 	void clearMonsterList() {
@@ -25,8 +25,10 @@ public class MonsterController : MonoBehaviour {
 		monsterList.Clear();
 	}
 	int getMonsterNumber() {
-		if (HighScore.CurrentScore < 120) return HighScore.CurrentScore / 30 + 1;
-		return Random.Range(3, 8);
+		if (HighScore.CurrentScore < 50) {
+			return Random.Range(1, HighScore.CurrentScore / 10 + 2);
+		}
+		return Random.Range(3, 6);
 	}
 	void spawnMonster(Vector3 position) {
 		if (monsterPrefab == null) return;

@@ -11,7 +11,6 @@ public class PlayerLife : MonoBehaviour {
 		set { _fear = Mathf.Clamp(value, 0f, 100f); }
 	}
 	Coroutine RisingFearRoutine;
-	Coroutine PanicRoutine;
 	float aura = 0f;
 	public bool panic = false;
 	public bool panicImminent = false;
@@ -73,7 +72,8 @@ public class PlayerLife : MonoBehaviour {
 	#region healthRelated
 	Coroutine hitRecoveryRoutineHolder = null;
 	public bool changeHealth(int amount, float recoveryTime = 2f) {
-		if (hitRecoveryRoutineHolder != null || !GameStateManager.InGame) return false;
+		if (!GameStateManager.InGame) return false;
+		if (amount < 0 && hitRecoveryRoutineHolder != null) return false;
 		Health += amount;
 		if (amount < 0) {
 			MovementScript.LandAndDmg(MovementScript.DmgPE, Vector3.zero);
@@ -111,8 +111,9 @@ public class PlayerLife : MonoBehaviour {
 		aura = (float)CurrentSettings.CurrentPlayerType.Aura;
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
-	public void ChangeFear(float value) {
-		if (panic || panicImminent) return;
+	public void ChangeFear(float value, bool ignoreImminent = false) {
+		if (panic) return;
+		if (!ignoreImminent && panicImminent) return;
 		Fear += value;
 	}
 	IEnumerator FearRaiseRoutine() {
@@ -124,13 +125,17 @@ public class PlayerLife : MonoBehaviour {
 		}
 	}
 	void CheckPanickAttack() {
-		if (Fear >= 100f) { PanicRoutine = StartCoroutine(Panicking()); }
+		if (Fear >= 100f) { StartCoroutine(Panicking()); }
 	}
 	public static event Action panicStart, panicEnd;
 	IEnumerator Panicking() {
 		panicImminent = true;
 		while (!MovementScript.grounded || MovementScript.dashing) {
 			yield return null;
+		}
+		if (Fear < 100f) {
+			panicImminent = false;
+			yield break;
 		}
 		panicStart?.Invoke();
 		panic = true;

@@ -208,7 +208,7 @@ public class MonsterBase : MonoBehaviour {
 	}
 	protected virtual void damagePlayer() {
 		if (GameStateManager.changingRoom) return;
-		int dmg = Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier);
+		int dmg = Mathf.Min(-1, Mathf.RoundToInt(-damage * GameBuffsManager.EnemyDamageMultiplier));
 		damageAmountAndTime(dmg);
 	}
 	protected virtual void damageAmountAndTime(float dmg, float time = 2f) {

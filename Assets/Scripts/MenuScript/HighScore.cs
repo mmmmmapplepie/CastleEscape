@@ -38,12 +38,15 @@ public class HighScore : MonoBehaviour {
 	[SerializeField] CurrentSettings currset;
 	[SerializeField] GameObject ConfirmationPanel;
 	public void OpenHighscoreResetConfirmation() {
+		UIStaticAccess.playClick();
 		ConfirmationPanel.SetActive(true);
 	}
 	public void CloseConfirmationPanel() {
+		UIStaticAccess.playClick();
 		ConfirmationPanel.SetActive(false);
 	}
 	public void ResetHighScores() {
+		UIStaticAccess.playClick();
 		foreach (Monster monster in currset.Monsters) {
 			foreach (PlayerType player in currset.PlayerTypes) {
 				string setting = player.name + monster.name;

@@ -246,7 +246,6 @@ public class NameOrganizer : MonoBehaviour {
 			gearTurnAudioActive = false;
 			UIAudio.StopSound("GearTurn", 0.4f);
 		}
-		print("moveDone");
 	}
 	void SetColors(float ratio, bool up) {
 		Color32 center = new Color32(0xFF, 0xE7, 0x2A, 0xFF);
