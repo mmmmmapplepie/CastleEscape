@@ -42,7 +42,6 @@ public class PlayerLife : MonoBehaviour {
 	}
 	void EndGame() {
 		StopAllCoroutines();
-
 	}
 	void StartGame() {
 		hitRecoveryRoutineHolder = null;
@@ -108,12 +107,17 @@ public class PlayerLife : MonoBehaviour {
 	void StartFear() {
 		Fear = 0;
 		panic = false;
+		panicImminent = false;
 		aura = (float)CurrentSettings.CurrentPlayerType.Aura;
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
 	public void ChangeFear(float value, bool ignoreImminent = false) {
+		print(panic);
+		print(!ignoreImminent);
+		print(panicImminent);
 		if (panic) return;
 		if (!ignoreImminent && panicImminent) return;
+		print(1);
 		Fear += value;
 	}
 	IEnumerator FearRaiseRoutine() {

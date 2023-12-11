@@ -25,10 +25,10 @@ public class MonsterController : MonoBehaviour {
 		monsterList.Clear();
 	}
 	int getMonsterNumber() {
-		if (HighScore.CurrentScore < 50) {
+		if (HighScore.CurrentScore < 20) {
 			return Random.Range(1, HighScore.CurrentScore / 10 + 2);
 		}
-		return Random.Range(3, 6);
+		return Random.Range(2, 5);
 	}
 	void spawnMonster(Vector3 position) {
 		if (monsterPrefab == null) return;

@@ -28,18 +28,18 @@ public class Item : MonoBehaviour {
 			player = coll.transform.root.gameObject;
 			triggered = true;
 			CheckAddingItemToUI(coll);
-			ItemEffect();
 			ItemSound();
 			Destroy(gameObject);
 		}
 	}
 	void CheckAddingItemToUI(Collider2D coll) {
-		ItemVisuals(coll.transform.root.Find("PEHolder"));
-		if (itemTime == 0) return;
 		UIItem itemPresent = FindForItemInUI();
+		ItemVisuals(coll.transform.root.Find("PEHolder"), itemPresent != null);
+		if (itemTime == 0) { ItemEffect(); return; }
 		if (itemPresent != null) {
 			ExtendItemTime(itemPresent); return;
 		} else {
+			ItemEffect();
 			AddItemToUI();
 		}
 	}
@@ -75,8 +75,8 @@ public class Item : MonoBehaviour {
 	protected virtual void ItemEffect() { }
 	protected virtual void EndItemEffect() { }
 	GameObject PE = null;
-	void ItemVisuals(Transform player) {
-		if (LingeringParticleEffect != null) {
+	void ItemVisuals(Transform player, bool itemPresent = false) {
+		if (LingeringParticleEffect != null && !itemPresent) {
 			PE = Instantiate(LingeringParticleEffect, player);
 		}
 		if (burstParticleEffect != null) {

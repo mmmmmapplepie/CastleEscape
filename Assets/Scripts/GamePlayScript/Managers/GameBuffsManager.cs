@@ -18,6 +18,12 @@ public class GameBuffsManager : MonoBehaviour {
 		GameStateManager.EnterMenu += resetMultipliers;
 		GameStateManager.GameStart += resetMultipliers;
 	}
+	// void Update() {
+	// 	print(PlayerSpeedMultiplier + "playerspd");
+	// 	print(EnemySpeedMultiplier + "enespd");
+	// 	print(EnemyDamageMultiplier + "enedmg");
+	// 	print(DashRegenerationRateMultiplier + "dash");
+	// }
 	void resetMultipliers() {
 		DashRegenerationRateMultiplier = 1f;
 		EnemyDamageMultiplier = 1f;

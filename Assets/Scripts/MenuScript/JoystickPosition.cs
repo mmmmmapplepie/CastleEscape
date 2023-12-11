@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -33,17 +34,16 @@ public class JoystickPosition : MonoBehaviour {
 		}
 	}
 	void getPositions() {
-		// PlayerPrefs.DeleteAll();
-		if (PlayerPrefs.HasKey("RightPosx") && PlayerPrefs.HasKey("RightPosy") && PlayerPrefs.HasKey("LeftPosx") && PlayerPrefs.HasKey("LeftPosy") && PlayerPrefs.HasKey("HaltPosx") && PlayerPrefs.HasKey("HaltPosy")) {
-			RightPos = new Vector2(PlayerPrefs.GetFloat("RightPosx"), PlayerPrefs.GetFloat("RightPosy"));
-			LeftPos = new Vector2(PlayerPrefs.GetFloat("LeftPosx"), PlayerPrefs.GetFloat("LeftPosy"));
-			HaltPos = new Vector2(PlayerPrefs.GetFloat("HaltPosx"), PlayerPrefs.GetFloat("HaltPosy"));
-		} else {
-			RightPos = MovementStick.anchoredPosition;
-			LeftPos = TorchStick.anchoredPosition;
-			HaltPos = HaltBtn.anchoredPosition;
-			PlayerPrefs.SetFloat("RightPosx", RightPos.x); PlayerPrefs.SetFloat("RightPosy", RightPos.y); PlayerPrefs.SetFloat("LeftPosx", LeftPos.x); PlayerPrefs.SetFloat("LeftPosy", LeftPos.y); PlayerPrefs.SetFloat("HaltPosx", HaltPos.x); PlayerPrefs.SetFloat("HaltPosy", HaltPos.y);
-		}
+		// if (PlayerPrefs.HasKey("RightPosx") && PlayerPrefs.HasKey("RightPosy") && PlayerPrefs.HasKey("LeftPosx") && PlayerPrefs.HasKey("LeftPosy") && PlayerPrefs.HasKey("HaltPosx") && PlayerPrefs.HasKey("HaltPosy")) {
+		// 	RightPos = new Vector2(PlayerPrefs.GetFloat("RightPosx"), PlayerPrefs.GetFloat("RightPosy"));
+		// 	LeftPos = new Vector2(PlayerPrefs.GetFloat("LeftPosx"), PlayerPrefs.GetFloat("LeftPosy"));
+		// 	HaltPos = new Vector2(PlayerPrefs.GetFloat("HaltPosx"), PlayerPrefs.GetFloat("HaltPosy"));
+		// } else {
+		RightPos = MovementStick.anchoredPosition;
+		LeftPos = TorchStick.anchoredPosition;
+		HaltPos = HaltBtn.anchoredPosition;
+		// 	PlayerPrefs.SetFloat("RightPosx", RightPos.x); PlayerPrefs.SetFloat("RightPosy", RightPos.y); PlayerPrefs.SetFloat("LeftPosx", LeftPos.x); PlayerPrefs.SetFloat("LeftPosy", LeftPos.y); PlayerPrefs.SetFloat("HaltPosx", HaltPos.x); PlayerPrefs.SetFloat("HaltPosy", HaltPos.y);
+		// }
 		// 0 == false -------------------- 1 == true
 		if (PlayerPrefs.HasKey("Orientation")) { RightSide = PlayerPrefs.GetInt("Orientation") == 0 ? false : true; } else { PlayerPrefs.SetInt("Orientation", 1); }
 		if (PlayerPrefs.HasKey("MovX") && PlayerPrefs.HasKey("MovY") && PlayerPrefs.HasKey("TorX") && PlayerPrefs.HasKey("TorY")) {
@@ -214,4 +214,26 @@ public class JoystickPosition : MonoBehaviour {
 			SetJoystickPosition(true);
 		}
 	}
+
+	public void ResetJoystickPositions() {
+		UIAudio.PlaySound("Click");
+
+		RightSide = true;
+		MovementX = 0f;
+		MovementY = 0f;
+		TorchX = 0f;
+		TorchY = 0f;
+		SetJoystickPosition();
+		PlayerPrefs.DeleteKey("Orientation");
+		PlayerPrefs.DeleteKey("MovX");
+		PlayerPrefs.DeleteKey("MovY");
+		PlayerPrefs.DeleteKey("TorX");
+		PlayerPrefs.DeleteKey("TorY");
+		getPositions();
+		SetJoystickPosition();
+	}
+
+
 }
+
+

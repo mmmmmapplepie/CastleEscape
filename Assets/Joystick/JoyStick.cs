@@ -135,8 +135,10 @@ public class JoyStick : MonoBehaviour {
 	void setCanvasScales() {
 		thisRT = GetComponent<RectTransform>();
 		GameObject canvasO = transform.root.gameObject;
-		canvasHeight = canvasO.GetComponent<CanvasScaler>().referenceResolution.y;
-		canvasWidth = canvasO.GetComponent<CanvasScaler>().referenceResolution.x;
+		canvasHeight = canvasO.GetComponent<RectTransform>().rect.height;
+		canvasWidth = canvasO.GetComponent<RectTransform>().rect.width;
+		// canvasHeight = canvasO.GetComponent<CanvasScaler>().referenceResolution.y;
+		// canvasWidth = canvasO.GetComponent<CanvasScaler>().referenceResolution.x;
 		canvasScale = canvasO.GetComponent<Canvas>().scaleFactor;
 		changeAnchoredPositionAccordingToCanvas();
 		//requires appropriate camera to be set to the joystick canvas. - in my case it was main camera.

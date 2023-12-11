@@ -81,7 +81,6 @@ public class UIItem : MonoBehaviour {
 		if (remainingTime > 0f) {
 			remainingTime -= Time.deltaTime;
 		} else {
-			EndFunction();
 			Destroy(PE);
 			Destroy(gameObject);
 		}

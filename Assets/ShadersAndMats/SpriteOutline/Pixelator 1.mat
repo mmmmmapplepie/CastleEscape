@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pixelator
+  m_Name: Pixelator 1
   m_Shader: {fileID: -6465566751694194690, guid: 4bc3ea1f7907b204ab2b7ff248bfcb1c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Pixels: 230
+    - _Pixels: 10
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &7386090493291825917

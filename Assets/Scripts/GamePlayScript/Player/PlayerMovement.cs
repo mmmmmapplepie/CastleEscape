@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour, JoystickController {
@@ -112,6 +113,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		animator.speed = 1f;
 	}
 	void Update() {
+		haltBtnVisual();
 		if (!ControllableState()) return;
 		grounded = checkGrounded();
 		checkDashAdd();
@@ -190,6 +192,14 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 	}
 	[SerializeField] GameObject shockwavePre;
 	Coroutine droppingRoutine = null;
+	[SerializeField] Button HaltBtn;
+	void haltBtnVisual() {
+		if (HaltUsed) {
+			HaltBtn.interactable = false;
+		} else {
+			HaltBtn.interactable = true;
+		}
+	}
 	bool HaltUsed = false;
 	float haltFactor = 0f;
 	public void HaltOrDrop() {

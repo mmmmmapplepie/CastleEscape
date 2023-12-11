@@ -12,10 +12,10 @@ public class MonsterBase : MonoBehaviour {
 	protected Transform player = null;
 	Vector3 baseScale;
 	Color hue;
-	void OnDrawGizmos() {
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(transform.position, senseRange);
-	}
+	// void OnDrawGizmos() {
+	// 	Gizmos.color = Color.green;
+	// 	Gizmos.DrawWireSphere(transform.position, senseRange);
+	// }
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
 		baseScale = transform.localScale;

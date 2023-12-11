@@ -11,23 +11,11 @@ public class ItemsController : MonoBehaviour {
 	void Awake() {
 		GameStateManager.GameEnd += ClearItems;
 		GameStateManager.EnterMenu += ClearItems;
+		GameStateManager.GameStart += ClearItems;
 		GameStateManager.StartNewRoom += NewRoom;
 		UIItemHolderRef = uiItemHolderRef;
 		buffPrefabs = buffsPre;
 		debuffPrefabs = debuffsPre;
-		// setBonus(buffPrefabs[0], 1 * Vector3.one);
-		// setBonus(buffPrefabs[1], 2 * Vector3.one);
-		// setBonus(buffPrefabs[2], 3 * Vector3.one);
-		// setBonus(buffPrefabs[3], 4 * Vector3.one);
-		// setBonus(buffPrefabs[4], 5 * Vector3.one);
-		// setBonus(buffPrefabs[5], 6 * Vector3.one);
-		// setBonus(buffPrefabs[6], 7 * Vector3.one);
-		// setBonus(debuffPrefabs[0], -5 * Vector3.one);
-		// setBonus(debuffPrefabs[1], -6 * Vector3.one);
-		// setBonus(debuffPrefabs[2], -1 * Vector3.one);
-		// setBonus(debuffPrefabs[3], -2 * Vector3.one);
-		// setBonus(debuffPrefabs[4], -3 * Vector3.one);
-		// setBonus(debuffPrefabs[5], -4 * Vector3.one);
 	}
 	void ClearItems() {
 		foreach (Transform tra in UIItemHolderRef) {
@@ -47,8 +35,6 @@ public class ItemsController : MonoBehaviour {
 
 
 	public static int luck = 0;
-
-	//buff/debuff chances are out of hundred. pick random from -50 to 50. range from -50 to debuff gives debuff and 50 down to buffchance gives buff. affected by Luck stat.
 	static int buffs = 0;
 	static int debuffs = 0;
 	public static void randomizeBuffAndDebuff(Vector3 pos) {
