@@ -1,0 +1,3170 @@
+fileFormatVersion: 2
+guid: db0c54c32a46d1845ac529b9f9538d87
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: movtut spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbedc94bc1f61a8449815815f92ebfb1
+      internalID: 1253189710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 10125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06185cabca475714f8565a49b62a3bac
+      internalID: 577234396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 10125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14f665053d0a4634bab324c449890544
+      internalID: -278775971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 10125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1abf1cf8a188e0543ad94b3e994b3fb5
+      internalID: 1278184401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 10125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 108a074f4fcc32b4d9284cc9753911c7
+      internalID: -1432621169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c64158a2ee33814385984f4196119bd
+      internalID: -1729612146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 9750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b678425805f0954ebf104e04a116a6f
+      internalID: 398714351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 9750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 685fb2840aebe044fa9280e2526cd1c7
+      internalID: 1044151104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 9750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624565c0f8873474894626d4c05df258
+      internalID: 1258172157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 9750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aad7803d57151ea41a5e7946df8175f2
+      internalID: -370408257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b7af38a0aa4814ca49efbc1b340994
+      internalID: 1655097676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 9375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc8e7c0755eac34798aa68a62d2616e
+      internalID: 931811319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 9375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3ce8f91d4a3bd24bada4d2ce986158b
+      internalID: 1516913840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 9375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c3f84e3e8445f4d801dfa364ce3c35
+      internalID: 277963156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 9375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 020f66fd1b12d8440a07c785e2b943ad
+      internalID: 1996501367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b9a4f46533f2d409f4848f047d93c9
+      internalID: 1176898900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 9000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 367c93c5faf84044792e102279cc1f3d
+      internalID: -31587068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 9000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48eced1dff250e84ca19b7d7445b08f5
+      internalID: 483853379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 9000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b0e5a0e5d10cec4e8be41baf61d8226
+      internalID: -894897132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 9000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9316dab8aa2bf2c4192f4f70c578cd0b
+      internalID: -1786343626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 976904f36a94bee48bb5b6ba5349a2f7
+      internalID: -1089968346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 8625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ed957f123350d4ca6e4310db1b38dc
+      internalID: -1652447156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 8625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4b66b17dff5c1a45b91f5fc28466174
+      internalID: 248544826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 8625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9334b0968aa48f4cb0c7f9dc075bbe3
+      internalID: -1203726848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 8625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2ccef5328b1c224bb68a8955fe0056e
+      internalID: 283557439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cba79dab5cf8edb4eb15518f6c944ba0
+      internalID: 658032713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 8250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b29af040c6de0c48a34756f68e8a0f4
+      internalID: 219136382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 8250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2669eac81fccf1c43bf02a1d6f0a219d
+      internalID: -1488246662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 8250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16963813a37c27848af3a1e12012ceb1
+      internalID: 663445989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 8250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eccefcb91c9db647b52e3b7c8d5ab6d
+      internalID: -1244420765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee35cd11d941d8048aff38a0d39e7ff9
+      internalID: -1588510394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 7875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d227f18a6e994541be94664a52f1bcf
+      internalID: -394811167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 7875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa6da5cdee28e64aae6137987953026
+      internalID: 1966809063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 7875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7bb8c3642a6fb94795c36c3fb0c23ca
+      internalID: 449484234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 7875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e1aaac9f2225c4c8d611f687711538
+      internalID: -1413887053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae10befc8355ef40a66807d5e0b7734
+      internalID: -1056037538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 7500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a25ed994b05724a99c00e413de9415
+      internalID: 804921600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 7500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43dfee7ae2c64db438523a6b53aa6a48
+      internalID: 1983526968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 7500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcd144ef13b68994b953c30d63285243
+      internalID: -1372229781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 7500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e46e26dfdadc944b4c15fcd3f3148e
+      internalID: -496600567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8b65149edc5174e860b315d42e2775
+      internalID: -1200241155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 7125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 754405d3e2804ee42847f01ff03195c0
+      internalID: 262427816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 7125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59638bd6a9292024aa766a7b075fbb31
+      internalID: -187248879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 7125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 323c9bf4c561f4543acc1451dcd5a73d
+      internalID: -420152959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 7125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ef1b82d3d019948888e5a774771197
+      internalID: -657494779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d5f529775536f24897d26f80817f311
+      internalID: -1849511219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 6750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b654a792f04f74ea85c350bbce23d7
+      internalID: 903164532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 6750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96c9bbc2a4e014044992da49c952a355
+      internalID: -1696630713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 6750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 025d3d45c9d33264c8a12ccaa7cd6472
+      internalID: 1169167610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 6750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 753ed5a4c4321fe4688c7efd9b00ba68
+      internalID: 4034912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830234cafece4b9448c5c115f457a11a
+      internalID: 2097476940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 6375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69ed0b8f5656778408a9b6d3d933bd6a
+      internalID: 158412206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 6375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20b004134c4cd641915a9c3f19c7084
+      internalID: 1861405928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_53
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 6375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c73d30daf06b21b49a9030285bd55ca1
+      internalID: -1792259005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_54
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 6375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2542787961608874eb3222afcac68e4c
+      internalID: 1594511782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d14f1d66bef39eb40a95840ea2958d05
+      internalID: -99765016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_56
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 6000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b36c89c53bf0843939d06c13f9c344
+      internalID: -1128501425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_57
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 6000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8361909e3ac9001469a418fb3fc11345
+      internalID: -1751677082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_58
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 6000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f338be107031b84ca8ada90c626d142
+      internalID: 585223568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_59
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 6000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35c4c2f3a3065ca4aa355573612855e3
+      internalID: -362530895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fdd2f9f4f425434c8b32af218049ae4
+      internalID: -796773400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_61
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 5625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dede7a6dc022b14dbdd8ede2492b958
+      internalID: 1222337782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_62
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 5625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3aa05dcbec6ac141b21af3ff2671ecd
+      internalID: 1228761754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_63
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 5625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e2ff01f8145584093b84bc0cc78bdc
+      internalID: -1365911378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_64
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 5625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 467fe8c015f7fad4e8b17d191e784dd1
+      internalID: 2131413794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d1553cd0622c9a4a9088da605e6cb12
+      internalID: -812867007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_66
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 5250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0decf55c6af67b24a8b0c43fb34d8c8e
+      internalID: -34941537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_67
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 5250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddf7d42fb29ca164ba951e621ea8e140
+      internalID: -1019273044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_68
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 5250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 868a1d2865b5d73419a9508aab16c660
+      internalID: 394951697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_69
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 5250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aee337adfe57bd04fbf8d3afca438d34
+      internalID: 827616818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4dafcb38f13b2945997b18cb54aa670
+      internalID: -687394922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_71
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 4875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a4c2a28ab2d93b4ca8870bd161c08c0
+      internalID: 69889629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_72
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 4875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df7ef002da4a05f42b1d26960a2a532d
+      internalID: 694844798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_73
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 4875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b46e67650e49d4b93e404f821d8732
+      internalID: 2071136972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_74
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 4875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 773a7212aa98a6645a81b11f559f6036
+      internalID: 710155965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_75
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9fd4bfa39f795142a33fba6918afcfd
+      internalID: -534869362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_76
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 4500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc83382aed36e64dabe594f653b554a
+      internalID: 417296109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_77
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 4500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4de24d4d7baeb34bb883dbdb9c2bb2b
+      internalID: -165064571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_78
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 4500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0506104a75f0645a191123748502cf
+      internalID: -1842944987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_79
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 4500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f9d897389d931442bb5b6f7bb619dd5
+      internalID: -2015728509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 312311416e2ad2f439ed0c5c6de1d85f
+      internalID: -654215904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_81
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 4125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f72c780288acf5b48a042cd43a94b64f
+      internalID: 1137259528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_82
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 4125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45827ad4b4bc783418f2858981f34afe
+      internalID: 96584898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_83
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 4125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed218bc4450e99f4cbc52eb214954cba
+      internalID: -799333601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_84
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 4125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d55f03e9fa923478e58ac6a2338282
+      internalID: -537675141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b7a0869e795da4e914fa8cb5a7245d
+      internalID: 1098923198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_86
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 3750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5f0f583b94d7a4a9943913fea83880
+      internalID: 1966978124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_87
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 3750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24dadc542ccc2bd46bac352f474f6419
+      internalID: 915249602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_88
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 3750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ef3eaeb7d120346a731e92beebc447
+      internalID: 325135957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_89
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 3750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b79498dc081d0e40b7e20a07a8c27c4
+      internalID: -2024941503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7e188704001e2447b165fd0a7ec6454
+      internalID: 332340726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_91
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 3375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3957dd4c3d8d9474d8267e63486256e1
+      internalID: 9019777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_92
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 3375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e481487fc94b8924f911fdad33d0ee5c
+      internalID: -1287966614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_93
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 3375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea2d00cd81686146893a0434188f461
+      internalID: 1486805839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_94
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 3375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b20cc198918f2554cb4503efa10f0fda
+      internalID: 1113878912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_95
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c0cfe861fc6e8a4a8d1ab4c7d7fee4e
+      internalID: -152306762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_96
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 3000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3cfe77f159d8994c83efe18434b2f1b
+      internalID: 2035589216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_97
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 3000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eac75dfa12b3f354c950e5db672e9bfb
+      internalID: 2054476893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_98
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 3000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1241e7977177b6d40ac708f48179e37c
+      internalID: 1001797426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_99
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 3000
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ab95b1695cbab44c839170bf3c510d7
+      internalID: 521322813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_100
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e512f567c4e4274459b25a80c2409cd1
+      internalID: -1453607161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_101
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 2625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 495f3a2eb644c964db6dc3e62a93f254
+      internalID: -1455519452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_102
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 2625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ccf2d62e49a3d43a36110af51775a5
+      internalID: -678826981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_103
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 2625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1dd627eed36dbe4eb6e57333be91341
+      internalID: -1484025207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_104
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 2625
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f56e5e579f6464c42aeeac6905922b5d
+      internalID: 1278063952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_105
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9abb0815a9e9f4fbcde5bb2408ad50
+      internalID: -1214587888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_106
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 2250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7171fa19121e651429112e74669ebd25
+      internalID: -362836426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_107
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 2250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1178b106f38efb4689dbb2856086abc
+      internalID: 2039718558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_108
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 2250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61af6fb3f3c6f754fa3613a0699e5562
+      internalID: -332957684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_109
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 2250
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f1f2783554a8c244a815dcccfb8274f
+      internalID: 831215671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_110
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d3fe59145d15ef47914db618ef81dbd
+      internalID: -856554637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_111
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce4d952ae87fa6e458cf97affff3b3d1
+      internalID: -1680544900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_112
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb896fcbb213bde41883da08dc7da1e5
+      internalID: 424427263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_113
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c80388a7d6dc004e8f62180359c6684
+      internalID: 1036199516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_114
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1875
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174779b3959e556418e2e57b56880631
+      internalID: 120415860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_115
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5cd324582ffd98478ae160807579494
+      internalID: -703825747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_116
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bd3d69aa13318049a6040e5c75e4304
+      internalID: -1491936347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_117
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a343af72963e6e848af6bd99b8ba821b
+      internalID: 1732833152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_118
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94c2dd8381b51a14fbe4dd6e922a3933
+      internalID: 2142043607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_119
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1500
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84822abf7439f8a4dafc929a32bbefef
+      internalID: 1252815253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_120
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec1455c21232ae48a1f1c0c180e8676
+      internalID: -1668193497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_121
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4207224ac0a42c438088038f69f3189
+      internalID: 1276666284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_122
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 683947dd1feef3843962b9608c883130
+      internalID: -147375000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_123
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 1125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c076be8bcdb2dfa449a2599e16d7d2b1
+      internalID: -782452059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_124
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1125
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b9384a3c67690d46bc622849dad7425
+      internalID: 1583559263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_125
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9baadb2d7b1bc9847a81cfa427ba5815
+      internalID: 757499355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_126
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86ab74aa3317bf242a00e21469d0a48c
+      internalID: -1084454545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_127
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb3dc279418431044a735f5c69e24541
+      internalID: -1499702976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_128
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc69f5fa5a866654dbde72c340f4e881
+      internalID: 1848064819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_129
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 750
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d759c4bde930bde489bc9e5cfe7403aa
+      internalID: -851096376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_130
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3eea8bbcb532645bbb039b6f07e25b
+      internalID: 479352929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_131
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28bf6f8ad6c44d348973ef3d9f1316fa
+      internalID: 117827086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_132
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e58a9c3becf39e94983be01163093115
+      internalID: -1879703077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_133
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7541177e659cdee4683512a7f50f3de0
+      internalID: -1342391860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_134
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 375
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7bc6b5f00b314140ba3c8a2bb034190
+      internalID: 1760254653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_135
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a21d835d0a9d8468768b7454e6aa61
+      internalID: 1381574210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: movtut spritesheet_136
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 600
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b273af3e6701f4541ab00efa5cdfef9e
+      internalID: 529001489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      movtut spritesheet_0: 1253189710
+      movtut spritesheet_1: 577234396
+      movtut spritesheet_10: 1655097676
+      movtut spritesheet_100: -1453607161
+      movtut spritesheet_101: -1455519452
+      movtut spritesheet_102: -678826981
+      movtut spritesheet_103: -1484025207
+      movtut spritesheet_104: 1278063952
+      movtut spritesheet_105: -1214587888
+      movtut spritesheet_106: -362836426
+      movtut spritesheet_107: 2039718558
+      movtut spritesheet_108: -332957684
+      movtut spritesheet_109: 831215671
+      movtut spritesheet_11: 931811319
+      movtut spritesheet_110: -856554637
+      movtut spritesheet_111: -1680544900
+      movtut spritesheet_112: 424427263
+      movtut spritesheet_113: 1036199516
+      movtut spritesheet_114: 120415860
+      movtut spritesheet_115: -703825747
+      movtut spritesheet_116: -1491936347
+      movtut spritesheet_117: 1732833152
+      movtut spritesheet_118: 2142043607
+      movtut spritesheet_119: 1252815253
+      movtut spritesheet_12: 1516913840
+      movtut spritesheet_120: -1668193497
+      movtut spritesheet_121: 1276666284
+      movtut spritesheet_122: -147375000
+      movtut spritesheet_123: -782452059
+      movtut spritesheet_124: 1583559263
+      movtut spritesheet_125: 757499355
+      movtut spritesheet_126: -1084454545
+      movtut spritesheet_127: -1499702976
+      movtut spritesheet_128: 1848064819
+      movtut spritesheet_129: -851096376
+      movtut spritesheet_13: 277963156
+      movtut spritesheet_130: 479352929
+      movtut spritesheet_131: 117827086
+      movtut spritesheet_132: -1879703077
+      movtut spritesheet_133: -1342391860
+      movtut spritesheet_134: 1760254653
+      movtut spritesheet_135: 1381574210
+      movtut spritesheet_136: 529001489
+      movtut spritesheet_137: 2021254845
+      movtut spritesheet_138: -2027168966
+      movtut spritesheet_139: -118667702
+      movtut spritesheet_14: 1996501367
+      movtut spritesheet_15: 1176898900
+      movtut spritesheet_16: -31587068
+      movtut spritesheet_17: 483853379
+      movtut spritesheet_18: -894897132
+      movtut spritesheet_19: -1786343626
+      movtut spritesheet_2: -278775971
+      movtut spritesheet_20: -1089968346
+      movtut spritesheet_21: -1652447156
+      movtut spritesheet_22: 248544826
+      movtut spritesheet_23: -1203726848
+      movtut spritesheet_24: 283557439
+      movtut spritesheet_25: 658032713
+      movtut spritesheet_26: 219136382
+      movtut spritesheet_27: -1488246662
+      movtut spritesheet_28: 663445989
+      movtut spritesheet_29: -1244420765
+      movtut spritesheet_3: 1278184401
+      movtut spritesheet_30: -1588510394
+      movtut spritesheet_31: -394811167
+      movtut spritesheet_32: 1966809063
+      movtut spritesheet_33: 449484234
+      movtut spritesheet_34: -1413887053
+      movtut spritesheet_35: -1056037538
+      movtut spritesheet_36: 804921600
+      movtut spritesheet_37: 1983526968
+      movtut spritesheet_38: -1372229781
+      movtut spritesheet_39: -496600567
+      movtut spritesheet_4: -1432621169
+      movtut spritesheet_40: -1200241155
+      movtut spritesheet_41: 262427816
+      movtut spritesheet_42: -187248879
+      movtut spritesheet_43: -420152959
+      movtut spritesheet_44: -657494779
+      movtut spritesheet_45: -1849511219
+      movtut spritesheet_46: 903164532
+      movtut spritesheet_47: -1696630713
+      movtut spritesheet_48: 1169167610
+      movtut spritesheet_49: 4034912
+      movtut spritesheet_5: -1729612146
+      movtut spritesheet_50: 2097476940
+      movtut spritesheet_51: 158412206
+      movtut spritesheet_52: 1861405928
+      movtut spritesheet_53: -1792259005
+      movtut spritesheet_54: 1594511782
+      movtut spritesheet_55: -99765016
+      movtut spritesheet_56: -1128501425
+      movtut spritesheet_57: -1751677082
+      movtut spritesheet_58: 585223568
+      movtut spritesheet_59: -362530895
+      movtut spritesheet_6: 398714351
+      movtut spritesheet_60: -796773400
+      movtut spritesheet_61: 1222337782
+      movtut spritesheet_62: 1228761754
+      movtut spritesheet_63: -1365911378
+      movtut spritesheet_64: 2131413794
+      movtut spritesheet_65: -812867007
+      movtut spritesheet_66: -34941537
+      movtut spritesheet_67: -1019273044
+      movtut spritesheet_68: 394951697
+      movtut spritesheet_69: 827616818
+      movtut spritesheet_7: 1044151104
+      movtut spritesheet_70: -687394922
+      movtut spritesheet_71: 69889629
+      movtut spritesheet_72: 694844798
+      movtut spritesheet_73: 2071136972
+      movtut spritesheet_74: 710155965
+      movtut spritesheet_75: -534869362
+      movtut spritesheet_76: 417296109
+      movtut spritesheet_77: -165064571
+      movtut spritesheet_78: -1842944987
+      movtut spritesheet_79: -2015728509
+      movtut spritesheet_8: 1258172157
+      movtut spritesheet_80: -654215904
+      movtut spritesheet_81: 1137259528
+      movtut spritesheet_82: 96584898
+      movtut spritesheet_83: -799333601
+      movtut spritesheet_84: -537675141
+      movtut spritesheet_85: 1098923198
+      movtut spritesheet_86: 1966978124
+      movtut spritesheet_87: 915249602
+      movtut spritesheet_88: 325135957
+      movtut spritesheet_89: -2024941503
+      movtut spritesheet_9: -370408257
+      movtut spritesheet_90: 332340726
+      movtut spritesheet_91: 9019777
+      movtut spritesheet_92: -1287966614
+      movtut spritesheet_93: 1486805839
+      movtut spritesheet_94: 1113878912
+      movtut spritesheet_95: -152306762
+      movtut spritesheet_96: 2035589216
+      movtut spritesheet_97: 2054476893
+      movtut spritesheet_98: 1001797426
+      movtut spritesheet_99: 521322813
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
