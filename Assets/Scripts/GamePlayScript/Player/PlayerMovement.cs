@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 		transform.Find("PlayerSprite").gameObject.GetComponent<SpriteRenderer>().color = playerObject.color;
 	}
 	public void setLightStrengths() {
-		torchLight.intensity = (float)playerObject.TorchIntensity * GameBuffsManager.TorchModifierMultiplier * 0.5f;
+		torchLight.intensity = (float)playerObject.TorchIntensity * 0.5f;
 		torchLight.pointLightOuterRadius = (float)playerObject.TorchIntensity * 2f + 3f;
 		torchLight.pointLightInnerAngle = (float)playerObject.TorchWidth * 3f + 30f;
 		torchLight.pointLightOuterAngle = (float)playerObject.TorchWidth * 10f + 50f;
@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour, JoystickController {
 			if (dashingRoutine != null) {
 				StopCoroutine(dashingRoutine);
 			}
+			GameStatProgress.dashes++;
 			RB.velocity = dashSpeed * DashControl * GameBuffsManager.DashRegenerationRateMultiplier;
 			RB.gravityScale = 0f;
 			RB.drag = 0f;

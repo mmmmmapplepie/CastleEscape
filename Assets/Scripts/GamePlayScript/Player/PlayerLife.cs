@@ -75,6 +75,7 @@ public class PlayerLife : MonoBehaviour {
 		if (amount < 0 && hitRecoveryRoutineHolder != null) return false;
 		Health += amount;
 		if (amount < 0) {
+			GameStatProgress.damage += -amount;
 			MovementScript.LandAndDmg(MovementScript.DmgPE, Vector3.zero);
 			MovementScript.oneOffSound(PlayerAudio.audioType.dmg);
 			hitRecoveryRoutineHolder = StartCoroutine(hitRecoveryRoutine(recoveryTime));
@@ -144,6 +145,7 @@ public class PlayerLife : MonoBehaviour {
 		panicStart?.Invoke();
 		panic = true;
 		panicImminent = false;
+		GameStatProgress.fear++;
 		MovementScript.StopDropping();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		MovementScript.panicAttack(panicTime);

@@ -101,6 +101,7 @@ public class MonsterBase : MonoBehaviour {
 			yield return null;
 		}
 		ChangeFaceLight(1f);
+		GameStatProgress.sensed++;
 		ChasingRoutineHolder = StartCoroutine(ChasingRoutine());
 		monsterAudio.PlayChaseSound();
 		ani.Play("Chase");

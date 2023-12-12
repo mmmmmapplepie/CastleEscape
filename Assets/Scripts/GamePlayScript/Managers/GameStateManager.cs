@@ -20,8 +20,6 @@ public class GameStateManager : MonoBehaviour {
 
 
 
-
-
 	public static bool InGame = false, Paused = false;
 	public static event Action RoomCleared, GameStart, GameEnd, PauseStart, PauseEnd, StartNewRoom, EnterMenu;
 	public static void Defeat() {
@@ -29,7 +27,6 @@ public class GameStateManager : MonoBehaviour {
 		pauseBtn.SetActive(false);
 		InGame = false;
 		GameEnd?.Invoke();
-		//show score screen. and new continue btn. (touch anywhere will go to menu)
 	}
 
 

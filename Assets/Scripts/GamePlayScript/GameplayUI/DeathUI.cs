@@ -13,6 +13,7 @@ public class DeathUI : MonoBehaviour {
 	[SerializeField] Canvas DeathCanvas;
 	[SerializeField] Camera maincam;
 	[SerializeField] TextMeshProUGUI previousScore, currentScore, playerType, monsterType;
+	[SerializeField] TextMeshProUGUI dashes, time, items, damage, fear, chased;
 	public static float deathRoutineTime = 2f;
 	IEnumerator deathRoutine() {
 		gameObject.GetComponent<AudioPlayer>().PlaySound("player death");
@@ -30,10 +31,6 @@ public class DeathUI : MonoBehaviour {
 			float decreasingRatio = t / tm;
 			maincam.orthographicSize = Mathf.Lerp(initialCamSize, finalCamSize, Mathf.Pow(increasingRatio, 3f));
 			DeathCanvas.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, increasingRatio);
-			//camera slowly zooms in
-			//slowly black out
-			//even covers the player
-			//play the audio for death
 			t -= Time.unscaledDeltaTime;
 			yield return null;
 		}
@@ -60,6 +57,12 @@ public class DeathUI : MonoBehaviour {
 		previousScore.text = HighScore.CurrentHighscore.ToString();
 		playerType.text = CurrentSettings.CurrentPlayerType.name;
 		monsterType.text = CurrentSettings.CurrentMonster.name;
+		dashes.text = GameStatProgress.dashes.ToString();
+		time.text = GameStatProgress.time.ToString();
+		items.text = GameStatProgress.items.ToString();
+		damage.text = GameStatProgress.damage.ToString();
+		fear.text = GameStatProgress.fear.ToString();
+		chased.text = GameStatProgress.sensed.ToString();
 	}
 
 	void ShowDeathMenu() {

@@ -12,8 +12,6 @@ public class MonsterController : MonoBehaviour {
 	List<GameObject> monsterList = new List<GameObject>();
 	void spawnMonsterWave() {
 		clearMonsterList();
-		// float x = 5f;
-		// spawnMonster(new Vector3(x, 0f, 0f));
 		for (int i = 0; i < getMonsterNumber(); i++) {
 			spawnMonster(monsterPosition());
 		}

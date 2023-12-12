@@ -38,7 +38,7 @@ public class ItemsController : MonoBehaviour {
 	static int buffs = 0;
 	static int debuffs = 0;
 	public static void randomizeBuffAndDebuff(Vector3 pos) {
-		int itemchanceluck = 2 * luck + 50;
+		int itemchanceluck = 5 * luck;
 		int itemChance = Random.Range(1, 1001);
 		if (itemChance > itemchanceluck) return;
 

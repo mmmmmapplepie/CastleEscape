@@ -9,7 +9,10 @@ public class HighScore : MonoBehaviour {
 	void Awake() {
 		HighScoreTxt = highScoreTxt;
 		ScoreTypeLabel = scoreTypeLabel;
+		EscapeCleared = escapeCleared;
 	}
+	[SerializeField] GameObject escapeCleared;
+	static GameObject EscapeCleared;
 	public static void ShowHighScore(bool saveScore = false) {
 		if (saveScore) {
 			CurrentHighscore = CurrentScore > CurrentHighscore ? CurrentScore : CurrentHighscore;
@@ -23,6 +26,13 @@ public class HighScore : MonoBehaviour {
 		}
 		ScoreTypeLabel.text = "High-Score:";
 		HighScoreTxt.text = CurrentHighscore.ToString();
+
+		if (GameStatProgress.CheckCharacterInEscapedList(CurrentSettings.CurrentPlayerType.name)) {
+			EscapeCleared.SetActive(true);
+		} else {
+			EscapeCleared.SetActive(false);
+		}
+		//show escaped badge if name present in gamestateprogress.
 	}
 
 	public static void UpdateScore(bool newgame = false) {
@@ -47,6 +57,7 @@ public class HighScore : MonoBehaviour {
 	}
 	public void ResetHighScores() {
 		UIStaticAccess.playClick();
+		GameStatProgress.ResetEscapeList();
 		foreach (Monster monster in currset.Monsters) {
 			foreach (PlayerType player in currset.PlayerTypes) {
 				string setting = player.name + monster.name;

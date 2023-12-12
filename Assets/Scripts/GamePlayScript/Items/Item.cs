@@ -24,6 +24,7 @@ public class Item : MonoBehaviour {
 	void ItemTrigger(Collider2D coll) {
 		if ((UIItemHolder.childCount > 5 || triggered) && itemTime != 0f) return;
 		if (coll.tag == "Player") {
+			GameStatProgress.items++;
 			playerColor = coll.gameObject.GetComponent<SpriteRenderer>().color;
 			player = coll.transform.root.gameObject;
 			triggered = true;
