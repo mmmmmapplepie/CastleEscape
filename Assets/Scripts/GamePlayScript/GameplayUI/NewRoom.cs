@@ -79,6 +79,7 @@ public class NewRoom : MonoBehaviour {
 	[SerializeField] GameStateManager gm;
 	[SerializeField] GameObject EscapedPanel;
 	[SerializeField] Button ContinueButton, MenuButton;
+	[SerializeField] Material scrollMat;
 	IEnumerator CastleEscaped() {
 		if (!GameStatProgress.CheckCharacterInEscapedList(CurrentSettings.CurrentPlayerType.name)) {
 			GameStatProgress.NewEscapedCharacter(CurrentSettings.CurrentPlayerType.name);
@@ -90,6 +91,8 @@ public class NewRoom : MonoBehaviour {
 		changeAlpha(playerType.transform.parent, 0f);
 		fixScores();
 
+		float scroll = 0;
+		scrollMat.SetFloat("_scroll", scroll);
 		//sound effect
 		EscapedPanel.GetComponent<Animator>().Play("Escape");
 		while (EscapedPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1f) {
@@ -109,7 +112,8 @@ public class NewRoom : MonoBehaviour {
 		changeAlpha(playerType.transform.parent, maxalpha);
 
 		while (EscapedPanel.activeSelf) {
-			//waitng to return to normal gameplay again
+			scroll += Time.unscaledDeltaTime;
+			scrollMat.SetFloat("_scroll", scroll);
 			yield return null;
 		}
 	}

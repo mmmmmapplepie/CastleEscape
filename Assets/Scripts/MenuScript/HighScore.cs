@@ -28,11 +28,10 @@ public class HighScore : MonoBehaviour {
 		HighScoreTxt.text = CurrentHighscore.ToString();
 
 		if (GameStatProgress.CheckCharacterInEscapedList(CurrentSettings.CurrentPlayerType.name)) {
-			// EscapeCleared.SetActive(true);
+			EscapeCleared.SetActive(true);
 		} else {
-			// EscapeCleared.SetActive(false);
+			EscapeCleared.SetActive(false);
 		}
-		//show escaped badge if name present in gamestateprogress.
 	}
 
 	public static void UpdateScore(bool newgame = false) {

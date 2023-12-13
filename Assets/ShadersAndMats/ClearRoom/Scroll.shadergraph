@@ -506,7 +506,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "3b7ee8147dab4e1998f0792547703b38",
     "m_Id": 0,
-    "m_DisplayName": "time",
+    "m_DisplayName": "scroll",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -969,10 +969,10 @@
     "m_Guid": {
         "m_GuidSerialized": "a7871daa-363f-4474-a71f-b37352ad9de8"
     },
-    "m_Name": "time",
+    "m_Name": "scroll",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "time",
-    "m_DefaultReferenceName": "_time",
+    "m_RefNameGeneratedByDisplayName": "scroll",
+    "m_DefaultReferenceName": "_scroll",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
