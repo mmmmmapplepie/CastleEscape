@@ -15,10 +15,11 @@ public class GameStatProgress : MonoBehaviour {
 		GameStateManager.EnterMenu += EnterMenu;
 		GameStateManager.GameStart += NewGame;
 	}
+	static string splitCharacter = "|";
 	void LoadEscapedCharacters() {
 		if (PlayerPrefs.HasKey("EscapedCharacters")) {
 			string temp = PlayerPrefs.GetString("EscapedCharacters");
-			string[] t = temp.Split(".");
+			string[] t = temp.Split(splitCharacter);
 			foreach (string n in t) {
 				EscapedCharacters.Add(n);
 			}
@@ -33,8 +34,9 @@ public class GameStatProgress : MonoBehaviour {
 		EscapedCharacters.Add(character);
 		string t = "";
 		foreach (string name in EscapedCharacters) {
-			t += name + ".";
+			t += name + splitCharacter;
 		}
+		if (t.Length > 0) t = t.Remove(t.Length - 1);
 		PlayerPrefs.SetString("EscapedCharacters", t);
 	}
 	public static void ResetEscapeList() {
@@ -54,6 +56,7 @@ public class GameStatProgress : MonoBehaviour {
 	}
 
 	void NewGame() {
+		print("values reset");
 		resetValues();
 	}
 	void Update() {

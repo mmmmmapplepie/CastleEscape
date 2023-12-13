@@ -11,6 +11,10 @@ public class BGMController : MonoBehaviour {
 		GameStateManager.EnterMenu += menu;
 		GameStateManager.GameStart += enterPlay;
 		GameStateManager.GameEnd += stop1HP;
+		NewRoom.EscapeStart += EscapeSound;
+		NewRoom.EscapeEnd += EscapeEndSound;
+		EscapeSounds.EscapeBGMTime += EscapeBGM;
+
 		startAudios();
 	}
 	void startAudios() {
@@ -75,7 +79,7 @@ public class BGMController : MonoBehaviour {
 	bool playing1HP = false;
 	bool panicTemp = false;
 	void Check1HP() {
-		if (!GameStateManager.InGame) return;
+		if (!GameStateManager.InGame || NewRoom.Escaping) return;
 		if (lifeS.Health == 1 && !playing1HP) {
 			playing1HP = true;
 			if (inPanic) {
@@ -97,4 +101,21 @@ public class BGMController : MonoBehaviour {
 		}
 		panicTemp = inPanic;
 	}
+
+	void EscapeSound() {
+		AP.changeVolume("Background", 0f, 1f);
+		AP.changeVolume("1HP", 0f, 1f);
+		AP.changeVolume("Play", 0f, 1f);
+	}
+
+	void EscapeEndSound() {
+		AP.changeVolume("Background", 1f, 1f);
+		AP.changeVolume("Play", 1f, 1f);
+		// AP.StopSound("EscapeBGM", 1f);
+	}
+
+	void EscapeBGM() {
+		// AP.PlaySound("EscapeBGM", 1f);
+	}
+
 }

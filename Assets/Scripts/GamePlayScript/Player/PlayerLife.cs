@@ -113,12 +113,8 @@ public class PlayerLife : MonoBehaviour {
 		RisingFearRoutine = StartCoroutine(FearRaiseRoutine());
 	}
 	public void ChangeFear(float value, bool ignoreImminent = false) {
-		print(panic);
-		print(!ignoreImminent);
-		print(panicImminent);
 		if (panic) return;
 		if (!ignoreImminent && panicImminent) return;
-		print(1);
 		Fear += value;
 	}
 	IEnumerator FearRaiseRoutine() {

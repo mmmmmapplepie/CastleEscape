@@ -58,7 +58,7 @@ public class DeathUI : MonoBehaviour {
 		playerType.text = CurrentSettings.CurrentPlayerType.name;
 		monsterType.text = CurrentSettings.CurrentMonster.name;
 		dashes.text = GameStatProgress.dashes.ToString();
-		time.text = GameStatProgress.time.ToString();
+		time.text = Mathf.RoundToInt(GameStatProgress.time).ToString();
 		items.text = GameStatProgress.items.ToString();
 		damage.text = GameStatProgress.damage.ToString();
 		fear.text = GameStatProgress.fear.ToString();

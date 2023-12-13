@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class NewRoom : MonoBehaviour {
 		StartCoroutine(ClearRoomRoutine());
 	}
 	float halfTransitionTime = 1.3f;
+	public static event Action EscapeStart, EscapeEnd;
+	public static bool Escaping = false;
 	IEnumerator ClearRoomRoutine() {
 		GetComponent<AudioPlayer>().PlaySound("change room");
 		rect.gameObject.SetActive(true);
@@ -46,10 +49,15 @@ public class NewRoom : MonoBehaviour {
 		rect.gameObject.GetComponent<Image>().material = unlit;
 		mat.SetFloat("_progress", 0f);
 
-		if (HighScore.CurrentScore == 30) {
+		if (HighScore.CurrentScore == 1) {
+			Escaping = true;
+			EscapeStart?.Invoke();
 			yield return StartCoroutine(CastleEscaped());
+			if (!GameStateManager.InGame) {
+				ClearRoomEnd();
+				yield break;
+			}
 		}
-
 		GameStateManager.MakeNewRoom();
 		float downTime = halfTransitionTime / 4f;
 		yield return new WaitForSecondsRealtime(downTime / 2f);
@@ -60,50 +68,107 @@ public class NewRoom : MonoBehaviour {
 			startTime -= Time.unscaledDeltaTime;
 			yield return null;
 		}
+		ClearRoomEnd();
+	}
+	void ClearRoomEnd() {
 		rect.gameObject.SetActive(false);
 		clearImage.color = new Color(col.r, col.g, col.b, 1f);
 		Time.timeScale = 1f;
 		GameStateManager.changingRoom = false;
 	}
-
 	[SerializeField] GameStateManager gm;
 	[SerializeField] GameObject EscapedPanel;
-	[SerializeField] Button ContinueButton;
+	[SerializeField] Button ContinueButton, MenuButton;
 	IEnumerator CastleEscaped() {
 		if (!GameStatProgress.CheckCharacterInEscapedList(CurrentSettings.CurrentPlayerType.name)) {
 			GameStatProgress.NewEscapedCharacter(CurrentSettings.CurrentPlayerType.name);
 		}
 		ContinueButton.interactable = true;
+		MenuButton.interactable = true;
+		playerType.transform.parent.gameObject.SetActive(false);
 		EscapedPanel.SetActive(true);
-		//the entry stuff
-		while (!ContinueButton.IsActive()) {
-			yield return null;
-		}
-		while (EscapedPanel.activeSelf) {
+		changeAlpha(playerType.transform.parent, 0f);
+		fixScores();
+
+		//sound effect
+		EscapedPanel.GetComponent<Animator>().Play("Escape");
+		while (EscapedPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime <= 1f) {
 			yield return null;
 		}
 
+		playerType.transform.parent.gameObject.SetActive(true);
+		float textFadeInTime = 1f;
+		float t = textFadeInTime;
+		while (t > 0f) {
+			t -= Time.unscaledDeltaTime;
+			float r = (textFadeInTime - t) / textFadeInTime;
+			r *= maxalpha;
+			changeAlpha(playerType.transform.parent, r);
+			yield return null;
+		}
+		changeAlpha(playerType.transform.parent, maxalpha);
+
+		while (EscapedPanel.activeSelf) {
+			//waitng to return to normal gameplay again
+			yield return null;
+		}
 	}
+
 	[SerializeField] TextMeshProUGUI playerType, dashes, time, items, damage, fear, chased;
 	void fixScores() {
 		playerType.text = CurrentSettings.CurrentPlayerType.name;
 		dashes.text = GameStatProgress.dashes.ToString();
-		time.text = GameStatProgress.time.ToString();
 		items.text = GameStatProgress.items.ToString();
 		damage.text = GameStatProgress.damage.ToString();
 		fear.text = GameStatProgress.fear.ToString();
 		chased.text = GameStatProgress.sensed.ToString();
+		time.text = Mathf.RoundToInt(GameStatProgress.time).ToString();
 	}
 
-
+	float maxalpha = 0.95f;
+	void changeAlpha(Transform tra, float alphaVal) {
+		if (tra.gameObject.GetComponent<TextMeshProUGUI>()) {
+			Color c = tra.gameObject.GetComponent<TextMeshProUGUI>().color;
+			tra.gameObject.GetComponent<TextMeshProUGUI>().color = new Color(c.r, c.g, c.b, alphaVal);
+		} else if (tra.gameObject.GetComponent<Image>()) {
+			Color c = tra.gameObject.GetComponent<Image>().color;
+			tra.gameObject.GetComponent<Image>().color = new Color(c.r, c.g, c.b, alphaVal);
+		}
+		foreach (Transform child in tra) {
+			changeAlpha(child, alphaVal);
+		}
+	}
+	void EndEscape() {
+		EscapeEnd?.Invoke();
+		Escaping = false;
+	}
 	public void Continue() {
 		ContinueButton.interactable = false;
-		//return to castle 
+		MenuButton.interactable = false;
+		EndEscape();
+		StartCoroutine(ContinueRun());
+	}
+	[SerializeField] Image FinalImage;
+	IEnumerator ContinueRun() {
+		ContinueButton.interactable = false;
+		MenuButton.interactable = false;
+		float fadetime = 1f;
+		float t = fadetime;
+		while (t > 0f) {
+			t -= Time.unscaledDeltaTime;
+			float r = maxalpha * t / fadetime;
+			changeAlpha(playerType.transform.parent, r);
+			FinalImage.color = new Color(1f, 1f, 1f, t / fadetime);
+			yield return null;
+		}
+		changeAlpha(playerType.transform.parent, 0f);
+		FinalImage.color = new Color(1f, 1f, 1f, 0f);
 		EscapedPanel.SetActive(false);
 	}
 
 	public void Menu() {
 		EscapedPanel.SetActive(false);
+		EndEscape();
 		gm.GoToMenu();
 	}
 }

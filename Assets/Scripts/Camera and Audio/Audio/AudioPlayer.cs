@@ -66,10 +66,10 @@ public class AudioPlayer : MonoBehaviour {
 	IEnumerator FadeInRoutine(Sound sound, float fadeInTime, float volumeFinal) {
 		float InitialVol = sound.audioSource.volume;
 		float VolDiff = volumeFinal - InitialVol;
-		float StartTime = Time.time;
+		float StartTime = Time.unscaledTime;
 		sound.audioSource.Play();
-		while (Time.time < StartTime + fadeInTime) {
-			float ratio = ((Time.time - StartTime - fadeInTime) / fadeInTime) + 1f;
+		while (Time.unscaledTime < StartTime + fadeInTime) {
+			float ratio = ((Time.unscaledTime - StartTime - fadeInTime) / fadeInTime) + 1f;
 			sound.audioSource.volume = InitialVol + VolDiff * ratio;
 			yield return null;
 		}
@@ -92,9 +92,9 @@ public class AudioPlayer : MonoBehaviour {
 		float InitialVol = sound.audioSource.volume;
 		float FinalVol = 0f;
 		float VolDiff = FinalVol - InitialVol;
-		float StartTime = Time.time;
-		while (Time.time < StartTime + fadeOutTime) {
-			float ratio = ((Time.time - StartTime - fadeOutTime) / fadeOutTime) + 1f;
+		float StartTime = Time.unscaledTime;
+		while (Time.unscaledTime < StartTime + fadeOutTime) {
+			float ratio = ((Time.unscaledTime - StartTime - fadeOutTime) / fadeOutTime) + 1f;
 			sound.audioSource.volume = InitialVol + VolDiff * ratio;
 			yield return null;
 		}
@@ -143,9 +143,9 @@ public class AudioPlayer : MonoBehaviour {
 	IEnumerator VolumeRoutine(Sound sound, float FinalVol, float changeTime) {
 		float InitialVol = sound.audioSource.volume;
 		float VolDiff = FinalVol - InitialVol;
-		float StartTime = Time.time;
-		while (Time.time < StartTime + changeTime) {
-			float ratio = ((Time.time - StartTime - changeTime) / changeTime) + 1f;
+		float StartTime = Time.unscaledTime;
+		while (Time.unscaledTime < StartTime + changeTime) {
+			float ratio = ((Time.unscaledTime - StartTime - changeTime) / changeTime) + 1f;
 			sound.audioSource.volume = InitialVol + VolDiff * ratio;
 			yield return null;
 		}
