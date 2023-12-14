@@ -13,10 +13,10 @@ public class EscapeSounds : MonoBehaviour {
 
 
 	public void RunningSound() {
-		// aud.PlayOneShot(Running);
+		aud.PlayOneShot(Running, 0.8f);
 	}
 	public void EscapeSound() {
-		// aud.PlayOneShot(Clear);
-		// EscapeBGMTime?.Invoke();
+		aud.PlayOneShot(Clear);
+		EscapeBGMTime?.Invoke();
 	}
 }

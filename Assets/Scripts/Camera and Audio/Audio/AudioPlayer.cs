@@ -46,7 +46,7 @@ public class AudioPlayer : MonoBehaviour {
 		findSound(name).audioSource.loop = LoopIsTrue ? true : false;
 	}
 	List<FadedSounds> fadeSounds = new List<FadedSounds>();
-	public void PlaySound(string name, float fadeInTime = 0f, bool stopAllRoutines = false, float volume = 1f, bool limitVolume = true) {
+	public void PlaySound(string name, float fadeInTime = 0f, bool stopAllRoutines = false, float volume = 1f, bool limitVolume = true, bool fadeInZero = true) {
 		Sound sound = findSound(name);
 		if (sound == null) return;
 		if (sound.audioSource == null) return;
@@ -124,10 +124,10 @@ public class AudioPlayer : MonoBehaviour {
 			this.Name = name;
 		}
 	}
-	public void changeVolume(string name, float targetVolume = 1f, float changeTime = 0f, bool stopAllRoutines = false, bool limitVolume = true) {
+	public void changeVolume(string name, float targetVolume = 1f, float changeTime = 0f, bool stopAllRoutines = false, bool limitVolume = true, bool changeEvenIfNotPlaying = false) {
 		Sound sound = findSound(name);
-		if (sound.audioSource == null) return;
-		if (sound == null || !sound.audioSource.isPlaying) return;
+		if (sound == null || sound.audioSource == null) return;
+		if (!sound.audioSource.isPlaying && !changeEvenIfNotPlaying) return;
 		float volM = sound.volume;
 		if (limitVolume) {
 			targetVolume *= volM;

@@ -6,7 +6,7 @@ metalgear sound:
 https://pixabay.com/sound-effects/search/turning-metal/
 pixabay
 
-footsteps sound:
+footsteps/wind sound:
 https://pixabay.com/sound-effects/search/footsteps/
 pixabay
 

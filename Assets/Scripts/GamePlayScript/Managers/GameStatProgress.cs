@@ -56,7 +56,6 @@ public class GameStatProgress : MonoBehaviour {
 	}
 
 	void NewGame() {
-		print("values reset");
 		resetValues();
 	}
 	void Update() {

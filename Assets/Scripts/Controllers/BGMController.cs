@@ -18,9 +18,13 @@ public class BGMController : MonoBehaviour {
 		startAudios();
 	}
 	void startAudios() {
-		AP.PlaySound("Background", 0.5f);
+		AP.changeVolume("Background", 0f, 0f, false, true, true);
+		AP.changeVolume("Menu", 0f, 0f, false, true, true);
+		AP.changeVolume("1HP", 0f, 0f, false, true, true);
+		AP.changeVolume("Play", 0f, 0f, false, true, true);
 		BGMroot = AP.findSound("Background").audioSource;
-		AP.PlaySound("Menu", 0.5f);
+		AP.PlaySound("Background", 20f);
+		AP.PlaySound("Menu", 20f);
 		AP.PlaySound("1HP", 0f, false, 0f);
 		AP.PlaySound("Play", 0f, false, 0f);
 	}
@@ -111,11 +115,12 @@ public class BGMController : MonoBehaviour {
 	void EscapeEndSound() {
 		AP.changeVolume("Background", 1f, 1f);
 		AP.changeVolume("Play", 1f, 1f);
-		// AP.StopSound("EscapeBGM", 1f);
+		AP.StopSound("EscapeBGM", 1f);
 	}
 
 	void EscapeBGM() {
-		// AP.PlaySound("EscapeBGM", 1f);
+		AP.changeVolume("EscapeBGM", 0f, 0f, false, true, true);
+		AP.PlaySound("EscapeBGM", 4f);
 	}
 
 }
