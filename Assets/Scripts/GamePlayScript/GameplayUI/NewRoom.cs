@@ -18,9 +18,10 @@ public class NewRoom : MonoBehaviour {
 		if (max > 1600f) {
 			rect.sizeDelta = Vector2.one * max;
 		}
+		escapeBackgroundImage.sizeDelta = canvasRect.rect.height > 1000f ? new Vector2(4000f, canvasRect.rect.height) : escapeBackgroundImage.sizeDelta;
 	}
 	Color col;
-	[SerializeField] RectTransform rect, canvasRect;
+	[SerializeField] RectTransform rect, canvasRect, escapeBackgroundImage;
 	[SerializeField] Image clearImage;
 	[SerializeField] Material mat, unlit;
 	void ClearRoom() {
@@ -90,8 +91,8 @@ public class NewRoom : MonoBehaviour {
 		EscapedPanel.SetActive(true);
 		changeAlpha(playerType.transform.parent, 0f);
 		fixScores();
-
-		float scroll = 0;
+		float scrollrate = 0f;
+		float scroll = 20f;
 		scrollMat.SetFloat("_scroll", scroll);
 		//sound effect
 		EscapedPanel.GetComponent<Animator>().Play("Escape");
@@ -112,7 +113,8 @@ public class NewRoom : MonoBehaviour {
 		changeAlpha(playerType.transform.parent, maxalpha);
 
 		while (EscapedPanel.activeSelf) {
-			scroll += Time.unscaledDeltaTime;
+			scrollrate = scrollrate < 1f ? scrollrate + Time.unscaledDeltaTime / 5f : 1f;
+			scroll += Time.unscaledDeltaTime * scrollrate;
 			scrollMat.SetFloat("_scroll", scroll);
 			yield return null;
 		}
