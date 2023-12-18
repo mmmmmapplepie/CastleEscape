@@ -18,7 +18,7 @@ public class NewRoom : MonoBehaviour {
 		if (max > 1600f) {
 			rect.sizeDelta = Vector2.one * max;
 		}
-		escapeBackgroundImage.sizeDelta = canvasRect.rect.height > 1000f ? new Vector2(4000f, canvasRect.rect.height) : escapeBackgroundImage.sizeDelta;
+		escapeBackgroundImage.sizeDelta = canvasRect.rect.height > 1000f ? new Vector2(4000f * (canvasRect.rect.height / 1000f), canvasRect.rect.height) : escapeBackgroundImage.sizeDelta;
 	}
 	Color col;
 	[SerializeField] RectTransform rect, canvasRect, escapeBackgroundImage;

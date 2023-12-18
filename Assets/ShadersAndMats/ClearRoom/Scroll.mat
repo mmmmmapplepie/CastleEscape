@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _scroll: 30.04449
+    - _scroll: 20.751547
     - _scrollOn: 0
     - _scrollspeed: 0.01
     - _time: 1.08

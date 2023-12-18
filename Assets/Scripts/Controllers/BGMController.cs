@@ -120,7 +120,7 @@ public class BGMController : MonoBehaviour {
 
 	void EscapeBGM() {
 		AP.changeVolume("EscapeBGM", 0f, 0f, false, true, true);
-		AP.PlaySound("EscapeBGM", 4f);
+		AP.PlaySound("EscapeBGM", 8f);
 	}
 
 }
