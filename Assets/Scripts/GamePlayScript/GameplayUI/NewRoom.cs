@@ -50,7 +50,7 @@ public class NewRoom : MonoBehaviour {
 		rect.gameObject.GetComponent<Image>().material = unlit;
 		mat.SetFloat("_progress", 0f);
 
-		if (HighScore.CurrentScore == 1) {
+		if (HighScore.CurrentScore == 30) {
 			Escaping = true;
 			EscapeStart?.Invoke();
 			yield return StartCoroutine(CastleEscaped());
