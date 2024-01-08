@@ -6,7 +6,6 @@ public class Firsttimeguide : MonoBehaviour {
 	[SerializeField] GameObject panel, clickBlocker, Title;
 	public AudioSource audioSource;
 	void Start() {
-		PlayerPrefs.DeleteAll();
 		StartCoroutine(StartRoutine());
 		StartCoroutine(destroyAudioSource());
 	}
@@ -34,7 +33,15 @@ public class Firsttimeguide : MonoBehaviour {
 		Vector3 initialScale = titleT.localScale = titleScale * 3f;
 		Vector2 initialPos = titleRect.anchoredPosition = new Vector2(0f, -realCenterYOffset);
 
-		yield return new WaitForSecondsRealtime(3f);
+		ChangeAlpha(0f);
+		float wait = 2f;
+		float waitT = wait;
+		while (waitT > 0f) {
+			waitT -= Time.unscaledDeltaTime;
+			ChangeAlpha(wait - waitT);
+			yield return null;
+		}
+		yield return new WaitForSecondsRealtime(3f - wait);
 
 		float period = 1f;
 		float time = period;
@@ -47,7 +54,7 @@ public class Firsttimeguide : MonoBehaviour {
 		}
 		titleT.localScale = titleScale;
 		titleRect.anchoredPosition = titlePos;
-		Title.GetComponent<Canvas>().sortingOrder = 100;
+		Title.GetComponent<Canvas>().sortingOrder = 99;
 		clickBlock.color = new Color(0f, 0f, 0f, 0f);
 
 
@@ -56,6 +63,9 @@ public class Firsttimeguide : MonoBehaviour {
 			yield break;
 		}
 		ShowGuide();
+	}
+	void ChangeAlpha(float a) {
+		Title.GetComponent<Image>().color = Title.transform.GetChild(0).gameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, a);
 	}
 	void ShowGuide() {
 		PlayerPrefs.SetInt("BeginnerGuide", 0);
